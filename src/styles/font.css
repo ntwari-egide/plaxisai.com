@@ -4,198 +4,137 @@
 * @description Font face declarations for the project. This file is imported in _app.js and is therefore applied to all pages.
 */
 
-/* ClashDisplay Bold */
 @font-face {
-  font-family: 'ClashDisplay';
-  font-weight: bold;
-  src: url('/fonts/ClashDisplay-Bold.otf');
-}
-
-/* ClashDisplay Extralight */
-@font-face {
-  font-family: 'ClashDisplay';
-  font-weight: 200;
-  src: url('/fonts/ClashDisplay-Extralight.otf');
-}
-
-/* ClashDisplay Light */
-@font-face {
-  font-family: 'ClashDisplay';
-  font-weight: 300;
-  src: url('/fonts/ClashDisplay-Light.otf');
-}
-
-/* ClashDisplay Medium */
-@font-face {
-  font-family: 'ClashDisplay';
-  font-weight: 500;
-  src: url('/fonts/ClashDisplay-Medium.otf');
-}
-
-/* ClashDisplay Regular */
-@font-face {
-  font-family: 'ClashDisplay';
+  font-family: 'Degarism Studio - Alliance No.2 Light';
+  src: url('/fonts/Degarism\ Studio\ -\ Alliance\ No.2\ Light.otf') format('opentype');
   font-weight: normal;
-  src: url('/fonts/ClashDisplay-Regular.otf');
+  font-style: normal;
 }
 
-/* Helvetica Neue W01 77 Bd Cn Obl */
 @font-face {
-  font-family: 'Helvetica Neue';
-  font-weight: 700;
-  font-stretch: condensed;
-  src: url('/fonts/HelveticaNeueW0177BdCnObl.otf');
-}
-
-/* Helvetica Neue LTW0697BlkCnObl */
-@font-face {
-  font-family: 'Helvetica Neue';
+  font-family: 'InterTight Black';
+  src: url('/fonts/InterTight-Black.ttf') format('truetype');
   font-weight: 900;
-  font-stretch: condensed;
-  src: url('/fonts/HelveticaNeueLTW0697BlkCnObl.otf');
+  font-style: normal;
 }
 
-/* Helvetica Neue W01 87 Hv Cn Obl */
 @font-face {
-  font-family: 'Helvetica Neue';
-  font-weight: 800;
-  font-stretch: condensed;
-  src: url('/fonts/HelveticaNeueW0187HvCnObl.otf');
-}
-
-/* Helvetica Neue Medium Extended */
-@font-face {
-  font-family: 'Helvetica Neue';
-  font-weight: 500;
-  font-style: extended;
-  src: url('/fonts/helvetica_medium.ttf');
-}
-
-/* Helvetica Neue UltraLight */
-@font-face {
-  font-family: 'Helvetica Neue';
-  font-weight: 100;
-  src: url('/fonts/HelveticaNeueUltraLight.otf');
-}
-
-/* Helvetica NeueLTW0693BlkExtObl */
-@font-face {
-  font-family: 'Helvetica Neue';
+  font-family: 'InterTight Black Italic';
+  src: url('/fonts/InterTight-BlackItalic.ttf') format('truetype');
   font-weight: 900;
-  font-style: extended;
-  src: url('/fonts/HelveticaNeueLTW0693BlkExtObl.otf');
-}
-
-/* Graphik Regular */
-@font-face {
-  font-family: 'Graphik';
-  font-weight: 400;
-  src: url('/fonts/GraphikRegular.otf');
-}
-
-/* Graphik Medium */
-@font-face {
-  font-family: 'Graphik';
-  font-weight: 500;
-  src: url('/fonts/GraphikMedium.otf');
-}
-
-/* Graphik Semibold */
-@font-face {
-  font-family: 'Graphik';
-  font-weight: 600;
-  src: url('/fonts/GraphikSemibold.otf');
-}
-
-/* Graphik Bold */
-@font-face {
-  font-family: 'Graphik';
-  font-weight: 700;
-  src: url('/fonts/GraphikBold.otf');
-}
-
-/* Graphik Super */
-@font-face {
-  font-family: 'Graphik';
-  font-weight: 800;
-  src: url('/fonts/GraphikSuper.otf');
-}
-
-/* Graphik Black */
-@font-face {
-  font-family: 'Graphik';
-  font-weight: 900;
-  src: url('/fonts/GraphikBlack.otf');
-}
-
-/* Graphik Thin Italic */
-@font-face {
-  font-family: 'Graphik';
-  font-weight: 100;
   font-style: italic;
-  src: url('/fonts/GraphikThinItalic.otf');
 }
 
-/* Graphik Extra Light Italic */
 @font-face {
-  font-family: 'Graphik';
+  font-family: 'InterTight Bold';
+  src: url('/fonts/InterTight-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'InterTight Bold Italic';
+  src: url('/fonts/InterTight-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'InterTight ExtraBold';
+  src: url('/fonts/InterTight-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'InterTight ExtraBold Italic';
+  src: url('/fonts/InterTight-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'InterTight ExtraLight';
+  src: url('/fonts/InterTight-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'InterTight ExtraLight Italic';
+  src: url('/fonts/InterTight-ExtraLightItalic.ttf') format('truetype');
   font-weight: 200;
   font-style: italic;
-  src: url('/fonts/GraphikExtralightItalic.otf');
 }
 
-/* Graphik Light Italic */
 @font-face {
-  font-family: 'Graphik';
+  font-family: 'InterTight Italic';
+  src: url('/fonts/InterTight-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'InterTight Light';
+  src: url('/fonts/InterTight-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'InterTight Light Italic';
+  src: url('/fonts/InterTight-LightItalic.ttf') format('truetype');
   font-weight: 300;
   font-style: italic;
-  src: url('/fonts/GraphikLightItalic.otf');
 }
 
-/* Graphik Regular Italic */
 @font-face {
-  font-family: 'Graphik';
-  font-weight: 400;
-  font-style: italic;
-  src: url('/fonts/GraphikRegularItalic.otf');
+  font-family: 'InterTight Medium';
+  src: url('/fonts/InterTight-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
 }
 
-/* Graphik Medium Italic */
 @font-face {
-  font-family: 'Graphik';
+  font-family: 'InterTight Medium Italic';
+  src: url('/fonts/InterTight-MediumItalic.ttf') format('truetype');
   font-weight: 500;
   font-style: italic;
-  src: url('/fonts/GraphikMediumItalic.otf');
 }
 
-/* Graphik Semibold Italic */
 @font-face {
-  font-family: 'Graphik';
+  font-family: 'InterTight Regular';
+  src: url('/fonts/InterTight-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'InterTight SemiBold';
+  src: url('/fonts/InterTight-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'InterTight SemiBold Italic';
+  src: url('/fonts/InterTight-SemiBoldItalic.ttf') format('truetype');
   font-weight: 600;
   font-style: italic;
-  src: url('/fonts/GraphikSemiboldItalic.otf');
 }
 
-/* Graphik Bold Italic */
 @font-face {
-  font-family: 'Graphik';
-  font-weight: 700;
-  font-style: italic;
-  src: url('/fonts/GraphikBoldItalic.otf');
+  font-family: 'InterTight Thin';
+  src: url('/fonts/InterTight-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
 }
 
-/* Graphik Super Italic */
 @font-face {
-  font-family: 'Graphik';
-  font-weight: 800;
+  font-family: 'InterTight Thin Italic';
+  src: url('/fonts/InterTight-ThinItalic.ttf') format('truetype');
+  font-weight: 100;
   font-style: italic;
-  src: url('/fonts/GraphikSuperItalic.otf');
 }
 
-/* Graphik Black Italic */
-@font-face {
-  font-family: 'Graphik';
-  font-weight: 900;
-  font-style: italic;
-  src: url('/fonts/GraphikBlackItalic.otf');
-}
+

@@ -9,12 +9,15 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Helvetica Neue' !important;
-  color: #0d0d0d;
+  font-family: 'InterTight', sans-serif;
 }
 
-.helvetica {
-  font-family: 'Helvetica Neue' !important;
+h1 {
+  font-family: 'Degarism Studio - Alliance No.2 Light', sans-serif;
+}
+
+.alliance-2 {
+  font-family: 'Degarism Studio - Alliance No.2 Light', sans-serif !important;
 }
 
 p {
