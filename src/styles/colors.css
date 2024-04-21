@@ -504,13 +504,10 @@
   --color-primary-900: rgb(var(--tw-color-primary-900)); /* #0f172a */
 }
 
-
 ._orange {
-  color: #F28729;
+  color: #f28729;
 }
 
-._white{
-  color: #FFFFFF;
+._white {
+  color: #ffffff;
 }
-
-

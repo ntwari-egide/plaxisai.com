@@ -10,7 +10,6 @@ import { RiAlarmWarningFill } from 'react-icons/ri';
 
 import Seo from '@/component/seo';
 
-
 export default function NotFoundPage() {
   return (
     <>
