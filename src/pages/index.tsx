@@ -4,9 +4,10 @@
  * @returns {JSX.Element} The home page
  */
 
+import * as React from 'react';
+
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
-import * as React from 'react';
 
 export default function HomePage() {
   return (
