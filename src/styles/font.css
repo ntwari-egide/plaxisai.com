@@ -1,0 +1,201 @@
+/**
+ * author: Egide
+* @file font.css
+* @description Font face declarations for the project. This file is imported in _app.js and is therefore applied to all pages.
+*/
+
+/* ClashDisplay Bold */
+@font-face {
+  font-family: 'ClashDisplay';
+  font-weight: bold;
+  src: url('/fonts/ClashDisplay-Bold.otf');
+}
+
+/* ClashDisplay Extralight */
+@font-face {
+  font-family: 'ClashDisplay';
+  font-weight: 200;
+  src: url('/fonts/ClashDisplay-Extralight.otf');
+}
+
+/* ClashDisplay Light */
+@font-face {
+  font-family: 'ClashDisplay';
+  font-weight: 300;
+  src: url('/fonts/ClashDisplay-Light.otf');
+}
+
+/* ClashDisplay Medium */
+@font-face {
+  font-family: 'ClashDisplay';
+  font-weight: 500;
+  src: url('/fonts/ClashDisplay-Medium.otf');
+}
+
+/* ClashDisplay Regular */
+@font-face {
+  font-family: 'ClashDisplay';
+  font-weight: normal;
+  src: url('/fonts/ClashDisplay-Regular.otf');
+}
+
+/* Helvetica Neue W01 77 Bd Cn Obl */
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-weight: 700;
+  font-stretch: condensed;
+  src: url('/fonts/HelveticaNeueW0177BdCnObl.otf');
+}
+
+/* Helvetica Neue LTW0697BlkCnObl */
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-weight: 900;
+  font-stretch: condensed;
+  src: url('/fonts/HelveticaNeueLTW0697BlkCnObl.otf');
+}
+
+/* Helvetica Neue W01 87 Hv Cn Obl */
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-weight: 800;
+  font-stretch: condensed;
+  src: url('/fonts/HelveticaNeueW0187HvCnObl.otf');
+}
+
+/* Helvetica Neue Medium Extended */
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-weight: 500;
+  font-style: extended;
+  src: url('/fonts/helvetica_medium.ttf');
+}
+
+/* Helvetica Neue UltraLight */
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-weight: 100;
+  src: url('/fonts/HelveticaNeueUltraLight.otf');
+}
+
+/* Helvetica NeueLTW0693BlkExtObl */
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-weight: 900;
+  font-style: extended;
+  src: url('/fonts/HelveticaNeueLTW0693BlkExtObl.otf');
+}
+
+/* Graphik Regular */
+@font-face {
+  font-family: 'Graphik';
+  font-weight: 400;
+  src: url('/fonts/GraphikRegular.otf');
+}
+
+/* Graphik Medium */
+@font-face {
+  font-family: 'Graphik';
+  font-weight: 500;
+  src: url('/fonts/GraphikMedium.otf');
+}
+
+/* Graphik Semibold */
+@font-face {
+  font-family: 'Graphik';
+  font-weight: 600;
+  src: url('/fonts/GraphikSemibold.otf');
+}
+
+/* Graphik Bold */
+@font-face {
+  font-family: 'Graphik';
+  font-weight: 700;
+  src: url('/fonts/GraphikBold.otf');
+}
+
+/* Graphik Super */
+@font-face {
+  font-family: 'Graphik';
+  font-weight: 800;
+  src: url('/fonts/GraphikSuper.otf');
+}
+
+/* Graphik Black */
+@font-face {
+  font-family: 'Graphik';
+  font-weight: 900;
+  src: url('/fonts/GraphikBlack.otf');
+}
+
+/* Graphik Thin Italic */
+@font-face {
+  font-family: 'Graphik';
+  font-weight: 100;
+  font-style: italic;
+  src: url('/fonts/GraphikThinItalic.otf');
+}
+
+/* Graphik Extra Light Italic */
+@font-face {
+  font-family: 'Graphik';
+  font-weight: 200;
+  font-style: italic;
+  src: url('/fonts/GraphikExtralightItalic.otf');
+}
+
+/* Graphik Light Italic */
+@font-face {
+  font-family: 'Graphik';
+  font-weight: 300;
+  font-style: italic;
+  src: url('/fonts/GraphikLightItalic.otf');
+}
+
+/* Graphik Regular Italic */
+@font-face {
+  font-family: 'Graphik';
+  font-weight: 400;
+  font-style: italic;
+  src: url('/fonts/GraphikRegularItalic.otf');
+}
+
+/* Graphik Medium Italic */
+@font-face {
+  font-family: 'Graphik';
+  font-weight: 500;
+  font-style: italic;
+  src: url('/fonts/GraphikMediumItalic.otf');
+}
+
+/* Graphik Semibold Italic */
+@font-face {
+  font-family: 'Graphik';
+  font-weight: 600;
+  font-style: italic;
+  src: url('/fonts/GraphikSemiboldItalic.otf');
+}
+
+/* Graphik Bold Italic */
+@font-face {
+  font-family: 'Graphik';
+  font-weight: 700;
+  font-style: italic;
+  src: url('/fonts/GraphikBoldItalic.otf');
+}
+
+/* Graphik Super Italic */
+@font-face {
+  font-family: 'Graphik';
+  font-weight: 800;
+  font-style: italic;
+  src: url('/fonts/GraphikSuperItalic.otf');
+}
+
+/* Graphik Black Italic */
+@font-face {
+  font-family: 'Graphik';
+  font-weight: 900;
+  font-style: italic;
+  src: url('/fonts/GraphikBlackItalic.otf');
+}
