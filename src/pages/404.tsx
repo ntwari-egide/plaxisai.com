@@ -4,10 +4,11 @@
  * @returns {JSX.Element} The 404 page
  */
 
-import Seo from '@/component/seo';
 import Link from 'next/link';
 import * as React from 'react';
 import { RiAlarmWarningFill } from 'react-icons/ri';
+
+import Seo from '@/component/seo';
 
 
 export default function NotFoundPage() {
