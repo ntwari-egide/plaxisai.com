@@ -16,7 +16,7 @@ const GradientButton = ({
   return (
     <button
       onClick={onClick}
-      className={` relative text-white gradient-button flex flex-row justify-between items-center place-items-center button-gradient px-[1.4vw] py-[1.5vh]  rounded-lg ${className} gap-[1vw] rounded-full`}
+      className={` relative text-white gradient-button flex flex-row justify-between items-center place-items-center button-gradient px-[1.4vw] py-[1.5vh] ${className} gap-[1vw] rounded-full`}
       style={style}
     >
       {text}

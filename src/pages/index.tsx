@@ -14,6 +14,9 @@ export default function HomePage() {
     <div className='flex flex-col gap-[15vh]'>
       <Seo templateTitle='Home' />
       <HeaderLayout />
+      <div className='min-h-[200vh] bg-[gray]'>
+      
+      </div>
     </div>
   );
 }

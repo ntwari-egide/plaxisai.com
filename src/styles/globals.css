@@ -40,3 +40,13 @@ p {
   cursor: pointer;
   border: 1px solid #173440;
 }
+
+/* header */
+.header_grassmorpshism {
+  background: rgba(0,0,0,.1);
+  box-shadow: 0 0 20px 0 hsla(0,0%,100%,.1);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 100px;
+  border: 1px solid var(--stroke,hsla(0,0%,100%,.2));
+  backdrop-filter: blur(20px);
+}
