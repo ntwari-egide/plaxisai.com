@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { RiPlayCircleLine } from 'react-icons/ri';
 
 import ReusableFileInput from '../controls/file-input';
 import LogoComponent from '../reusable/logo';
@@ -12,9 +13,9 @@ const HomeWelcomeComponent = () => {
         alt='logo'
         className='w-[80px] h-[80px] m-auto mt-[14vh]'
       />
-      <div className=' flex flex-col justify-center items-center place-items-center gap-[4vh] mt-[2vh]'>
+      <div className=' flex flex-col justify-center items-center place-items-center gap-[3vh] mt-[2vh]'>
         <LogoComponent displayAir size='medium' />
-        <p className='text-white text-[5vh] text-center w-[40vw]'>
+        <p className='text-white text-[5vh] font-bold text-center w-[40vw]'>
           Unlock your career — just upload your resume and see where it can take
           you!
         </p>
@@ -22,6 +23,10 @@ const HomeWelcomeComponent = () => {
           placeholder='Upload your resume here'
           buttonContent='Get Matched'
         />
+        <div className='flex flex-row object-center justify-center place-items-center gap-[0.4vw]'>
+          <RiPlayCircleLine className='text-[3.5vh] text-white' />
+          <p className='text-white text-[2vh] font-light'>Watch the video</p>
+        </div>
       </div>
     </div>
   );

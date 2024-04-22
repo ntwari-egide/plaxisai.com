@@ -1,11 +1,10 @@
 import { Flex, Upload, UploadProps } from 'antd';
 import Image from 'next/image';
 import { useState } from 'react';
-import { RiArrowRightLine } from 'react-icons/ri';
-
-import AIIcon from '../../../public/images/ai-icon.png';
-import TextButton from './text-button';
 import { GetProps } from 'react-redux';
+
+import TextButton from './text-button';
+import AIIcon from '../../../public/images/ai-icon.png';
 
 type ReusableFileInput = {
   onChange?: (file: File) => void;
@@ -36,7 +35,7 @@ const ReusableFileInput = ({
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result as string));
     reader.readAsDataURL(img);
-  }
+  };
 
   const handleChange: UploadProps['onChange'] = (info) => {
     if (info.file.status === 'uploading') {
@@ -64,7 +63,13 @@ const ReusableFileInput = ({
         className='alliance-2'
       >
         <button className='flex flex-row justify-between items-center place-items-center bg-[#464652] text-[#CDCDD0]  px-[1vw] py-[1vh] gap-[2vw] rounded-full'>
-          <Image src={AIIcon} className='ml-[0.5vw]' alt='AI Icon' width={20} height={20} />
+          <Image
+            src={AIIcon}
+            className='ml-[0.5vw]'
+            alt='AI Icon'
+            width={20}
+            height={20}
+          />
 
           {placeholder}
           <TextButton text={buttonContent} />

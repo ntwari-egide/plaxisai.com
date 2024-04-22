@@ -7,12 +7,7 @@ type TextButtonProps = {
   style?: React.CSSProperties;
 };
 
-const TextButton = ({
-  text,
-  onClick,
-  className,
-  style,
-}: TextButtonProps) => {
+const TextButton = ({ text, onClick, className, style }: TextButtonProps) => {
   return (
     <button
       onClick={onClick}
