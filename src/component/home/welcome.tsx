@@ -4,6 +4,7 @@ import { RiPlayCircleLine } from 'react-icons/ri';
 import ReusableFileInput from '../controls/file-input';
 import LogoComponent from '../reusable/logo';
 import LogoIcon from '../../../public/images/logo-icon.png';
+import Screen1Image from '../../../public/images/screen-1.png';
 
 const HomeWelcomeComponent = () => {
   return (
@@ -24,9 +25,10 @@ const HomeWelcomeComponent = () => {
           buttonContent='Get Matched'
         />
         <div className='flex flex-row object-center justify-center place-items-center gap-[0.4vw]'>
-          <RiPlayCircleLine className='text-[3.5vh] text-white' />
-          <p className='text-white text-[2vh] font-light'>Watch the video</p>
+          <RiPlayCircleLine className='text-[2.5vh] text-white' />
+          <p className='text-white text-[1.6vh] font-light'>Watch the video</p>
         </div>
+        <Image src={Screen1Image} className='w-[70vw] mt-[8vh]' alt='screen-1' />
       </div>
     </div>
   );
