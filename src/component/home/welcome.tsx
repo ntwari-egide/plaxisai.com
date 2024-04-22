@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import ReusableFileInput from '../controls/file-input';
 import LogoComponent from '../reusable/logo';
 import LogoIcon from '../../../public/images/logo-icon.png';
 
@@ -17,6 +18,10 @@ const HomeWelcomeComponent = () => {
           Unlock your career — just upload your resume and see where it can take
           you!
         </p>
+        <ReusableFileInput
+          placeholder='Upload your resume here'
+          buttonContent='Get Matched'
+        />
       </div>
     </div>
   );
