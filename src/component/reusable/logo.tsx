@@ -1,8 +1,9 @@
 type LogoProps = {
   size: 'small' | 'medium' | 'large';
+  displayAir?: boolean;
 };
 
-const LogoComponent = ({ size }: LogoProps) => {
+const LogoComponent = ({ size, displayAir }: LogoProps) => {
   return (
     <div>
       <h1
@@ -14,7 +15,8 @@ const LogoComponent = ({ size }: LogoProps) => {
             : 'text-5xl'
         } text-white`}
       >
-        GetHired<span className='text-[_orange]'>Hints</span>
+        GetHired
+        <span className='text-[_orange]'>Hints{displayAir ? ' AI' : ''}</span>
       </h1>
     </div>
   );
