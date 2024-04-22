@@ -28,7 +28,7 @@ const HomeWelcomeComponent = () => {
           <RiPlayCircleLine className='text-[2.5vh] text-white' />
           <p className='text-white text-[1.6vh] font-light'>Watch the video</p>
         </div>
-        <Image src={Screen1Image} className='w-[70vw] mt-[8vh]' alt='screen-1' />
+        <Image src={Screen1Image} className='w-[60vw] mt-[8vh]' alt='screen-1' />
       </div>
     </div>
   );

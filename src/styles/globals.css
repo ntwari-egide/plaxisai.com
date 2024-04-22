@@ -22,7 +22,7 @@ h1 {
 }
 
 .inter-tight {
-  font-family: 'InterTight Black', sans-serif !important;
+  font-family: 'InterTight', sans-serif !important;
 }
 
 p {
@@ -56,4 +56,21 @@ p {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+
+/** steps */
+.ant-steps-item-title {
+  color: white !important;
+  font-size: 3vh !important;
+  font-weight: bold;
+}
+
+.ant-steps-item-description {
+  color: #BDBDBE !important;
+  font-size: 2vh !important;
+}
+
+.ant-steps-item-content {
+  margin: 1vh 0 !important;
 }

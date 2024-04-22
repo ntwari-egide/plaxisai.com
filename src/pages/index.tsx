@@ -9,6 +9,7 @@ import * as React from 'react';
 import HomeWelcomeComponent from '@/component/home/welcome';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
+import AIPipelineComponent from '@/component/home/ai-pipeline';
 
 export default function HomePage() {
   return (
@@ -17,7 +18,8 @@ export default function HomePage() {
       <div className='welcome-bg'>
         <HeaderLayout />
         <HomeWelcomeComponent />
-        <div className='min-h-[500vh]'></div>
+        <AIPipelineComponent />
+        <div className='min-h-[390vh]'></div>
       </div>
     </div>
   );

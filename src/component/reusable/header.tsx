@@ -19,7 +19,7 @@ const HeaderLayout = () => {
   }, []);
 
   return (
-    <header className='px-[2vw] sticky top-[3vh] md:px-[3vw] mt-[3vh]'>
+    <header className='px-[2vw] z-50 sticky top-[3vh] md:px-[3vw] mt-[3vh]'>
       <div className='flex flex-row justify-between justify-items-center place-items-center'>
         <LogoComponent size='medium' />
         <div className='flex flex-col justify-center items-center place-items-center'>
