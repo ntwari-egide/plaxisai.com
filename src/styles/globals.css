@@ -52,7 +52,7 @@ p {
 }
 
 .welcome-bg {
-  background-image: url('/images/welcome-background.png');
+  /* background-image: url('/images/welcome-background.png'); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

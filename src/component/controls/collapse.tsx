@@ -1,7 +1,6 @@
 import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
 import React from 'react';
-import { RiAddLine } from 'react-icons/ri';
 
 type CollapseComponentProps = {
   items: CollapseProps['items'];
