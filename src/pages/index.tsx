@@ -11,6 +11,7 @@ import FAQComponent from '@/component/home/faq';
 import HomeWelcomeComponent from '@/component/home/welcome';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
+import CallToActionComponent from '@/component/home/call-to-action';
 
 export default function HomePage() {
   return (
@@ -21,6 +22,7 @@ export default function HomePage() {
         <HomeWelcomeComponent />
         <AIPipelineComponent />
         <FAQComponent />
+        <CallToActionComponent />
         <div className='min-h-[315vh]'></div>
       </div>
     </div>

@@ -16,7 +16,7 @@ const HomeWelcomeComponent = () => {
       />
       <div className=' flex flex-col justify-center items-center place-items-center gap-[3vh] mt-[2vh]'>
         <LogoComponent displayAir size='medium' />
-        <p className='text-white text-[5vh] font-bold text-center w-[40vw]'>
+        <p className='text-white text-[5vh] font-bold text-center w-[40vw] alliance-2'>
           Unlock your career — just upload your resume and see where it can take
           you!
         </p>

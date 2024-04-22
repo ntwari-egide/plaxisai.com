@@ -1,6 +1,7 @@
 import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
 import React from 'react';
+import { RiAddLine } from 'react-icons/ri';
 
 type CollapseComponentProps = {
   items: CollapseProps['items'];
@@ -12,6 +13,8 @@ const CollapseComponent = ({ items }: CollapseComponentProps) => (
     items={items}
     bordered={false}
     defaultActiveKey={['1']}
+    expandIconPosition='right'
+    // expandIcon={<RiAddLine />}
   />
 );
 

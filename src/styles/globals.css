@@ -77,8 +77,8 @@ p {
 .ant-collapse-item {
   background: #27272d;
   margin: 2.5vh 0;
-  border: 1px solid #59595d !important;
-  border-radius: 9px !important;
+  border: none !important;
+  border-radius: 15px !important;
   padding: 1.5vh !important;
 }
 
@@ -96,4 +96,8 @@ span.ant-collapse-header-text {
 .ant-collapse-content-box {
   color: #bdbdbe !important;
   font-size: 2vh;
+}
+
+.ant-collapse-expand-icon {
+  color: white !important;
 }
