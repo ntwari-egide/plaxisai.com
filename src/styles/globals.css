@@ -73,3 +73,27 @@ p {
 .ant-steps-item-content {
   margin: 1vh 0 !important;
 }
+
+.ant-collapse-item {
+  background: #27272d;
+  margin: 2.5vh 0;
+  border: 1px solid #59595d !important;
+  border-radius: 9px !important;
+  padding: 1.5vh !important;
+}
+
+.ant-collapse-item:hover {
+  background-color: #19191e;
+  transition: ease-in-out;
+}
+
+span.ant-collapse-header-text {
+  color: white;
+  font-size: 3vh;
+  font-weight: 900;
+}
+
+.ant-collapse-content-box {
+  color: #bdbdbe !important;
+  font-size: 2vh;
+}

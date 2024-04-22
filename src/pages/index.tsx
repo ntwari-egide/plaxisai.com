@@ -7,6 +7,7 @@
 import * as React from 'react';
 
 import AIPipelineComponent from '@/component/home/ai-pipeline';
+import FAQComponent from '@/component/home/faq';
 import HomeWelcomeComponent from '@/component/home/welcome';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
@@ -19,7 +20,8 @@ export default function HomePage() {
         <HeaderLayout />
         <HomeWelcomeComponent />
         <AIPipelineComponent />
-        <div className='min-h-[390vh]'></div>
+        <FAQComponent />
+        <div className='min-h-[315vh]'></div>
       </div>
     </div>
   );
