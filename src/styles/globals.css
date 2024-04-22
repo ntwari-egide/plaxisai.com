@@ -58,7 +58,6 @@ p {
   background-position: center;
 }
 
-
 /** steps */
 .ant-steps-item-title {
   color: white !important;
@@ -67,7 +66,7 @@ p {
 }
 
 .ant-steps-item-description {
-  color: #BDBDBE !important;
+  color: #bdbdbe !important;
   font-size: 2vh !important;
 }
 

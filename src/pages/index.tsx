@@ -6,10 +6,10 @@
 
 import * as React from 'react';
 
+import AIPipelineComponent from '@/component/home/ai-pipeline';
 import HomeWelcomeComponent from '@/component/home/welcome';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
-import AIPipelineComponent from '@/component/home/ai-pipeline';
 
 export default function HomePage() {
   return (
