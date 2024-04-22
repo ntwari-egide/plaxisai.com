@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const AIPipelineComponent = () => {
     return (
-        <div className="flex flex-row relative top-[-3vh] px-[2vw] md:px-[3vw] relative">
+        <div className="flex flex-row px-[2vw] md:px-[3vw] sticky ">
             <div className="w-[30vw] flex flex-col gap-[2vh]">
                 <p className="text-[#F28729] inter-tight text-[3vh] font-medium">AI Pipeline</p>
                 <h1 className="text-white text-[5vh] font-bold alliance-2">Get matched: Four Dynamic Steps</h1>
