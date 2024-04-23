@@ -15,7 +15,7 @@ const AIPipelineComponent = () => {
         </h1>
         <Steps
           direction='vertical'
-          current={4}
+          current={2}
           progressDot
           className='alliance-2'
           items={[
