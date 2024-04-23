@@ -9,7 +9,7 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Degarism Studio - Alliance No.2 Light', sans-serif;
+  font-family: 'Alliance', sans-serif;
   background-color: #09090d;
 }
 
@@ -18,7 +18,7 @@ h1 {
 }
 
 .alliance-2 {
-  font-family: 'Degarism Studio - Alliance No.2 Light', sans-serif !important;
+  font-family: 'Alliance', sans-serif !important;
 }
 
 .inter-tight {
