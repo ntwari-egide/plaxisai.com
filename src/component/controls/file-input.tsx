@@ -62,7 +62,7 @@ const ReusableFileInput = ({
         showUploadList={false}
         className='alliance-2'
       >
-        <button className='flex flex-row justify-between items-center place-items-center bg-[#464652] text-[#CDCDD0]  px-[1vw] py-[1vh] gap-[2vw] rounded-full'>
+        <button className='flex flex-row justify-between items-center place-items-center bg-[#464652] text-[#CDCDD0]  px-[1vw] py-[1vh] gap-[2vw] rounded-full text-[2vh]'>
           <Image
             src={AIIcon}
             className='ml-[0.5vw]'

@@ -10,9 +10,9 @@ import AIPipelineComponent from '@/component/home/ai-pipeline';
 import CallToActionComponent from '@/component/home/call-to-action';
 import FAQComponent from '@/component/home/faq';
 import HomeWelcomeComponent from '@/component/home/welcome';
+import FooterComponent from '@/component/layouts/footer';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
-import FooterComponent from '@/component/layouts/footer';
 
 export default function HomePage() {
   return (

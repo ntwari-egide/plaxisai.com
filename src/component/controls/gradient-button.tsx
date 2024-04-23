@@ -21,7 +21,7 @@ const GradientButton = ({
       className={` relative text-white gradient-button flex flex-row justify-between items-center place-items-center button-gradient ${
         size == 'large'
           ? 'px-[3.4vw] py-[3.5vh] text-[7vh]'
-          : 'px-[1.4vw] py-[1.5vh]'
+          : 'px-[1.4vw] py-[1.5vh] text-[2vh]'
       } ${className} gap-[1vw] rounded-full`}
       style={style}
     >
