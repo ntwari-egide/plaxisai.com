@@ -20,14 +20,14 @@ const GradientButton = ({
       onClick={onClick}
       className={` relative text-white gradient-button flex flex-row justify-between items-center place-items-center button-gradient ${
         size == 'large'
-          ? 'px-[3.4vw] py-[3.5vh] text-[7vh]'
-          : 'px-[1.4vw] py-[1.5vh] text-[2vh]'
+          ? 'px-[10vw] md:px-[3.4vw] py-[1.5vh] md:py-[3.5vh] text-[4vh] md:text-[7vh]'
+          : 'px-[4vw] md:px-[1.4vw] py-[1.5vh] text-[2vh]'
       } ${className} gap-[1vw] rounded-full`}
       style={style}
     >
       {text}
       <RiArrowRightLine
-        className={`${size == 'large' ? 'text-[7vh]' : 'text-[3vh]'}`}
+        className={`${size == 'large' ? ' text-[5vh] md:text-[7vh]' : 'text-[3vh]'}`}
       />
     </button>
   );

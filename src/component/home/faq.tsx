@@ -35,14 +35,14 @@ const FAQComponent = () => {
   ];
 
   return (
-    <div className='relative mt-[25vh] flex flex-col gap-[3vh] place-items-center'>
-      <h1 className='text-[#F28729] inter-tight text-[3vh] font-medium text-center'>
+    <div className='relative mt-[25vh] flex flex-col gap-[1vh] md:gap-[3vh] place-items-center'>
+      <h1 className='text-[#F28729] inter-tight md:text-[3vh] font-medium text-center'>
         FAQ
       </h1>
-      <h1 className='text-white text-[5vh] font-bold alliance-2 text-center'>
+      <h1 className='text-white text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center'>
         Got questions? <br /> Join the community.
       </h1>
-      <p className='text-center text-[#BDBDBE] text-[2vh] w-[27vw] m-auto'>
+      <p className='text-center text-[#BDBDBE] text-[2vh] w-[80vw] md:w-[27vw] m-auto'>
         Our Discord cxommunity and staff are here to help! Your feedback will
         help us improve in future versions.
       </p>

@@ -8,7 +8,7 @@ type CollapseComponentProps = {
 
 const CollapseComponent = ({ items }: CollapseComponentProps) => (
   <Collapse
-    className='w-[63vw] alliance-2'
+    className='w-[90vw] md:w-[63vw] alliance-2'
     items={items}
     bordered={false}
     defaultActiveKey={['1']}

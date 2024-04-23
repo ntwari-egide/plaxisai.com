@@ -53,7 +53,7 @@ const ReusableFileInput = ({
 
   return (
     <Flex
-      className={`flex flex-col gap-[1vh] alliance-2 ${className}`}
+      className={`flex flex-col md:gap-[1vh] alliance-2 ${className}`}
       style={style}
     >
       <Upload
@@ -62,7 +62,7 @@ const ReusableFileInput = ({
         showUploadList={false}
         className='alliance-2'
       >
-        <button className='flex flex-row justify-between items-center place-items-center bg-[#464652] text-[#CDCDD0]  px-[1vw] py-[1vh] gap-[2vw] rounded-full text-[2vh]'>
+        <div className='flex cursor-pointer flex-row justify-between items-center place-items-center bg-[#464652] text-[#CDCDD0]  px-[1vw] py-[1vh] gap-[2vw] rounded-full text-[2vh]'>
           <Image
             src={AIIcon}
             className='ml-[0.5vw]'
@@ -73,7 +73,7 @@ const ReusableFileInput = ({
 
           {placeholder}
           <TextButton text={buttonContent} />
-        </button>
+        </div>
       </Upload>
     </Flex>
   );

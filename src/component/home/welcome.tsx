@@ -16,13 +16,14 @@ const HomeWelcomeComponent = () => {
       />
       <div className=' flex flex-col justify-center items-center place-items-center gap-[3vh] mt-[2vh]'>
         <LogoComponent displayAir size='medium' />
-        <p className='text-white text-[5vh] font-bold text-center w-[40vw] alliance-2'>
+        <p className='text-white text-[3.4vh] md:text-[5vh] font-bold text-center px-[10vw] md:px-0 md:w-[40vw] alliance-2'>
           Unlock your career — just upload your resume and see where it can take
           you!
         </p>
         <ReusableFileInput
           placeholder='Upload your resume here'
           buttonContent='Get Matched'
+          className='w-auto m-auto'
         />
         <div className='flex flex-row object-center justify-center place-items-center gap-[0.4vw]'>
           <RiPlayCircleLine className='text-[2.5vh] text-white' />
@@ -30,7 +31,7 @@ const HomeWelcomeComponent = () => {
         </div>
         <Image
           src={Screen1Image}
-          className='w-[60vw] mt-[8vh]'
+          className='md:w-[60vw] mt-[8vh]'
           alt='screen-1'
         />
       </div>

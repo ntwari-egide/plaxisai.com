@@ -5,12 +5,12 @@ import Screen2 from '../../../public/images/screen-2.png';
 
 const AIPipelineComponent = () => {
   return (
-    <div className='flex flex-row px-[2vw] md:px-[3vw] relative top-[3vh] '>
-      <div className='w-[30vw] flex flex-col gap-[2vh]'>
-        <p className='text-[#F28729] inter-tight text-[3vh] font-medium'>
+    <div className='flex flex-col md:flex-row px-[2vw] md:px-[3vw] relative top-[3vh] '>
+      <div className='md:w-[30vw] flex flex-col gap-[2vh] place-items-center md:place-items-start'>
+        <p className='text-[#F28729] inter-tight md:text-[3vh] font-medium'>
           AI Pipeline
         </p>
-        <h1 className='text-white text-[5vh] font-bold alliance-2'>
+        <h1 className='text-white text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center md:text-start'>
           Get matched: Four Dynamic Steps
         </h1>
         <Steps
@@ -46,7 +46,7 @@ const AIPipelineComponent = () => {
         <Image
           src={Screen2}
           alt='screen-2'
-          className='w-[80vw] absolute left-[20vw]'
+          className='w-[80vw] hidden md:block absolute left-[20vw]'
         />
       </div>
     </div>
