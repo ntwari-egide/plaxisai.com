@@ -102,7 +102,8 @@ span.ant-collapse-header-text {
   color: white !important;
 }
 
-
-.ant-steps-item.ant-steps-item-finish .ant-steps-item-title, .ant-steps-item.ant-steps-item.ant-steps-item-finish .ant-steps-item-description {
-  opacity: .6 !important;
+.ant-steps-item.ant-steps-item-finish .ant-steps-item-title,
+.ant-steps-item.ant-steps-item.ant-steps-item-finish
+  .ant-steps-item-description {
+  opacity: 0.6 !important;
 }

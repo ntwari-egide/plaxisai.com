@@ -5,6 +5,7 @@
  * @returns {JSX.Element} The main app component
  */
 
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 
@@ -17,6 +18,7 @@ import { store } from '@/store';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
+      <SpeedInsights />
       <Component {...pageProps} />
     </Provider>
   );

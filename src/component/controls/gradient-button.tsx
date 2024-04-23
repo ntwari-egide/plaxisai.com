@@ -27,7 +27,9 @@ const GradientButton = ({
     >
       {text}
       <RiArrowRightLine
-        className={`${size == 'large' ? ' text-[5vh] md:text-[7vh]' : 'text-[3vh]'}`}
+        className={`${
+          size == 'large' ? ' text-[5vh] md:text-[7vh]' : 'text-[3vh]'
+        }`}
       />
     </button>
   );

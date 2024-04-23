@@ -15,7 +15,9 @@ const FooterComponent = () => {
           <LogoComponent size='medium' />
         </div>
         <div>
-          <h2 className='text-white text-[2.5vh] md:text-[3.5vh] font-bold'>Explore</h2>
+          <h2 className='text-white text-[2.5vh] md:text-[3.5vh] font-bold'>
+            Explore
+          </h2>
           <ul className='flex flex-col gap-[1.5vh] mt-[2vh]'>
             <li className='text-[1.7vh] text-[#78787A] hover:text-white transition-all cursor-pointer'>
               Resume Templates
@@ -29,7 +31,9 @@ const FooterComponent = () => {
           </ul>
         </div>
         <div>
-          <h2 className='text-white text-[2.5vh] md:text-[3.5vh] font-bold'>Resources</h2>
+          <h2 className='text-white text-[2.5vh] md:text-[3.5vh] font-bold'>
+            Resources
+          </h2>
           <ul className='flex flex-col gap-[1.5vh] mt-[2vh]'>
             <li className='text-[1.7vh] text-[#78787A] hover:text-white transition-all cursor-pointer'>
               FAQ
@@ -49,7 +53,9 @@ const FooterComponent = () => {
           </ul>
         </div>
         <div>
-          <h2 className='text-white text-[2.5vh] md:text-[3.5vh] font-bold'>Company</h2>
+          <h2 className='text-white text-[2.5vh] md:text-[3.5vh] font-bold'>
+            Company
+          </h2>
           <ul className='flex flex-col gap-[1.5vh] mt-[2vh]'>
             <li className='text-[1.7vh] text-[#78787A] hover:text-white transition-all cursor-pointer'>
               Community
