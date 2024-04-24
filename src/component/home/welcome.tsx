@@ -24,6 +24,7 @@ const HomeWelcomeComponent = () => {
           placeholder='Upload your resume here'
           buttonContent='Get Matched'
           className='w-auto m-auto'
+          accept='.pdf,.doc,.docx'
         />
         <div className='flex flex-row object-center justify-center place-items-center gap-[0.4vw]'>
           <RiPlayCircleLine className='text-[2.5vh] text-white' />
