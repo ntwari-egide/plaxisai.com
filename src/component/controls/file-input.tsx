@@ -5,6 +5,7 @@ import { GetProps } from 'react-redux';
 
 import TextButton from './text-button';
 import AIIcon from '../../../public/images/ai-icon.png';
+import ResponseLayout from '../response';
 
 type ReusableFileInput = {
   onChange?: (file: File) => void;
@@ -31,6 +32,8 @@ const ReusableFileInput = ({
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string | undefined>();
 
+  const [openResultsModel, setOpenResultsModel] = useState(false);
+
   const getBase64 = (img: FileType, callback: (imageUrl: string) => void) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result as string));
@@ -54,7 +57,8 @@ const ReusableFileInput = ({
   return (
     <Flex
       className={`flex flex-col md:gap-[1vh] alliance-2 ${className}`}
-      style={style}
+      style={style} 
+      onClick={() => setOpenResultsModel(true)}
     >
       <Upload
         accept={accept}
@@ -75,6 +79,8 @@ const ReusableFileInput = ({
           <TextButton text={buttonContent} />
         </div>
       </Upload>
+
+      <ResponseLayout isOpen={openResultsModel} setOpen={setOpenResultsModel} onCancel={()=> setOpenResultsModel(false)} />
     </Flex>
   );
 };
