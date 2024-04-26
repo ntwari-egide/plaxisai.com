@@ -1,5 +1,7 @@
-import { Modal, Slider } from "antd";
+import { ArrowDownOutlined } from "@ant-design/icons";
+import { Modal, Select, Slider } from "antd";
 import { useState } from "react";
+import ReusableSelect from "../controls/select";
 
 type ResponseLayoutProps = {
     onClick?: () => void;
@@ -16,7 +18,7 @@ const ResponseLayout = ({ onClick}: ResponseLayoutProps) => {
                 </div>
                 <div className="w-[80%] min-h-[60vh] flex flex-col gap-[4vh]">
                     <div className="bg-[#09090D] border-[1px] border-[#1C1C1F] min-h-[8vh] rounded-md">
-
+                        <ResponseFilterComponent />
                     </div>
                     <div className="bg-[#09090D] border-[1px] border-[#1C1C1F] min-h-[58vh] rounded-md">
 
@@ -25,6 +27,53 @@ const ResponseLayout = ({ onClick}: ResponseLayoutProps) => {
             </div>
         </div>
     );
+}
+
+const ResponseFilterComponent = () => {
+
+    const companyTypeOptions = [
+        {label: "Company type", value: "Company type"},
+        {label: "All", value: "All"},
+        {label: "Tech", value: "Tech"},
+        {label: "Finance", value: "Finance"},
+        {label: "Health", value: "Health"},
+        {label: "Retail", value: "Retail"},
+    ]
+
+    return (
+        <div className="flex flex-row  p-[1vh] gap-[4vw] justify-between">
+            <h1 className="text-[2vh] text-white alliance-2">Filters:</h1>
+            <div className="flex flex-row justify-between w-full">
+                <ReusableSelect
+                    defaultValue="Company type"
+                    options={companyTypeOptions}
+                    placeholder="Company Type"
+                    width={150}
+                />
+
+<ReusableSelect
+    defaultValue="Company type"
+                    options={companyTypeOptions}
+                    placeholder="Company Type"
+                    width={150}
+                />
+
+<ReusableSelect
+    defaultValue="Company type"
+                    options={companyTypeOptions}
+                    placeholder="Company Type"
+                    width={150}
+                />
+
+<ReusableSelect
+    defaultValue="Company type"
+                    options={companyTypeOptions}
+                    placeholder="Company Type"
+                    width={150}
+                />
+            </div>
+        </div>
+    )
 }
 
 const LeftComponent = () => {
