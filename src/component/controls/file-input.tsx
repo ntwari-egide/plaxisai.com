@@ -1,4 +1,4 @@
-import { Flex, Upload, UploadProps } from 'antd';
+import { Flex, Modal, Upload, UploadProps } from 'antd';
 import Image from 'next/image';
 import { useState } from 'react';
 import { GetProps } from 'react-redux';
@@ -55,6 +55,7 @@ const ReusableFileInput = ({
   };
 
   return (
+    <>
     <Flex
       className={`flex flex-col md:gap-[1vh] alliance-2 ${className}`}
       style={style} 
@@ -79,9 +80,20 @@ const ReusableFileInput = ({
           <TextButton text={buttonContent} />
         </div>
       </Upload>
-
-      <ResponseLayout isOpen={openResultsModel} setOpen={setOpenResultsModel} onCancel={()=> setOpenResultsModel(false)} />
     </Flex>
+
+    {/* Response Layout Modal component */}
+
+    <Modal
+      open={openResultsModel}
+      className='w-[80vw]'
+      onCancel={() => setOpenResultsModel(false)}
+      footer={null}
+    >
+      <ResponseLayout />
+    </Modal>
+    
+    </>
   );
 };
 
