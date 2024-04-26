@@ -1,6 +1,7 @@
 import { Slider } from 'antd';
 
 import ReusableSelect from '../controls/select';
+import JobCard from '../layouts/job-card';
 
 type ResponseLayoutProps = {
   onClick?: () => void;
@@ -18,7 +19,12 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
           <div className='bg-[#09090D] border-[1px] border-[#1C1C1F] min-h-[8vh] rounded-md'>
             <ResponseFilterComponent />
           </div>
-          <div className='bg-[#09090D] border-[1px] border-[#1C1C1F] min-h-[58vh] rounded-md'></div>
+          <div className=' gap-[2vh] grid grid-cols-2'>
+            <JobCard />
+            <JobCard />
+            <JobCard />
+            <JobCard />
+          </div>
         </div>
       </div>
     </div>
@@ -35,8 +41,33 @@ const ResponseFilterComponent = () => {
     { label: 'Retail', value: 'Retail' },
   ];
 
+  const compensationOptions = [
+    { label : '> 50k', value: '> 50k'},
+    { label : '> 100k', value: '> 100k'},
+    { label : '> 150k', value: '> 150k'},
+    { label : '> 200k', value: '> 200k'},
+    { label : '> 250k', value: '> 250k'},
+  ];
+
+  const levelOptions = [
+    { label : 'Level', value: 'Level'},
+    { label : 'Entry', value: 'Entry'},
+    { label : 'Mid', value: 'Mid'},
+    { label : 'Senior', value: 'Senior'},
+  ];
+
+  const locationOptions = [
+    { label : 'Location', value: 'Location'},
+    { label : 'Remote', value: 'Remote'},
+    { label : 'New York', value: 'New York'},
+    { label : 'California', value: 'California'},
+    { label : 'Texas', value: 'Texas'},
+    { label : 'Florida', value: 'Florida'},
+  ];
+
   return (
-    <div className='flex flex-row  p-[1vh] gap-[4vw] justify-between'>
+    <div className='flex flex-col p-[1vh]'>
+        <div className='flex flex-row  p-[1vh] gap-[4vw] justify-between'>
       <h1 className='text-[2vh] text-white alliance-2'>Filters:</h1>
       <div className='flex flex-row justify-between w-full'>
         <ReusableSelect
@@ -47,26 +78,27 @@ const ResponseFilterComponent = () => {
         />
 
         <ReusableSelect
-          defaultValue='Company type'
-          options={companyTypeOptions}
-          placeholder='Company Type'
+          defaultValue='Compensation'
+          options={compensationOptions}
+          placeholder='Compensation'
           width={150}
         />
 
         <ReusableSelect
-          defaultValue='Company type'
-          options={companyTypeOptions}
-          placeholder='Company Type'
+          defaultValue='Level'
+          options={levelOptions}
+          placeholder='Level'
           width={150}
         />
 
         <ReusableSelect
-          defaultValue='Company type'
-          options={companyTypeOptions}
-          placeholder='Company Type'
+          defaultValue='Location'
+          options={locationOptions}
+          placeholder='Location'
           width={150}
         />
       </div>
+    </div>
     </div>
   );
 };
