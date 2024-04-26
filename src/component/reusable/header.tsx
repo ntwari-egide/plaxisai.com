@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import LogoComponent from './logo';
 import GradientButton from '../controls/gradient-button';
+import Link from 'next/link';
 
 type HeaderLayoutProps = {
   sticky?: boolean;
@@ -29,7 +30,7 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
       }`}
     >
       <div className='flex flex-row justify-between justify-items-center place-items-center'>
-        <LogoComponent size='medium' />
+        <Link href='/'><LogoComponent size='medium' /></Link>
         <div className='flex flex-col justify-center items-center place-items-center'>
           <nav
             className={`${
