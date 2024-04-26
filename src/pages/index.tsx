@@ -4,9 +4,7 @@
  * @returns {JSX.Element} The home page
  */
 
-import { motion, Variants } from 'framer-motion';
 import * as React from 'react';
-import { RefObject, useEffect, useState } from 'react';
 
 import AIPipelineComponent from '@/component/home/ai-pipeline';
 import CallToActionComponent from '@/component/home/call-to-action';
@@ -16,15 +14,11 @@ import FooterComponent from '@/component/layouts/footer';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
 
-
 export default function HomePage() {
-
   return (
     <div className='flex flex-col gap-[15vh]'>
       <Seo templateTitle='Home' />
-      <div
-        className='welcome-bg flex justify-between flex-col'
-      >
+      <div className='welcome-bg flex justify-between flex-col'>
         <HeaderLayout />
         {/* Each HomeWelcomeComponent with the same animation, if intended */}
         <HomeWelcomeComponent />

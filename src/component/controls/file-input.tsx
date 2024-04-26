@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { GetProps } from 'react-redux';
 
 import TextButton from './text-button';
-import AIIcon from '../../../public/images/ai-icon.png';
 import ResponseLayout from '../response';
+import AIIcon from '../../../public/images/ai-icon.png';
 
 type ReusableFileInput = {
   onChange?: (file: File) => void;
@@ -56,43 +56,42 @@ const ReusableFileInput = ({
 
   return (
     <>
-    <Flex
-      className={`flex relative flex-col md:gap-[1vh] alliance-2 ${className}`}
-      style={style} 
-      onClick={() => setOpenResultsModel(true)}
-    >
-      <Upload
-        accept={accept}
-        onChange={handleChange}
-        showUploadList={false}
-        className='alliance-2'
+      <Flex
+        className={`flex relative flex-col md:gap-[1vh] alliance-2 ${className}`}
+        style={style}
+        onClick={() => setOpenResultsModel(true)}
       >
-        <div className='flex cursor-pointer flex-row justify-between items-center place-items-center bg-[#464652] text-[#CDCDD0]  px-[1vw] py-[1vh] gap-[2vw] rounded-full text-[2vh]'>
-          <Image
-            src={AIIcon}
-            className='ml-[0.5vw]'
-            alt='AI Icon'
-            width={20}
-            height={20}
-          />
+        <Upload
+          accept={accept}
+          onChange={handleChange}
+          showUploadList={false}
+          className='alliance-2'
+        >
+          <div className='flex cursor-pointer flex-row justify-between items-center place-items-center bg-[#464652] text-[#CDCDD0]  px-[1vw] py-[1vh] gap-[2vw] rounded-full text-[2vh]'>
+            <Image
+              src={AIIcon}
+              className='ml-[0.5vw]'
+              alt='AI Icon'
+              width={20}
+              height={20}
+            />
 
-          {placeholder}
-          <TextButton text={buttonContent} />
-        </div>
-      </Upload>
-    </Flex>
+            {placeholder}
+            <TextButton text={buttonContent} />
+          </div>
+        </Upload>
+      </Flex>
 
-    {/* Response Layout Modal component */}
+      {/* Response Layout Modal component */}
 
-    <Modal
-      open={openResultsModel}
-      className='w-[80vw] relative'
-      onCancel={() => setOpenResultsModel(false)}
-      footer={null}
-    >
-      <ResponseLayout />
-    </Modal>
-    
+      <Modal
+        open={openResultsModel}
+        className='w-[80vw] relative'
+        onCancel={() => setOpenResultsModel(false)}
+        footer={null}
+      >
+        <ResponseLayout />
+      </Modal>
     </>
   );
 };
