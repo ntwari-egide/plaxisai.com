@@ -51,6 +51,13 @@ p {
   backdrop-filter: blur(20px) !important;
 }
 
+.grassmorphism_bg {
+  background: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 0 20px 0 hsla(0, 0%, 100%, 0.1) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  backdrop-filter: blur(20px) !important;
+}
+
 .ant-modal-content {
   background: rgba(0, 0, 0, 0.1) !important;
   box-shadow: 0 0 20px 0 hsla(0, 0%, 100%, 0.1) !important;

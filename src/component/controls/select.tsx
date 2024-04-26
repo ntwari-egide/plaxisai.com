@@ -23,7 +23,7 @@ const ReusableSelect = ({
         placeholder={placeholder}
         style={{ width: width }}
         className={'alliance-2' + className}
-        suffixIcon={<ArrowDownOutlined />}
+        suffixIcon={<ArrowDownOutlined className='text-white' />}
         options={options}
         popupMatchSelectWidth={false}
       />

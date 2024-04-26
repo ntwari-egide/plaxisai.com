@@ -2,6 +2,7 @@ import { Slider } from 'antd';
 
 import ReusableSelect from '../controls/select';
 import JobCard from '../layouts/job-card';
+import data from './data';
 
 type ResponseLayoutProps = {
   onClick?: () => void;
@@ -10,20 +11,30 @@ type ResponseLayoutProps = {
 const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
   return (
     <div className='relative min-h-screen p-[2vw]' onClick={onClick}>
-      <h1 className='text-white text-[3vh]'>Matched</h1>
+      <div className=" relative flex flex-row">
+        <h1 className='text-white text-[3vh]'>Matched</h1>
+      </div>
       <div className='flex flex-row gap-[3vw] mt-[3vh]'>
-        <div className='bg-[#09090D] sticky top-0 w-[20%] border-[1px] border-[#1C1C1F] min-h-[60vh] rounded-md'>
+        <div className='bg-[#09090D] sticky top-[5vh] w-[20%] border-[1px] border-[#1C1C1F] h-[77vh] rounded-md'>
           <LeftComponent />
         </div>
         <div className='w-[80%] min-h-[60vh] flex flex-col gap-[4vh]'>
-          <div className='bg-[#09090D] border-[1px] border-[#1C1C1F] min-h-[8vh] rounded-md'>
+          <div className='grassmorphism_bg sticky top-[0] border-[1px] border-[#1C1C1F] z-50 min-h-[8vh] rounded-md'>
             <ResponseFilterComponent />
           </div>
           <div className=' gap-[2vh] grid grid-cols-2'>
-            <JobCard />
-            <JobCard />
-            <JobCard />
-            <JobCard />
+            { data.map((job, index) => 
+              <JobCard 
+                key={index}
+                company={job.company}
+                position={job.position}
+                duration={job.duration}
+                location={job.location}
+                description={job.description}
+                link={job.link}
+              /> )
+              
+            }
           </div>
         </div>
       </div>
@@ -121,13 +132,6 @@ const LeftComponent = () => {
         <div className='h-16 w-16 rounded-full border-[2px] border-[#F28729] flex place-items-center'>
           <h1 className='text-white text-center w-full text-[3vh]'>B</h1>
         </div>
-      </div>
-      <div className='w-full px-[2vh] py-[2vh] flex flex-col gap-[2vh] border-b-[1px] border-[#1C1C1F]'>
-        <h1 className='text-[#9D9D9E] alliance-2 text-[1.7vh]'>
-          Experience Score
-        </h1>
-        <span className='text-[#00AC3A] text-[2.3vh]'>80</span>
-        <Slider defaultValue={80} disabled />
       </div>
       <div className='w-full px-[2vh] py-[2vh] flex flex-col gap-[2vh] border-b-[1px] border-[#1C1C1F]'>
         <h1 className='text-[#9D9D9E] alliance-2 text-[1.7vh]'>

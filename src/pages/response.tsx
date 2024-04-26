@@ -13,17 +13,17 @@ import HomeWelcomeComponent from '@/component/home/welcome';
 import FooterComponent from '@/component/layouts/footer';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
+import ResponseLayout from '@/component/response';
 
 export default function HomePage() {
   return (
     <div className='flex flex-col gap-[15vh]'>
       <Seo templateTitle='Home' />
       <div className='welcome-bg flex justify-between flex-col'>
-        <HeaderLayout sticky />
-        {/* Each HomeWelcomeComponent with the same animation, if intended */}
-        <HomeWelcomeComponent />
-        <AIPipelineComponent />
-        <FAQComponent />
+        <HeaderLayout />
+        <div className='relative w-[90vw] m-auto'>
+            <ResponseLayout />
+        </div>
         <CallToActionComponent />
         <FooterComponent />
       </div>
