@@ -57,7 +57,7 @@ const ReusableFileInput = ({
   return (
     <>
     <Flex
-      className={`flex flex-col md:gap-[1vh] alliance-2 ${className}`}
+      className={`flex relative flex-col md:gap-[1vh] alliance-2 ${className}`}
       style={style} 
       onClick={() => setOpenResultsModel(true)}
     >
@@ -86,7 +86,7 @@ const ReusableFileInput = ({
 
     <Modal
       open={openResultsModel}
-      className='w-[80vw]'
+      className='w-[80vw] relative'
       onCancel={() => setOpenResultsModel(false)}
       footer={null}
     >

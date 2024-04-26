@@ -120,3 +120,11 @@ span.ant-collapse-header-text {
   .ant-steps-item-description {
   opacity: 0.6 !important;
 }
+
+.ant-slider.ant-slider-disabled .ant-slider-track {
+  background-color: #05ac3a !important;
+}
+
+.ant-slider.ant-slider-disabled .ant-slider-rail {
+  background-color: #9d9d9e !important;
+}
