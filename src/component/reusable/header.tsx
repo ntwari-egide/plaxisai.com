@@ -5,9 +5,9 @@ import GradientButton from '../controls/gradient-button';
 
 type HeaderLayoutProps = {
   sticky?: boolean;
-}
+};
 
-const HeaderLayout = ( { sticky } : HeaderLayoutProps) => {
+const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
   const [scrolled, setScrolled] = useState<boolean>(false);
 
   useEffect(() => {
@@ -23,7 +23,11 @@ const HeaderLayout = ( { sticky } : HeaderLayoutProps) => {
   }, []);
 
   return (
-    <header className={`px-[6vw] z-50 md:px-[3vw] mt-[3vh] ${sticky ? 'md:sticky top-[3vh]':''}`}>
+    <header
+      className={`px-[6vw] z-50 md:px-[3vw] mt-[3vh] ${
+        sticky ? 'md:sticky top-[3vh]' : ''
+      }`}
+    >
       <div className='flex flex-row justify-between justify-items-center place-items-center'>
         <LogoComponent size='medium' />
         <div className='flex flex-col justify-center items-center place-items-center'>

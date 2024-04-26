@@ -1,8 +1,8 @@
 import { Slider } from 'antd';
 
+import data from './data';
 import ReusableSelect from '../controls/select';
 import JobCard from '../layouts/job-card';
-import data from './data';
 
 type ResponseLayoutProps = {
   onClick?: () => void;
@@ -11,7 +11,7 @@ type ResponseLayoutProps = {
 const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
   return (
     <div className='relative min-h-screen p-[2vw]' onClick={onClick}>
-      <div className=" relative flex flex-row">
+      <div className=' relative flex flex-row'>
         <h1 className='text-white text-[3vh]'>Matched</h1>
       </div>
       <div className='flex flex-row gap-[3vw] mt-[3vh]'>
@@ -23,8 +23,8 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
             <ResponseFilterComponent />
           </div>
           <div className=' gap-[2vh] grid grid-cols-2'>
-            { data.map((job, index) => 
-              <JobCard 
+            {data.map((job, index) => (
+              <JobCard
                 key={index}
                 company={job.company}
                 position={job.position}
@@ -32,9 +32,8 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
                 location={job.location}
                 description={job.description}
                 link={job.link}
-              /> )
-              
-            }
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -53,63 +52,63 @@ const ResponseFilterComponent = () => {
   ];
 
   const compensationOptions = [
-    { label : '> 50k', value: '> 50k'},
-    { label : '> 100k', value: '> 100k'},
-    { label : '> 150k', value: '> 150k'},
-    { label : '> 200k', value: '> 200k'},
-    { label : '> 250k', value: '> 250k'},
+    { label: '> 50k', value: '> 50k' },
+    { label: '> 100k', value: '> 100k' },
+    { label: '> 150k', value: '> 150k' },
+    { label: '> 200k', value: '> 200k' },
+    { label: '> 250k', value: '> 250k' },
   ];
 
   const levelOptions = [
-    { label : 'Level', value: 'Level'},
-    { label : 'Entry', value: 'Entry'},
-    { label : 'Mid', value: 'Mid'},
-    { label : 'Senior', value: 'Senior'},
+    { label: 'Level', value: 'Level' },
+    { label: 'Entry', value: 'Entry' },
+    { label: 'Mid', value: 'Mid' },
+    { label: 'Senior', value: 'Senior' },
   ];
 
   const locationOptions = [
-    { label : 'Location', value: 'Location'},
-    { label : 'Remote', value: 'Remote'},
-    { label : 'New York', value: 'New York'},
-    { label : 'California', value: 'California'},
-    { label : 'Texas', value: 'Texas'},
-    { label : 'Florida', value: 'Florida'},
+    { label: 'Location', value: 'Location' },
+    { label: 'Remote', value: 'Remote' },
+    { label: 'New York', value: 'New York' },
+    { label: 'California', value: 'California' },
+    { label: 'Texas', value: 'Texas' },
+    { label: 'Florida', value: 'Florida' },
   ];
 
   return (
     <div className='flex flex-col p-[1vh]'>
-        <div className='flex flex-row  p-[1vh] gap-[4vw] justify-between'>
-      <h1 className='text-[2vh] text-white alliance-2'>Filters:</h1>
-      <div className='flex flex-row justify-between w-full'>
-        <ReusableSelect
-          defaultValue='Company type'
-          options={companyTypeOptions}
-          placeholder='Company Type'
-          width={150}
-        />
+      <div className='flex flex-row  p-[1vh] gap-[4vw] justify-between'>
+        <h1 className='text-[2vh] text-white alliance-2'>Filters:</h1>
+        <div className='flex flex-row justify-between w-full'>
+          <ReusableSelect
+            defaultValue='Company type'
+            options={companyTypeOptions}
+            placeholder='Company Type'
+            width={150}
+          />
 
-        <ReusableSelect
-          defaultValue='Compensation'
-          options={compensationOptions}
-          placeholder='Compensation'
-          width={150}
-        />
+          <ReusableSelect
+            defaultValue='Compensation'
+            options={compensationOptions}
+            placeholder='Compensation'
+            width={150}
+          />
 
-        <ReusableSelect
-          defaultValue='Level'
-          options={levelOptions}
-          placeholder='Level'
-          width={150}
-        />
+          <ReusableSelect
+            defaultValue='Level'
+            options={levelOptions}
+            placeholder='Level'
+            width={150}
+          />
 
-        <ReusableSelect
-          defaultValue='Location'
-          options={locationOptions}
-          placeholder='Location'
-          width={150}
-        />
+          <ReusableSelect
+            defaultValue='Location'
+            options={locationOptions}
+            placeholder='Location'
+            width={150}
+          />
+        </div>
       </div>
-    </div>
     </div>
   );
 };
