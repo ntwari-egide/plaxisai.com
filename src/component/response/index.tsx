@@ -14,15 +14,15 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
       <div className=' relative flex flex-row'>
         <h1 className='text-white text-[3vh]'>Matched</h1>
       </div>
-      <div className='flex flex-row gap-[3vw] mt-[3vh]'>
-        <div className='bg-[#09090D] sticky top-[5vh] w-[20%] border-[1px] border-[#1C1C1F] h-[77vh] rounded-md'>
+      <div className='flex flex-col-reverse md:flex-row gap-[3vw] mt-[3vh]'>
+        <div className='bg-[#09090D] sticky top-[5vh] md:w-[20%] border-[1px] border-[#1C1C1F] h-[77vh] rounded-md'>
           <LeftComponent />
         </div>
-        <div className='w-[80%] min-h-[60vh] flex flex-col gap-[4vh]'>
+        <div className='md:w-[80%] min-h-[60vh] flex flex-col gap-[4vh]'>
           <div className='grassmorphism_bg sticky top-[0] border-[1px] border-[#1C1C1F] z-50 min-h-[8vh] rounded-md'>
             <ResponseFilterComponent />
           </div>
-          <div className=' gap-[2vh] grid grid-cols-2'>
+          <div className='gap-[2vh] grid grid-cols-1  md:grid-cols-2'>
             {data.map((job, index) => (
               <JobCard
                 key={index}
@@ -77,9 +77,9 @@ const ResponseFilterComponent = () => {
 
   return (
     <div className='flex flex-col p-[1vh]'>
-      <div className='flex flex-row  p-[1vh] gap-[4vw] justify-between'>
+      <div className='flex  flex-col md:flex-row  p-[1vh] gap-[4vw] justify-between'>
         <h1 className='text-[2vh] text-white alliance-2'>Filters:</h1>
-        <div className='flex flex-row justify-between w-full'>
+        <div className='flex flex-col md:flex-row justify-between w-full'>
           <ReusableSelect
             defaultValue='Company type'
             options={companyTypeOptions}
