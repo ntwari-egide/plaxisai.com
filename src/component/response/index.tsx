@@ -79,7 +79,7 @@ const ResponseFilterComponent = () => {
     <div className='flex flex-col p-[1vh]'>
       <div className='flex  flex-col md:flex-row  p-[1vh] gap-[4vw] justify-between'>
         <h1 className='text-[2vh] text-white alliance-2'>Filters:</h1>
-        <div className='flex flex-col md:flex-row justify-between w-full'>
+        <div className='md:flex gap-[2vw] md:gap-0 grid-cols-2 grid flex-row justify-between w-full'>
           <ReusableSelect
             defaultValue='Company type'
             options={companyTypeOptions}
