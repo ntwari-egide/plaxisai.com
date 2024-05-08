@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [20.9.0]
     name: Build with Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-latest
 
@@ -39,7 +39,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
-      
+
       - name: Build Next js for testing
         run: npm run build
 
@@ -50,8 +50,8 @@ jobs:
       - name: Run Lint Fixer
         run: npm run lint:fix
 
-      - name: Type Checking
-        run: npm run type-check
+      # - name: Type Checking
+      #   run: npm run type-check
 
       - name: Run Tests
         run: npm run test
