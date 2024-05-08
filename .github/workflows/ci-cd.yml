@@ -39,10 +39,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
-
-      - name: Set Entry Point
-        run: echo "require('dotenv').config()" > src/index.js
-
+      
       - name: Build Next js for testing
         run: npm run build
 
