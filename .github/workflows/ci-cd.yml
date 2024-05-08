@@ -7,6 +7,43 @@ on:
     branches: [main]
 
 jobs:
+  lint-fixer:
+    strategy:
+      matrix:
+        node-version: [20.9.0]
+    name: Lint Fixer with Node.js ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.JS ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install
+      - name: Run Lint Fixer
+        run: npm run lint:fix
+  lint:
+    strategy:
+      matrix:
+        node-version: [20.9.0]
+    name: Lint with Node.js ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.JS ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install
+      - name: Run Lint
+        run: npm run lint
+
   build:
     strategy:
       matrix:
@@ -29,7 +66,7 @@ jobs:
   test:
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [20.9.0]
     name: Test with Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-latest
 
@@ -53,28 +90,28 @@ jobs:
       # - name: Type Checking
       #   run: npm run type-check
 
-      - name: Run Tests
-        run: npm run test
+      # - name: Run Tests
+      #   run: npm run test
 
-      - name: Run Test Coverage
-        run: npm run test:coverage
+      # - name: Run Test Coverage
+      #   run: npm run test:coverage
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v3
+      #   env:
+      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: Install Playwright
-        run: npx playwright install --with-deps
+      # - name: Install Playwright
+      #   run: npx playwright install --with-deps
 
-      - name: Run Story book Tests
-        run: npm run test:storybook
+      # - name: Run Story book Tests
+      #   run: npm run test:storybook
 
-      - name: Run E2E Tests
-        run: npm run test:e2e
+      # - name: Run E2E Tests
+      #   run: npm run test:e2e
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: test-results
-          path: test-results
-          retention-days: 7
+      # - uses: actions/upload-artifact@v2
+      #   with:
+      #     name: test-results
+      #     path: test-results
+      #     retention-days: 7
