@@ -1,16 +1,16 @@
 # Docker file for building image for this gethiredhints project for next js and tailwind
 
 # load the base image
-FROM node:12.18.3
+FROM node:14
 
 # set the working directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # copy the package.json and package-lock.json files
 COPY package*.json ./
 
 # install the dependencies
-RUN npm install
+RUN npm install --force
 
 # copy the source code
 COPY . .
