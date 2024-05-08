@@ -1,5 +1,5 @@
-import { ArrowDownOutlined } from '@ant-design/icons';
 import { Select } from 'antd';
+import { RiArrowDownLine } from 'react-icons/ri';
 
 type ReusableSelectProps = {
   defaultValue?: string;
@@ -23,7 +23,7 @@ const ReusableSelect = ({
         placeholder={placeholder}
         style={{ width: width }}
         className={'alliance-2' + className}
-        suffixIcon={<ArrowDownOutlined className='text-white' />}
+        suffixIcon={<RiArrowDownLine className='text-white' />}
         options={options}
         popupMatchSelectWidth={false}
       />
