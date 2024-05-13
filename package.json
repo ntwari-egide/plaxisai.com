@@ -20,6 +20,8 @@
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "@reduxjs/toolkit": "^2.0.1",
+    "@types/formidable": "^3.4.5",
+    "@types/pdf-parse": "^1.1.4",
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
     "antd": "^5.5.2",
