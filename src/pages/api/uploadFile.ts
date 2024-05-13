@@ -9,7 +9,7 @@ export const config = {
     },
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function fileHandler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         const form = new formidable.IncomingForm()
         form.parse( req, async (err, fields, files) => {
