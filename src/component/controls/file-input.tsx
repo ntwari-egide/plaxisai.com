@@ -1,10 +1,14 @@
+import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { Flex, Modal, Upload, UploadProps } from 'antd';
 import Image from 'next/image';
 import { useState } from 'react';
-import { GetProps } from 'react-redux';
+import { GetProps, useDispatch, useSelector } from 'react-redux';
+
+import { RootState } from '@/store';
+
+import { uploadFile } from '@/features/resume-scanner';
 
 import TextButton from './text-button';
-import ResponseLayout from '../response';
 import AIIcon from '../../../public/images/ai-icon.png';
 
 type ReusableFileInput = {
@@ -34,6 +38,11 @@ const ReusableFileInput = ({
 
   const [openResultsModel, setOpenResultsModel] = useState(false);
 
+  const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
+  const { error, response } = useSelector(
+    (state: RootState) => state.resumeScanner
+  );
+
   const getBase64 = (img: FileType, callback: (imageUrl: string) => void) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result as string));
@@ -46,6 +55,11 @@ const ReusableFileInput = ({
       return;
     }
     if (info.file.status === 'done') {
+      // send the file to the server api for processing
+      const formData = new FormData();
+      formData.append('file', info.file.originFileObj as File);
+      dispatch(uploadFile(formData));
+
       // Get this url from response in real world.
       getBase64(info.file.originFileObj as FileType, (url) => {
         setLoading(false);
@@ -90,7 +104,7 @@ const ReusableFileInput = ({
         onCancel={() => setOpenResultsModel(false)}
         footer={null}
       >
-        <ResponseLayout />
+        <div className='text-white'>{response}</div>
       </Modal>
     </>
   );
