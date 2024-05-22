@@ -41,12 +41,7 @@ export default async function handler(req, res) {
       max_tokens: 300,
       temperature: 0.5,
     });    
-
-    console.log(
-      'OpenAI response:',
-      completion
-    )
-
+    
     const analysisResult = completion.choices[0].message.content;
 
     // Parse the response as JSON
