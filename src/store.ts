@@ -1,11 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import jobListing from './features/ job-listing';
+import openAi from './features/open-ai';
 import resumeScanner from './features/resume-scanner';
 
 export const store = configureStore({
   reducer: {
     // Add the generated reducer here
     resumeScanner: resumeScanner,
+    jobListing: jobListing,
+    openAI: openAi,
   },
 });
 
