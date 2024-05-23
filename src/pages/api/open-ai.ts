@@ -1,7 +1,11 @@
+import { NextApiRequest, NextApiResponse } from "next";
 import OpenAI from "openai";
 
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const openai = new OpenAI();
 
   if (req.method !== 'POST') {
@@ -27,6 +31,7 @@ export default async function handler(req, res) {
               {
                 "id": <Unique ID>,
                 "name": "<Company Name>",
+                "companyLocation": "<Company Location>",
                 "matchingCredit": <Matching Credit out of 10>
               },
               ...
@@ -41,7 +46,7 @@ export default async function handler(req, res) {
       max_tokens: 300,
       temperature: 0.5,
     });    
-    
+
     const analysisResult = completion.choices[0].message.content;
 
     // Parse the response as JSON
@@ -49,7 +54,6 @@ export default async function handler(req, res) {
 
     res.status(200).json(parsedResult);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: 'Error processing the request' });
   }
 }
