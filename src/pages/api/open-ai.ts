@@ -25,7 +25,7 @@ export default async function handler(
       messages: [
         {
           role: 'system',
-          content: `You are a helpful assistant that analyzes resume text and suggests possible career titles and companies that might be interested in the individual. Please know that the company doesn't need to be fortune 100, no, it is all companies all over the world. If the application is not in US, suggest the companies in his/her/their country. Format the response as a JSON object with the following structure:\n\n{
+          content: `You are a helpful assistant that analyzes resume text and suggests possible career titles and companies that might be interested in the individual. Please know that the company doesn't need to be fortune 100, no, it is all companies all over the world. If the application is not in US, suggest the companies in his/her/their country. For the title, return the title that is easy to search, don't return more than two words. Format the response as a JSON object with the following structure:\n\n{
             "title": "<Suggested Career Title>",
             "companyMatches": [
               {
