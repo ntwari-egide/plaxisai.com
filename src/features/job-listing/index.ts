@@ -33,24 +33,24 @@ export interface RequestJobListing {
 
 export const jobListingRequest = createAsyncThunk(
   'jobListing/fetchJobs',
-  async (request: RequestJobListing) => {
+  async (request: any) => {
     const response = await fetch('/api/job-listing', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        title: request.title,
-        company: request.company,
-        companyLocation: request.companyLocation,
-      }),
+      body: JSON.stringify(request),
     });
 
     if (!response.ok) {
       throw new Error('Failed to fetch jobs');
     }
+    
+    const data = await response.json();
 
-    return response.json();
+    console.log('validJobResults', data);
+
+    return data;
   }
 );
 
@@ -73,7 +73,7 @@ const jobListingSlice = createSlice({
       })
       .addCase(jobListingRequest.fulfilled, (state, action) => {
         state.loading = false;
-        state.jobs = action.payload.jobs;
+        state.jobs = action.payload;
       })
       .addCase(jobListingRequest.rejected, (state, action) => {
         state.loading = false;

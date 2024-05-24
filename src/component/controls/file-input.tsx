@@ -50,6 +50,8 @@ const ReusableFileInput = ({
     (state: RootState) => state.resumeScanner
   );
 
+  const allJobs = useSelector((state: RootState) => state.jobListing.jobs);
+
   const getBase64 = (img: FileType, callback: (imageUrl: string) => void) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result as string));
@@ -66,31 +68,17 @@ const ReusableFileInput = ({
       const formData = new FormData();
       formData.append('file', info.file.originFileObj as File);
       dispatch(setResumeScanner('STARTED'));
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating async operation
       const resumeText = await dispatch(uploadFile(formData)).unwrap();
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating async operation
       dispatch(setResumeScanner('COMPLETED'));
 
       // getting the company matches using open ai api
       dispatch(setOpenAi('STARTED'));
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating async operation
       const companyMatches = await dispatch(analyzeResume(resumeText.content)).unwrap();
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating async operation
       dispatch(setOpenAi('COMPLETED'));
 
       // get company matches from the response
       dispatch(setJobListing('STARTED'));
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating async operation
-      for (const company of companyMatches?.companyMatches || []) {
-        await dispatch(
-          jobListingRequest({
-            title: companyMatches?.title as string,
-            company: company.name,
-            companyLocation: company.companyLocation,
-          })
-        );
-      }
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulating async operation
+      await dispatch(jobListingRequest(companyMatches));
       dispatch(setJobListing('COMPLETED'));
 
       // Get this url from response in real world.
