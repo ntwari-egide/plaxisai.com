@@ -49,7 +49,6 @@ const fileUploadSlice = createSlice({
       .addCase(uploadFile.pending, (state) => {
         state.uploading = true;
         state.error = null;
-      
       })
       .addCase(uploadFile.fulfilled, (state, action) => {
         state.uploading = false;

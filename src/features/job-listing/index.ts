@@ -25,16 +25,34 @@ const initialState: JobListingState = {
   error: null,
 };
 
-export const jobListing = createAsyncThunk('jobListing/fetchJobs', async () => {
-  const response = await fetch('/api/job-listing');
+export interface RequestJobListing {
+  title: string;
+  company: string;
+  companyLocation: string;
+}
 
-  if (!response.ok) {
-    throw new Error('Failed to fetch jobs');
+export const jobListingRequest = createAsyncThunk(
+  'jobListing/fetchJobs',
+  async (request: RequestJobListing) => {
+    const response = await fetch('/api/job-listing', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: request.title,
+        company: request.company,
+        companyLocation: request.companyLocation,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch jobs');
+    }
+
+    return response.json();
   }
-
-  return response.json();
-});
-
+);
 
 // slice
 const jobListingSlice = createSlice({
@@ -49,15 +67,15 @@ const jobListingSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(jobListing.pending, (state) => {
+      .addCase(jobListingRequest.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(jobListing.fulfilled, (state, action) => {
+      .addCase(jobListingRequest.fulfilled, (state, action) => {
         state.loading = false;
         state.jobs = action.payload.jobs;
       })
-      .addCase(jobListing.rejected, (state, action) => {
+      .addCase(jobListingRequest.rejected, (state, action) => {
         state.loading = false;
         state.error = action?.error?.message;
       });

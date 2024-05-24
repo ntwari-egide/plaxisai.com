@@ -6,7 +6,14 @@ import { GetProps, useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '@/store';
 
+import { jobListingRequest } from '@/features/job-listing';
+import { analyzeResume } from '@/features/open-ai';
 import { uploadFile } from '@/features/resume-scanner';
+import {
+  setJobListing,
+  setOpenAi,
+  setResumeScanner,
+} from '@/features/tracking-progress';
 
 import TextButton from './text-button';
 import AIIcon from '../../../public/images/ai-icon.png';
@@ -43,13 +50,21 @@ const ReusableFileInput = ({
     (state: RootState) => state.resumeScanner
   );
 
+  const companyMatches = useSelector(
+    (state: RootState) => state.openAI.response
+  );
+
+  const companyMatchesLoading = useSelector(
+    (state: RootState) => state.trackingProgress
+  );
+
   const getBase64 = (img: FileType, callback: (imageUrl: string) => void) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result as string));
     reader.readAsDataURL(img);
   };
 
-  const handleChange: UploadProps['onChange'] = (info) => {
+  const handleChange: UploadProps['onChange'] = async (info) => {
     if (info.file.status === 'uploading') {
       setLoading(true);
       return;
@@ -58,7 +73,34 @@ const ReusableFileInput = ({
       // send the file to the server api for processing
       const formData = new FormData();
       formData.append('file', info.file.originFileObj as File);
+      dispatch(setResumeScanner('STARTED'));
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating async operation
+
       dispatch(uploadFile(formData));
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating async operation
+      dispatch(setResumeScanner('COMPLETED'));
+
+      // getting the company matches using open ai api
+      dispatch(setOpenAi('STARTED'));
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating async operation
+      dispatch(analyzeResume(response as string));
+      dispatch(setOpenAi('COMPLETED'));
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating async operation
+
+      // get company matches from the response
+      dispatch(setJobListing('STARTED'));
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating async operation
+      for (const company of companyMatches?.companyMatches || []) {
+        dispatch(
+          jobListingRequest({
+            title: companyMatches?.title as string,
+            company: company.name,
+            companyLocation: company.companyLocation,
+          })
+        );
+      }
+      dispatch(setJobListing('COMPLETED'));
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating async operation
 
       // Get this url from response in real world.
       getBase64(info.file.originFileObj as FileType, (url) => {

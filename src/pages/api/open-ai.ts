@@ -1,6 +1,5 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import OpenAI from "openai";
-
+import { NextApiRequest, NextApiResponse } from 'next';
+import OpenAI from 'openai';
 
 export default async function handler(
   req: NextApiRequest,
@@ -45,7 +44,7 @@ export default async function handler(
       ],
       max_tokens: 300,
       temperature: 0.5,
-    });    
+    });
 
     const analysisResult = completion.choices[0].message.content;
 
