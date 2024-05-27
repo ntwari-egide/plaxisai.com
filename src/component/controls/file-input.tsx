@@ -1,6 +1,7 @@
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
-import { Flex, Modal, Steps, Upload, UploadProps } from 'antd';
+import { Flex, Modal, Progress, Steps, Upload, UploadProps } from 'antd';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { GetProps, useDispatch, useSelector } from 'react-redux';
 
@@ -17,7 +18,6 @@ import {
 
 import TextButton from './text-button';
 import AIIcon from '../../../public/images/ai-icon.png';
-import { useRouter } from 'next/router';
 
 type ReusableFileInput = {
   onChange?: (file: File) => void;
@@ -52,6 +52,8 @@ const ReusableFileInput = ({
     (state: RootState) => state.resumeScanner
   );
 
+  const progress = useSelector((state: RootState) => state.trackingProgress);
+
   const allJobs = useSelector((state: RootState) => state.jobListing.jobs);
 
   const getBase64 = (img: FileType, callback: (imageUrl: string) => void) => {
@@ -61,6 +63,8 @@ const ReusableFileInput = ({
   };
 
   const handleChange: UploadProps['onChange'] = async (info) => {
+    setOpenResultsModel(true); // make the progress bar visible
+
     if (info.file.status === 'uploading') {
       setLoading(true);
       return;
@@ -83,10 +87,7 @@ const ReusableFileInput = ({
       await dispatch(jobListingRequest(companyMatches));
       dispatch(setJobListing('COMPLETED'));
 
-
-      // wait for like 2 seconds
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      // send the route to the /response
+      // send the route to the /response and open in new tab
       Router.push('/response');
 
       // Get this url from response in real world.
@@ -102,7 +103,6 @@ const ReusableFileInput = ({
       <Flex
         className={`flex relative flex-col md:gap-[1vh] alliance-2 ${className}`}
         style={style}
-        onClick={() => setOpenResultsModel(true)}
       >
         <Upload
           accept={accept}
@@ -141,34 +141,19 @@ const ReusableFileInput = ({
           <h1 className='text-white text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center'>
             Get matched: Four Dynamic Steps
           </h1>
-          <Steps
-            direction='vertical'
-            current={2}
-            progressDot
-            className='alliance-2'
-            items={[
-              {
-                title: 'Initiating Upload...',
-                description:
-                  'Begin by securely uploading your resume into our precision-engineered system.',
-              },
-              {
-                title: 'Analyzing Data...',
-                description:
-                  'Your resume is now being dissected by our advanced algorithm',
-              },
-              {
-                title: 'Matching Profiles...',
-                description:
-                  'Our system is intelligently comparing your credentials with potential employers to find the perfect fit',
-              },
-              {
-                title: 'Revealing Opportunities...',
-                description:
-                  'Access tailored job matches and uncover your next career opportunity instantly.',
-              },
-            ]}
-          />
+
+          <Flex vertical gap="small" style={{ width: 180 }}>
+            <p className='text-white'>Parsing Resume Content</p>
+            <Progress percent={ progress.resumeScaner == 'STARTED' ? 40: progress.resumeScaner == 'COMPLETED' ? 100: 0} size="small" />
+
+            <p className='text-white'>Matching Company Profiles using AI</p>
+            <Progress percent={ progress.openAi == 'STARTED' ? 50: progress.openAi == 'COMPLETED' ? 100: 0} size="small" />
+
+            <p className='text-white'>Matching Job Listings</p>
+            <Progress percent={ progress.jobListing == 'STARTED' ? 50: progress.jobListing == 'COMPLETED' ? 100: 0} size="small" />
+
+          </Flex>
+          
         </div>
       </Modal>
     </>
