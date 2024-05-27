@@ -54,8 +54,6 @@ const ReusableFileInput = ({
 
   const progress = useSelector((state: RootState) => state.trackingProgress);
 
-  const allJobs = useSelector((state: RootState) => state.jobListing.jobs);
-
   const getBase64 = (img: FileType, callback: (imageUrl: string) => void) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result as string));

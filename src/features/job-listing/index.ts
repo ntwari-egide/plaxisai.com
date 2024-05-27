@@ -14,7 +14,7 @@ interface Job {
 }
 
 interface JobListingState {
-  jobs: Job[];
+  jobs: any[];
   loading: boolean;
   error: string | null | undefined;
 }
