@@ -1,5 +1,5 @@
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
-import { Flex, Modal, Upload, UploadProps } from 'antd';
+import { Flex, Modal, Steps, Upload, UploadProps } from 'antd';
 import Image from 'next/image';
 import { useState } from 'react';
 import { GetProps, useDispatch, useSelector } from 'react-redux';
@@ -17,6 +17,7 @@ import {
 
 import TextButton from './text-button';
 import AIIcon from '../../../public/images/ai-icon.png';
+import { useRouter } from 'next/router';
 
 type ReusableFileInput = {
   onChange?: (file: File) => void;
@@ -42,6 +43,7 @@ const ReusableFileInput = ({
 }: ReusableFileInput) => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string | undefined>();
+  const Router = useRouter();
 
   const [openResultsModel, setOpenResultsModel] = useState(false);
 
@@ -80,6 +82,12 @@ const ReusableFileInput = ({
       dispatch(setJobListing('STARTED'));
       await dispatch(jobListingRequest(companyMatches));
       dispatch(setJobListing('COMPLETED'));
+
+
+      // wait for like 2 seconds
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // send the route to the /response
+      Router.push('/response');
 
       // Get this url from response in real world.
       getBase64(info.file.originFileObj as FileType, (url) => {
@@ -125,7 +133,43 @@ const ReusableFileInput = ({
         onCancel={() => setOpenResultsModel(false)}
         footer={null}
       >
-        <div className='text-white'>{response}</div>
+        {/* // this is progress tracking bar */}
+        <div className='flex flex-col gap-[1vh] place-items-center'>
+          <h1 className='text-[#F28729] inter-tight md:text-[3vh] font-medium text-center'>
+            Progress
+          </h1>
+          <h1 className='text-white text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center'>
+            Get matched: Four Dynamic Steps
+          </h1>
+          <Steps
+            direction='vertical'
+            current={2}
+            progressDot
+            className='alliance-2'
+            items={[
+              {
+                title: 'Initiating Upload...',
+                description:
+                  'Begin by securely uploading your resume into our precision-engineered system.',
+              },
+              {
+                title: 'Analyzing Data...',
+                description:
+                  'Your resume is now being dissected by our advanced algorithm',
+              },
+              {
+                title: 'Matching Profiles...',
+                description:
+                  'Our system is intelligently comparing your credentials with potential employers to find the perfect fit',
+              },
+              {
+                title: 'Revealing Opportunities...',
+                description:
+                  'Access tailored job matches and uncover your next career opportunity instantly.',
+              },
+            ]}
+          />
+        </div>
       </Modal>
     </>
   );
