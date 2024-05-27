@@ -45,7 +45,7 @@ export const jobListingRequest = createAsyncThunk(
     if (!response.ok) {
       throw new Error('Failed to fetch jobs');
     }
-    
+
     const data = await response.json();
 
     console.log('validJobResults', data);

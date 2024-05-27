@@ -34,7 +34,7 @@ export const analyzeResume = createAsyncThunk<OpenAIResponse, string>(
       },
       body: JSON.stringify({ resumeText: resumeText }),
     });
-    
+
     if (!response.ok) {
       throw new Error('Failed to analyze resume');
     }

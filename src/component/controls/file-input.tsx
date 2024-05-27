@@ -1,5 +1,5 @@
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
-import { Flex, Modal, Progress, Steps, Upload, UploadProps } from 'antd';
+import { Flex, Modal, Progress, Upload, UploadProps } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -77,7 +77,9 @@ const ReusableFileInput = ({
 
       // getting the company matches using open ai api
       dispatch(setOpenAi('STARTED'));
-      const companyMatches = await dispatch(analyzeResume(resumeText.content)).unwrap();
+      const companyMatches = await dispatch(
+        analyzeResume(resumeText.content)
+      ).unwrap();
       dispatch(setOpenAi('COMPLETED'));
 
       // get company matches from the response
@@ -140,18 +142,43 @@ const ReusableFileInput = ({
             Get matched: Four Dynamic Steps
           </h1>
 
-          <Flex vertical gap="small" style={{ width: 180 }}>
+          <Flex vertical gap='small' style={{ width: 180 }}>
             <p className='text-white'>Parsing Resume Content</p>
-            <Progress percent={ progress.resumeScaner == 'STARTED' ? 40: progress.resumeScaner == 'COMPLETED' ? 100: 0} size="small" />
+            <Progress
+              percent={
+                progress.resumeScaner == 'STARTED'
+                  ? 40
+                  : progress.resumeScaner == 'COMPLETED'
+                  ? 100
+                  : 0
+              }
+              size='small'
+            />
 
             <p className='text-white'>Matching Company Profiles using AI</p>
-            <Progress percent={ progress.openAi == 'STARTED' ? 50: progress.openAi == 'COMPLETED' ? 100: 0} size="small" />
+            <Progress
+              percent={
+                progress.openAi == 'STARTED'
+                  ? 50
+                  : progress.openAi == 'COMPLETED'
+                  ? 100
+                  : 0
+              }
+              size='small'
+            />
 
             <p className='text-white'>Matching Job Listings</p>
-            <Progress percent={ progress.jobListing == 'STARTED' ? 50: progress.jobListing == 'COMPLETED' ? 100: 0} size="small" />
-
+            <Progress
+              percent={
+                progress.jobListing == 'STARTED'
+                  ? 50
+                  : progress.jobListing == 'COMPLETED'
+                  ? 100
+                  : 0
+              }
+              size='small'
+            />
           </Flex>
-          
         </div>
       </Modal>
     </>

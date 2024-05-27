@@ -21,7 +21,6 @@ const JobCard = ({
   salary,
   postedDate,
 }: JobCardProps) => {
-
   const truncateText = (text: string, maxWords: number): string => {
     const words = text.split(' ');
     if (words.length > maxWords) {
@@ -30,7 +29,6 @@ const JobCard = ({
     return text;
   };
 
-  
   return (
     <Link
       href={link}
@@ -46,15 +44,21 @@ const JobCard = ({
         <p className='text-[white] text-[1.7vh]'>{location} </p>
       </div>
       <div className='flex alliance-2 flex-row justify-between gap-[2vw]'>
-        { salary && <p className='text-[white] text-[1.7vh]'>
-          Salary : <span className='text-[#9d9d9e]'>{salary}</span>
-        </p>}
-        { postedDate && <p className='text-[white] text-[1.7vh]'>
-          Posted At : <span className='text-[#9d9d9e]'>{postedDate}</span>
-        </p>}
+        {salary && (
+          <p className='text-[white] text-[1.7vh]'>
+            Salary : <span className='text-[#9d9d9e]'>{salary}</span>
+          </p>
+        )}
+        {postedDate && (
+          <p className='text-[white] text-[1.7vh]'>
+            Posted At : <span className='text-[#9d9d9e]'>{postedDate}</span>
+          </p>
+        )}
       </div>
 
-      <p className='text-[#d5d5d6e6] alliance-2 text-[2vh]'>{truncateText(description, 30)} </p>
+      <p className='text-[#d5d5d6e6] alliance-2 text-[2vh]'>
+        {truncateText(description, 30)}{' '}
+      </p>
     </Link>
   );
 };

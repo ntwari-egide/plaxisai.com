@@ -1,27 +1,26 @@
 import { Slider } from 'antd';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-import data from './data';
+import { RootState } from '@/store';
+
 import ReusableSelect from '../controls/select';
 import JobCard from '../layouts/job-card';
-import { useDispatch, useSelector } from 'react-redux';
-import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
-import { RootState } from '@/store';
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 
 type ResponseLayoutProps = {
   onClick?: () => void;
 };
 
 const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
-
   const router = useRouter();
 
   let allJobs = [];
   allJobs = useSelector((state: RootState) => state.jobListing.jobs);
 
-  const matchedCompanies = useSelector((state: RootState) => state.openAI.response?.companyMatches);
-
+  const matchedCompanies = useSelector(
+    (state: RootState) => state.openAI.response?.companyMatches
+  );
 
   // if the all jobs we need to send back to index.tsx
 
@@ -30,8 +29,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
       router.push('/');
     }
   }, [allJobs, router]);
-  
-  
+
   return (
     <div className='relative min-h-screen p-[2vw]' onClick={onClick}>
       <div className=' relative flex flex-row'>
@@ -39,7 +37,10 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
       </div>
       <div className='flex flex-col-reverse md:flex-row gap-[3vw] mt-[3vh]'>
         <div className='bg-[#09090D] sticky top-[5vh] md:w-[20%] border-[1px] border-[#1C1C1F] h-[77vh] rounded-md'>
-          <LeftComponent allJobs={allJobs} matchedCompanies={matchedCompanies} />
+          <LeftComponent
+            allJobs={allJobs}
+            matchedCompanies={matchedCompanies}
+          />
         </div>
         <div className='md:w-[80%] min-h-[60vh] flex flex-col gap-[4vh]'>
           <div className='grassmorphism_bg sticky top-[0] border-[1px] border-[#1C1C1F] z-50 min-h-[8vh] rounded-md'>
@@ -47,21 +48,21 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
           </div>
           <div className='gap-[2vh] grid grid-cols-1  md:grid-cols-2'>
             {/* {data.map((job) => ( */}
-            {allJobs.map((job) => (
+            {allJobs.map((job) =>
               job.jobs.jobs.map((foundJob: any, index: number) => (
                 <JobCard
-                key={index}
-                company={foundJob.company}
-                position={foundJob.title}
-                duration={foundJob.employmentType}
-                location={foundJob.location}
-                description={foundJob.description}
-                link={foundJob.jobProviders[0].url}
-                salary={foundJob.salaryRange}
-                postedDate={foundJob.datePosted}
-              />
+                  key={index}
+                  company={foundJob.company}
+                  position={foundJob.title}
+                  duration={foundJob.employmentType}
+                  location={foundJob.location}
+                  description={foundJob.description}
+                  link={foundJob.jobProviders[0].url}
+                  salary={foundJob.salaryRange}
+                  postedDate={foundJob.datePosted}
+                />
               ))
-            ))}
+            )}
           </div>
         </div>
       </div>
@@ -144,14 +145,15 @@ const ResponseFilterComponent = () => {
 interface LeftComponentProps {
   allJobs?: any[];
   matchedCompanies?: any[];
-};
+}
 
-const LeftComponent = ( { allJobs, matchedCompanies }: LeftComponentProps) => {
-
-
-  const totalJobs = allJobs && Array.isArray(allJobs) ? 
-  allJobs.map((job: any) => job.jobs.jobs.length).reduce((a: number, b: number) => a + b, 0) 
-  : 0;
+const LeftComponent = ({ allJobs, matchedCompanies }: LeftComponentProps) => {
+  const totalJobs =
+    allJobs && Array.isArray(allJobs)
+      ? allJobs
+          .map((job: any) => job.jobs.jobs.length)
+          .reduce((a: number, b: number) => a + b, 0)
+      : 0;
 
   return (
     <div className='flex flex-col gap-[2vh]'>
@@ -160,7 +162,9 @@ const LeftComponent = ( { allJobs, matchedCompanies }: LeftComponentProps) => {
           Matching Companies
         </h1>
         <div className='h-16 w-20 rounded-full border-[2px] border-[#00AC3A] flex place-items-center'>
-          <h1 className='text-white text-center w-full text-[3vh]'>{allJobs?.length}</h1>
+          <h1 className='text-white text-center w-full text-[3vh]'>
+            {allJobs?.length}
+          </h1>
         </div>
       </div>
       <div className='w-full px-[2vh] py-[2vh] flex flex-col gap-[2vh] border-b-[1px] border-[#1C1C1F]'>
@@ -168,25 +172,28 @@ const LeftComponent = ( { allJobs, matchedCompanies }: LeftComponentProps) => {
           Resume Matched Jobs
         </h1>
         <div className='h-16 w-16 rounded-full border-[2px] border-[#F28729] flex place-items-center'>
-          <h1 className='text-white text-center w-full text-[3vh]'>{totalJobs}</h1>
+          <h1 className='text-white text-center w-full text-[3vh]'>
+            {totalJobs}
+          </h1>
         </div>
       </div>
       <div className='w-full px-[2vh] py-[2vh] flex flex-col gap-[2vh] border-b-[1px] border-[#1C1C1F]'>
         <h1 className='text-[#9D9D9E] alliance-2 text-[1.7vh]'>
           Matched Companies Score (10)
           <table className='mt-[2vh]'>
-            {
-              matchedCompanies?.map((company: any, index: number) => (
-                <tbody key={index}>
-                  <tr>
-                    <td className='text-[white] text-[1.7vh]'>{company.name} :</td>
-                    <td className='text-[#9D9D9E] text-[1.7vh]'>{company.matchingCredit}</td>
-                  </tr>
-                </tbody>
-              ))
-            }
+            {matchedCompanies?.map((company: any, index: number) => (
+              <tbody key={index}>
+                <tr>
+                  <td className='text-[white] text-[1.7vh]'>
+                    {company.name} :
+                  </td>
+                  <td className='text-[#9D9D9E] text-[1.7vh]'>
+                    {company.matchingCredit}
+                  </td>
+                </tr>
+              </tbody>
+            ))}
           </table>
-          
         </h1>
       </div>
       <div className='w-full px-[2vh] py-[2vh] flex flex-col gap-[2vh]'>

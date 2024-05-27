@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 interface CompanyMatch {
   id: number;
@@ -22,8 +22,11 @@ export default async function handler(
     return;
   }
 
-  const { title, companyMatches }: { title: string; companyMatches: CompanyMatch[] } = req.body;
-  
+  const {
+    title,
+    companyMatches,
+  }: { title: string; companyMatches: CompanyMatch[] } = req.body;
+
   if (!title || !companyMatches || companyMatches.length === 0) {
     res.status(400).json({ message: 'Title and company matches are required' });
     return;
@@ -59,7 +62,7 @@ export default async function handler(
     const jobResults: JobResult[] = await Promise.all(jobPromises);
 
     // Filter out any null job results
-    const validJobResults = jobResults.filter(result => result.jobs !== null);    
+    const validJobResults = jobResults.filter((result) => result.jobs !== null);
 
     res.status(200).json(validJobResults);
   } catch (error) {
