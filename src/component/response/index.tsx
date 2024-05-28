@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Slider } from 'antd';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@/store';
@@ -78,7 +78,33 @@ interface ResponseFilterComponentProps {
   allJobs: any[];
 }
 
+interface Filters {
+  companies: string[];
+  jobProvider: string[];
+  employmentType: string[];
+  location: string[];
+}
+
 const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => {
+
+  // one state for all the filters
+  const [filters, setFilters] = useState<Filters>({ companies: [], jobProvider: [], employmentType: [], location: [] });
+
+  const onChangeCompany = (value: string[]) => {
+    value && setFilters({ ...filters, companies: value });
+  }
+
+  const onChangeJobProvider = (value: string[]) => {
+    value && setFilters({ ...filters, jobProvider: value });
+  }
+
+  const onChangeEmploymentType = (value: string[]) => {
+    value && setFilters({ ...filters, employmentType: value });
+  }
+
+  const onChangeLocation = (value: string[]) => {
+    value && setFilters({ ...filters, location: value });
+  }
 
   return (
     <div className='flex flex-col p-[1vh]'>
@@ -90,6 +116,7 @@ const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => 
             options={allJobs && getFilterOptions(allJobs, 'company')}
             placeholder='Company'
             width={150}
+            onChange={onChangeCompany}
             allowMultiple
           />
 
@@ -98,6 +125,7 @@ const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => 
             options={allJobs && getFilterOptions(allJobs, 'jobProvider')}
             placeholder='Job Provider'
             width={150}
+            onChange={onChangeJobProvider}
             allowMultiple
           />
 
@@ -106,6 +134,7 @@ const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => 
             options={allJobs && getFilterOptions(allJobs, 'employmentType')}
             placeholder='Employment Type'
             width={150}
+            onChange={onChangeEmploymentType}
             allowMultiple
           />
 
@@ -114,6 +143,7 @@ const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => 
             options={allJobs && getFilterOptions(allJobs, 'location')}
             placeholder='Location'
             width={150}
+            onChange={onChangeLocation}
             allowMultiple
           />
         </div>

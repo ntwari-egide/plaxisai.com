@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { JobListingState } from '../job-listing';
+
 import { filterJobsHelper } from '@/utils/filters';
+
+import { JobListingState } from '../job-listing';
 
 const initialState: JobListingState = {
     jobs: [],
