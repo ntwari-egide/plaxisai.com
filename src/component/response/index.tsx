@@ -104,22 +104,22 @@ const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => 
 
   const onChangeCompany = (value: string[]) => {
     value && setFilters({ ...filters, companies: value });
-    dispatch( filterJobs(filters) );
+    dispatch(filterJobs({ jobs: allJobs, filterOptions: filters }));
   }
 
   const onChangeJobProvider = (value: string[]) => {
     value && setFilters({ ...filters, jobProvider: value });
-    dispatch( filterJobs(filters) );
+    dispatch(filterJobs({ jobs: allJobs, filterOptions: filters }));
   }
 
   const onChangeEmploymentType = (value: string[]) => {
     value && setFilters({ ...filters, employmentType: value });
-    dispatch( filterJobs(filters) );
+    dispatch(filterJobs({ jobs: allJobs, filterOptions: filters }));
   }
 
   const onChangeLocation = (value: string[]) => {
     value && setFilters({ ...filters, location: value });
-    dispatch( filterJobs(filters) );
+    dispatch(filterJobs({ jobs: allJobs, filterOptions: filters }));
   }
 
   return (

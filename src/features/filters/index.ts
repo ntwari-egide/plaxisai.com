@@ -20,25 +20,15 @@ export const resetJobListing = createAsyncThunk(
 );
 
 // given the filter options, filter the jobs and return the filtered jobs, know that the filter options are an array of objects of type { label: string, value: string }, and the jobs are an array of objects of type Job. Know that the filter options are the keys of the Job object and can have nested hierarchy, so you need to traverse the job object to get the value of the key
+interface FilterJobsProps {
+    jobs: any[];
+    filterOptions: FilterOptions;
+}
 export const filterJobs = createAsyncThunk(
     'jobListing/filter',
-    async (filterOptions: FilterOptions) => {
-        const response = await fetch('/api/job-listing', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(filterOptions),
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch jobs');
-        }
-
-        const data: any[] = await response.json();
-
+    async ({jobs , filterOptions}: FilterJobsProps) => {
         // Filter the jobs using the filter options
-        const filteredJobs = filterJobsHelper(data, filterOptions);
+        const filteredJobs = filterJobsHelper(jobs, filterOptions);
 
         return filteredJobs;
     }
