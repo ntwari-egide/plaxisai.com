@@ -3,7 +3,7 @@
  * @param response 
  * @approach loop through the response, check where the key matches the filterOptionName, and then return the array of values, removing duplicates, the filterOption might be in sub objects, so you need to go all the way down to get the value
  */
-export const getFilterOptions = (response: any[], filterOptionName: string): string[] => {
+export const getFilterOptions = (response: any[], filterOptionName: string): { label: string, value: string }[] => {
     const filterOptions: Set<string> = new Set();
 
     const traverse = (obj: any) => {
@@ -27,5 +27,5 @@ export const getFilterOptions = (response: any[], filterOptionName: string): str
 
     response.forEach(item => traverse(item));
 
-    return Array.from(filterOptions);
+    return Array.from(filterOptions).map(option => ({ label: option, value: option }));
 };

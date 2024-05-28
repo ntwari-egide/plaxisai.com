@@ -31,8 +31,6 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
       router.push('/');
     }
   }, [allJobs, router]);
-
-  console.log( 'filtering options: ', getFilterOptions(data, 'datePosted'));
   
 
   return (
@@ -49,7 +47,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
         </div>
         <div className='md:w-[80%] min-h-[60vh] flex flex-col gap-[4vh]'>
           <div className='grassmorphism_bg sticky top-[0] border-[1px] border-[#1C1C1F] z-50 min-h-[8vh] rounded-md'>
-            <ResponseFilterComponent />
+            <ResponseFilterComponent allJobs={allJobs} />
           </div>
           <div className='gap-[2vh] grid grid-cols-1  md:grid-cols-2'>
             {/* {data.map((job) => ( */}
@@ -75,39 +73,11 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
   );
 };
 
-const ResponseFilterComponent = () => {
-  const companyTypeOptions = [
-    { label: 'Company type', value: 'Company type' },
-    { label: 'All', value: 'All' },
-    { label: 'Tech', value: 'Tech' },
-    { label: 'Finance', value: 'Finance' },
-    { label: 'Health', value: 'Health' },
-    { label: 'Retail', value: 'Retail' },
-  ];
+interface ResponseFilterComponentProps {
+  allJobs: any[];
+}
 
-  const compensationOptions = [
-    { label: '> 50k', value: '> 50k' },
-    { label: '> 100k', value: '> 100k' },
-    { label: '> 150k', value: '> 150k' },
-    { label: '> 200k', value: '> 200k' },
-    { label: '> 250k', value: '> 250k' },
-  ];
-
-  const levelOptions = [
-    { label: 'Level', value: 'Level' },
-    { label: 'Entry', value: 'Entry' },
-    { label: 'Mid', value: 'Mid' },
-    { label: 'Senior', value: 'Senior' },
-  ];
-
-  const locationOptions = [
-    { label: 'Location', value: 'Location' },
-    { label: 'Remote', value: 'Remote' },
-    { label: 'New York', value: 'New York' },
-    { label: 'California', value: 'California' },
-    { label: 'Texas', value: 'Texas' },
-    { label: 'Florida', value: 'Florida' },
-  ];
+const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => {
 
   return (
     <div className='flex flex-col p-[1vh]'>
@@ -115,29 +85,29 @@ const ResponseFilterComponent = () => {
         <h1 className='text-[2vh] text-white alliance-2'>Filters:</h1>
         <div className='md:flex gap-[2vw] md:gap-0 grid-cols-2 grid flex-row justify-between w-full'>
           <ReusableSelect
-            defaultValue='Company type'
-            options={companyTypeOptions}
-            placeholder='Company Type'
+            defaultValue='Company'
+            options={allJobs && getFilterOptions(allJobs, 'company')}
+            placeholder='Company'
             width={150}
           />
 
           <ReusableSelect
-            defaultValue='Compensation'
-            options={compensationOptions}
-            placeholder='Compensation'
+            defaultValue='Job Provider'
+            options={allJobs && getFilterOptions(allJobs, 'jobProvider')}
+            placeholder='Job Provider'
             width={150}
           />
 
           <ReusableSelect
-            defaultValue='Level'
-            options={levelOptions}
-            placeholder='Level'
+            defaultValue='Employment Type'
+            options={allJobs && getFilterOptions(allJobs, 'employmentType')}
+            placeholder='Employment Type'
             width={150}
           />
 
           <ReusableSelect
             defaultValue='Location'
-            options={locationOptions}
+            options={allJobs && getFilterOptions(allJobs, 'location')}
             placeholder='Location'
             width={150}
           />
