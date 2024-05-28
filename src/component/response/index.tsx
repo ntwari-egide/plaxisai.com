@@ -43,7 +43,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
     // reset the state
     dispatch(resetJobListing(allJobs));
   }, [allJobs, router]);
-  
+
   return (
     <div className='relative min-h-screen p-[2vw]' onClick={onClick}>
       <div className=' relative flex flex-row'>
@@ -58,7 +58,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
         </div>
         <div className='md:w-[80%] min-h-[60vh] flex flex-col gap-[4vh]'>
           <div className='grassmorphism_bg sticky top-[0] border-[1px] border-[#1C1C1F] z-50 min-h-[8vh] rounded-md'>
-            <ResponseFilterComponent allJobs={allJobs} />
+            <ResponseFilterComponent allJobs={jobsFiltered} />
           </div>
           <div className='gap-[2vh] grid grid-cols-1  md:grid-cols-2'>
             {/* {data.map((job) => ( */}
@@ -95,32 +95,36 @@ export interface FilterOptions {
   location: string[];
 }
 
-const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => {
-
+const ResponseFilterComponent = ({ allJobs }: ResponseFilterComponentProps) => {
   const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
 
   // one state for all the filters
-  const [filters, setFilters] = useState<FilterOptions>({ companies: [], jobProvider: [], employmentType: [], location: [] });
+  const [filters, setFilters] = useState<FilterOptions>({
+    companies: [],
+    jobProvider: [],
+    employmentType: [],
+    location: [],
+  });
 
   const onChangeCompany = (value: string[]) => {
     value && setFilters({ ...filters, companies: value });
     dispatch(filterJobs({ jobs: allJobs, filterOptions: filters }));
-  }
+  };
 
   const onChangeJobProvider = (value: string[]) => {
     value && setFilters({ ...filters, jobProvider: value });
     dispatch(filterJobs({ jobs: allJobs, filterOptions: filters }));
-  }
+  };
 
   const onChangeEmploymentType = (value: string[]) => {
     value && setFilters({ ...filters, employmentType: value });
     dispatch(filterJobs({ jobs: allJobs, filterOptions: filters }));
-  }
+  };
 
   const onChangeLocation = (value: string[]) => {
     value && setFilters({ ...filters, location: value });
     dispatch(filterJobs({ jobs: allJobs, filterOptions: filters }));
-  }
+  };
 
   return (
     <div className='flex flex-col p-[1vh]'>

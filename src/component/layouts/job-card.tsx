@@ -35,9 +35,10 @@ const JobCard = ({
       target='_blank'
       className='border-[1px] p-[2vh] bg-[#09090D] rounded-md border-[#1C1C1F] cursor-pointer hover:scale-[.98] transition-all flex flex-col gap-[1vh]'
     >
-      <h1 className='text-[2vh] text-[#9d9d9e] font-medium' dangerouslySetInnerHTML={
-        { __html: company }
-      }></h1>
+      <h1
+        className='text-[2vh] text-[#9d9d9e] font-medium'
+        dangerouslySetInnerHTML={{ __html: company }}
+      ></h1>
       <div className='flex alliance-2 flex-row justify-between gap-[2vw]'>
         <p className='text-[white] font-medium text-[1.7vh]'>{position}</p>
         <p className='text-[white] text-[1.7vh]'>
@@ -58,9 +59,10 @@ const JobCard = ({
         )}
       </div>
 
-      <p className='text-[#d5d5d6e6] alliance-2 text-[2vh]' dangerouslySetInnerHTML={
-        { __html: truncateText(description, 30) }
-      } />
+      <p
+        className='text-[#d5d5d6e6] alliance-2 text-[2vh]'
+        dangerouslySetInnerHTML={{ __html: truncateText(description, 30) }}
+      />
     </Link>
   );
 };

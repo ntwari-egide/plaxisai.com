@@ -48,8 +48,6 @@ export const jobListingRequest = createAsyncThunk(
 
     const data = await response.json();
 
-    console.log('validJobResults', data);
-
     return data;
   }
 );

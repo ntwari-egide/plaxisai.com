@@ -32,7 +32,7 @@ const ReusableSelect = ({
         popupMatchSelectWidth={false}
         defaultValue={defaultValue}
         allowClear
-        mode={ allowMultiple ? 'multiple' : undefined}
+        mode={allowMultiple ? 'multiple' : undefined}
       />
     </div>
   );
