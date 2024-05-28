@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import filters from './features/filters';
 import jobListing from './features/job-listing';
 import openAi from './features/open-ai';
 import resumeScanner from './features/resume-scanner';
@@ -12,6 +13,7 @@ export const store = configureStore({
     jobListing: jobListing,
     openAI: openAi,
     trackingProgress: trackingProgress,
+    jobsFiltered: filters,
   },
 });
 

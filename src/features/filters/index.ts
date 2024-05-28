@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { filterJobsHelper } from '@/utils/filters';
 
 import { JobListingState } from '../job-listing';
+import { FilterOptions } from '@/component/response';
 
 const initialState: JobListingState = {
     jobs: [],
@@ -21,7 +22,7 @@ export const resetJobListing = createAsyncThunk(
 // given the filter options, filter the jobs and return the filtered jobs, know that the filter options are an array of objects of type { label: string, value: string }, and the jobs are an array of objects of type Job. Know that the filter options are the keys of the Job object and can have nested hierarchy, so you need to traverse the job object to get the value of the key
 export const filterJobs = createAsyncThunk(
     'jobListing/filter',
-    async (filterOptions: { label: string, value: string }[]) => {
+    async (filterOptions: FilterOptions) => {
         const response = await fetch('/api/job-listing', {
             method: 'POST',
             headers: {
@@ -49,6 +50,16 @@ const filteredJobsListing = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
+            .addCase(resetJobListing.fulfilled, (state, action) => {
+                state.jobs = action.payload;
+            })
+            .addCase(resetJobListing.rejected, (state, action) => {
+                state.error = action.error.message;
+            })
+            .addCase(resetJobListing.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
             .addCase(filterJobs.pending, (state) => {
                 state.loading = true;
                 state.error = null;

@@ -2,7 +2,7 @@ import { Select } from 'antd';
 import { RiArrowDownLine } from 'react-icons/ri';
 
 type ReusableSelectProps = {
-  defaultValue?: string;
+  defaultValue?: string[];
   placeholder?: string;
   options: { label: string; value: string }[];
   className?: string;
@@ -30,6 +30,7 @@ const ReusableSelect = ({
         suffixIcon={<RiArrowDownLine className='text-white' />}
         options={options}
         popupMatchSelectWidth={false}
+        defaultValue={defaultValue}
         allowClear
         mode={ allowMultiple ? 'multiple' : undefined}
       />

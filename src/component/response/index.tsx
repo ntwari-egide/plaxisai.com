@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { Slider } from 'antd';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '@/store';
 
+import { filterJobs, resetJobListing } from '@/features/filters';
 import { getFilterOptions } from '@/utils/filters';
 
 import ReusableSelect from '../controls/select';
@@ -21,6 +23,12 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
   let allJobs = [];
   allJobs = useSelector((state: RootState) => state.jobListing.jobs);
 
+  const jobsFiltered = useSelector(
+    (state: RootState) => state.jobsFiltered.jobs
+  );
+
+  const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
+
   const matchedCompanies = useSelector(
     (state: RootState) => state.openAI.response?.companyMatches
   );
@@ -31,9 +39,11 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
     if (allJobs.length === 0) {
       router.push('/');
     }
+
+    // reset the state
+    dispatch(resetJobListing(allJobs));
   }, [allJobs, router]);
   
-
   return (
     <div className='relative min-h-screen p-[2vw]' onClick={onClick}>
       <div className=' relative flex flex-row'>
@@ -52,7 +62,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
           </div>
           <div className='gap-[2vh] grid grid-cols-1  md:grid-cols-2'>
             {/* {data.map((job) => ( */}
-            {allJobs.map((job) =>
+            {jobsFiltered.map((job) =>
               job.jobs.jobs.map((foundJob: any, index: number) => (
                 <JobCard
                   key={index}
@@ -78,7 +88,7 @@ interface ResponseFilterComponentProps {
   allJobs: any[];
 }
 
-interface Filters {
+export interface FilterOptions {
   companies: string[];
   jobProvider: string[];
   employmentType: string[];
@@ -87,23 +97,29 @@ interface Filters {
 
 const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => {
 
+  const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
+
   // one state for all the filters
-  const [filters, setFilters] = useState<Filters>({ companies: [], jobProvider: [], employmentType: [], location: [] });
+  const [filters, setFilters] = useState<FilterOptions>({ companies: [], jobProvider: [], employmentType: [], location: [] });
 
   const onChangeCompany = (value: string[]) => {
     value && setFilters({ ...filters, companies: value });
+    dispatch( filterJobs(filters) );
   }
 
   const onChangeJobProvider = (value: string[]) => {
     value && setFilters({ ...filters, jobProvider: value });
+    dispatch( filterJobs(filters) );
   }
 
   const onChangeEmploymentType = (value: string[]) => {
     value && setFilters({ ...filters, employmentType: value });
+    dispatch( filterJobs(filters) );
   }
 
   const onChangeLocation = (value: string[]) => {
     value && setFilters({ ...filters, location: value });
+    dispatch( filterJobs(filters) );
   }
 
   return (
@@ -112,7 +128,7 @@ const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => 
         <h1 className='text-[2vh] text-white alliance-2'>Filters:</h1>
         <div className='md:flex gap-[2vw] md:gap-0 grid-cols-2 grid flex-row justify-between w-full'>
           <ReusableSelect
-            defaultValue='Company'
+            defaultValue={['Company']}
             options={allJobs && getFilterOptions(allJobs, 'company')}
             placeholder='Company'
             width={150}
@@ -121,7 +137,7 @@ const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => 
           />
 
           <ReusableSelect
-            defaultValue='Job Provider'
+            defaultValue={['Job Provider']}
             options={allJobs && getFilterOptions(allJobs, 'jobProvider')}
             placeholder='Job Provider'
             width={150}
@@ -130,7 +146,7 @@ const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => 
           />
 
           <ReusableSelect
-            defaultValue='Employment Type'
+            defaultValue={['Employment Type']}
             options={allJobs && getFilterOptions(allJobs, 'employmentType')}
             placeholder='Employment Type'
             width={150}
@@ -139,7 +155,7 @@ const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => 
           />
 
           <ReusableSelect
-            defaultValue='Location'
+            defaultValue={['Location']}
             options={allJobs && getFilterOptions(allJobs, 'location')}
             placeholder='Location'
             width={150}

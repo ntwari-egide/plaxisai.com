@@ -1,3 +1,4 @@
+import { FilterOptions } from "@/component/response";
 import { Job } from "@/features/job-listing";
 
 /**
@@ -32,32 +33,40 @@ export const getFilterOptions = (response: any[], filterOptionName: string): { l
     return Array.from(filterOptions).map(option => ({ label: option, value: option }));
 };
 
+export const filterJobsHelper = (jobs: any[], filterOptions: FilterOptions) => {
+    return jobs.reduce((filteredJobs, job) => {
+        const cloneJob = { ...job };
 
-// Function to filter jobs based on filter options
-export const filterJobsHelper = (jobs: any[], filterOptions: { label: string, value: string }[]) => {
-    return jobs.filter(job => {
-        return filterOptions.every(filter => {
-            const filterKey = filter.label;
-            const filterValue = filter.value;
-
-            const traverse = (obj: any): any => {
-                if (typeof obj !== 'object' || obj === null) {
-                    return null;
-                }
-
-                for (const key in obj) {
-                    if (key === filterKey) {
-                        return obj[key];
-                    } else if (typeof obj[key] === 'object') {
-                        const result = traverse(obj[key]);
-                        if (result) return result;
+        // Helper function to traverse nested objects and find the value of a given key
+        const traverse = (obj: any, key: string): any => {
+            if (typeof obj !== 'object' || obj === null) {
+                return null;
+            }
+            if (Object.prototype.hasOwnProperty.call(obj, key)) {
+                return obj[key];
+            }
+            for (const k in obj) {
+                if (typeof obj[k] === 'object') {
+                    const result = traverse(obj[k], key);
+                    if (result !== undefined) {
+                        return result;
                     }
                 }
-                return null;
-            };
+            }
+            return undefined;
+        };
 
-            const jobValue = traverse(job);
-            return jobValue === filterValue;
-        });
-    });
+        // Check if job matches any of the specified filter values for each category
+        const matchesCompany = filterOptions.companies.length === 0 || filterOptions.companies.includes(traverse(cloneJob, 'company'));
+        const matchesJobProvider = filterOptions.jobProvider.length === 0 || filterOptions.jobProvider.includes(traverse(cloneJob, 'jobProvider'));
+        const matchesEmploymentType = filterOptions.employmentType.length === 0 || filterOptions.employmentType.includes(traverse(cloneJob, 'employmentType'));
+        const matchesLocation = filterOptions.location.length === 0 || filterOptions.location.includes(traverse(cloneJob, 'location'));
+
+        // Job must match all specified filters to be included
+        if (matchesCompany && matchesJobProvider && matchesEmploymentType && matchesLocation) {
+            filteredJobs.push(cloneJob);
+        }
+
+        return filteredJobs;
+    }, []);
 };
