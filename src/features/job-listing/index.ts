@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-interface Job {
+export interface Job {
   id: string;
   title: string;
   company: string;
@@ -13,7 +13,7 @@ interface Job {
   jobProviders: any[];
 }
 
-interface JobListingState {
+export interface JobListingState {
   jobs: any[];
   loading: boolean;
   error: string | null | undefined;

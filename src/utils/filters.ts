@@ -1,3 +1,5 @@
+import { Job } from "@/features/job-listing";
+
 /**
  * @param filterOptionName
  * @param response 
@@ -28,4 +30,34 @@ export const getFilterOptions = (response: any[], filterOptionName: string): { l
     response.forEach(item => traverse(item));
 
     return Array.from(filterOptions).map(option => ({ label: option, value: option }));
+};
+
+
+// Function to filter jobs based on filter options
+export const filterJobsHelper = (jobs: any[], filterOptions: { label: string, value: string }[]) => {
+    return jobs.filter(job => {
+        return filterOptions.every(filter => {
+            const filterKey = filter.label;
+            const filterValue = filter.value;
+
+            const traverse = (obj: any): any => {
+                if (typeof obj !== 'object' || obj === null) {
+                    return null;
+                }
+
+                for (const key in obj) {
+                    if (key === filterKey) {
+                        return obj[key];
+                    } else if (typeof obj[key] === 'object') {
+                        const result = traverse(obj[key]);
+                        if (result) return result;
+                    }
+                }
+                return null;
+            };
+
+            const jobValue = traverse(job);
+            return jobValue === filterValue;
+        });
+    });
 };
