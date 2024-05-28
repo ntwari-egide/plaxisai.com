@@ -20,8 +20,7 @@ type ResponseLayoutProps = {
 const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
   const router = useRouter();
 
-  let allJobs = [];
-  allJobs = useSelector((state: RootState) => state.jobListing.jobs);
+  const allJobs = useSelector((state: RootState) => state.jobListing.jobs);
 
   const jobsFiltered = useSelector(
     (state: RootState) => state.jobsFiltered.jobs
