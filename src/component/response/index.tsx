@@ -7,6 +7,8 @@ import { RootState } from '@/store';
 
 import ReusableSelect from '../controls/select';
 import JobCard from '../layouts/job-card';
+import { getFilterOptions } from '@/utils/filters';
+import data from './data';
 
 type ResponseLayoutProps = {
   onClick?: () => void;
@@ -29,6 +31,9 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
       router.push('/');
     }
   }, [allJobs, router]);
+
+  console.log( 'filtering options: ', getFilterOptions(data, 'datePosted'));
+  
 
   return (
     <div className='relative min-h-screen p-[2vw]' onClick={onClick}>
