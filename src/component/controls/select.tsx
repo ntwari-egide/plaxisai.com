@@ -7,6 +7,7 @@ type ReusableSelectProps = {
   options: { label: string; value: string }[];
   className?: string;
   width?: number;
+  allowMultiple?: boolean;
 };
 
 const ReusableSelect = ({
@@ -15,6 +16,7 @@ const ReusableSelect = ({
   width,
   options,
   className,
+  allowMultiple,
 }: ReusableSelectProps) => {
   return (
     <div>
@@ -26,6 +28,9 @@ const ReusableSelect = ({
         suffixIcon={<RiArrowDownLine className='text-white' />}
         options={options}
         popupMatchSelectWidth={false}
+        allowClear
+        mode={ allowMultiple ? 'multiple' : undefined}
+
       />
     </div>
   );

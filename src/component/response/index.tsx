@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Slider } from 'antd';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -5,10 +6,10 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from '@/store';
 
+import { getFilterOptions } from '@/utils/filters';
+
 import ReusableSelect from '../controls/select';
 import JobCard from '../layouts/job-card';
-import { getFilterOptions } from '@/utils/filters';
-import data from './data';
 
 type ResponseLayoutProps = {
   onClick?: () => void;
@@ -89,6 +90,7 @@ const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => 
             options={allJobs && getFilterOptions(allJobs, 'company')}
             placeholder='Company'
             width={150}
+            allowMultiple
           />
 
           <ReusableSelect
@@ -96,6 +98,7 @@ const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => 
             options={allJobs && getFilterOptions(allJobs, 'jobProvider')}
             placeholder='Job Provider'
             width={150}
+            allowMultiple
           />
 
           <ReusableSelect
@@ -103,6 +106,7 @@ const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => 
             options={allJobs && getFilterOptions(allJobs, 'employmentType')}
             placeholder='Employment Type'
             width={150}
+            allowMultiple
           />
 
           <ReusableSelect
@@ -110,6 +114,7 @@ const ResponseFilterComponent = ({ allJobs } : ResponseFilterComponentProps) => 
             options={allJobs && getFilterOptions(allJobs, 'location')}
             placeholder='Location'
             width={150}
+            allowMultiple
           />
         </div>
       </div>
