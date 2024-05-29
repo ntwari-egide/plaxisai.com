@@ -104,25 +104,28 @@ const ResponseFilterComponent = ({ allJobs }: ResponseFilterComponentProps) => {
     employmentType: [],
     location: [],
   });
-
   const onChangeCompany = (value: string[]) => {
-    value && setFilters({ ...filters, companies: value });
-    dispatch(filterJobs({ jobs: allJobs, filterOptions: filters }));
+    const newFilters = { ...filters, companies: value };
+    setFilters(newFilters);
+    dispatch(filterJobs({ jobs: allJobs, filterOptions: newFilters }));
   };
 
   const onChangeJobProvider = (value: string[]) => {
-   setFilters({ ...filters, jobProvider: value });
-    dispatch(filterJobs({ jobs: allJobs, filterOptions: filters }));
+    const newFilters = { ...filters, jobProvider: value };
+    setFilters(newFilters);
+    dispatch(filterJobs({ jobs: allJobs, filterOptions: newFilters }));
   };
 
   const onChangeEmploymentType = (value: string[]) => {
-    setFilters({ ...filters, employmentType: value });
-    dispatch(filterJobs({ jobs: allJobs, filterOptions: filters }));
+    const newFilters = { ...filters, employmentType: value };
+    setFilters(newFilters);
+    dispatch(filterJobs({ jobs: allJobs, filterOptions: newFilters }));
   };
 
   const onChangeLocation = (value: string[]) => {
-    setFilters({ ...filters, location: value });
-    dispatch(filterJobs({ jobs: allJobs, filterOptions: filters }));
+    const newFilters = { ...filters, location: value };
+    setFilters(newFilters);
+    dispatch(filterJobs({ jobs: allJobs, filterOptions: newFilters }));
   };
 
   return (

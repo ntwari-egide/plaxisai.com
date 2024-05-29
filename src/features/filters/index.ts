@@ -24,18 +24,29 @@ interface FilterJobsProps {
   jobs: any[];
   filterOptions: FilterOptions;
 }
+
 export const filterJobs = createAsyncThunk(
-  'jobListing/filter',
-  async ({ jobs, filterOptions }: FilterJobsProps) => {
-    // Filter the jobs using the filter options
-    //remove 'company' in filterOptions.companies array
-    filterOptions.companies = filterOptions.companies.filter((company) => company !== 'company');
-
-    const filteredJobs = filterJobsHelper(jobs, filterOptions);
-
-    return filteredJobs;
-  }
-);
+    'jobListing/filter',
+    async ({ jobs, filterOptions }: FilterJobsProps) => {
+      // Remove 'company' in filterOptions.companies array
+      filterOptions.companies = filterOptions.companies.filter((company) => company !== 'Company');
+  
+      // Remove 'jobProvider' in filterOptions.jobProvider array
+      filterOptions.jobProvider = filterOptions.jobProvider.filter((jobProvider) => jobProvider !== 'Job Provider');
+  
+      // Remove 'employmentType' in filterOptions.employmentType array
+      filterOptions.employmentType = filterOptions.employmentType.filter((employmentType) => employmentType !== 'Employment Type');
+  
+      // Remove 'location' in filterOptions.location array
+      filterOptions.location = filterOptions.location.filter((location) => location !== 'Location');
+  
+      // Process filtered jobs
+      const filteredJobs = filterJobsHelper(jobs, filterOptions);
+  
+      return filteredJobs;
+    }
+  );
+  
 
 const filteredJobsListing = createSlice({
   name: 'filteredJobsListing',
