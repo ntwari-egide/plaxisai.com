@@ -28,6 +28,9 @@ export const filterJobs = createAsyncThunk(
   'jobListing/filter',
   async ({ jobs, filterOptions }: FilterJobsProps) => {
     // Filter the jobs using the filter options
+    //remove 'company' in filterOptions.companies array
+    filterOptions.companies = filterOptions.companies.filter((company) => company !== 'company');
+
     const filteredJobs = filterJobsHelper(jobs, filterOptions);
 
     return filteredJobs;

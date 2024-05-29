@@ -51,13 +51,13 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
       <div className='flex flex-col-reverse md:flex-row gap-[3vw] mt-[3vh]'>
         <div className='bg-[#09090D] sticky top-[5vh] md:w-[20%] border-[1px] border-[#1C1C1F] h-[77vh] rounded-md'>
           <LeftComponent
-            allJobs={allJobs}
+            allJobs={jobsFiltered}
             matchedCompanies={matchedCompanies}
           />
         </div>
         <div className='md:w-[80%] min-h-[60vh] flex flex-col gap-[4vh]'>
           <div className='grassmorphism_bg sticky top-[0] border-[1px] border-[#1C1C1F] z-50 min-h-[8vh] rounded-md'>
-            <ResponseFilterComponent allJobs={jobsFiltered} />
+            <ResponseFilterComponent allJobs={allJobs} />
           </div>
           <div className='gap-[2vh] grid grid-cols-1  md:grid-cols-2'>
             {/* {data.map((job) => ( */}
@@ -111,17 +111,17 @@ const ResponseFilterComponent = ({ allJobs }: ResponseFilterComponentProps) => {
   };
 
   const onChangeJobProvider = (value: string[]) => {
-    value && setFilters({ ...filters, jobProvider: value });
+   setFilters({ ...filters, jobProvider: value });
     dispatch(filterJobs({ jobs: allJobs, filterOptions: filters }));
   };
 
   const onChangeEmploymentType = (value: string[]) => {
-    value && setFilters({ ...filters, employmentType: value });
+    setFilters({ ...filters, employmentType: value });
     dispatch(filterJobs({ jobs: allJobs, filterOptions: filters }));
   };
 
   const onChangeLocation = (value: string[]) => {
-    value && setFilters({ ...filters, location: value });
+    setFilters({ ...filters, location: value });
     dispatch(filterJobs({ jobs: allJobs, filterOptions: filters }));
   };
 
