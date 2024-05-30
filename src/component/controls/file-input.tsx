@@ -18,6 +18,7 @@ import {
 
 import TextButton from './text-button';
 import AIIcon from '../../../public/images/ai-icon.png';
+import TypingAnimation from '../reusable/typing-animations';
 
 type ReusableFileInput = {
   onChange?: (file: File) => void;
@@ -119,7 +120,21 @@ const ReusableFileInput = ({
               height={20}
             />
 
-            {placeholder}
+            
+            <p className='md:w-[10vw]'><TypingAnimation 
+              strings={[
+               'Upload your resume here', 'Get matched with the best!', 'Get hired!', 'Just one upload away!' 
+              ]}
+              typeSpeed={50}
+              backSpeed={10}
+              startDelay={0}
+              backDelay={2000}
+              loop={false}
+              showCursor={true}
+              cursorChar="|"
+              smartBackspace={true}
+              shuffle={false}
+            /></p>
             <TextButton text={buttonContent} />
           </div>
         </Upload>
