@@ -142,3 +142,17 @@ span.ant-collapse-header-text {
   border: 1px solid #1c1c1f !important;
   font-family: 'Alliance', sans-serif !important;
 }
+
+/* components/ScrollImage.module.css */
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 80vh; /* Adjust as needed */
+}
+
+.imageContainer img {
+  width: 100%;
+  height: auto;
+}

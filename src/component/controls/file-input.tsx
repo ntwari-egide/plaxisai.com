@@ -121,7 +121,7 @@ const ReusableFileInput = ({
             />
 
             
-            <p className='md:w-[10vw]'><TypingAnimation 
+            <p className='md:w-[14vw]'><TypingAnimation 
               strings={[
                'Upload your resume here', 'Get matched with the best!', 'Get hired!', 'Just one upload away!' 
               ]}

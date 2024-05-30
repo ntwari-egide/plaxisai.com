@@ -13,6 +13,9 @@ const nextConfig = {
   //     'res.cloudinary.com',
   //   ],
   // },
+  experimental: {
+    esmExternals: true,
+  },
 
   // SVGR
   webpack(config) {

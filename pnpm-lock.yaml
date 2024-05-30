@@ -8,6 +8,9 @@ dependencies:
   '@ant-design/icons':
     specifier: ^5.2.6
     version: 5.3.7(react-dom@18.3.1)(react@18.3.1)
+  '@gsap/react':
+    specifier: ^2.1.1
+    version: 2.1.1
   '@reduxjs/toolkit':
     specifier: ^2.0.1
     version: 2.2.3(react-redux@9.1.2)(react@18.3.1)
@@ -41,6 +44,9 @@ dependencies:
   framer-motion:
     specifier: ^10.16.14
     version: 10.18.0(react-dom@18.3.1)(react@18.3.1)
+  gsap:
+    specifier: ^3.12.5
+    version: 3.12.5
   mammoth:
     specifier: ^1.7.2
     version: 1.7.2
@@ -2265,6 +2271,13 @@ packages:
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@gsap/react@2.1.1:
+    resolution: {integrity: sha512-apGPRrmpqxvl1T6Io1KgT8tFU+IuACI6z4zmT7t8+PASserJeLVRFJdSNUFA2Xb/eVkZI1noE8LIrY/w/oJECw==}
+    dependencies:
+      gsap: 3.12.5
+      react: 18.3.1
+    dev: false
 
   /@humanwhocodes/config-array@0.11.14:
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -7077,6 +7090,10 @@ packages:
 
   /grid-index@1.1.0:
     resolution: {integrity: sha512-HZRwumpOGUrHyxO5bqKZL0B0GlUpwtCAzZ42sgxUPniu33R1LSFH5yrIcBCHjkctCAh3mtWKcKd9J4vDDdeVHA==}
+    dev: false
+
+  /gsap@3.12.5:
+    resolution: {integrity: sha512-srBfnk4n+Oe/ZnMIOXt3gT605BX9x5+rh/prT2F1SsNJsU1XuMiP0E2aptW481OnonOGACZWBqseH5Z7csHxhQ==}
     dev: false
 
   /hard-rejection@2.1.0:
