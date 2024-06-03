@@ -8,7 +8,7 @@ import LogoIcon from '../../../public/images/logo-icon.png';
 import Screen1Image from '../../../public/images/screen-1.png';
 
 const HomeWelcomeComponent = () => {
-  return (
+  return ( 
     <div className='home-welcome relative'>
       <Image
         src={LogoIcon}
@@ -31,9 +31,10 @@ const HomeWelcomeComponent = () => {
           <RiPlayCircleLine className='text-[2.5vh] text-white' />
           <p className='text-white text-[1.6vh] font-light'>Watch the video</p>
         </div>
-        <div className='sticky top-0'>
+        <div className='sticky top-[20vh]'>
           <ScrollImageAnimations src={Screen1Image} />
         </div>
+        <div className=' h-[100vh]'></div>
       </div>
     </div>
   );

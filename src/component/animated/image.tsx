@@ -16,9 +16,9 @@ const ScrollImageAnimations = ( { src } : ScrollImageAnimationsProps) => {
       const element = containerRef.current;
       gsap.fromTo(
         element,
-        { width: '40vw', opacity: 0.4 },
+        { width: '30vw', opacity: 0.4 },
         {
-          width: '60vw',
+          width: '45vw',
           opacity: 1,
           scrollTrigger: {
             trigger: element,
@@ -31,7 +31,7 @@ const ScrollImageAnimations = ( { src } : ScrollImageAnimationsProps) => {
     }, { scope: containerRef });
   
   return (
-    <div ref={containerRef} className='imageContainer'>
+    <div ref={containerRef} className='imageContainer h-full'>
         <Image
           src={src}
           className=" mt-[1vh]"
