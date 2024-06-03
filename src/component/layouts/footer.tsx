@@ -9,7 +9,7 @@ import LogoComponent from '../reusable/logo';
 
 const FooterComponent = () => {
   return (
-    <div className='mt-[15vh] md:mt-[23vh] px-[6vw] md:px-[3vw] pb-[4vh] '>
+    <div className='mt-[15vh] md:mt-[23vh] z-30 px-[6vw] md:px-[3vw] pb-[4vh] '>
       <div className='min-h-[40vh] justify-between md:flex grid grid-cols-2 flex-col md:flex-row gap-[10vw]'>
         <div className='flex flex-col justify-between md:h-[40vh]'>
           <LogoComponent size='medium' />
