@@ -31,7 +31,7 @@ const HomeWelcomeComponent = () => {
           <RiPlayCircleLine className='text-[2.5vh] text-white' />
           <p className='text-white text-[1.6vh] font-light'>Watch the video</p>
         </div>
-        <div className='sticky top-[20vh]'>
+        <div className='sticky top-[15vh]'>
           <ScrollImageAnimations src={Screen1Image} />
         </div>
         <div className=' h-[100vh]'></div>

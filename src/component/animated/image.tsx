@@ -2,7 +2,10 @@
 import { useGSAP } from "@gsap/react";
 import { gsap } from 'gsap';
 import Image, { StaticImageData } from 'next/image';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { Tween } from 'react-gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
 
 
 interface ScrollImageAnimationsProps {
@@ -10,33 +13,42 @@ interface ScrollImageAnimationsProps {
 }
 
 const ScrollImageAnimations = ( { src } : ScrollImageAnimationsProps) => {
-    const containerRef = useRef<HTMLDivElement>(null);
 
-    useGSAP(() => {
-      const element = containerRef.current;
-      gsap.fromTo(
-        element,
-        { width: '30vw', opacity: 0.4 },
-        {
-          width: '45vw',
-          opacity: 1,
-          scrollTrigger: {
-            trigger: element,
-            start: 'top bottom', // When the top of the element hits the bottom of the viewport
-            end: 'bottom top',   // When the bottom of the element hits the top of the viewport
-            scrub: true,         // Smooth scrubbing
-          },
-        }
-      );
-    }, { scope: containerRef });
-  
+  // register gsap
+  gsap.registerPlugin(useGSAP);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const box1Ref = useRef<HTMLDivElement>(null);
+  const box2Ref = useRef<HTMLDivElement>(null);
+
+
+  useEffect(() => {
+    // Register gsap ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
+
+    const element = containerRef.current;
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: element,
+        start: 'top bottom', // Start when the top of the element hits the bottom of the viewport
+        end: 'bottom top', // End when the bottom of the element hits the top of the viewport
+        scrub: true, // Smooth scrubbing
+        // markers: true, // Add markers for debugging; remove in production
+      }
+    })
+    .fromTo(
+      element, 
+      { width: '50vw', opacity: 0.4 }, 
+      { width: '80vw', opacity: 1 },
+
+    );
+
+  }, []);
+
   return (
-    <div ref={containerRef} className='imageContainer h-full'>
-        <Image
-          src={src}
-          className=" mt-[1vh]"
-          alt='screen-1'
-        />
+    <div ref={containerRef} className="flex justify-center items-center h-screen overflow-hidden">
+      <Image src={src} className="transition-all duration-300 mt-4" alt='Scrolling Image' />
     </div>
   );
 };

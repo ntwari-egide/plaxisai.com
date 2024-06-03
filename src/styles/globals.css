@@ -144,14 +144,3 @@ span.ant-collapse-header-text {
 }
 
 /* components/ScrollImage.module.css */
-.imageContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.imageContainer img {
-  width: 100%;
-  height: auto;
-}
