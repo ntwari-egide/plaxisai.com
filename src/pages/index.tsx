@@ -14,7 +14,47 @@ import FooterComponent from '@/component/layouts/footer';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
 
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { useGSAP } from "@gsap/react";
+import { gsap } from 'gsap';
+import { useEffect, useRef } from 'react';
+
 export default function HomePage() {
+
+
+  // register gsap
+  gsap.registerPlugin(useGSAP);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  // const step1 = document.getElementById('step1');
+
+  useEffect(() => {
+    // Register gsap ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
+
+    const element = containerRef.current;
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: element,
+        start: 'top bottom', // Start when the top of the element hits the bottom of the viewport
+        end: 'bottom top', // End when the bottom of the element hits the top of the viewport
+        scrub: true, // Smooth scrubbing
+        // markers: true, // Add markers for debugging; remove in production
+      }
+    })
+    .fromTo(
+      element, 
+      { opacity: 0 }, 
+      { opacity: 1, animationDuration: 0.2 }, // Fade in
+    )
+    .to(
+      element, 
+      { opacity: 0, animationDuration: 0.2},
+    )
+    ;
+
+  }, []);
+
   return (
     <div className='flex relative flex-col gap-[15vh]'>
       <Seo templateTitle='Home' />
@@ -22,10 +62,9 @@ export default function HomePage() {
         <HeaderLayout sticky />
         {/* Each HomeWelcomeComponent with the same animation, if intended */}
         <HomeWelcomeComponent />
-        <div className=' sticky top-[0vh]'>
+        <div ref={containerRef} className=' sticky top-[10vh]'>
           <AIPipelineComponent />
           <div className=' h-[200vh]'>
-
           </div>
         </div>
         <FAQComponent />
