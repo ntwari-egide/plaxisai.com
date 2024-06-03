@@ -3,7 +3,6 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from 'gsap';
 import Image, { StaticImageData } from 'next/image';
 import React, { useEffect, useRef } from 'react';
-import { Tween } from 'react-gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 
@@ -39,7 +38,7 @@ const ScrollImageAnimations = ( { src } : ScrollImageAnimationsProps) => {
     })
     .fromTo(
       element, 
-      { width: '50vw', opacity: 0.4 }, 
+      { width: '60vw', opacity: 0.4 }, 
       { width: '80vw', opacity: 1 },
 
     );

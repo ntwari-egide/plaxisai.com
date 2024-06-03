@@ -35,7 +35,7 @@ const FAQComponent = () => {
   ];
 
   return (
-    <div className='relative mt-[25vh] flex flex-col gap-[1vh] md:gap-[3vh] place-items-center'>
+    <div className=' relative mt-[25vh] flex flex-col gap-[1vh] md:gap-[3vh] place-items-center'>
       <h1 className='text-[#F28729] inter-tight md:text-[3vh] font-medium text-center'>
         FAQ
       </h1>

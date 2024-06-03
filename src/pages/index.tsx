@@ -16,13 +16,18 @@ import Seo from '@/component/seo';
 
 export default function HomePage() {
   return (
-    <div className='flex flex-col gap-[15vh]'>
+    <div className='flex relative flex-col gap-[15vh]'>
       <Seo templateTitle='Home' />
       <div className='welcome-bg flex justify-between flex-col'>
         <HeaderLayout sticky />
         {/* Each HomeWelcomeComponent with the same animation, if intended */}
         <HomeWelcomeComponent />
-        <AIPipelineComponent />
+        <div className=' sticky top-[0vh]'>
+          <AIPipelineComponent />
+          <div className=' h-[200vh]'>
+
+          </div>
+        </div>
         <FAQComponent />
         <CallToActionComponent />
         <FooterComponent />
