@@ -8,7 +8,7 @@ import LogoIcon from '../../../public/images/logo-icon.png';
 import Screen1Image from '../../../public/images/screen-1.png';
 
 const HomeWelcomeComponent = () => {
-  return ( 
+  return (
     <div className='home-welcome relative'>
       <Image
         src={LogoIcon}

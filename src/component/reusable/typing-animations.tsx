@@ -1,5 +1,5 @@
 import React from 'react';
-import {ReactTyped} from 'react-typed';
+import { ReactTyped } from 'react-typed';
 
 interface TypingAnimationProps {
   strings: string[];

@@ -1,5 +1,5 @@
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
-import { Flex, Modal, Progress, Upload, UploadProps } from 'antd';
+import { Flex, message, Modal, Progress, Upload, UploadProps } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -17,8 +17,8 @@ import {
 } from '@/features/tracking-progress';
 
 import TextButton from './text-button';
-import AIIcon from '../../../public/images/ai-icon.png';
 import TypingAnimation from '../reusable/typing-animations';
+import AIIcon from '../../../public/images/ai-icon.png';
 
 type ReusableFileInput = {
   onChange?: (file: File) => void;
@@ -72,30 +72,35 @@ const ReusableFileInput = ({
       // send the file to the server api for processing
       const formData = new FormData();
       formData.append('file', info.file.originFileObj as File);
-      dispatch(setResumeScanner('STARTED'));
-      const resumeText = await dispatch(uploadFile(formData)).unwrap();
-      dispatch(setResumeScanner('COMPLETED'));
 
-      // getting the company matches using open ai api
-      dispatch(setOpenAi('STARTED'));
-      const companyMatches = await dispatch(
-        analyzeResume(resumeText.content)
-      ).unwrap();
-      dispatch(setOpenAi('COMPLETED'));
+      try {
+        dispatch(setResumeScanner('STARTED'));
+        const resumeText = await dispatch(uploadFile(formData)).unwrap();
+        dispatch(setResumeScanner('COMPLETED'));
 
-      // get company matches from the response
-      dispatch(setJobListing('STARTED'));
-      await dispatch(jobListingRequest(companyMatches));
-      dispatch(setJobListing('COMPLETED'));
+        // getting the company matches using open ai api
+        dispatch(setOpenAi('STARTED'));
+        const companyMatches = await dispatch(
+          analyzeResume(resumeText.content)
+        ).unwrap();
+        dispatch(setOpenAi('COMPLETED'));
 
-      // send the route to the /response and open in new tab
-      Router.push('/response');
+        // get company matches from the response
+        dispatch(setJobListing('STARTED'));
+        await dispatch(jobListingRequest(companyMatches));
+        dispatch(setJobListing('COMPLETED'));
 
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj as FileType, (url) => {
-        setLoading(false);
-        setImageUrl(url);
-      });
+        // send the route to the /response and open in new tab
+        Router.push('/response');
+
+        // Get this url from response in real world.
+        getBase64(info.file.originFileObj as FileType, (url) => {
+          setLoading(false);
+          setImageUrl(url);
+        });
+      } catch (error) {
+        message.error('Error processing the file');
+      }
     }
   };
 
@@ -120,21 +125,25 @@ const ReusableFileInput = ({
               height={20}
             />
 
-            
-            <p className='md:w-[14vw]'><TypingAnimation 
-              strings={[
-               'Upload your resume here', 'Get matched with the best!', 'Get hired!', 'Just one upload away!' 
-              ]}
-              typeSpeed={50}
-              backSpeed={10}
-              startDelay={0}
-              backDelay={2000}
-              loop={false}
-              showCursor={true}
-              cursorChar="|"
-              smartBackspace={true}
-              shuffle={false}
-            /></p>
+            <p className='md:w-[14vw]'>
+              <TypingAnimation
+                strings={[
+                  'Upload your resume here',
+                  'Get matched with the best!',
+                  'Get hired!',
+                  'Just one upload away!',
+                ]}
+                typeSpeed={50}
+                backSpeed={10}
+                startDelay={0}
+                backDelay={2000}
+                loop={false}
+                showCursor={true}
+                cursorChar='|'
+                smartBackspace={true}
+                shuffle={false}
+              />
+            </p>
             <TextButton text={buttonContent} />
           </div>
         </Upload>
