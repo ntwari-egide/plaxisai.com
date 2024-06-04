@@ -1,3 +1,4 @@
+/* eslint-disable unused-imports/no-unused-vars */
 // Import docx library
 import formidable from 'formidable';
 import fs from 'fs';

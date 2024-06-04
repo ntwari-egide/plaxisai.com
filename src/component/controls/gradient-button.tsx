@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { RiArrowRightLine } from 'react-icons/ri';
 
 type GradientButtonProps = {
@@ -6,6 +7,7 @@ type GradientButtonProps = {
   className?: string;
   size?: 'small' | 'medium' | 'large';
   style?: React.CSSProperties;
+  href?: string;
 };
 
 const GradientButton = ({
@@ -14,24 +16,48 @@ const GradientButton = ({
   className,
   size,
   style,
+  href,
 }: GradientButtonProps) => {
   return (
-    <button
-      onClick={onClick}
-      className={` relative text-white gradient-button flex flex-row justify-between items-center place-items-center button-gradient ${
-        size == 'large'
-          ? 'px-[10vw] md:px-[3.4vw] py-[1.5vh] md:py-[3.5vh] text-[4vh] md:text-[7vh]'
-          : 'px-[4vw] md:px-[1.4vw] py-[1.5vh] text-[2vh]'
-      } ${className} gap-[1vw] rounded-full`}
-      style={style}
-    >
-      {text}
-      <RiArrowRightLine
-        className={`${
-          size == 'large' ? ' text-[5vh] md:text-[7vh]' : 'text-[3vh]'
-        }`}
-      />
-    </button>
+    <>
+      {href ? (
+        <Link href={href}>
+          <button
+            onClick={onClick}
+            className={`relative text-white gradient-button flex flex-row justify-between items-center place-items-center button-gradient ${
+              size == 'large'
+                ? 'px-[10vw] md:px-[3.4vw] py-[1.5vh] md:py-[3.5vh] text-[4vh] md:text-[7vh]'
+                : 'px-[4vw] md:px-[1.4vw] py-[1.5vh] text-[2vh]'
+            } ${className} gap-[1vw] rounded-full`}
+            style={style}
+          >
+            {text}
+            <RiArrowRightLine
+              className={`${
+                size == 'large' ? ' text-[5vh] md:text-[7vh]' : 'text-[3vh]'
+              } -rotate-45`}
+            />
+          </button>
+        </Link>
+      ) : (
+        <button
+          onClick={onClick}
+          className={`relative text-white gradient-button flex flex-row justify-between items-center place-items-center button-gradient ${
+            size == 'large'
+              ? 'px-[10vw] md:px-[3.4vw] py-[1.5vh] md:py-[3.5vh] text-[4vh] md:text-[7vh]'
+              : 'px-[4vw] md:px-[1.4vw] py-[1.5vh] text-[2vh]'
+          } ${className} gap-[1vw] rounded-full`}
+          style={style}
+        >
+          {text}
+          <RiArrowRightLine
+            className={`${
+              size == 'large' ? ' text-[5vh] md:text-[7vh]' : 'text-[3vh]'
+            } rotate-45`}
+          />
+        </button>
+      )}
+    </>
   );
 };
 

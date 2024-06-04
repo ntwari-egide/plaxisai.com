@@ -5,7 +5,7 @@ import Screen2 from '../../../public/images/screen-2.png';
 
 const AIPipelineComponent = () => {
   return (
-    <div className='flex overflow-hidden flex-col md:flex-row px-[2vw] md:px-[3vw] relative top-[3vh] '>
+    <div className='flex overflow-hidden flex-col md:flex-row px-[2vw] md:px-[3vw] relative top-[3vh] ' id="features">
       <div className='md:w-[30vw] flex flex-col gap-[2vh] place-items-center md:place-items-start'>
         <p className='text-[#F28729] inter-tight md:text-[3vh] font-medium'>
           AI Pipeline

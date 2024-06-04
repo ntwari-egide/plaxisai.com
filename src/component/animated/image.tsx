@@ -14,8 +14,6 @@ const ScrollImageAnimations = ({ src }: ScrollImageAnimationsProps) => {
   gsap.registerPlugin(useGSAP);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const box1Ref = useRef<HTMLDivElement>(null);
-  const box2Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Register gsap ScrollTrigger plugin

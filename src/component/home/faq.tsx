@@ -4,14 +4,6 @@ import CollapseComponent from '../controls/collapse';
 import TextButton from '../controls/text-button';
 
 const FAQComponent = () => {
-  const text = (
-    <p style={{ paddingLeft: 24 }}>
-      A dog is a type of domesticated animal. Known for its loyalty and
-      faithfulness, it can be found as a welcome guest in many households across
-      the world.
-    </p>
-  );
-
   const items: CollapseProps['items'] = [
     {
       key: '1',
@@ -35,7 +27,7 @@ const FAQComponent = () => {
   ];
 
   return (
-    <div className=' relative mt-[25vh] flex flex-col gap-[1vh] md:gap-[3vh] place-items-center'>
+    <div id="faq" className=' relative mt-[25vh] flex flex-col gap-[1vh] md:gap-[3vh] place-items-center'>
       <h1 className='text-[#F28729] inter-tight md:text-[3vh] font-medium text-center'>
         FAQ
       </h1>

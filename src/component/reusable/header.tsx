@@ -41,13 +41,13 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
           >
             <ul className='flex flex-row gap-[5vw]'>
               <li className='text-white text-[2vh] hover:text-[gray] cursor-pointer'>
-                Overview
+                <Link href="/#home">Overview</Link>
               </li>
               <li className='text-white text-[2vh] hover:text-[gray] cursor-pointer'>
-                Features
+                <Link href="/#features">Features</Link>
               </li>
               <li className='text-white text-[2vh] hover:text-[gray] cursor-pointer'>
-                FAQ
+                <Link href="/#faq">FAQ</Link>
               </li>
               <li className='text-white text-[2vh] hover:text-[gray] cursor-pointer'>
                 About

@@ -11,14 +11,10 @@ const CallToActionComponent = () => {
   const textRef = useRef(null);
 
   useEffect(() => {
-    const textElement = textRef.current;
 
     gsap.registerPlugin(ScrollTrigger);
 
     const tl = gsap.timeline({ paused: true });
-
-    const play = () => tl.play();
-    const reverse = () => tl.reverse();
 
     return () => {
       tl.kill(); // Cleanup GSAP animation
@@ -33,7 +29,7 @@ const CallToActionComponent = () => {
       >
         Your next great job is just one upload away.
       </h1>
-      <GradientButton size='large' text='Get Started' className='mt-[5vh]' />
+      <GradientButton href='#home' size='large' text='Get Started' className='mt-[5vh]' />
     </div>
   );
 };
