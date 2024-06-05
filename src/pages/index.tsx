@@ -22,18 +22,18 @@ export default function HomePage() {
   // register gsap
   gsap.registerPlugin(useGSAP);
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  const AIPipeAnimes = useRef<HTMLDivElement>(null);
   // const step1 = document.getElementById('step1');
 
   useEffect(() => {
     // Register gsap ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger);
 
-    const element = containerRef.current;
+    const AIPipelineEl = AIPipeAnimes.current;
     gsap
       .timeline({
         scrollTrigger: {
-          trigger: element,
+          trigger: AIPipelineEl,
           start: 'top bottom', // Start when the top of the element hits the bottom of the viewport
           end: 'bottom top', // End when the bottom of the element hits the top of the viewport
           scrub: true, // Smooth scrubbing
@@ -41,11 +41,11 @@ export default function HomePage() {
         },
       })
       .fromTo(
-        element,
+        AIPipelineEl,
         { opacity: 0 },
         { opacity: 1, animationDuration: 0.2 } // Fade in
       )
-      .to(element, { opacity: 0, animationDuration: 0.2 });
+      .to(AIPipelineEl, { opacity: 0, animationDuration: 0.2 });
   }, []);
 
   return (
@@ -55,7 +55,7 @@ export default function HomePage() {
         <HeaderLayout sticky />
         {/* Each HomeWelcomeComponent with the same animation, if intended */}
         <HomeWelcomeComponent />
-        <div ref={containerRef} className=' sticky top-[10vh]'>
+        <div ref={AIPipeAnimes} className=' sticky top-[10vh]'>
           <AIPipelineComponent />
           <div className=' h-[200vh]'></div>
         </div>

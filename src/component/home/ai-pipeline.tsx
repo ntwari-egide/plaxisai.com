@@ -11,7 +11,7 @@ const AIPipelineComponent = () => {
           AI Pipeline
         </p>
         <h1 className='text-white text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center md:text-start'>
-          Get matched: Four Dynamic Steps
+          Get matched: <br /> 3 Dynamic Steps
         </h1>
         <Steps
           direction='vertical'
@@ -20,22 +20,17 @@ const AIPipelineComponent = () => {
           className='alliance-2'
           items={[
             {
-              title: 'Initiating Upload...',
-              description:
-                'Begin by securely uploading your resume into our precision-engineered system.',
-            },
-            {
-              title: 'Analyzing Data...',
+              title: 'Extracting Data',
               description:
                 'Your resume is now being dissected by our advanced algorithm',
             },
             {
-              title: 'Matching Profiles...',
+              title: 'Matching Profiles',
               description:
                 'Our system is intelligently comparing your credentials with potential employers to find the perfect fit',
             },
             {
-              title: 'Revealing Opportunities...',
+              title: 'Revealing Opportunities',
               description:
                 'Access tailored job matches and uncover your next career opportunity instantly.',
             },
