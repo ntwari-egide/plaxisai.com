@@ -1,10 +1,16 @@
 import { Steps } from 'antd';
 import Image from 'next/image';
 
-// import Screen2 from '../../../public/images/data-extraction.gif';
+import GradientButton from '../controls/gradient-button';
+import screen1 from '../../../public/images/data-extraction.gif';
 import Screen2 from '../../../public/images/matching-profile.gif';
+import Screen3 from '../../../public/images/reveal-best-matches.gif';
 
-const AIPipelineComponent = () => {
+interface AIPipelineComponentProps  {
+  animationProgress: number | undefined
+}
+
+const AIPipelineComponent = ({ animationProgress} : AIPipelineComponentProps) => {
   return (
     <div className='flex overflow-hidden flex-col md:flex-row px-[2vw] md:px-[3vw] relative top-[3vh] ' id="features">
       <div className='md:w-[30vw] flex flex-col gap-[2vh] place-items-center md:place-items-start'>
@@ -16,7 +22,7 @@ const AIPipelineComponent = () => {
         </h1>
         <Steps
           direction='vertical'
-          current={2}
+          current={ animationProgress! < 0.3 ? 0 : animationProgress! < 0.5 ? 1: 2 }
           progressDot
           className='alliance-2'
           items={[
@@ -37,10 +43,12 @@ const AIPipelineComponent = () => {
             },
           ]}
         />
+      <GradientButton href='#home' text='Use It for Free' className='mt-[5vh]' />
+        
       </div>
       <div className='w-[70vw] h-[80vh]'>
         <Image
-          src={Screen2}
+          src={animationProgress! < 0.3 ? screen1 : animationProgress! < 0.5 ? Screen2: Screen3}
           alt='screen-2'
           className='w-[84vw] h-full hidden md:block absolute -[20vw] object-cover'
         />

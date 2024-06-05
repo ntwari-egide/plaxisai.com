@@ -35,7 +35,7 @@ const FAQComponent = () => {
         Got questions? <br /> Join the community.
       </h1>
       <p className='text-center text-[#BDBDBE] text-[2vh] w-[80vw] md:w-[27vw] m-auto'>
-        Our Discord cxommunity and staff are here to help! Your feedback will
+        Our Discord community and staff are here to help! Your feedback will
         help us improve in future versions.
       </p>
       <TextButton text='Join Discord' className='mt-[2vh]' />

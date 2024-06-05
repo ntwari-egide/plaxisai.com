@@ -9,6 +9,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
+import { useState } from 'react';
 
 import AIPipelineComponent from '@/component/home/ai-pipeline';
 import CallToActionComponent from '@/component/home/call-to-action';
@@ -21,6 +22,8 @@ import Seo from '@/component/seo';
 export default function HomePage() {
   // register gsap
   gsap.registerPlugin(useGSAP);
+
+  const [AITimelineProgress, setAITimelineProgress] = useState<number>();
 
   const AIPipeAnimes = useRef<HTMLDivElement>(null);
   // const step1 = document.getElementById('step1');
@@ -38,6 +41,9 @@ export default function HomePage() {
           end: 'bottom top', // End when the bottom of the element hits the top of the viewport
           scrub: true, // Smooth scrubbing
           // markers: true, // Add markers for debugging; remove in production
+          onUpdate: (self) => {
+            setAITimelineProgress(self.progress);
+          },
         },
       })
       .fromTo(
@@ -47,6 +53,7 @@ export default function HomePage() {
       )
       .to(AIPipelineEl, { opacity: 0, animationDuration: 0.2 });
   }, []);
+  
 
   return (
     <div className='flex relative flex-col gap-[15vh]'>
@@ -56,8 +63,8 @@ export default function HomePage() {
         {/* Each HomeWelcomeComponent with the same animation, if intended */}
         <HomeWelcomeComponent />
         <div ref={AIPipeAnimes} className=' sticky top-[10vh]'>
-          <AIPipelineComponent />
-          <div className=' h-[200vh]'></div>
+          <AIPipelineComponent animationProgress={AITimelineProgress} />
+          <div className=' h-[230vh]'></div>
         </div>
         <FAQComponent />
         <CallToActionComponent />
