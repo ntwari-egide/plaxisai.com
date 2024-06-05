@@ -1,7 +1,8 @@
 import { Steps } from 'antd';
 import Image from 'next/image';
 
-import Screen2 from '../../../public/images/data-extraction.gif';
+// import Screen2 from '../../../public/images/data-extraction.gif';
+import Screen2 from '../../../public/images/matching-profile.gif';
 
 const AIPipelineComponent = () => {
   return (
@@ -27,12 +28,12 @@ const AIPipelineComponent = () => {
             {
               title: 'Matching Profiles',
               description:
-                'Our system is intelligently comparing your credentials with potential employers to find the perfect fit',
+                'Our system is intelligently comparing your credentials with over 5M+ potential employers to find the perfect fit with in seconds.',
             },
             {
-              title: 'Revealing Opportunities',
+              title: 'Revealing Best Matches',
               description:
-                'Access tailored job matches and uncover your next career opportunity instantly.',
+                'Access tailored matching companies and their grade your next career opportunity instantly.',
             },
           ]}
         />
