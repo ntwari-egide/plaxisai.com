@@ -12,7 +12,6 @@ import LogoIcon from '../../../public/images/logo-icon.png';
 import Screen1Image from '../../../public/images/screen-1.png';
 
 const HomeWelcomeComponent = () => {
-
   gsap.registerPlugin(useGSAP);
 
   const homeGifs = useRef<HTMLDivElement>(null);
@@ -38,10 +37,10 @@ const HomeWelcomeComponent = () => {
         { width: '60vw', opacity: 0.4 },
         { width: '80vw', opacity: 1 }
       );
-  },[])
+  }, []);
 
   return (
-    <div className='home-welcome relative' id="home">
+    <div className='home-welcome relative' id='home'>
       <Image
         src={LogoIcon}
         alt='logo'
@@ -50,7 +49,8 @@ const HomeWelcomeComponent = () => {
       <div className=' flex flex-col relative justify-center items-center place-items-center gap-[3vh] mt-[2vh]'>
         <LogoComponent displayAir size='medium' />
         <p className='text-white text-[3.4vh] md:text-[5vh] font-bold text-center px-[10vw] md:px-0 md:w-[40vw] alliance-2'>
-        Unlock your career: Just upload your resume, <span className=' text-[#cdcdd09b]'>no sign-up needed.</span>
+          Unlock your career: Just upload your resume,{' '}
+          <span className=' text-[#cdcdd09b]'>no sign-up needed.</span>
         </p>
         <ReusableFileInput
           placeholder='Upload your resume here'
@@ -62,9 +62,7 @@ const HomeWelcomeComponent = () => {
           <RiPlayCircleLine className='text-[2.5vh] text-white' />
           <p className='text-white text-[1.6vh] font-light'>Watch the video</p>
         </div>
-        <div className='sticky top-[5vh] -mt-[15vh] -z-10' 
-          ref={homeGifs}
-        >
+        <div className='sticky top-[5vh] -mt-[15vh] -z-10' ref={homeGifs}>
           <ScrollImageAnimations src={Screen1Image} />
         </div>
         <div className=' h-[100vh]'></div>

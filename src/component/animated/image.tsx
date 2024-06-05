@@ -1,18 +1,17 @@
 // components/ScrollImage.tsx
-import Image, { StaticImageData } from 'next/image';
-import React, { useEffect } from 'react';
-import FileInputImg from '../../../public/images/file-input.png';
-
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import Image, { StaticImageData } from 'next/image';
+import React, { useEffect } from 'react';
+
+import FileInputImg from '../../../public/images/file-input.png';
 
 interface ScrollImageAnimationsProps {
   src: StaticImageData;
 }
 
 const ScrollImageAnimations = ({ src }: ScrollImageAnimationsProps) => {
-
   gsap.registerPlugin(useGSAP);
 
   const fileInputImg = React.useRef<HTMLDivElement>(null);
@@ -35,16 +34,19 @@ const ScrollImageAnimations = ({ src }: ScrollImageAnimationsProps) => {
       })
       .fromTo(
         fileInputImgEl,
-        { opacity: 0, width: '20vw', top: '24vh', zIndex: -1, delay: 0.5},
-        { opacity: 1, width: '35vw', top: 'auto', zIndex: 'auto', animationDuration: 0.2 } // Fade in
-      )
-  }
-  , []);
+        { opacity: 0, width: '20vw', top: '24vh', zIndex: -1, delay: 0.5 },
+        {
+          opacity: 1,
+          width: '35vw',
+          top: 'auto',
+          zIndex: 'auto',
+          animationDuration: 0.2,
+        } // Fade in
+      );
+  }, []);
 
   return (
-    <div
-      className='flex justify-center relative items-center h-screen overflow-hidden'
-    >
+    <div className='flex justify-center relative items-center h-screen overflow-hidden'>
       <Image
         src={src}
         className='transition-all duration-300 mt-4'
@@ -58,7 +60,6 @@ const ScrollImageAnimations = ({ src }: ScrollImageAnimationsProps) => {
           alt='Scrolling Image'
         />
       </div>
-      
     </div>
   );
 };

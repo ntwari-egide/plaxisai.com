@@ -11,7 +11,6 @@ const CallToActionComponent = () => {
   const textRef = useRef(null);
 
   useEffect(() => {
-
     gsap.registerPlugin(ScrollTrigger);
 
     const tl = gsap.timeline({ paused: true });
@@ -29,7 +28,12 @@ const CallToActionComponent = () => {
       >
         Your next great job is just one upload away.
       </h1>
-      <GradientButton href='#home' size='large' text='Get Matched for Free' className='mt-[5vh]' />
+      <GradientButton
+        href='#home'
+        size='large'
+        text='Get Matched for Free'
+        className='mt-[5vh]'
+      />
     </div>
   );
 };
