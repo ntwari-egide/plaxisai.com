@@ -1,7 +1,7 @@
 import { Steps } from 'antd';
 import Image from 'next/image';
 
-import Screen2 from '../../../public/images/screen-2.png';
+import Screen2 from '../../../public/images/data-extraction.gif';
 
 const AIPipelineComponent = () => {
   return (
@@ -37,11 +37,11 @@ const AIPipelineComponent = () => {
           ]}
         />
       </div>
-      <div className='w-[70vw]'>
+      <div className='w-[70vw] h-[80vh]'>
         <Image
           src={Screen2}
           alt='screen-2'
-          className='w-[80vw] hidden md:block absolute left-[20vw]'
+          className='w-[84vw] h-full hidden md:block absolute -[20vw] object-cover'
         />
       </div>
     </div>
