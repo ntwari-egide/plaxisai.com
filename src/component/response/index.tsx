@@ -49,7 +49,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
         <h1 className='text-white text-[3vh]'>Matched</h1>
       </div>
       <div className='flex flex-col-reverse md:flex-row gap-[3vw] mt-[3vh]'>
-        <div className='bg-[#09090D] sticky top-[5vh] md:w-[20%] border-[1px] border-[#1C1C1F] h-[77vh] rounded-md'>
+        <div className='bg-[#09090D] sticky top-[5vh] md:w-[20%] border-[1px] border-[#1C1C1F] h-[80vh] rounded-md'>
           <LeftComponent
             allJobs={jobsFiltered}
             matchedCompanies={matchedCompanies}
