@@ -147,3 +147,11 @@ span.ant-collapse-header-text {
 .ant-steps .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-tail::after {
   background-color: #348687 !important;
 }
+
+span.ant-progress-text.ant-progress-text-end.ant-progress-text-outer {
+  color: #9d9d9e !important;
+}
+
+.ant-progress-inner {
+  background: #474748 !important;
+}

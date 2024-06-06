@@ -160,12 +160,30 @@ const ReusableFileInput = ({
         onCancel={() => setOpenResultsModel(false)}
         footer={null}
       >
-        <div className='flex justify-center'>
+        <div className='w-full flex justify-center py-[5vh]'>
           <div>
-            <div>
-              <Spin indicator={<LoadingOutlined style={{ fontSize: 130 }} spin />} />
+            <div className='flex justify-center'>
+              <Spin className='text-[#348687]' indicator={<LoadingOutlined style={{ fontSize: 130, color: '#348687' }} spin />} />
             </div>          
-            <div className='flex flex-col mt-[4vh] gap-[2vw]'>
+            <div className='flex flex-col mt-[4vh] gap-[2vw] w-[40vw]'>
+              <div className="flex flex-row gap-[1vw]">
+                <Progress
+                  percent={
+                    progress.resumeScaner === 'STARTED'
+                      ? 40
+                      : progress.resumeScaner === 'COMPLETED'
+                      ? 100
+                      : 0
+                  }
+                  size='small'
+                  status={progress.resumeScaner === 'COMPLETED' ? 'success' : 'active'}
+                />
+                <h1 className='text-white text-[2vh] w-1/2'>
+                  {progress.resumeScaner === 'STARTED' ? 'Extracting Data' : 'Data Extracted'}
+                </h1>
+              </div>
+
+              <div className='flex flex-row gap-[1vw]'>
               <Progress
                 percent={
                   progress.resumeScaner === 'STARTED'
@@ -177,25 +195,12 @@ const ReusableFileInput = ({
                 size='small'
                 status={progress.resumeScaner === 'COMPLETED' ? 'success' : 'active'}
               />
-              <h1 className='text-white text-[2vh]'>
+              <h1 className='text-white text-[2vh] w-1/2'>
                 {progress.resumeScaner === 'STARTED' ? 'Extracting Data' : 'Data Extracted'}
               </h1>
+              </div>
 
-              <Progress
-                percent={
-                  progress.openAi === 'STARTED'
-                    ? 50
-                    : progress.openAi === 'COMPLETED'
-                    ? 100
-                    : 0
-                }
-                size='small'
-                status={progress.openAi === 'COMPLETED' ? 'success' : 'active'}
-              />
-              <h1 className='text-white text-[2vh]'>
-                {progress.openAi === 'STARTED' ? 'Matching Company Profiles' : 'Profiles Matched'}
-              </h1>
-
+              <div className='flex flex-row gap-[1vw]'>
               <Progress
                 percent={
                   progress.jobListing === 'STARTED'
@@ -207,9 +212,10 @@ const ReusableFileInput = ({
                 size='small'
                 status={progress.jobListing === 'COMPLETED' ? 'success' : 'active'}
               />
-              <h1 className='text-white text-[2vh]'>
+              <h1 className='text-white text-[2vh] w-1/2'>
                 {progress.jobListing === 'STARTED' ? 'Matching Job Listings' : 'Listings Matched'}
               </h1>
+              </div>
             </div>
           </div>
         </div>
