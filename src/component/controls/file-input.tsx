@@ -1,6 +1,7 @@
 /* eslint-disable unused-imports/no-unused-vars */
+import { LoadingOutlined } from '@ant-design/icons';
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
-import { Flex, message, Modal, Progress, Upload, UploadProps } from 'antd';
+import { Flex, message, Modal, Progress, Spin, Upload, UploadProps } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -20,6 +21,7 @@ import {
 import TextButton from './text-button';
 import TypingAnimation from '../reusable/typing-animations';
 import AIIcon from '../../../public/images/ai-icon.png';
+
 
 type ReusableFileInput = {
   onChange?: (file: File) => void;
@@ -154,56 +156,62 @@ const ReusableFileInput = ({
 
       <Modal
         open={openResultsModel}
-        className='w-[80vw] relative'
+        className='w-[60vw] relative'
         onCancel={() => setOpenResultsModel(false)}
         footer={null}
       >
-        {/* // this is progress tracking bar */}
-        <div className='flex flex-col gap-[1vh] place-items-center'>
-          <h1 className='text-[#F28729] inter-tight md:text-[3vh] font-medium text-center'>
-            Progress
-          </h1>
-          <h1 className='text-white text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center'>
-            Get matched: Four Dynamic Steps
-          </h1>
+        <div className='flex justify-center'>
+          <div>
+            <div>
+              <Spin indicator={<LoadingOutlined style={{ fontSize: 130 }} spin />} />
+            </div>          
+            <div className='flex flex-col mt-[4vh] gap-[2vw]'>
+              <Progress
+                percent={
+                  progress.resumeScaner === 'STARTED'
+                    ? 40
+                    : progress.resumeScaner === 'COMPLETED'
+                    ? 100
+                    : 0
+                }
+                size='small'
+                status={progress.resumeScaner === 'COMPLETED' ? 'success' : 'active'}
+              />
+              <h1 className='text-white text-[2vh]'>
+                {progress.resumeScaner === 'STARTED' ? 'Extracting Data' : 'Data Extracted'}
+              </h1>
 
-          <Flex vertical gap='small' style={{ width: 180 }}>
-            <p className='text-white'>Parsing Resume Content</p>
-            <Progress
-              percent={
-                progress.resumeScaner == 'STARTED'
-                  ? 40
-                  : progress.resumeScaner == 'COMPLETED'
-                  ? 100
-                  : 0
-              }
-              size='small'
-            />
+              <Progress
+                percent={
+                  progress.openAi === 'STARTED'
+                    ? 50
+                    : progress.openAi === 'COMPLETED'
+                    ? 100
+                    : 0
+                }
+                size='small'
+                status={progress.openAi === 'COMPLETED' ? 'success' : 'active'}
+              />
+              <h1 className='text-white text-[2vh]'>
+                {progress.openAi === 'STARTED' ? 'Matching Company Profiles' : 'Profiles Matched'}
+              </h1>
 
-            <p className='text-white'>Matching Company Profiles using AI</p>
-            <Progress
-              percent={
-                progress.openAi == 'STARTED'
-                  ? 50
-                  : progress.openAi == 'COMPLETED'
-                  ? 100
-                  : 0
-              }
-              size='small'
-            />
-
-            <p className='text-white'>Matching Job Listings</p>
-            <Progress
-              percent={
-                progress.jobListing == 'STARTED'
-                  ? 50
-                  : progress.jobListing == 'COMPLETED'
-                  ? 100
-                  : 0
-              }
-              size='small'
-            />
-          </Flex>
+              <Progress
+                percent={
+                  progress.jobListing === 'STARTED'
+                    ? 50
+                    : progress.jobListing === 'COMPLETED'
+                    ? 100
+                    : 0
+                }
+                size='small'
+                status={progress.jobListing === 'COMPLETED' ? 'success' : 'active'}
+              />
+              <h1 className='text-white text-[2vh]'>
+                {progress.jobListing === 'STARTED' ? 'Matching Job Listings' : 'Listings Matched'}
+              </h1>
+            </div>
+          </div>
         </div>
       </Modal>
     </>
