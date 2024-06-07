@@ -19,7 +19,7 @@ const AIPipelineComponent = ({
       className='flex overflow-hidden flex-col md:flex-row px-[2vw] md:px-[3vw] ipad-portrait:flex-col relative top-[3vh] '
       id='features'
     >
-      <div className='md:w-[30vw] ipad-portrait:w-full ipad-portrait:object-center ipad-portrait:items-center flex flex-col gap-[2vh] place-items-center md:place-items-start'>
+      <div className='md:w-[30vw] ipad-landscape:w-[40vw] ipad-portrait:w-full ipad-portrait:object-center ipad-portrait:items-center flex flex-col gap-[2vh] place-items-center md:place-items-start'>
         <p className='text-[#F28729] inter-tight md:text-[3vh] font-medium'>
           AI Pipeline
         </p>
@@ -57,7 +57,7 @@ const AIPipelineComponent = ({
           className='mt-[5vh]'
         />
       </div>
-      <div className='w-[70vw] h-full hidden md:block'>
+      <div className='w-[70vw] ipad-landscape:w-[60vw] h-full hidden md:block'>
         <Image
           src={
             animationProgress! < 0.3
