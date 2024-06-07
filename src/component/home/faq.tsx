@@ -37,7 +37,7 @@ const FAQComponent = () => {
       <h1 className='text-white text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center'>
         Got questions? <br /> Join the community.
       </h1>
-      <p className='text-center text-[#BDBDBE] text-[2vh] w-[80vw] md:w-[27vw] m-auto'>
+      <p className='text-center text-[#BDBDBE] text-[2vh] w-[80vw] md:w-[27vw] ipad-portrait:w-[70vw] m-auto'>
         Our Discord community and staff are here to help! Your feedback will
         help us improve in future versions.
       </p>

@@ -63,10 +63,10 @@ export default function HomePage() {
         <HomeWelcomeComponent />
         <div
           ref={AIPipeAnimes}
-          className=' md:mt-0 mt-[10vh] md:sticky top-[10vh]'
+          className=' md:mt-0 mt-[10vh] ipad-portrait:relative md:sticky top-[10vh]'
         >
           <AIPipelineComponent animationProgress={AITimelineProgress} />
-          <div className=' md:h-[230vh]'></div>
+          <div className=' md:h-[230vh] ipad-portrait:hidden'></div>
         </div>
         <FAQComponent />
         <CallToActionComponent />

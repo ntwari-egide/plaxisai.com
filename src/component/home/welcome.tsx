@@ -48,7 +48,7 @@ const HomeWelcomeComponent = () => {
       />
       <div className=' flex flex-col relative justify-center items-center place-items-center gap-[3vh] mt-[2vh]'>
         <LogoComponent displayAir size='medium' />
-        <p className='text-white text-[3.4vh] md:text-[5vh] font-bold text-center px-[10vw] md:px-0 md:w-[40vw] alliance-2'>
+        <p className='text-white text-[3.4vh] md:text-[5vh] font-bold text-center px-[10vw] md:px-0 ipad-portrait:w-[70vw] md:w-[40vw] alliance-2'>
           Unlock your career: Just upload your resume,{' '}
           <span className=' text-[#cdcdd09b]'>no sign-up needed.</span>
         </p>
@@ -62,7 +62,7 @@ const HomeWelcomeComponent = () => {
           <RiPlayCircleLine className='text-[2.5vh] text-white' />
           <p className='text-white text-[1.6vh] font-light'>Watch the video</p>
         </div>
-        <div className='hidden md:block'>
+        <div className='hidden md:block ipad-portrait:hidden'>
           <div className='sticky top-[5vh] -mt-[15vh] -z-10' ref={homeGifs}>
             <ScrollImageAnimations src={Screen1Image} />
           </div>

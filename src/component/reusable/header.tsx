@@ -37,7 +37,7 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
           <nav
             className={`${
               scrolled ? 'header_grassmorpshism' : ''
-            } px-[3vw] py-[2vh] md:block hidden`}
+            } px-[3vw] py-[2vh] md:block hidden ipad-portrait:hidden`}
           >
             <ul className='flex flex-row gap-[5vw]'>
               <li className='text-white text-[2vh] hover:text-[gray] cursor-pointer'>

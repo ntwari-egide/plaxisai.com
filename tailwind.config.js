@@ -52,9 +52,12 @@ module.exports = {
         shimmer: 'shimmer 1.3s linear infinite',
       },
       screens: {
-        'ipad-portrait': '768px',  // iPad portrait mode
-        'ipad-landscape': '1024px', // iPad landscape mode
-      }
+        'sm': '640px', // Tailwind default
+        'md': '768px', // Tailwind default, covers iPad portrait mode
+        'lg': '1024px', // Tailwind default, covers iPad landscape mode
+        'ipad-portrait': {'min': '768px', 'max': '1023px'}, // Custom iPad portrait mode
+        'ipad-landscape': {'min': '1024px', 'max': '1366px'}, // Custom iPad landscape mode
+      },
     },
   },
   plugins: [require('@tailwindcss/forms')],
