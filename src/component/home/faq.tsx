@@ -7,9 +7,9 @@ const FAQComponent = () => {
   const items: CollapseProps['items'] = [
     {
       key: '1',
-      label: 'How do I use GetHiredHints to find job opportunities?',
+      label: 'How do I use CareerSync to find job opportunities?',
       children:
-        'You can use GetHiredHints to find job opportunities by uploading your resume and letting our AI match you with job opportunities that fit your skills and experience.',
+        'You can use CareerSync to find job opportunities by uploading your resume and letting our AI match you with job opportunities that fit your skills and experience.',
     },
     {
       key: '2',

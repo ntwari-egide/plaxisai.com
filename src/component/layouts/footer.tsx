@@ -77,7 +77,7 @@ const FooterComponent = () => {
       </div>
       <div className='flex flex-row justify-between md:mt-0 mt-[10vh]'>
         <p className='text-[1.4vh] text-[#78787A]'>
-          GetHiredHints © {new Date().getFullYear()}, <br /> All Rights Reserved
+          CareerSync © {new Date().getFullYear()}, <br /> All Rights Reserved
         </p>
         <div className='flex flex-row gap-[1vw]'>
           <RiLinkedinFill className='text-[3.5vh] text-[white] cursor-pointer' />
