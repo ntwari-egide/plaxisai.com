@@ -193,7 +193,7 @@ const LeftComponent = ({ allJobs, matchedCompanies }: LeftComponentProps) => {
         <h1 className='text-[#9D9D9E] alliance-2 text-[1.7vh]'>
           Matching Companies
         </h1>
-        <div className='h-16 w-20 rounded-full border-[2px] border-[#00AC3A] flex place-items-center'>
+        <div className='h-16 w-20 rounded-full border-[2px] border-[#22BABC] flex place-items-center'>
           <h1 className='text-white text-center w-full text-[3vh]'>
             {allJobs?.length}
           </h1>
@@ -203,7 +203,7 @@ const LeftComponent = ({ allJobs, matchedCompanies }: LeftComponentProps) => {
         <h1 className='text-[#9D9D9E] alliance-2 text-[1.7vh]'>
           Resume Matched Jobs
         </h1>
-        <div className='h-16 w-16 rounded-full border-[2px] border-[#F28729] flex place-items-center'>
+        <div className='h-16 w-16 rounded-full border-[2px] border-[#FA7F09] flex place-items-center'>
           <h1 className='text-white text-center w-full text-[3vh]'>
             {totalJobs}
           </h1>
@@ -232,7 +232,7 @@ const LeftComponent = ({ allJobs, matchedCompanies }: LeftComponentProps) => {
         <h1 className='text-[#9D9D9E] alliance-2 text-[1.7vh]'>
           Experience Score
         </h1>
-        <span className='text-[#00AC3A] text-[2.3vh]'>80</span>
+        <span className='text-[#22BABC] text-[2.3vh]'>80</span>
         <Slider defaultValue={80} disabled />
       </div>
     </div>

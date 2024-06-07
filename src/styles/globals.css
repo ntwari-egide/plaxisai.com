@@ -147,7 +147,7 @@ span.ant-collapse-header-text {
 }
 
 .ant-slider.ant-slider-disabled .ant-slider-track {
-  background-color: #05ac3a !important;
+  background-color: #22BABC !important;
 }
 
 .ant-slider.ant-slider-disabled .ant-slider-rail {
@@ -179,20 +179,25 @@ span.ant-progress-text.ant-progress-text-end.ant-progress-text-outer {
 }
 
 .ant-steps-item-icon {
-  background: #91e4da !important;
-  border-color: #91e4da !important;
+  background: #9FF8EE !important;
+  border-color: #9FF8EE !important;
+}
+
+.ant-steps-item.ant-steps-item-process.ant-steps-item-active  {
+  opacity: 1 !important;
 }
 
 .ant-steps-item.ant-steps-item-process.ant-steps-item-active 
 .ant-steps-item-icon {
-  background: #348687da !important;
-  border-color: #348687da !important;
+  background: #22BABC !important;
+  border-color: #22BABC !important;
 }
 
 .ant-steps-item.ant-steps-item-finish svg {
   color: #348888 !important;
 }
 
-.ant-steps-item.ant-steps-item-finish {
-  opacity: 0.6 !important;
+.ant-steps-item.ant-steps-item-finish,
+.ant-steps-item {
+  opacity: 0.3 !important;
 }
