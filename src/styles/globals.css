@@ -112,6 +112,25 @@ span.ant-collapse-header-text {
   font-weight: 900;
 }
 
+/** mobile responsiveness */
+@media (max-width: 768px) {
+  .ant-steps-item-title {
+    font-size: 2.5vh !important;
+  }
+
+  .ant-steps-item-description {
+    font-size: 1.5vh !important;
+  }
+
+  .ant-collapse-item {
+    margin: 1vh 0;
+  }
+
+  span.ant-collapse-header-text {
+    font-size: 2.5vh;
+  }
+}
+
 .ant-collapse-content-box {
   color: #bdbdbe !important;
   font-size: 2vh;

@@ -51,6 +51,10 @@ module.exports = {
         flicker: 'flicker 3s linear infinite',
         shimmer: 'shimmer 1.3s linear infinite',
       },
+      screens: {
+        'ipad-portrait': '768px',  // iPad portrait mode
+        'ipad-landscape': '1024px', // iPad landscape mode
+      }
     },
   },
   plugins: [require('@tailwindcss/forms')],
