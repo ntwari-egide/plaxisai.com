@@ -15,8 +15,8 @@ const LogoComponent = ({ size, displayAir }: LogoProps) => {
             : 'text-5xl'
         } text-white`}
       >
-        GetHired
-        <span className='text-[#F28729]'>Hints{displayAir ? ' AI' : ''}</span>
+        Career
+        <span className='text-[#F28729]'>Sync{displayAir ? ' AI' : ''}</span>
       </h1>
     </div>
   );

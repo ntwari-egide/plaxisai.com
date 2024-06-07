@@ -62,10 +62,12 @@ const HomeWelcomeComponent = () => {
           <RiPlayCircleLine className='text-[2.5vh] text-white' />
           <p className='text-white text-[1.6vh] font-light'>Watch the video</p>
         </div>
-        <div className='sticky top-[5vh] -mt-[15vh] -z-10' ref={homeGifs}>
-          <ScrollImageAnimations src={Screen1Image} />
+        <div className='hidden md:block]'>
+          <div className='sticky top-[5vh] -mt-[15vh] -z-10' ref={homeGifs}>
+            <ScrollImageAnimations src={Screen1Image} />
+          </div>
+          <div className=' h-[100vh]'></div>
         </div>
-        <div className=' h-[100vh]'></div>
       </div>
     </div>
   );

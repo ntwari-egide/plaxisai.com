@@ -24,7 +24,7 @@ const AIPipelineComponent = ({
           AI Pipeline
         </p>
         <h1 className='text-white text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center md:text-start'>
-          Get matched: <br /> 3 Dynamic Steps
+          Get matched: <br className='hidden md:block' /> 3 Dynamic Steps
         </h1>
         <Steps
           direction='vertical'
@@ -57,7 +57,7 @@ const AIPipelineComponent = ({
           className='mt-[5vh]'
         />
       </div>
-      <div className='w-[70vw] h-[80vh]'>
+      <div className='w-[70vw] h-full hidden md:block'>
         <Image
           src={
             animationProgress! < 0.3
@@ -67,7 +67,7 @@ const AIPipelineComponent = ({
               : Screen3
           }
           alt='screen-2'
-          className='w-[84vw] h-full hidden md:block absolute -[20vw] object-cover'
+          className='w-[84vw] h-[80vh] absolute -[20vw] object-cover'
         />
       </div>
     </div>
