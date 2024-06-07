@@ -29,7 +29,7 @@ const FAQComponent = () => {
   return (
     <div
       id='faq'
-      className=' relative mt-[25vh] flex flex-col gap-[1vh] md:gap-[3vh] place-items-center'
+      className=' relative mt-[10vh] md:mt-[25vh] flex flex-col gap-[1vh] md:gap-[3vh] place-items-center'
     >
       <h1 className='text-[#F28729] inter-tight md:text-[3vh] font-medium text-center'>
         FAQ
@@ -41,7 +41,7 @@ const FAQComponent = () => {
         Our Discord community and staff are here to help! Your feedback will
         help us improve in future versions.
       </p>
-      <TextButton text='Join Discord' className='mt-[2vh]' />
+      <TextButton text='Join Discord' isContentImportant className='mt-[2vh]' />
       <CollapseComponent items={items} />
     </div>
   );
