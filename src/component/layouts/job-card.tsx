@@ -40,11 +40,15 @@ const JobCard = ({
         dangerouslySetInnerHTML={{ __html: company }}
       ></h1>
       <div className='flex alliance-2 flex-row justify-between gap-[2vw]'>
-        <p className='text-[white] font-medium ipad-portrait:text-[1.5vh] text-[1.7vh]'>{position}</p>
+        <p className='text-[white] font-medium ipad-portrait:text-[1.5vh] text-[1.7vh]'>
+          {position}
+        </p>
         <p className='text-[white] ipad-portrait:text-[1.5vh] text-[1.7vh]'>
           Duration: <span className='text-[#9d9d9e]'>{duration}</span>
         </p>
-        <p className='text-[white] ipad-portrait:text-[1.5vh] text-[1.7vh]'>{location} </p>
+        <p className='text-[white] ipad-portrait:text-[1.5vh] text-[1.7vh]'>
+          {location}{' '}
+        </p>
       </div>
       <div className='flex alliance-2 flex-row justify-between gap-[2vw]'>
         {salary && (

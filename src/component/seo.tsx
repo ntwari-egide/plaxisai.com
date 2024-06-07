@@ -44,10 +44,7 @@ export default function Seo(props: SeoProps) {
   return (
     <Head>
       <title>{meta.title}</title>
-      <meta
-        name='title'
-        content='CareerSync | AI powered job search engine'
-      />
+      <meta name='title' content='CareerSync | AI powered job search engine' />
       {/* Description */}
       <meta
         name='description'
