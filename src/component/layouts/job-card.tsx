@@ -40,27 +40,27 @@ const JobCard = ({
         dangerouslySetInnerHTML={{ __html: company }}
       ></h1>
       <div className='flex alliance-2 flex-row justify-between gap-[2vw]'>
-        <p className='text-[white] font-medium text-[1.7vh]'>{position}</p>
-        <p className='text-[white] text-[1.7vh]'>
+        <p className='text-[white] font-medium ipad-portrait:text-[1.5vh] text-[1.7vh]'>{position}</p>
+        <p className='text-[white] ipad-portrait:text-[1.5vh] text-[1.7vh]'>
           Duration: <span className='text-[#9d9d9e]'>{duration}</span>
         </p>
-        <p className='text-[white] text-[1.7vh]'>{location} </p>
+        <p className='text-[white] ipad-portrait:text-[1.5vh] text-[1.7vh]'>{location} </p>
       </div>
       <div className='flex alliance-2 flex-row justify-between gap-[2vw]'>
         {salary && (
-          <p className='text-[white] text-[1.7vh]'>
+          <p className='text-[white] ipad-portrait:text-[1.5vh] text-[1.7vh]'>
             Salary : <span className='text-[#9d9d9e]'>{salary}</span>
           </p>
         )}
         {postedDate && (
-          <p className='text-[white] text-[1.7vh]'>
+          <p className='text-[white] ipad-portrait:text-[1.5vh] text-[1.7vh]'>
             Posted At : <span className='text-[#9d9d9e]'>{postedDate}</span>
           </p>
         )}
       </div>
 
       <p
-        className='text-[#d5d5d6e6] alliance-2 text-[2vh]'
+        className='text-[#d5d5d6e6] alliance-2 ipad-portrait:text-[1.7vh] text-[2vh]'
         dangerouslySetInnerHTML={{ __html: truncateText(description, 30) }}
       />
     </Link>
