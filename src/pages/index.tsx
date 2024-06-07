@@ -61,7 +61,10 @@ export default function HomePage() {
         <HeaderLayout sticky />
         {/* Each HomeWelcomeComponent with the same animation, if intended */}
         <HomeWelcomeComponent />
-        <div ref={AIPipeAnimes} className=' md:mt-0 mt-[10vh] md:sticky top-[10vh]'>
+        <div
+          ref={AIPipeAnimes}
+          className=' md:mt-0 mt-[10vh] md:sticky top-[10vh]'
+        >
           <AIPipelineComponent animationProgress={AITimelineProgress} />
           <div className=' md:h-[230vh]'></div>
         </div>
