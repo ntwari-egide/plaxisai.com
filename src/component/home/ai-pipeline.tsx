@@ -31,7 +31,6 @@ const AIPipelineComponent = ({
           current={
             animationProgress! < 0.3 ? 0 : animationProgress! < 0.5 ? 1 : 2
           }
-          progressDot
           className='alliance-2'
           items={[
             {

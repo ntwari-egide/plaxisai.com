@@ -177,3 +177,22 @@ span.ant-progress-text.ant-progress-text-end.ant-progress-text-outer {
 .ant-progress-inner {
   background: #474748 !important;
 }
+
+.ant-steps-item-icon {
+  background: #91e4da !important;
+  border-color: #91e4da !important;
+}
+
+.ant-steps-item.ant-steps-item-process.ant-steps-item-active 
+.ant-steps-item-icon {
+  background: #348687da !important;
+  border-color: #348687da !important;
+}
+
+.ant-steps-item.ant-steps-item-finish svg {
+  color: #348888 !important;
+}
+
+.ant-steps-item.ant-steps-item-finish {
+  opacity: 0.6 !important;
+}
