@@ -135,7 +135,7 @@ const ReusableFileInput = ({
               height={20}
             />
 
-            <p className='md:w-[14vw]'>
+            <p className='md:w-[14vw] w-[60vw]'>
               <TypingAnimation
                 strings={[
                   'Upload your resume here',
