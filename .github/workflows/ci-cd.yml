@@ -1,4 +1,4 @@
-name: CareerSync CI/CD
+name: Artim AI CI/CD
 
 on:
   push:

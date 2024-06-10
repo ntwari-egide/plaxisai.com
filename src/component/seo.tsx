@@ -11,12 +11,12 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 const defaultMeta = {
-  title: 'CareerSync | AI powered job search engine',
-  siteName: 'CareerSync',
+  title: 'Artim AI | AI powered job search engine',
+  siteName: 'Artim AI',
   description:
-    'CareerSync is an AI powered job search engine that helps you find the best jobs in the tech industry. We use machine learning to match you with the best jobs based on your skills and experience.',
+    'Artim AI is an AI powered job search engine that helps you find the best jobs in the tech industry. We use machine learning to match you with the best jobs based on your skills and experience.',
   /** Without additional '/' on the end, e.g. https://theodorusclarence.com */
-  url: 'https://CareerSync.com',
+  url: 'https://Artim AI.com',
   type: 'website',
   robots: 'follow, index',
   /**
@@ -44,16 +44,16 @@ export default function Seo(props: SeoProps) {
   return (
     <Head>
       <title>{meta.title}</title>
-      <meta name='title' content='CareerSync | AI powered job search engine' />
+      <meta name='title' content='Artim AI | AI powered job search engine' />
       {/* Description */}
       <meta
         name='description'
-        content='CareerSync is an AI powered job search engine that helps you find the best jobs in the tech industry. We use machine learning to match you with the best jobs based on your skills and experience.'
+        content='Artim AI is an AI powered job search engine that helps you find the best jobs in the tech industry. We use machine learning to match you with the best jobs based on your skills and experience.'
       />
       {/* Keywords */}
       <meta
         name='keywords'
-        content='CareerSync, job search engine, AI powered job search engine, tech jobs, machine learning, job matching, job search, job search platform, job search website, job search app, job search tool, job search service, job search software, job search technology, job search company, job search site, job search engine website, job search engine app, job search engine tool, job search engine service, job search engine software, job search engine technology, job search engine company, job search engine site, job search engine platform, job search engine website, job search engine app, job search engine tool, job search engine service, job search engine software, job search engine technology, job search engine company, job search engine site, job search engine platform, job search engine website, job search engine app, job search engine tool, job search engine service, job search engine software, job search engine technology, job search engine company, job search engine site, job search engine platform'
+        content='Artim AI, job search engine, AI powered job search engine, tech jobs, machine learning, job matching, job search, job search platform, job search website, job search app, job search tool, job search service, job search software, job search technology, job search company, job search site, job search engine website, job search engine app, job search engine tool, job search engine service, job search engine software, job search engine technology, job search engine company, job search engine site, job search engine platform, job search engine website, job search engine app, job search engine tool, job search engine service, job search engine software, job search engine technology, job search engine company, job search engine site, job search engine platform, job search engine website, job search engine app, job search engine tool, job search engine service, job search engine software, job search engine technology, job search engine company, job search engine site, job search engine platform'
       />
       {/* Author */}
       <meta name='author' content='Egide Ntwari' />
