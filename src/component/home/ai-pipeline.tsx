@@ -66,7 +66,7 @@ const AIPipelineComponent = ({
               : Screen3
           }
           alt='screen-2'
-          className='w-[84vw] h-[80vh] absolute -[20vw] object-cover'
+          className='w-[84vw] h-[85vh] absolute -[20vw] object-cover'
         />
       </div>
     </div>
