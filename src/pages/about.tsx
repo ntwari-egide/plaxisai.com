@@ -1,7 +1,7 @@
 /**
  * @author: Egide Ntwali
- * @description: The home page
- * @returns {JSX.Element} The home page
+ * @description: The about page
+ * @returns {JSX.Element} The about page
  */
 
 import * as React from 'react';
@@ -13,7 +13,7 @@ import FooterComponent from '@/component/layouts/footer';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
 
-export default function HomePage() {
+export default function AboutPage() {
   return (
     <div className='flex relative flex-col gap-[15vh]'>
       <Seo templateTitle='About' />
