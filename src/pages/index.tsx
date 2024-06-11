@@ -53,7 +53,7 @@ export default function HomePage() {
       )
       .to(AIPipelineEl, { opacity: 0, animationDuration: 0.2 });
   }, []);
- 
+
   return (
     <div className='flex relative flex-col gap-[15vh]'>
       <Seo templateTitle='Home' />

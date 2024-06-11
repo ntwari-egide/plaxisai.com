@@ -1,6 +1,7 @@
 import Image from 'next/image';
-import MainLogoImage from '../../../public/images/main-logo.png';
+
 import LogoImage from '../../../public/images/logo.png';
+import MainLogoImage from '../../../public/images/main-logo.png';
 
 type LogoProps = {
   size: 'small' | 'medium' | 'large';
@@ -9,12 +10,10 @@ type LogoProps = {
 
 const LogoComponent = ({ size, displayAir }: LogoProps) => {
   return (
-    <div className=" flex flex-row object-center items-center gap-[1vw]">
-      {
-        ! displayAir && (
-          <Image src={MainLogoImage} alt="Logo" className='h-[5vh] w-full' />
-        )
-      }
+    <div className=' flex flex-row object-center items-center gap-[1vw]'>
+      {!displayAir && (
+        <Image src={MainLogoImage} alt='Logo' className='h-[5vh] w-full' />
+      )}
       <h1
         className={`${
           size === 'small'
@@ -24,7 +23,11 @@ const LogoComponent = ({ size, displayAir }: LogoProps) => {
             : 'text-5xl'
         } text-white`}
       >
-        { displayAir ? <Image src={LogoImage} alt="Logo" className='h-[3vh] w-full' /> : ''}
+        {displayAir ? (
+          <Image src={LogoImage} alt='Logo' className='h-[3vh] w-full' />
+        ) : (
+          ''
+        )}
       </h1>
     </div>
   );
