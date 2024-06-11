@@ -50,7 +50,7 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
                 <Link href='/#faq'>FAQ</Link>
               </li>
               <li className='text-white text-[2vh] hover:text-[gray] cursor-pointer'>
-                About
+                <Link href='/about'> About</Link>
               </li>
             </ul>
           </nav>
