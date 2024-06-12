@@ -38,52 +38,54 @@ export const getFilterOptions = (
   }));
 };
 
+/**
+ * @param jobs
+ * @param filterOptions
+ * @approach loop through the jobs and check if the job matches the filterOptions, if it does, add it to the filteredJobs array
+ */
 export const filterJobsHelper = (jobs: any[], filterOptions: FilterOptions) => {
+  console.log('filters: ', JSON.stringify(filterOptions));
+
+  // Helper function to traverse nested objects and find the value of a given key
+  const traverse = (obj: any, key: string): any => {
+    if (typeof obj !== 'object' || obj === null) {
+      return null;
+    }
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      return obj[key];
+    }
+    for (const k in obj) {
+      if (typeof obj[k] === 'object') {
+        const result = traverse(obj[k], key);
+        if (result !== undefined) {
+          return result;
+        }
+      }
+    }
+    return undefined;
+  };
+
+  const matchesFilter = (
+    job: any,
+    filterKey: keyof FilterOptions,
+    filterValues: string[]
+  ) => {
+    if (filterValues.length === 0) return true;
+    const jobValue = traverse(job, filterKey as string);
+    return Array.isArray(jobValue)
+      ? jobValue.some((val) => filterValues.includes(val))
+      : filterValues.includes(jobValue);
+  };
+
   return jobs.reduce((filteredJobs, job) => {
     const cloneJob = { ...job };
 
-    // Helper function to traverse nested objects and find the value of a given key
-    const traverse = (obj: any, key: string): any => {
-      if (typeof obj !== 'object' || obj === null) {
-        return null;
-      }
-      if (Object.prototype.hasOwnProperty.call(obj, key)) {
-        return obj[key];
-      }
-      for (const k in obj) {
-        if (typeof obj[k] === 'object') {
-          const result = traverse(obj[k], key);
-          if (result !== undefined) {
-            return result;
-          }
-        }
-      }
-      return undefined;
-    };
-
-    // Check if job matches any of the specified filter values for each category
-    const matchesCompany =
-      filterOptions.companies.length === 0 ||
-      filterOptions.companies.includes(traverse(cloneJob, 'company'));
-    const matchesJobProvider =
-      filterOptions.jobProvider.length === 0 ||
-      filterOptions.jobProvider.includes(traverse(cloneJob, 'jobProvider'));
-    const matchesEmploymentType =
-      filterOptions.employmentType.length === 0 ||
-      filterOptions.employmentType.includes(
-        traverse(cloneJob, 'employmentType')
-      );
-    const matchesLocation =
-      filterOptions.location.length === 0 ||
-      filterOptions.location.includes(traverse(cloneJob, 'location'));
+    const matchesAllFilters = (
+      Object.keys(filterOptions) as (keyof FilterOptions)[]
+    ).every((key) => matchesFilter(cloneJob, key, filterOptions[key]));
 
     // Job must match all specified filters to be included
-    if (
-      matchesCompany &&
-      matchesJobProvider &&
-      matchesEmploymentType &&
-      matchesLocation
-    ) {
+    if (matchesAllFilters) {
       filteredJobs.push(cloneJob);
     }
 
