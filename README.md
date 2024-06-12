@@ -1,4 +1,4 @@
-# AfriqAir Rebranding
+# Artim 
 
 ## Features
 
