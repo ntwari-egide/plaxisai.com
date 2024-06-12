@@ -44,7 +44,10 @@ export default function Seo(props: SeoProps) {
   return (
     <Head>
       <title>{meta.title}</title>
-      <meta name='title' content='Artim AI | AI powered resume job matching engine' />
+      <meta
+        name='title'
+        content='Artim AI | AI powered resume job matching engine'
+      />
       {/* Description */}
       <meta
         name='description'

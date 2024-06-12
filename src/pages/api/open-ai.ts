@@ -52,8 +52,8 @@ export default async function handler(
       ],
       max_tokens: 300,
       temperature: 0.5,
-    });    
-    
+    });
+
     const analysisResult = completion.choices[0].message.content;
 
     // Parse the response as JSON
