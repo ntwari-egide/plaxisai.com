@@ -24,7 +24,15 @@ export default async function handler(
       messages: [
         {
           role: 'system',
-          content: `You are a helpful assistant that analyzes resume text and suggests possible career titles and companies that might be interested in the individual. Please know that the company doesn't need to be fortune 100, no, it is all companies all over the world. If the application is not in US, suggest the companies in his/her/their country. For the title, return the title that is easy to search, don't return more than two words. Format the response as a JSON object with the following structure:\n\n{
+          content: `You are a helpful assistant that analyzes resume text and suggests possible career titles and companies that might be interested in the individual. Please provide the following details for better suggestions: 
+          
+          1. The individual's specific region or country.
+          2. Any specific industries or sectors of interest.
+          3. Any preferred company size (e.g., startup, mid-size, large corporation).
+          4. Any specific skills or technologies mentioned in the resume.
+          5. If no internship is mentioned in the resume, suggest resume-focused opportunities.
+          
+          Please format the response as a JSON object with the following structure:\n\n{
             "title": "<Suggested Career Title>",
             "companyMatches": [
               {
@@ -44,8 +52,8 @@ export default async function handler(
       ],
       max_tokens: 300,
       temperature: 0.5,
-    });
-
+    });    
+    
     const analysisResult = completion.choices[0].message.content;
 
     // Parse the response as JSON

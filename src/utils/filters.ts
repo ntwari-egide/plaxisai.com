@@ -44,8 +44,7 @@ export const getFilterOptions = (
  * @approach loop through the jobs and check if the job matches the filterOptions, if it does, add it to the filteredJobs array
  */
 export const filterJobsHelper = (jobs: any[], filterOptions: FilterOptions) => {
-  console.log('filters: ', JSON.stringify(filterOptions));
-
+  
   // Helper function to traverse nested objects and find the value of a given key
   const traverse = (obj: any, key: string): any => {
     if (typeof obj !== 'object' || obj === null) {

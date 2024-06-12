@@ -38,13 +38,13 @@ export default function Seo(props: SeoProps) {
     ...props,
   };
   meta['title'] = props.templateTitle
-    ? `${props.templateTitle} | ${meta.siteName}`
+    ? `${props.templateTitle} | ${meta.siteName} - AI powered resume job matching engine`
     : meta.title;
 
   return (
     <Head>
       <title>{meta.title}</title>
-      <meta name='title' content='Artim AI | AI powered job search engine' />
+      <meta name='title' content='Artim AI | AI powered resume job matching engine' />
       {/* Description */}
       <meta
         name='description'
