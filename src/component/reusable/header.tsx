@@ -40,18 +40,26 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
             } px-[3vw] py-[2vh] md:block hidden ipad-portrait:hidden`}
           >
             <ul className='flex flex-row gap-[5vw]'>
-              <li className='text-white text-[2vh] hover:text-[gray] cursor-pointer'>
-                <Link href='/'>Overview</Link>
-              </li>
-              <li className='text-white text-[2vh] hover:text-[gray] cursor-pointer'>
-                <Link href='/#features'>Features</Link>
-              </li>
-              <li className='text-white text-[2vh] hover:text-[gray] cursor-pointer'>
-                <Link href='/#faq'>FAQ</Link>
-              </li>
-              <li className='text-white text-[2vh] hover:text-[gray] cursor-pointer'>
-                <Link href='/about'> About</Link>
-              </li>
+              <Link href='/#home'>
+                <li className='text-white text-[2vh] hover:text-[gray] cursor-pointer'>
+                  Overview
+                </li>
+              </Link>
+              <Link href='/#features'>
+                <li className='text-white text-[2vh] hover:text-[gray] cursor-pointer'>
+                  Features
+                </li>
+              </Link>
+              <Link href='/#faq'>
+                <li className='text-white text-[2vh] hover:text-[gray] cursor-pointer'>
+                  FAQ
+                </li>
+              </Link>
+              <Link href='/about'>
+                <li className='text-white text-[2vh] hover:text-[gray] cursor-pointer'>
+                  About
+                </li>
+              </Link>
             </ul>
           </nav>
         </div>
