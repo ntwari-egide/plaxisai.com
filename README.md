@@ -1,4 +1,4 @@
-# Artim 
+# Artim
 
 ## Features
 
