@@ -7,9 +7,9 @@ const FAQComponent = () => {
   const items: CollapseProps['items'] = [
     {
       key: '1',
-      label: 'How do I use Artim AI to find job opportunities?',
+      label: 'How do I use Plaxis AI to find job opportunities?',
       children:
-        'You can use Artim AI to find job opportunities by uploading your resume and letting our AI match you with job opportunities that fit your skills and experience.',
+        'You can use Plaxis AI to find job opportunities by uploading your resume and letting our AI match you with job opportunities that fit your skills and experience.',
     },
     {
       key: '2',

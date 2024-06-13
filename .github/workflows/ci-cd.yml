@@ -1,4 +1,4 @@
-name: Artim AI CI/CD
+name: Plaxis AI CI/CD
 
 on:
   push:
