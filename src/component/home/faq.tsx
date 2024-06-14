@@ -1,8 +1,8 @@
 import type { CollapseProps } from 'antd';
+import Link from 'next/link';
 
 import CollapseComponent from '../controls/collapse';
 import TextButton from '../controls/text-button';
-import Link from 'next/link';
 
 const FAQComponent = () => {
   const items: CollapseProps['items'] = [
@@ -43,7 +43,11 @@ const FAQComponent = () => {
         help us improve in future versions.
       </p>
       <Link href='https://discord.gg/hP3PHMCY' target='_blank'>
-      <TextButton text='Join Discord' isContentImportant className='mt-[2vh]' />
+        <TextButton
+          text='Join Discord'
+          isContentImportant
+          className='mt-[2vh]'
+        />
       </Link>
       <CollapseComponent items={items} />
     </div>
