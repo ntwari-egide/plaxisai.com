@@ -29,7 +29,7 @@ const CallToActionComponent = () => {
         Your next great job is just one upload away.
       </h1>
       <GradientButton
-        href='#home'
+        href='/#home'
         size='large'
         text='Get Matched for Free'
         className='mt-[5vh]'

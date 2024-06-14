@@ -63,7 +63,7 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
             </ul>
           </nav>
         </div>
-        <GradientButton text='Get Started' />
+        <GradientButton text='Get Started' href='/#home' />
       </div>
     </header>
   );

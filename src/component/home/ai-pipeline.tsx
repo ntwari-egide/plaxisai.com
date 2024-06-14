@@ -24,7 +24,7 @@ const AIPipelineComponent = ({
           AI Pipeline
         </p>
         <h1 className='text-white text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center md:text-start'>
-          Get matched: <br className='hidden md:block' /> 3 Dynamic Steps
+        AI-Driven Matching: Quick and Precise
         </h1>
         <Steps
           direction='vertical'
@@ -36,24 +36,24 @@ const AIPipelineComponent = ({
             {
               title: 'Extracting Data',
               description:
-                'Your resume is now being dissected by our advanced algorithm',
+                'Your resume is meticulously analyzed by our cutting-edge algorithm, ensuring no detail is missed.',
             },
             {
               title: 'Matching Profiles',
               description:
-                'Our system is intelligently comparing your credentials with over 5M+ potential employers to find the perfect fit with in seconds.',
+                'Our intelligent system scans over 5 million employers, pinpointing the perfect match for you in mere seconds.',
             },
             {
               title: 'Revealing Best Matches',
               description:
-                'Access tailored matching companies and their grade your next career opportunity instantly.',
+                'Instantly access a curated list of top-matching companies and positions.',
             },
           ]}
         />
         <GradientButton
           href='#home'
           text='Use It for Free'
-          className='mt-[5vh]'
+          className='mt-[1vh]'
         />
       </div>
       <div className='w-[70vw] ipad-landscape:w-[60vw] h-full hidden md:block'>
