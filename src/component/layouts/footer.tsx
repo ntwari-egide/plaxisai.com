@@ -6,6 +6,7 @@ import {
 } from 'react-icons/ri';
 
 import LogoComponent from '../reusable/logo';
+import Link from 'next/link';
 
 const FooterComponent = () => {
   return (
@@ -80,10 +81,18 @@ const FooterComponent = () => {
           Plaxis AI © {new Date().getFullYear()}, <br /> All Rights Reserved
         </p>
         <div className='flex flex-row gap-[1vw]'>
+          <Link href='https://www.linkedin.com/company/plaxis-ai'>
           <RiLinkedinFill className='text-[3.5vh] text-[white] cursor-pointer' />
+          </Link>
+          <Link href='https://github.com/Plaxis-AI' target='_blank'>
           <RiGithubFill className='text-[3.5vh] text-[white] cursor-pointer' />
+          </Link>
+          <Link href='' target='_blank'>
           <RiYoutubeFill className='text-[3.5vh] text-[white] cursor-pointer' />
+          </Link>
+          <Link href='https://discord.gg/PDbwTa6b' target='_blank'>
           <RiDiscordFill className='text-[3.5vh] text-[white] cursor-pointer' />
+          </Link>
         </div>
       </div>
     </div>
