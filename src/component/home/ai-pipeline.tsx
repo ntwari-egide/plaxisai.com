@@ -24,7 +24,7 @@ const AIPipelineComponent = ({
           AI Pipeline
         </p>
         <h1 className='text-white text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center md:text-start'>
-        AI-Driven Matching: Quick and Precise
+          AI-Driven Matching: Quick and Precise
         </h1>
         <Steps
           direction='vertical'
