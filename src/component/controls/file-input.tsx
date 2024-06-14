@@ -45,11 +45,9 @@ type FileType = Parameters<GetProps<UploadProps['beforeUpload']>>[0]['file'];
 // it first of all need to upload the file somewhere.
 
 const ReusableFileInput = ({
-  onChange,
   accept,
   className,
   style,
-  placeholder,
   buttonContent,
 }: ReusableFileInput) => {
   const [loading, setLoading] = useState(false);
