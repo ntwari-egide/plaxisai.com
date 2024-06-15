@@ -15,7 +15,7 @@ export const config = {
 };
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
+  // if (req.method == 'POST') {
     const form = new formidable.IncomingForm();
     form.parse(req, async (err, fields, files) => {
       if (err) {
@@ -56,10 +56,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         res.status(400).json({ error: 'Invalid file type' });
       }
     });
-  } else {
-    res.setHeader('Allow', ['POST']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
-  }
+  // } else {
+  //   res.setHeader('Allow', ['POST']);
+  //   res.status(405).end(`Method ${req.method} Not Allowed`);
+  // }
 }
 
 export default allowCors(handler);

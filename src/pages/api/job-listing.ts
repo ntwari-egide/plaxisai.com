@@ -19,10 +19,10 @@ async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> {
-  if (req.method !== 'POST') {
-    res.status(405).json({ message: 'Only POST requests allowed' });
-    return;
-  }
+  // if (req.method !== 'POST') {
+  //   res.status(405).json({ message: 'Only POST requests allowed' });
+  //   return;
+  // }
 
   const {
     title,

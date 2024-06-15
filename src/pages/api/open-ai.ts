@@ -6,9 +6,9 @@ import allowCors from '@/utils/cors';
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const openai = new OpenAI();
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Only POST requests allowed' });
-  }
+  // if (req.method !== 'POST') {
+  //   return res.status(405).json({ message: 'Only POST requests allowed' });
+  // }
 
   const { resumeText } = req.body;
 

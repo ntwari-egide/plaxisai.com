@@ -47,6 +47,28 @@ const nextConfig = {
 
     return config;
   },
+
+  async headers() {
+    return [
+      {
+        source: '/api/(.*)', // Routes this applies to
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*', // Allow for specific domains to have access or * for all
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET, POST, PUT, DELETE, OPTIONS', // Allows for specific methods accepted
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'Content-Type, Authorization', // Allows for specific headers accepted
+          },
+        ],
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

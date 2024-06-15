@@ -30,7 +30,7 @@ export const analyzeResume = createAsyncThunk<OpenAIResponse, string>(
   async (resumeText) => {
     try {
       const response = await axios.post(
-        'https://www.plaxisai.com/api/open-ai',
+        '/api/open-ai',
         { resumeText },
         {
           headers: {

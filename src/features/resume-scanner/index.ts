@@ -24,7 +24,7 @@ export const uploadFile = createAsyncThunk<ResumeScannerResponse, FormData>(
   async (formData) => {
     try {
       const response = await axios.post(
-        'https://www.plaxisai.com/api/uploadFile',
+        '/api/uploadFile',
         formData
       );
 
