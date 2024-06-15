@@ -1,11 +1,9 @@
-import allowCors from '@/utils/cors';
 import { NextApiRequest, NextApiResponse } from 'next';
 import OpenAI from 'openai';
 
-async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+import allowCors from '@/utils/cors';
+
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   const openai = new OpenAI();
 
   if (req.method !== 'POST') {

@@ -1,11 +1,12 @@
 /* eslint-disable unused-imports/no-unused-vars */
 // Import docx library
-import allowCors from '@/utils/cors';
 import formidable from 'formidable';
 import fs from 'fs';
 import mammoth from 'mammoth';
 import { NextApiRequest, NextApiResponse } from 'next';
 import pdf from 'pdf-parse';
+
+import allowCors from '@/utils/cors';
 
 export const config = {
   api: {
@@ -13,10 +14,7 @@ export const config = {
   },
 };
 
-async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const form = new formidable.IncomingForm();
     form.parse(req, async (err, fields, files) => {

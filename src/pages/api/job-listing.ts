@@ -1,6 +1,7 @@
-import allowCors from '@/utils/cors';
 import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
+
+import allowCors from '@/utils/cors';
 
 interface CompanyMatch {
   id: number;
