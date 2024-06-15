@@ -27,7 +27,7 @@ const initialState: OpenAIState = {
 export const analyzeResume = createAsyncThunk<OpenAIResponse, string>(
   'openai/analyzeResume',
   async (resumeText) => {
-    const response = await fetch('/api/open-ai', {
+    const response = await fetch('https://www.plaxisai.com/api/open-ai', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

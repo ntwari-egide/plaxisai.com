@@ -1,3 +1,4 @@
+import allowCors from '@/utils/cors';
 import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -13,7 +14,7 @@ interface JobResult {
   jobs: any;
 }
 
-export default async function handler(
+async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> {
@@ -70,3 +71,5 @@ export default async function handler(
     res.status(500).json({ message: 'Error processing the request' });
   }
 }
+
+export default allowCors(handler);

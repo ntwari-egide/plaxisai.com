@@ -1,5 +1,6 @@
 /* eslint-disable unused-imports/no-unused-vars */
 // Import docx library
+import allowCors from '@/utils/cors';
 import formidable from 'formidable';
 import fs from 'fs';
 import mammoth from 'mammoth';
@@ -12,7 +13,7 @@ export const config = {
   },
 };
 
-export default async function handler(
+async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -62,3 +63,5 @@ export default async function handler(
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
+
+export default allowCors(handler);

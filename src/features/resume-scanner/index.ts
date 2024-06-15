@@ -21,7 +21,7 @@ const initialState: UploadState = {
 export const uploadFile = createAsyncThunk<ResumeScannerResponse, FormData>(
   'file/uploadFile',
   async (formData) => {
-    const response = await fetch('/api/uploadFile', {
+    const response = await fetch('https://www.plaxisai.com/api/uploadFile', {
       method: 'POST',
       body: formData,
     });

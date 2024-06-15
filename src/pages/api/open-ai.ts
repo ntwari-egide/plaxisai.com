@@ -1,7 +1,8 @@
+import allowCors from '@/utils/cors';
 import { NextApiRequest, NextApiResponse } from 'next';
 import OpenAI from 'openai';
 
-export default async function handler(
+async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -64,3 +65,5 @@ export default async function handler(
     res.status(500).json({ message: 'Error processing the request' });
   }
 }
+
+export default allowCors(handler);

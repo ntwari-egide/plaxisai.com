@@ -34,7 +34,7 @@ export interface RequestJobListing {
 export const jobListingRequest = createAsyncThunk(
   'jobListing/fetchJobs',
   async (request: any) => {
-    const response = await fetch('/api/job-listing', {
+    const response = await fetch('https://www.plaxisai.com/api/job-listing', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
