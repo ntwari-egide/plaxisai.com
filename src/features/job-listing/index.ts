@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export interface Job {
   id: string;
@@ -34,21 +35,21 @@ export interface RequestJobListing {
 export const jobListingRequest = createAsyncThunk(
   'jobListing/fetchJobs',
   async (request: any) => {
-    const response = await fetch('https://www.plaxisai.com/api/job-listing', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(request),
-    });
+    try {
+      const response = await axios.post(
+        'https://www.plaxisai.com/api/job-listing',
+        request,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
-    if (!response.ok) {
+      return response.data;
+    } catch (error) {
       throw new Error('Failed to fetch jobs');
     }
-
-    const data = await response.json();
-
-    return data;
   }
 );
 

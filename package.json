@@ -26,7 +26,7 @@
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
     "antd": "^5.5.2",
-    "axios": "^1.6.8",
+    "axios": "^1.7.2",
     "clsx": "^1.2.1",
     "docx": "^8.5.0",
     "formidable": "^2.1.2",

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 interface ResumeScannerResponse {
   content: string;
@@ -21,15 +22,16 @@ const initialState: UploadState = {
 export const uploadFile = createAsyncThunk<ResumeScannerResponse, FormData>(
   'file/uploadFile',
   async (formData) => {
-    const response = await fetch('https://www.plaxisai.com/api/uploadFile', {
-      method: 'POST',
-      body: formData,
-    });
+    try {
+      const response = await axios.post(
+        'https://www.plaxisai.com/api/uploadFile',
+        formData
+      );
 
-    if (!response.ok) {
+      return response.data;
+    } catch (error) {
       throw new Error('Failed to upload file');
     }
-    return response.json();
   }
 );
 

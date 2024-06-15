@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 interface CompanyMatch {
   id: number;
@@ -27,19 +28,21 @@ const initialState: OpenAIState = {
 export const analyzeResume = createAsyncThunk<OpenAIResponse, string>(
   'openai/analyzeResume',
   async (resumeText) => {
-    const response = await fetch('https://www.plaxisai.com/api/open-ai', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ resumeText: resumeText }),
-    });
+    try {
+      const response = await axios.post(
+        'https://www.plaxisai.com/api/open-ai',
+        { resumeText },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
-    if (!response.ok) {
+      return response.data;
+    } catch (error) {
       throw new Error('Failed to analyze resume');
     }
-
-    return response.json();
   }
 );
 
