@@ -12,7 +12,7 @@ const LogoComponent = ({ size, displayAir }: LogoProps) => {
   return (
     <div className=' flex flex-row object-center items-center gap-[1vw]'>
       {!displayAir && (
-        <Image src={MainLogoImage} alt='Logo' className='h-[5vh] w-full' />
+        <Image src={MainLogoImage} alt='Logo' className='h-[5vh] md:w-full w-[30vw]' />
       )}
       <h1
         className={`${
@@ -24,7 +24,7 @@ const LogoComponent = ({ size, displayAir }: LogoProps) => {
         } text-white`}
       >
         {displayAir ? (
-          <Image src={LogoImage} alt='Logo' className='h-[3vh] w-full' />
+          <Image src={LogoImage} alt='Logo' className='h-[3vh] md:w-full w-[30vw]' />
         ) : (
           ''
         )}

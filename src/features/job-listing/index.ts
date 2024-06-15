@@ -37,7 +37,7 @@ export const jobListingRequest = createAsyncThunk(
   async (request: any) => {
     try {
       const response = await axios.post(
-        'https://www.plaxisai.com/api/job-listing',
+        '/api/job-listing',
         request,
         {
           headers: {
