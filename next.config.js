@@ -13,6 +13,7 @@ const nextConfig = {
   //     'res.cloudinary.com',
   //   ],
   // },
+
   experimental: {
     esmExternals: true,
   },
@@ -51,21 +52,13 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/api/(.*)', // Routes this applies to
+        source: "/api/:path*",
         headers: [
-          {
-            key: 'Access-Control-Allow-Origin',
-            value: '*', // Allow for specific domains to have access or * for all
-          },
-          {
-            key: 'Access-Control-Allow-Methods',
-            value: 'GET, POST, PUT, DELETE, OPTIONS', // Allows for specific methods accepted
-          },
-          {
-            key: 'Access-Control-Allow-Headers',
-            value: 'Content-Type, Authorization', // Allows for specific headers accepted
-          },
-        ],
+          { key: "Access-Control-Allow-Credentials", value: "true" },
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          { key: "Access-Control-Allow-Methods", value: "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
+          { key: "Access-Control-Allow-Headers", value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" },
+        ]
       },
     ];
   },

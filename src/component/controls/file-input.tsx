@@ -70,6 +70,7 @@ const ReusableFileInput = ({
   };
 
   const handleChange: UploadProps['onChange'] = async (info) => {
+
     setOpenResultsModel(true); // make the progress bar visible
 
     if (info.file.status === 'uploading') {
