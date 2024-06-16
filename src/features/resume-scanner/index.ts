@@ -24,7 +24,7 @@ export const uploadFile = createAsyncThunk<ResumeScannerResponse, FormData>(
   async (formData) => {
     try {
       const response = await axios.post(
-        '/api/uploadFile',
+        'api/uploadFile',
         formData
       );
 
