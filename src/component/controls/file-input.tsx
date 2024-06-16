@@ -1,19 +1,11 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { LoadingOutlined } from '@ant-design/icons';
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
-import {
-  Flex,
-  message,
-  Modal,
-  Progress,
-  Spin,
-  Upload,
-  UploadProps,
-} from 'antd';
+import { Flex, message, Modal, Progress, Spin } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { GetProps, useDispatch, useSelector } from 'react-redux';
+import { useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '@/store';
 
@@ -30,7 +22,7 @@ import TextButton from './text-button';
 import TypingAnimation from '../reusable/typing-animations';
 import AIIcon from '../../../public/images/ai-icon.png';
 
-type ReusableFileInput = {
+type ReusableFileInputProps = {
   onChange?: (file: File) => void;
   accept?: string;
   className?: string;
@@ -40,19 +32,16 @@ type ReusableFileInput = {
   style?: React.CSSProperties;
 };
 
-type FileType = Parameters<GetProps<UploadProps['beforeUpload']>>[0]['file'];
-
-// it first of all need to upload the file somewhere.
-
 const ReusableFileInput = ({
   accept,
   className,
   style,
   buttonContent,
-}: ReusableFileInput) => {
+}: ReusableFileInputProps) => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string | undefined>();
   const Router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [openResultsModel, setOpenResultsModel] = useState(false);
 
@@ -60,57 +49,57 @@ const ReusableFileInput = ({
   const { error, response } = useSelector(
     (state: RootState) => state.resumeScanner
   );
-
   const progress = useSelector((state: RootState) => state.trackingProgress);
 
-  const getBase64 = (img: FileType, callback: (imageUrl: string) => void) => {
+  const getBase64 = (img: File, callback: (imageUrl: string) => void) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result as string));
     reader.readAsDataURL(img);
   };
 
-  const handleChange: UploadProps['onChange'] = async (info) => {
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
 
     setOpenResultsModel(true); // make the progress bar visible
+    setLoading(true);
 
-    if (info.file.status === 'uploading') {
-      setLoading(true);
-      return;
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      await dispatch(setResumeScanner('STARTED'));
+      const resumeText = await dispatch(uploadFile(formData)).unwrap();
+      await dispatch(setResumeScanner('COMPLETED'));
+
+      // getting the company matches using open ai api
+      await dispatch(setOpenAi('STARTED'));
+      const companyMatches = await dispatch(
+        analyzeResume(resumeText.content)
+      ).unwrap();
+      await dispatch(setOpenAi('COMPLETED'));
+
+      // get company matches from the response
+      await dispatch(setJobListing('STARTED'));
+      await dispatch(jobListingRequest(companyMatches));
+      await dispatch(setJobListing('COMPLETED'));
+
+      // send the route to the /response and open in new tab
+      Router.push('/response');
+
+      // Get this url from response in real world.
+      getBase64(file, (url) => {
+        setLoading(false);
+        setImageUrl(url);
+      });
+    } catch (error) {
+      message.error('Error processing the file');
+      setLoading(false);
     }
-    if (info.file.status === 'done') {
-      // send the file to the server api for processing
-      const formData = new FormData();
-      formData.append('file', info.file.originFileObj as File);
+  };
 
-      try {
-        dispatch(setResumeScanner('STARTED'));
-        const resumeText = await dispatch(uploadFile(formData)).unwrap();
-        dispatch(setResumeScanner('COMPLETED'));
-
-        // getting the company matches using open ai api
-        dispatch(setOpenAi('STARTED'));
-        const companyMatches = await dispatch(
-          analyzeResume(resumeText.content)
-        ).unwrap();
-        dispatch(setOpenAi('COMPLETED'));
-
-        // get company matches from the response
-        dispatch(setJobListing('STARTED'));
-        await dispatch(jobListingRequest(companyMatches));
-        dispatch(setJobListing('COMPLETED'));
-
-        // send the route to the /response and open in new tab
-        Router.push('/response');
-
-        // Get this url from response in real world.
-        getBase64(info.file.originFileObj as FileType, (url) => {
-          setLoading(false);
-          setImageUrl(url);
-        });
-      } catch (error) {
-        message.error('Error processing the file');
-      }
-    }
+  const handleContainerClick = () => {
+    fileInputRef.current?.click();
   };
 
   return (
@@ -118,44 +107,45 @@ const ReusableFileInput = ({
       <Flex
         className={`flex relative flex-col md:gap-[1vh] alliance-2 ${className}`}
         style={style}
+        onClick={handleContainerClick}
       >
-        <Upload
-          accept={accept}
-          onChange={handleChange}
-          showUploadList={false}
-          className='alliance-2'
-        >
-          <div className='flex cursor-pointer flex-row justify-between items-center place-items-center bg-[#464652] text-[#CDCDD0]  px-[1vw] py-[1vh] gap-[2vw] rounded-full text-[2vh]'>
-            <Image
-              src={AIIcon}
-              className='ml-[0.5vw]'
-              alt='AI Icon'
-              width={20}
-              height={20}
-            />
+        <div className='flex cursor-pointer flex-row justify-between items-center place-items-center bg-[#464652] text-[#CDCDD0]  px-[1vw] py-[1vh] gap-[2vw] rounded-full text-[2vh]'>
+          <Image
+            src={AIIcon}
+            className='ml-[0.5vw]'
+            alt='AI Icon'
+            width={20}
+            height={20}
+          />
 
-            <p className='md:w-[14vw] w-[60vw] ipad-portrait:w-[40vw] ipad-landscape:w-[30vw]'>
-              <TypingAnimation
-                strings={[
-                  'Upload your resume here',
-                  'Get matched with the best!',
-                  'Get hired!',
-                  'Just one upload away!',
-                ]}
-                typeSpeed={50}
-                backSpeed={10}
-                startDelay={0}
-                backDelay={2000}
-                loop={false}
-                showCursor={true}
-                cursorChar='|'
-                smartBackspace={true}
-                shuffle={false}
-              />
-            </p>
-            <TextButton text={buttonContent} />
-          </div>
-        </Upload>
+          <p className='md:w-[14vw] w-[60vw] ipad-portrait:w-[40vw] ipad-landscape:w-[30vw]'>
+            <TypingAnimation
+              strings={[
+                'Upload your resume here',
+                'Get matched with the best!',
+                'Get hired!',
+                'Just one upload away!',
+              ]}
+              typeSpeed={50}
+              backSpeed={10}
+              startDelay={0}
+              backDelay={2000}
+              loop={false}
+              showCursor={true}
+              cursorChar='|'
+              smartBackspace={true}
+              shuffle={false}
+            />
+          </p>
+          <TextButton text={buttonContent} />
+          <input
+            ref={fileInputRef}
+            type='file'
+            accept={accept}
+            className='hidden'
+            onChange={handleChange}
+          />
+        </div>
       </Flex>
 
       {/* Response Layout Modal component */}

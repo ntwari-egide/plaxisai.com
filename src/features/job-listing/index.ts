@@ -36,15 +36,11 @@ export const jobListingRequest = createAsyncThunk(
   'jobListing/fetchJobs',
   async (request: any) => {
     try {
-      const response = await axios.post(
-        'api/job-listing',
-        request,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await axios.post('api/job-listing', request, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
       return response.data;
     } catch (error) {

@@ -22,11 +22,9 @@ const initialState: UploadState = {
 export const uploadFile = createAsyncThunk<ResumeScannerResponse, FormData>(
   'file/uploadFile',
   async (formData) => {
+    console.log('reached here -------- formData', formData);
     try {
-      const response = await axios.post(
-        'api/uploadFile',
-        formData
-      );
+      const response = await axios.post('api/uploadFile', formData);
 
       return response.data;
     } catch (error) {
