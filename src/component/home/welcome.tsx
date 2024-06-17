@@ -50,7 +50,7 @@ const HomeWelcomeComponent = () => {
         <LogoComponent displayAir size='medium' />
         <p className='text-white text-[3.4vh] md:text-[5vh] font-bold text-center px-[10vw] md:px-0 ipad-portrait:w-[70vw] md:w-[40vw] alliance-2'>
           Unlock your career: Just upload your resume,{' '}
-          <span className=' text-[#cdcdd09b]'>no sign-up needed.</span>
+          <span className=' text-[#22BABC]'>no sign-up needed.</span>
         </p>
         <ReusableFileInput
           placeholder='Upload your resume here'
