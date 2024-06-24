@@ -68,7 +68,6 @@ async function handler(
 
     res.status(200).json(validJobResults);
   } catch (error) {
-    console.error('Error processing the request:', error);
     res.status(500).json({ message: 'Error processing the request' });
   }
 }

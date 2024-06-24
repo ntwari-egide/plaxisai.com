@@ -56,10 +56,8 @@ api.interceptors.response.use(
       // The request was made, but the server responded with an error status code
     } else if (error.request) {
       // The request was made, but no response was received
-      console.log(error.request);
     } else {
       // Something happened in setting up the request that triggered an Error
-      console.log('Error', error.message);
     }
     return Promise.reject(error);
   }
