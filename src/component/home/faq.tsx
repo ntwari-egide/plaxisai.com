@@ -42,7 +42,7 @@ const FAQComponent = () => {
         Our Discord community and staff are here to help! Your feedback will
         help us improve in future versions.
       </p>
-      <Link href='https://discord.gg/hP3PHMCY' target='_blank'>
+      <Link href='https://discord.gg/hFgPf7xfrQ' target='_blank'>
         <TextButton
           text='Join Discord'
           isContentImportant
