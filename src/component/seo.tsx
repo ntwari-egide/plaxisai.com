@@ -23,7 +23,8 @@ const defaultMeta = {
    * No need to be filled, will be populated with openGraph function
    * If you wish to use a normal image, just specify the path below
    */
-  image: 'https://res.cloudinary.com/dpqasrwfu/image/upload/v1719519501/f7bms0z0wwedxu4kf7oy.png',
+  image:
+    'https://res.cloudinary.com/dpqasrwfu/image/upload/v1719519501/f7bms0z0wwedxu4kf7oy.png',
 };
 
 type SeoProps = {
