@@ -9,14 +9,14 @@ interface UploadState {
   file: File | null;
   response: string | null;
   uploading: boolean;
-  error: string | null | undefined;
+  error: string | null | undefined; 
 }
 
 const initialState: UploadState = {
   file: null,
   response: null,
   uploading: false,
-  error: null,
+  error: null, 
 };
 
 export const uploadFile = createAsyncThunk<ResumeScannerResponse, FormData>(
