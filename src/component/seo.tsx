@@ -14,7 +14,7 @@ const defaultMeta = {
   title: 'Plaxis AI | AI powered job search engine',
   siteName: 'Plaxis AI',
   description:
-    'Plaxis AI is an AI powered job search engine that helps you find the best jobs in the tech industry. We use machine learning to match you with the best jobs based on your skills and experience.',
+    'Plaxis AI is an AI powered job search engine that helps you find the best jobs in any industry. We use machine learning to match you with the best jobs based on your skills and experience.',
   /** Without additional '/' on the end, e.g. https://theodorusclarence.com */
   url: 'https://ArtimAI.io',
   type: 'website',
@@ -51,7 +51,7 @@ export default function Seo(props: SeoProps) {
       {/* Description */}
       <meta
         name='description'
-        content='Plaxis AI is an AI powered job search engine that helps you find the best jobs in the tech industry. We use machine learning to match you with the best jobs based on your skills and experience.'
+        content='Plaxis AI is an AI powered job search engine that helps you find the best jobs in any industry. We use machine learning to match you with the best jobs based on your skills and experience.'
       />
       {/* Keywords */}
       <meta
