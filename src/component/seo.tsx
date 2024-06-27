@@ -16,14 +16,14 @@ const defaultMeta = {
   description:
     'Plaxis AI is an AI powered job search engine that helps you find the best jobs in any industry. We use machine learning to match you with the best jobs based on your skills and experience.',
   /** Without additional '/' on the end, e.g. https://theodorusclarence.com */
-  url: 'https://ArtimAI.io',
+  url: 'https://plaxisai.com',
   type: 'website',
   robots: 'follow, index',
   /**
    * No need to be filled, will be populated with openGraph function
    * If you wish to use a normal image, just specify the path below
    */
-  image: 'https://tsnext-tw.thcl.dev/images/large-og.png',
+  image: 'https://res.cloudinary.com/dpqasrwfu/image/upload/v1719519501/f7bms0z0wwedxu4kf7oy.png',
 };
 
 type SeoProps = {
