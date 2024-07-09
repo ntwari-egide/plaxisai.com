@@ -174,6 +174,12 @@ span.ant-progress-text.ant-progress-text-end.ant-progress-text-outer {
   color: #9d9d9e !important;
 }
 
+span.ant-progress-text.ant-progress-text-inner {
+  color: #9d9d9e !important;
+}
+
+.ant-progress-small:where(.css-dev-only-do-not-override-3rel02).ant-progress-line, .ant-progress-small:where(.css-dev-only-do-not-override-3rel02).ant-progress-line .ant-progress-text .anticon
+
 .ant-progress-inner {
   background: #474748 !important;
 }
