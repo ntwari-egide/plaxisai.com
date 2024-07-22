@@ -18,7 +18,7 @@ import '@/styles/font.css';
 import { store } from '@/store';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  //setting up the google analytics
+  // Setting up the Google Analytics
 
   return (
     <>
@@ -27,18 +27,18 @@ function MyApp({ Component, pageProps }: AppProps) {
         <SpeedInsights />
         <Component {...pageProps} />
       </Provider>
-      <script>
-        <Script src='https://www.googletagmanager.com/gtag/js?id=G-TVRMYEEVXZ' />
-        <Script id='google-analytics'>
-          {`
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-SP1PT7F8EV');
-      `}
-        </Script>
-      </script>
+      <Script
+        src='https://www.googletagmanager.com/gtag/js?id=G-SP1PT7F8EV'
+        strategy='afterInteractive'
+      />
+      <Script id='google-analytics' strategy='afterInteractive'>
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-SP1PT7F8EV');
+        `}
+      </Script>
     </>
   );
 }
