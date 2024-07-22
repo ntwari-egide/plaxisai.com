@@ -18,29 +18,28 @@ import '@/styles/font.css';
 import { store } from '@/store';
 
 function MyApp({ Component, pageProps }: AppProps) {
-
   //setting up the google analytics
-  
+
   return (
     <>
-    <Provider store={store}>
-      <Analytics />
-      <SpeedInsights />
-      <Component {...pageProps} />
-    </Provider>
-    <script>
-    <Script src='https://www.googletagmanager.com/gtag/js?id=G-TVRMYEEVXZ' />
-      <Script id='google-analytics'>
-      {`
+      <Provider store={store}>
+        <Analytics />
+        <SpeedInsights />
+        <Component {...pageProps} />
+      </Provider>
+      <script>
+        <Script src='https://www.googletagmanager.com/gtag/js?id=G-TVRMYEEVXZ' />
+        <Script id='google-analytics'>
+          {`
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'G-SP1PT7F8EV');
       `}
-      </Script>
+        </Script>
       </script>
-</>
+    </>
   );
 }
 
