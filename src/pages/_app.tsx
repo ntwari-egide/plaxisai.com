@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-TVRMYEEVXZ');
+      gtag('config', 'G-SP1PT7F8EV');
       `}
       </Script>
       </script>
