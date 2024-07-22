@@ -1,7 +1,7 @@
 /**
  * @author: Egide Ntwali
  * @description: The SEO component, It is used to manage the SEO of the website and the pages
- * @param {SeoProps} props The props of the SEO component
+ * @par am {SeoProps} props The props of the SEO component
  * @param {string} date The date of the SEO component
  * @param {string} templateTitle The template title of the SEO component
  * @returns {JSX.Element} The SEO component
