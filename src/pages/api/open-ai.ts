@@ -50,13 +50,14 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     // Parse the response as JSON
     const parsedValidationResult = JSON.parse(validationAnalysisResult!);
 
-    // Call OpenAI API to analyze the resume content and format the output as requested
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        {
-          role: 'system',
-          content: `
+    if (parsedValidationResult.isValid) {
+      // Call OpenAI API to analyze the resume content and format the output as requested
+      const completion = await openai.chat.completions.create({
+        model: 'gpt-3.5-turbo',
+        messages: [
+          {
+            role: 'system',
+            content: `
           You are a helpful assistant that analyzes resume text and suggests possible career titles and companies that might be interested in the individual. Please provide the following details for better suggestions: 
           
           1. The individual's specific region or country.
@@ -77,36 +78,35 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
               ...
             ]
           }`,
-        },
-        {
-          role: 'user',
-          content: `Resume Text:\n${resumeText}`,
-        },
-      ],
-      max_tokens: 300,
-      temperature: 0.5,
-    });
+          },
+          {
+            role: 'user',
+            content: `Resume Text:\n${resumeText}`,
+          },
+        ],
+        max_tokens: 300,
+        temperature: 0.5,
+      });
 
-    const analysisResult = completion.choices[0].message.content;
+      const analysisResult = completion.choices[0].message.content;
 
-    // Parse the response as JSON
-    const parsedResult = JSON.parse(analysisResult!);
+      // Parse the response as JSON
+      const parsedResult = JSON.parse(analysisResult!);
 
-    // check if in validity analysis the resume is valid
-    if (parsedValidationResult?.isValid) {
-      // return the analysis result
-      return res.status(200).json(parsedResult);
-    } else {
-      // return the errors
       const result = {
         validity: parsedValidationResult,
         analysis: parsedResult,
       };
 
       return res.status(200).json(result);
-    }
+    } else {
+      const result = {
+        validity: parsedValidationResult,
+        analysis: null,
+      };
 
-    res.status(200).json(parsedResult);
+      return res.status(200).json(result);
+    }
   } catch (error) {
     res.status(500).json({ message: 'Error processing the request' });
   }

@@ -9,8 +9,18 @@ interface CompanyMatch {
 }
 
 interface OpenAIResponse {
-  title: string;
-  companyMatches: CompanyMatch[];
+  validity: {
+    isValid: boolean;
+    errors: {
+      section: string;
+      isValid: boolean;
+      message: string;
+    }[];
+  };
+  analysis: {
+    title: string;
+    companyMatches: CompanyMatch[];
+  };
 }
 
 interface OpenAIState {

@@ -29,7 +29,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
   const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
 
   const matchedCompanies = useSelector(
-    (state: RootState) => state.openAI.response?.companyMatches
+    (state: RootState) => state.openAI.response?.analysis.companyMatches
   );
 
   // if the all jobs we need to send back to index.tsx

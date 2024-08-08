@@ -42,6 +42,7 @@ const ReusableFileInput = ({
   const [imageUrl, setImageUrl] = useState<string | undefined>();
   const Router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isRedirected, setIsRedirected] = useState(false);
 
   const [openResultsModel, setOpenResultsModel] = useState(false);
 
@@ -50,6 +51,9 @@ const ReusableFileInput = ({
     (state: RootState) => state.resumeScanner
   );
   const progress = useSelector((state: RootState) => state.trackingProgress);
+  const validity = useSelector(
+    (state: RootState) => state.openAI.response?.validity
+  );
 
   const getBase64 = (img: File, callback: (imageUrl: string) => void) => {
     const reader = new FileReader();
@@ -85,7 +89,11 @@ const ReusableFileInput = ({
       await dispatch(setJobListing('COMPLETED'));
 
       // send the route to the /response and open in new tab
-      Router.push('/response');
+      if (validity && validity?.isValid) {
+        Router.push('/response');
+      } else {
+        message.error('Invalid resume');
+      }
 
       // Get this url from response in real world.
       getBase64(file, (url) => {
@@ -101,6 +109,22 @@ const ReusableFileInput = ({
   const handleContainerClick = () => {
     fileInputRef.current?.click();
   };
+
+  // useEffect(() => {
+  //   if (validity?.isValid === false) {
+  //     message.error('Invalid resume');
+  //   } else if (validity?.isValid === true && !isRedirected) {
+  //     setIsRedirected(true);
+  //     Router.push('/response');
+  //   }
+  // }, [validity, isRedirected]);
+
+  //  if (validity?.isValid === false) {
+  //   message.error('Invalid resume');
+  // } else if (validity?.isValid === true) {
+  //   setIsRedirected(true);
+  //   Router.push('/response');
+  // }
 
   return (
     <>
