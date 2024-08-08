@@ -17,7 +17,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-
     // Call OpenAI API to analyze the validity of the resume text
 
     const validationCompletion = await openai.chat.completions.create({
@@ -43,9 +42,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           content: `Resume Text:\n${resumeText}`,
         },
       ],
-    })
+    });
 
-    const validationAnalysisResult = validationCompletion.choices[0].message.content;
+    const validationAnalysisResult =
+      validationCompletion.choices[0].message.content;
 
     // Parse the response as JSON
     const parsedValidationResult = JSON.parse(validationAnalysisResult!);
@@ -101,11 +101,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       const result = {
         validity: parsedValidationResult,
         analysis: parsedResult,
-      }
-      
+      };
+
       return res.status(200).json(result);
     }
-    
+
     res.status(200).json(parsedResult);
   } catch (error) {
     res.status(500).json({ message: 'Error processing the request' });
