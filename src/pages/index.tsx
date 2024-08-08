@@ -51,7 +51,7 @@ export default function HomePage() {
         { opacity: 0 },
         { opacity: 1, animationDuration: 0.2 } // Fade in
       )
-      .to(AIPipelineEl, { opacity: 0, animationDuration: 0.2 });
+      .to(AIPipelineEl, { opacity: 0, animationDuraion: 0.2 });
   }, []);
 
   return (

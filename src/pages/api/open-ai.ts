@@ -17,13 +17,50 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
+
+    // Call OpenAI API to analyze the validity of the resume text
+
+    const validationCompletion = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages: [
+        {
+          role: 'system',
+          content: `You are a helpful assistant that analyzes resume text and suggests possible career titles and companies that might be interested in the individual. Please provide the resume text for analysis. Analyse if the content provided matches the format of a typical resume. Check the name, address, phone number, email, education, experience, and skills sections. You can tolerate three errors in the resume text. The response should be like this:
+          {
+            "isValid": true,
+            "errors": [
+              {
+                "section": "<section content>",
+                "isValid": <boolean>,
+                "message": "<Friendly message of what's missing>"
+              },
+              ...
+            ]
+          } `,
+        },
+        {
+          role: 'user',
+          content: `Resume Text:\n${resumeText}`,
+        },
+      ],
+    })
+
+    const validationAnalysisResult = validationCompletion.choices[0].message.content;
+
+    // Parse the response as JSON
+    const parsedValidationResult = JSON.parse(validationAnalysisResult!);
+
+    console.log(" Validity: ", parsedValidationResult);
+
+
     // Call OpenAI API to analyze the resume content and format the output as requested
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [
         {
           role: 'system',
-          content: `You are a helpful assistant that analyzes resume text and suggests possible career titles and companies that might be interested in the individual. Please provide the following details for better suggestions: 
+          content: `
+          You are a helpful assistant that analyzes resume text and suggests possible career titles and companies that might be interested in the individual. Please provide the following details for better suggestions: 
           
           1. The individual's specific region or country.
           2. Any specific industries or sectors of interest.
@@ -57,7 +94,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     // Parse the response as JSON
     const parsedResult = JSON.parse(analysisResult!);
-
+    
     res.status(200).json(parsedResult);
   } catch (error) {
     res.status(500).json({ message: 'Error processing the request' });
