@@ -50,9 +50,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     // Parse the response as JSON
     const parsedValidationResult = JSON.parse(validationAnalysisResult!);
 
-    console.log(" Validity: ", parsedValidationResult);
-
-
     // Call OpenAI API to analyze the resume content and format the output as requested
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
@@ -94,6 +91,20 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     // Parse the response as JSON
     const parsedResult = JSON.parse(analysisResult!);
+
+    // check if in validity analysis the resume is valid
+    if (parsedValidationResult?.isValid) {
+      // return the analysis result
+      return res.status(200).json(parsedResult);
+    } else {
+      // return the errors
+      const result = {
+        validity: parsedValidationResult,
+        analysis: parsedResult,
+      }
+      
+      return res.status(200).json(result);
+    }
     
     res.status(200).json(parsedResult);
   } catch (error) {
