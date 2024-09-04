@@ -1,4 +1,4 @@
-# Artim
+# Plaxis AI
 
 ## Features
 

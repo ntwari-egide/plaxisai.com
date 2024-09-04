@@ -4,7 +4,7 @@ import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { Flex, message, Modal, Progress, Spin } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '@/store';
@@ -87,13 +87,13 @@ const ReusableFileInput = ({
       await dispatch(setJobListing('STARTED'));
       await dispatch(jobListingRequest(companyMatches));
       await dispatch(setJobListing('COMPLETED'));
-
-      // send the route to the /response and open in new tab
-      if (validity && validity?.isValid) {
-        Router.push('/response');
-      } else {
-        message.error('Invalid resume');
-      }
+      
+      // // send the route to the /response and open in new tab
+      // if (validity && validity?.isValid) {
+      //   Router.push('/response');  
+      // } else {
+      //   message.error('Invalid resume');
+      // }
 
       // Get this url from response in real world.
       getBase64(file, (url) => {
@@ -109,23 +109,7 @@ const ReusableFileInput = ({
   const handleContainerClick = () => {
     fileInputRef.current?.click();
   };
-
-  // useEffect(() => {
-  //   if (validity?.isValid === false) {
-  //     message.error('Invalid resume');
-  //   } else if (validity?.isValid === true && !isRedirected) {
-  //     setIsRedirected(true);
-  //     Router.push('/response');
-  //   }
-  // }, [validity, isRedirected]);
-
-  //  if (validity?.isValid === false) {
-  //   message.error('Invalid resume');
-  // } else if (validity?.isValid === true) {
-  //   setIsRedirected(true);
-  //   Router.push('/response');
-  // }
-
+  
   return (
     <>
       <Flex
@@ -180,7 +164,22 @@ const ReusableFileInput = ({
         onCancel={() => setOpenResultsModel(false)}
         footer={null}
       >
-        <div className='w-full flex justify-center py-[5vh]'>
+        {
+          validity && !validity?.isValid ? <div>
+            
+            <div className=' h-[60vh] text-white'>
+              {
+                validity?.errors.map((error, index) => (
+                  <>
+                  <p key={index} className='text-[1.5vh]'>{error.section}</p>
+                  <p key={index} className='text-[1.5vh]'>{error.message}</p>
+                  </>
+                ))
+              }
+            </div>
+            
+          </div> : <div>
+            <div className='w-full flex justify-center py-[5vh]'>
           <div>
             <div className='flex justify-center'>
               <Spin
@@ -259,6 +258,8 @@ const ReusableFileInput = ({
             </div>
           </div>
         </div>
+          </div>
+        }
       </Modal>
     </>
   );
