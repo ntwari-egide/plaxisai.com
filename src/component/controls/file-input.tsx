@@ -130,7 +130,7 @@ const ReusableFileInput = ({
             <TypingAnimation
               strings={[
                 'Upload your resume here',
-                'Get matched with the best!',
+                'Get matched',
                 'Get hired!',
                 'Just one upload away!',
               ]}
