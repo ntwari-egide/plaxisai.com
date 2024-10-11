@@ -47,10 +47,10 @@ const HomeWelcomeComponent = () => {
         className='w-[80px] h-[80px] m-auto mt-[14vh]'
       />
       <div className=' flex flex-col relative justify-center items-center place-items-center gap-[3vh] mt-[2vh]'>
-        <LogoComponent displayAir size='medium' />
-        <p className='text-white text-[3.4vh] md:text-[5vh] font-bold text-center px-[10vw] md:px-0 ipad-portrait:w-[70vw] md:w-[40vw] alliance-2'>
+        <LogoComponent displayAI size='medium' />
+        <p className='text-[#000000] text-[3.4vh] md:text-[5.3vh] font-bold text-center px-[10vw] md:px-0 ipad-portrait:w-[70vw] md:w-[50vw] alliance-2'>
           Unlock your career: Just upload your resume,{' '}
-          <span className=' text-[#22BABC]'>no sign-up needed.</span>
+          <span className=' text-[#348888]'>no sign-up <br /> needed!</span>
         </p>
         <ReusableFileInput
           placeholder='Upload your resume here'
@@ -59,8 +59,8 @@ const HomeWelcomeComponent = () => {
           accept='.pdf,.doc,.docx'
         />
         <div className='flex flex-row object-center justify-center place-items-center gap-[0.4vw]'>
-          <RiPlayCircleLine className='text-[2.5vh] text-white' />
-          <p className='text-white text-[1.6vh] font-light'>Watch the video</p>
+          <RiPlayCircleLine className='text-[2.5vh] text-[#000000]' />
+          <p className='text-[#000000] text-[1.6vh] font-light'>Watch the video</p>
         </div>
         <div className='hidden md:block ipad-portrait:hidden'>
           <div className='sticky top-[5vh] -mt-[15vh] -z-10' ref={homeGifs}>

@@ -23,7 +23,7 @@ const AIPipelineComponent = ({
         <p className='text-[#F28729] inter-tight md:text-[3vh] font-medium'>
           AI Pipeline
         </p>
-        <h1 className='text-white text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center md:text-start'>
+        <h1 className='text-[#000000] text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center md:text-start'>
           AI-Driven Matching: Quick and Precise
         </h1>
         <Steps

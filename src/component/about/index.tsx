@@ -3,7 +3,7 @@ import { Image } from 'antd';
 const AboutLayout = () => {
   return (
     <div className='px-[3vw] w-full mt-[6vh] flex flex-col gap-[10vh]'>
-      <h1 className='text-white text-[7vh] text-center'>About</h1>
+      <h1 className='text-[#000000] text-[7vh] text-center'>About</h1>
       <p className='text-[#D5D5D6] text-[2.5vh] px-[10vw]'>
         In today's competitive job market, students often find themselves
         endlessly editing their resumes to fit different job applications.

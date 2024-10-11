@@ -19,7 +19,7 @@ const TextButton = ({
     <button
       type='button'
       onClick={onClick}
-      className={` relative text-white bg-[#3D3D44] flex flex-row justify-between items-center place-items-center border border-[#6A6A6F] px-[1.4vw] py-[1.5vh] ${className} gap-[1vw] rounded-full flex ${
+      className={` relative text-[#09090D] bg-transparent flex flex-row justify-between items-center place-items-center border border-[#6A6A6F] px-[1.4vw] py-[1.5vh] ${className} gap-[1vw] rounded-full flex ${
         isContentImportant
           ? 'flex-row px-[6vw]'
           : 'flex-col md:flex-row w-[15vw]'

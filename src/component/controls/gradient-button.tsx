@@ -24,7 +24,7 @@ const GradientButton = ({
         <Link href={href}>
           <button
             onClick={onClick}
-            className={` cursor-pointer hover:scale-[1.04] transition-all relative text-white gradient-button flex flex-row justify-between items-center place-items-center button-gradient ${
+            className={` cursor-pointer hover:scale-[1.04] transition-all relative text-[#000000] gradient-button flex flex-row justify-between items-center place-items-center button-gradient ${
               size == 'large'
                 ? 'px-[10vw] md:px-[3.4vw] py-[1.5vh] md:py-[3.5vh] text-[2.5vh] md:text-[7vh] ipad-portrait:text-[4vh]'
                 : 'px-[4vw] md:px-[1.4vw] py-[1.5vh] text-[2vh]'
@@ -42,7 +42,7 @@ const GradientButton = ({
       ) : (
         <button
           onClick={onClick}
-          className={` cursor-pointer hover:scale-[1.04] transition-all relative text-white gradient-button flex flex-row justify-between items-center place-items-center button-gradient ${
+          className={` cursor-pointer hover:scale-[1.04] transition-all relative text-[#000000] gradient-button flex flex-row justify-between items-center place-items-center button-gradient ${
             size == 'large'
               ? 'px-[10vw] md:px-[3.4vw] py-[1.5vh] md:py-[3.5vh] text-[2.5vh] md:text-[7vh] ipad-portrait:text-[4vh]'
               : 'px-[4vw] md:px-[1.4vw] py-[1.5vh] text-[2vh]'

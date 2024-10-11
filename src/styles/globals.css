@@ -9,16 +9,16 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Alliance', sans-serif;
-  background-color: #09090d;
+  font-family: 'WhyteInktrap', sans-serif;
+  background-color: white;
 }
 
 h1 {
   font-family: 'InterTight', sans-serif;
 }
 
-.alliance-2 {
-  font-family: 'Alliance', sans-serif !important;
+.whyteInktrap_font {
+  font-family: 'WhyteInktrap', sans-serif !important;
 }
 
 .inter-tight {
@@ -67,7 +67,7 @@ p {
 }
 
 .ant-modal-content svg {
-  color: white;
+  color: #000000;
 }
 
 .welcome-bg {
@@ -159,7 +159,7 @@ span.ant-collapse-header-text {
   color: #9d9d9e !important;
   font-size: 1.7vh !important;
   border: 1px solid #1c1c1f !important;
-  font-family: 'Alliance', sans-serif !important;
+  font-family: 'WhyteInktrap', sans-serif !important;
 }
 
 /* components/ScrollImage.module.css */

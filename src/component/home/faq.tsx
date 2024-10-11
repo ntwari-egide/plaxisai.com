@@ -35,7 +35,7 @@ const FAQComponent = () => {
       <h1 className='text-[#F28729] inter-tight md:text-[3vh] font-medium text-center'>
         FAQ
       </h1>
-      <h1 className='text-white text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center'>
+      <h1 className='text-[#000000] text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center'>
         Got questions? <br /> Join the community.
       </h1>
       <p className='text-center text-[#BDBDBE] text-[2vh] w-[80vw] md:w-[27vw] ipad-portrait:w-[70vw] m-auto'>

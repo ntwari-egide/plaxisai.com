@@ -4,7 +4,7 @@ import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { Flex, message, Modal, Progress, Spin } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '@/store';
@@ -113,11 +113,11 @@ const ReusableFileInput = ({
   return (
     <>
       <Flex
-        className={`flex relative flex-col md:gap-[1vh] alliance-2 ${className}`}
+        className={`flex relative flex-col md:gap-[1vh] inter-tight ${className}`}
         style={style}
         onClick={handleContainerClick}
       >
-        <div className='flex cursor-pointer flex-row justify-between items-center place-items-center bg-[#464652] text-[#CDCDD0]  px-[1vw] py-[1vh] gap-[2vw] rounded-full text-[2vh]'>
+        <div className='flex cursor-pointer flex-row justify-between items-center place-items-center bg-[#DADADC] text-[#CDCDD0]  px-[1vw] py-[1vh] gap-[2vw] rounded-full text-[2vh]'>
           <Image
             src={AIIcon}
             className='ml-[0.5vw]'
@@ -126,7 +126,7 @@ const ReusableFileInput = ({
             height={20}
           />
 
-          <p className='md:w-[14vw] w-[60vw] ipad-portrait:w-[40vw] ipad-landscape:w-[30vw]'>
+          <p className='md:w-[14vw] w-[60vw] ipad-portrait:w-[40vw] text-[#333336] ipad-landscape:w-[30vw] font-medium'>
             <TypingAnimation
               strings={[
                 'Upload your resume here',
@@ -167,7 +167,7 @@ const ReusableFileInput = ({
         {
           validity && !validity?.isValid ? <div>
             
-            <div className=' h-[60vh] text-white'>
+            <div className=' h-[60vh] text-[#000000]'>
               {
                 validity?.errors.map((error, index) => (
                   <>
@@ -207,7 +207,7 @@ const ReusableFileInput = ({
                     progress.resumeScaner === 'COMPLETED' ? 'success' : 'active'
                   }
                 />
-                <h1 className='text-white text-[2vh] w-1/2'>
+                <h1 className='text-[#000000] text-[2vh] w-1/2'>
                   {progress.resumeScaner === 'STARTED'
                     ? 'Extracting Data'
                     : 'Data Extracted'}
@@ -228,7 +228,7 @@ const ReusableFileInput = ({
                     progress.resumeScaner === 'COMPLETED' ? 'success' : 'active'
                   }
                 />
-                <h1 className='text-white text-[2vh] w-1/2'>
+                <h1 className='text-[#000000] text-[2vh] w-1/2'>
                   {progress.resumeScaner === 'STARTED'
                     ? 'Extracting Data'
                     : 'Data Extracted'}
@@ -249,7 +249,7 @@ const ReusableFileInput = ({
                     progress.jobListing === 'COMPLETED' ? 'success' : 'active'
                   }
                 />
-                <h1 className='text-white text-[2vh] w-1/2'>
+                <h1 className='text-[#000000] text-[2vh] w-1/2'>
                   {progress.jobListing === 'STARTED'
                     ? 'Matching Job Listings'
                     : 'Listings Matched'}

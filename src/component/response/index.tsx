@@ -46,7 +46,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
   return (
     <div className='relative min-h-screen p-[2vw]' onClick={onClick}>
       <div className=' relative flex flex-row'>
-        <h1 className='text-white text-[3vh]'>Matched</h1>
+        <h1 className='text-[#000000] text-[3vh]'>Matched</h1>
       </div>
       <div className='flex flex-col-reverse md:flex-row gap-[3vw] mt-[3vh] ipad-portrait:flex-col-reverse'>
         <div className='bg-[#09090D] sticky top-[5vh] md:w-[20%] ipad-portrait:w-full border-[1px] border-[#1C1C1F] h-[80vh] rounded-md'>
@@ -131,7 +131,7 @@ const ResponseFilterComponent = ({ allJobs }: ResponseFilterComponentProps) => {
   return (
     <div className='flex flex-col p-[1vh]'>
       <div className='flex  flex-col md:flex-row  p-[1vh] gap-[4vw] justify-between ipad-portrait:flex-col'>
-        <h1 className='text-[2vh] text-white alliance-2'>Filters:</h1>
+        <h1 className='text-[2vh] text-[#000000] alliance-2'>Filters:</h1>
         <div className='md:flex gap-[2vw] md:gap-0 grid-cols-2 grid flex-row justify-between w-full'>
           <ReusableSelect
             defaultValue={['Company']}
@@ -194,7 +194,7 @@ const LeftComponent = ({ allJobs, matchedCompanies }: LeftComponentProps) => {
           Matching Companies
         </h1>
         <div className='h-16 w-20 rounded-full border-[2px] border-[#22BABC] flex place-items-center'>
-          <h1 className='text-white text-center w-full text-[3vh]'>
+          <h1 className='text-[#000000] text-center w-full text-[3vh]'>
             {allJobs?.length}
           </h1>
         </div>
@@ -204,7 +204,7 @@ const LeftComponent = ({ allJobs, matchedCompanies }: LeftComponentProps) => {
           Resume Matched Jobs
         </h1>
         <div className='h-16 w-16 rounded-full border-[2px] border-[#FA7F09] flex place-items-center'>
-          <h1 className='text-white text-center w-full text-[3vh]'>
+          <h1 className='text-[#000000] text-center w-full text-[3vh]'>
             {totalJobs}
           </h1>
         </div>
