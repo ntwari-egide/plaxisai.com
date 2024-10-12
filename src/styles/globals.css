@@ -43,11 +43,11 @@ p {
 
 /* header */
 .header_grassmorpshism {
-  background: rgba(0, 0, 0, 0.1) !important;
-  box-shadow: 0 0 20px 0 hsla(0, 0%, 100%, 0.1) !important;
+  background: rgba(0, 0, 0, 0.02) !important;
+  box-shadow: 0 0 20px 0 hsla(0, 0%, 100%, 0.038) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  border-radius: 100px !important;
-  border: 1px solid var(--stroke, hsla(0, 0%, 100%, 0.2)) !important;
+  /* border-radius: 100px !important; */
+  /* border: 1px solid var(--stroke, hsla(0, 0%, 100%, 0.2)) !important; */
   backdrop-filter: blur(20px) !important;
 }
 

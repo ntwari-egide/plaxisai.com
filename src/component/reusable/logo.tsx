@@ -12,11 +12,7 @@ const LogoComponent = ({ size, displayAI }: LogoProps) => {
   return (
     <div className=' flex flex-row object-center items-center gap-[1vw]'>
       {!displayAI && (
-        <Image
-          src={MainLogoImage}
-          alt='Logo'
-          className='h-[5vh] md:w-full w-[30vw]'
-        />
+        <h1 className='whyteInktrap_font font-semibold text-[2.5vh]'>Plaxis AI</h1>
       )}
       <div
         className={`${

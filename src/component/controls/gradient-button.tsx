@@ -8,6 +8,7 @@ type GradientButtonProps = {
   size?: 'small' | 'medium' | 'large';
   style?: React.CSSProperties;
   href?: string;
+  theme?: 'yellow' | 'transparent';
 };
 
 const GradientButton = ({
@@ -17,6 +18,7 @@ const GradientButton = ({
   size,
   style,
   href,
+  theme
 }: GradientButtonProps) => {
   return (
     <>
@@ -24,18 +26,18 @@ const GradientButton = ({
         <Link href={href}>
           <button
             onClick={onClick}
-            className={` cursor-pointer hover:scale-[1.04] transition-all relative text-[#000000] gradient-button flex flex-row justify-between items-center place-items-center button-gradient ${
+            className={` cursor-pointer hover:scale-[1.04] transition-all relative text-[#000000] flex flex-row justify-between items-center inter-tight place-items-center  border-[2px] ${theme =='yellow' ? 'border-[#F28729] bg-[#F28729] ':'border-[#09090D] bg-transparent'}  ${
               size == 'large'
                 ? 'px-[10vw] md:px-[3.4vw] py-[1.5vh] md:py-[3.5vh] text-[2.5vh] md:text-[7vh] ipad-portrait:text-[4vh]'
-                : 'px-[4vw] md:px-[1.4vw] py-[1.5vh] text-[2vh]'
+                : 'px-[4vw] md:px-[1.4vw] py-[1vh] text-[1.6vh] font-semibold'
             } ${className} gap-[1vw] rounded-full`}
             style={style}
           >
             {text}
             <RiArrowRightLine
               className={`${
-                size == 'large' ? ' text-[5vh] md:text-[7vh]' : 'text-[3vh]'
-              } -rotate-45`}
+                size == 'large' ? ' text-[5vh] md:text-[7vh]' : 'text-[2.4vh]'
+              } `}
             />
           </button>
         </Link>
