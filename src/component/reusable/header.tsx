@@ -10,19 +10,7 @@ type HeaderLayoutProps = {
 };
 
 const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
-  const [scrolled, setScrolled] = useState<boolean>(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 0;
-      setScrolled(isScrolled);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  const [isNotificationCanceled, setNotificationCanceling] = useState<boolean>(false);
 
   return (
     <header
@@ -73,12 +61,12 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
 
         </div>
       </div>
-      <div className='bg-[rgb(218,218,220)] py-[1vh] border-t-[1px] border-[#348888] flex justify-between flex-row px-[2vw]'>
+      <div className={`${isNotificationCanceled ? 'hidden':"block"} bg-[rgb(218,218,220)] py-[1vh] border-t-[1px] border-[#348888] flex justify-between flex-row px-[2vw]`}>
         <div className='w-full'>
         <p className='text-[#09090D] text-center inter-tight text-[1.6vh]'>Trial of Our AI <span className='italic'>“Speak To Me”</span> Cloud model service is now live. Explore it now!</p>
         </div>
 
-        <RiCloseLine className='cursor-pointer text-[#09090D] text-[2.5vh]' />
+        <RiCloseLine className='cursor-pointer text-[#09090D] text-[2.5vh]' onClick={()=> setNotificationCanceling(true)} />
       </div>
     </header>
   );
