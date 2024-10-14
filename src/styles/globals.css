@@ -79,14 +79,16 @@ p {
 
 /** steps */
 .ant-steps-item-title {
-  color: white !important;
+  color: #09090D !important;
   font-size: 3vh !important;
   font-weight: bold;
+  font-family: 'WhyteInktrap', sans-serif !important;
 }
 
 .ant-steps-item-description {
-  color: #bdbdbe !important;
-  font-size: 2vh !important;
+  color: #09090D !important;
+  font-size: 1.6vh !important;
+  font-family: 'InterTight', sans-serif !important;
 }
 
 .ant-steps-item-content {
@@ -191,8 +193,8 @@ span.ant-progress-text.ant-progress-text-inner {
 }
 
 .ant-steps-item-icon {
-  background: #9ff8ee !important;
-  border-color: #9ff8ee !important;
+  background: #348888 !important;
+  border-color: #348888 !important;
 }
 
 .ant-steps-item.ant-steps-item-process.ant-steps-item-active {
@@ -211,5 +213,5 @@ span.ant-progress-text.ant-progress-text-inner {
 
 .ant-steps-item.ant-steps-item-finish,
 .ant-steps-item {
-  opacity: 0.3 !important;
+  opacity: 0.5 !important;
 }

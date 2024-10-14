@@ -16,14 +16,14 @@ const AIPipelineComponent = ({
 }: AIPipelineComponentProps) => {
   return (
     <div
-      className='flex overflow-hidden flex-col md:flex-row px-[2vw] md:px-[3vw] ipad-portrait:flex-col relative top-[3vh] '
+      className='flex overflow-hidden flex-col md:flex-row px-[2vw] justify-items-center h-full md:px-[3vw] ipad-portrait:flex-col relative top-[5.5vh] '
       id='features'
     >
       <div className='md:w-[30vw] ipad-landscape:w-[40vw] ipad-portrait:w-full ipad-portrait:object-center ipad-portrait:items-center flex flex-col gap-[2vh] place-items-center md:place-items-start'>
         <p className='text-[#F28729] inter-tight md:text-[3vh] font-medium'>
           AI Pipeline
         </p>
-        <h1 className='text-[#000000] text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center md:text-start'>
+        <h1 className='text-[#000000] text-[2.5vh] md:text-[4.5vh] font-bold whyteInktrap_font  text-center md:text-start'>
           AI-Driven Matching: Quick and Precise
         </h1>
         <Steps
