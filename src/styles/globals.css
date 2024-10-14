@@ -208,10 +208,10 @@ span.ant-progress-text.ant-progress-text-inner {
 }
 
 .ant-steps-item.ant-steps-item-finish svg {
-  color: #348888 !important;
+  color: white !important;
 }
 
 .ant-steps-item.ant-steps-item-finish,
 .ant-steps-item {
-  opacity: 0.5 !important;
+  opacity: 0.6 !important;
 }

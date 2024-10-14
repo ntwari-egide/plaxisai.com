@@ -16,7 +16,7 @@ const AIPipelineComponent = ({
 }: AIPipelineComponentProps) => {
   return (
     <div
-      className='flex overflow-hidden flex-col md:flex-row px-[2vw] justify-items-center h-full md:px-[3vw] ipad-portrait:flex-col relative top-[5.5vh] '
+      className='flex overflow-hidden flex-col md:flex-row px-[2vw] justify-items-center h-full md:px-[3vw] ipad-portrait:flex-col relative top-[10vh] '
       id='features'
     >
       <div className='md:w-[30vw] ipad-landscape:w-[40vw] ipad-portrait:w-full ipad-portrait:object-center ipad-portrait:items-center flex flex-col gap-[2vh] place-items-center md:place-items-start'>
@@ -53,7 +53,9 @@ const AIPipelineComponent = ({
         <GradientButton
           href='#home'
           text='Use It for Free'
-          className='mt-[1vh]'
+          className='mt-[1vh] text-white bg-[#348888]'
+          theme='colorfull'
+          backgroundColor='#348888'
         />
       </div>
       <div className='w-[70vw] ipad-landscape:w-[60vw] h-full hidden md:block'>

@@ -56,7 +56,7 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
           </nav>
         </div>
         <div className='flex flex-row gap-[2vw]'>
-          <GradientButton text='Login' theme='yellow' href='/#home' />
+          <GradientButton backgroundColor='#F28729' text='Login' theme='colorfull' href='/#home' />
           <GradientButton text='Get Started' href='/#home' />
 
         </div>
