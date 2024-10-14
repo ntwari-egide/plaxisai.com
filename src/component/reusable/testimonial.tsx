@@ -8,8 +8,8 @@ type TestimonialProps = {
   userName?: string;
   mBody?: string;
   university?: string;
-  uniURL: string
-  major?: string
+  uniURL: string;
+  major?: string;
 };
 
 const Testimonial = ({
@@ -18,7 +18,7 @@ const Testimonial = ({
   mBody,
   major,
   university,
-  uniURL
+  uniURL,
 }: TestimonialProps) => {
   return (
     <div className='border-[1px] z-[80] border-[#09090D] rounded-xl px-[1.4vw]'>
