@@ -64,7 +64,7 @@ const AboutLayout = () => {
         ))}
       </div>
 
-      <div className='mt-[10vh] flex flex-col gap-[4vh] border-t-[1px] pt-[4vh]'>
+      <div className='mt-[10vh] flex flex-col gap-[4vh] border-t-[1px] border-t-[#E6E6E7] pt-[4vh]'>
         <h1 className='text-[#000000] text-[2.5vh] md:text-[4.5vh] font-bold whyteInktrap_font  text-center md:text-start w-[35vw] mt-4 leading-[5vh]'>
           Ready to find your perfect match?
         </h1>
