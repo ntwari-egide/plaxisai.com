@@ -20,8 +20,6 @@ export default function AboutPage() {
       <div className='welcome-bg flex justify-between flex-col'>
         <HeaderLayout sticky />
         <AboutLayout />
-        <FAQComponent />
-        <CallToActionComponent />
         <FooterComponent />
       </div>
     </div>
