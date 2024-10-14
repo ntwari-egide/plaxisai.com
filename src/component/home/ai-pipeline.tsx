@@ -20,10 +20,10 @@ const AIPipelineComponent = ({
       id='features'
     >
       <div className='md:w-[30vw] ipad-landscape:w-[40vw] ipad-portrait:w-full ipad-portrait:object-center ipad-portrait:items-center flex flex-col gap-[2vh] place-items-center md:place-items-start'>
-        <p className='text-[#F28729] inter-tight md:text-[3vh] font-medium'>
+        <p className='text-[#F28729] inter-tight md:text-[2vh] font-medium'>
           AI Pipeline
         </p>
-        <h1 className='text-[#000000] text-[2.5vh] md:text-[4.5vh] font-bold whyteInktrap_font  text-center md:text-start'>
+        <h1 className='text-[#000000] text-[2.5vh] md:text-[4.5vh] font-bold whyteInktrap_font  text-center md:text-start leading-[5vh]'>
           AI-Driven Matching: Quick and Precise
         </h1>
         <Steps

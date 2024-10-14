@@ -25,6 +25,10 @@ h1 {
   font-family: 'InterTight', sans-serif !important;
 }
 
+h1 {
+  color: #09090d;
+}
+
 p {
   font-size: 2vh;
   font-weight: normal !important;
@@ -79,14 +83,14 @@ p {
 
 /** steps */
 .ant-steps-item-title {
-  color: #09090D !important;
+  color: #09090d !important;
   font-size: 3vh !important;
   font-weight: bold;
   font-family: 'WhyteInktrap', sans-serif !important;
 }
 
 .ant-steps-item-description {
-  color: #09090D !important;
+  color: #09090d !important;
   font-size: 1.6vh !important;
   font-family: 'InterTight', sans-serif !important;
 }

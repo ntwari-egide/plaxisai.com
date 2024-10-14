@@ -87,10 +87,10 @@ const ReusableFileInput = ({
       await dispatch(setJobListing('STARTED'));
       await dispatch(jobListingRequest(companyMatches));
       await dispatch(setJobListing('COMPLETED'));
-      
+
       // // send the route to the /response and open in new tab
       // if (validity && validity?.isValid) {
-      //   Router.push('/response');  
+      //   Router.push('/response');
       // } else {
       //   message.error('Invalid resume');
       // }
@@ -109,7 +109,7 @@ const ReusableFileInput = ({
   const handleContainerClick = () => {
     fileInputRef.current?.click();
   };
-  
+
   return (
     <>
       <Flex
@@ -164,102 +164,110 @@ const ReusableFileInput = ({
         onCancel={() => setOpenResultsModel(false)}
         footer={null}
       >
-        {
-          validity && !validity?.isValid ? <div>
-            
-            <div className=' h-[60vh] text-[#000000]'>
-              {
-                validity?.errors.map((error, index) => (
-                  <>
-                  <p key={index} className='text-[1.5vh]'>{error.section}</p>
-                  <p key={index} className='text-[1.5vh]'>{error.message}</p>
-                  </>
-                ))
-              }
-            </div>
-            
-          </div> : <div>
-            <div className='w-full flex justify-center py-[5vh]'>
+        {validity && !validity?.isValid ? (
           <div>
-            <div className='flex justify-center'>
-              <Spin
-                className='text-[#348687]'
-                indicator={
-                  <LoadingOutlined
-                    style={{ fontSize: 130, color: '#348687' }}
-                    spin
+            <div className=' h-[60vh] text-[#000000]'>
+              {validity?.errors.map((error, index) => (
+                <>
+                  <p key={index} className='text-[1.5vh]'>
+                    {error.section}
+                  </p>
+                  <p key={index} className='text-[1.5vh]'>
+                    {error.message}
+                  </p>
+                </>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className='w-full flex justify-center py-[5vh]'>
+              <div>
+                <div className='flex justify-center'>
+                  <Spin
+                    className='text-[#348687]'
+                    indicator={
+                      <LoadingOutlined
+                        style={{ fontSize: 130, color: '#348687' }}
+                        spin
+                      />
+                    }
                   />
-                }
-              />
-            </div>
-            <div className='flex flex-col mt-[4vh] gap-[2vw] w-[40vw]'>
-              <div className='flex flex-row gap-[1vw]'>
-                <Progress
-                  percent={
-                    progress.resumeScaner === 'STARTED'
-                      ? 40
-                      : progress.resumeScaner === 'COMPLETED'
-                      ? 100
-                      : 0
-                  }
-                  size='small'
-                  status={
-                    progress.resumeScaner === 'COMPLETED' ? 'success' : 'active'
-                  }
-                />
-                <h1 className='text-[#000000] text-[2vh] w-1/2'>
-                  {progress.resumeScaner === 'STARTED'
-                    ? 'Extracting Data'
-                    : 'Data Extracted'}
-                </h1>
-              </div>
+                </div>
+                <div className='flex flex-col mt-[4vh] gap-[2vw] w-[40vw]'>
+                  <div className='flex flex-row gap-[1vw]'>
+                    <Progress
+                      percent={
+                        progress.resumeScaner === 'STARTED'
+                          ? 40
+                          : progress.resumeScaner === 'COMPLETED'
+                          ? 100
+                          : 0
+                      }
+                      size='small'
+                      status={
+                        progress.resumeScaner === 'COMPLETED'
+                          ? 'success'
+                          : 'active'
+                      }
+                    />
+                    <h1 className='text-[#000000] text-[2vh] w-1/2'>
+                      {progress.resumeScaner === 'STARTED'
+                        ? 'Extracting Data'
+                        : 'Data Extracted'}
+                    </h1>
+                  </div>
 
-              <div className='flex flex-row gap-[1vw]'>
-                <Progress
-                  percent={
-                    progress.resumeScaner === 'STARTED'
-                      ? 40
-                      : progress.resumeScaner === 'COMPLETED'
-                      ? 100
-                      : 0
-                  }
-                  size='small'
-                  status={
-                    progress.resumeScaner === 'COMPLETED' ? 'success' : 'active'
-                  }
-                />
-                <h1 className='text-[#000000] text-[2vh] w-1/2'>
-                  {progress.resumeScaner === 'STARTED'
-                    ? 'Extracting Data'
-                    : 'Data Extracted'}
-                </h1>
-              </div>
+                  <div className='flex flex-row gap-[1vw]'>
+                    <Progress
+                      percent={
+                        progress.resumeScaner === 'STARTED'
+                          ? 40
+                          : progress.resumeScaner === 'COMPLETED'
+                          ? 100
+                          : 0
+                      }
+                      size='small'
+                      status={
+                        progress.resumeScaner === 'COMPLETED'
+                          ? 'success'
+                          : 'active'
+                      }
+                    />
+                    <h1 className='text-[#000000] text-[2vh] w-1/2'>
+                      {progress.resumeScaner === 'STARTED'
+                        ? 'Extracting Data'
+                        : 'Data Extracted'}
+                    </h1>
+                  </div>
 
-              <div className='flex flex-row gap-[1vw]'>
-                <Progress
-                  percent={
-                    progress.jobListing === 'STARTED'
-                      ? 50
-                      : progress.jobListing === 'COMPLETED'
-                      ? 100
-                      : 0
-                  }
-                  size='small'
-                  status={
-                    progress.jobListing === 'COMPLETED' ? 'success' : 'active'
-                  }
-                />
-                <h1 className='text-[#000000] text-[2vh] w-1/2'>
-                  {progress.jobListing === 'STARTED'
-                    ? 'Matching Job Listings'
-                    : 'Listings Matched'}
-                </h1>
+                  <div className='flex flex-row gap-[1vw]'>
+                    <Progress
+                      percent={
+                        progress.jobListing === 'STARTED'
+                          ? 50
+                          : progress.jobListing === 'COMPLETED'
+                          ? 100
+                          : 0
+                      }
+                      size='small'
+                      status={
+                        progress.jobListing === 'COMPLETED'
+                          ? 'success'
+                          : 'active'
+                      }
+                    />
+                    <h1 className='text-[#000000] text-[2vh] w-1/2'>
+                      {progress.jobListing === 'STARTED'
+                        ? 'Matching Job Listings'
+                        : 'Listings Matched'}
+                    </h1>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-          </div>
-        }
+        )}
       </Modal>
     </>
   );

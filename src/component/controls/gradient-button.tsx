@@ -28,7 +28,11 @@ const GradientButton = ({
         <Link href={href}>
           <button
             onClick={onClick}
-            className={` cursor-pointer hover:scale-[1.04] transition-all relative text-[#000000] flex flex-row justify-between items-center inter-tight place-items-center  border-[2px] ${theme =='colorfull' ? `border-[${backgroundColor}] bg-[${backgroundColor}] `:'border-[#09090D] bg-transparent'}  ${
+            className={` cursor-pointer hover:scale-[1.04] transition-all relative text-[#000000] flex flex-row justify-between items-center inter-tight place-items-center  border-[2px] ${
+              theme == 'colorfull'
+                ? `border-[${backgroundColor}] bg-[${backgroundColor}] `
+                : 'border-[#09090D] bg-transparent'
+            }  ${
               size == 'large'
                 ? 'px-[10vw] md:px-[3.4vw] py-[1.5vh] md:py-[3.5vh] text-[2.5vh] md:text-[7vh] ipad-portrait:text-[4vh]'
                 : 'px-[4vw] md:px-[1.4vw] py-[1vh] text-[1.6vh] font-semibold'
