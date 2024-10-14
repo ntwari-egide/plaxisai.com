@@ -26,7 +26,7 @@ h1 {
 }
 
 h1 {
-  color: #09090d;
+  color: #09090D;
 }
 
 p {
@@ -83,14 +83,14 @@ p {
 
 /** steps */
 .ant-steps-item-title {
-  color: #09090d !important;
+  color: #09090D !important;
   font-size: 3vh !important;
   font-weight: bold;
   font-family: 'WhyteInktrap', sans-serif !important;
 }
 
 .ant-steps-item-description {
-  color: #09090d !important;
+  color: #09090D !important;
   font-size: 1.6vh !important;
   font-family: 'InterTight', sans-serif !important;
 }
@@ -100,22 +100,27 @@ p {
 }
 
 .ant-collapse-item {
-  background: #27272d;
+  background: #E5E5E5;
   margin: 2.5vh 0;
   border: none !important;
   border-radius: 15px !important;
   padding: 1.5vh !important;
 }
 
+.ant-collapse-borderless {
+  background-color: transparent !important;
+  border: 0;
+}
+
 .ant-collapse-item:hover {
-  background-color: #19191e;
   transition: ease-in-out;
 }
 
 span.ant-collapse-header-text {
-  color: white;
+  color: #09090D;
+  font-family: 'WhyteInktrap', sans-serif !important;
   font-size: 3vh;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 /** mobile responsiveness */
@@ -138,12 +143,13 @@ span.ant-collapse-header-text {
 }
 
 .ant-collapse-content-box {
-  color: #bdbdbe !important;
-  font-size: 2vh;
+  color: #09090D !important;
+  font-size: 1.7vh;
+  font: medium;
 }
 
 .ant-collapse-expand-icon {
-  color: white !important;
+  color: #09090D !important;
 }
 
 .ant-steps-item.ant-steps-item-finish .ant-steps-item-title,

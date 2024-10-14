@@ -2,7 +2,7 @@ import type { CollapseProps } from 'antd';
 import Link from 'next/link';
 
 import CollapseComponent from '../controls/collapse';
-import TextButton from '../controls/text-button';
+import GradientButton from '../controls/gradient-button';
 
 const FAQComponent = () => {
   const items: CollapseProps['items'] = [
@@ -30,24 +30,28 @@ const FAQComponent = () => {
   return (
     <div
       id='faq'
-      className=' relative mt-[10vh] md:mt-[25vh] flex flex-col gap-[1vh] md:gap-[3vh] place-items-center'
+      className=' relative mt-[10vh] md:mt-[25vh] flex flex-col gap-[1vh] md:gap-[4vh] place-items-center'
     >
-      <h1 className='text-[#F28729] inter-tight md:text-[3vh] font-medium text-center'>
-        FAQ
-      </h1>
-      <h1 className='text-[#000000] text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center'>
-        Got questions? <br /> Join the community.
-      </h1>
-      <p className='text-center text-[#BDBDBE] text-[2vh] w-[80vw] md:w-[27vw] ipad-portrait:w-[70vw] m-auto'>
+      <div className='flex flex-col place-items-center'>
+        <h1 className='text-[#F28729] inter-tight md:text-[2vh] font-medium'>
+          FAQ
+        </h1>
+        <h1 className='text-[#000000] text-[2.5vh] md:text-[4.5vh] font-bold whyteInktrap_font  text-center w-[30vw] mt-4 leading-[5vh]'>
+          Got questions? <br /> Join the community.
+        </h1>
+      </div>
+      <p className='text-center text-[#09090D] md:w-[27vw] ipad-portrait:w-[70vw] m-auto w-[20vw] inter-tight  font-medium text-[1.7vh]'>
         Our Discord community and staff are here to help! Your feedback will
         help us improve in future versions.
       </p>
       <Link href='https://discord.gg/hFgPf7xfrQ' target='_blank'>
-        <TextButton
-          text='Join Discord'
-          isContentImportant
-          className='mt-[2vh]'
-        />
+        <GradientButton
+            href='#home'
+            text='Join Groupme'
+            className='mt-[1vh] text-white bg-[#348888]'
+            theme='colorfull'
+            backgroundColor='#348888'
+          />
       </Link>
       <CollapseComponent items={items} />
     </div>

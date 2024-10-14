@@ -129,10 +129,10 @@ const ReusableFileInput = ({
           <p className='md:w-[14vw] w-[60vw] ipad-portrait:w-[40vw] text-[#333336] ipad-landscape:w-[30vw] font-medium'>
             <TypingAnimation
               strings={[
-                'Upload your resume here',
-                'Get matched',
-                'Get hired!',
+                'Upload your resume here!',
+                'Get matched!',
                 'Just one upload away!',
+                'Upload your resume here!',
               ]}
               typeSpeed={50}
               backSpeed={10}
