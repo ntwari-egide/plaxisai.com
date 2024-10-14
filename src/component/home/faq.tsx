@@ -46,12 +46,12 @@ const FAQComponent = () => {
       </p>
       <Link href='https://discord.gg/hFgPf7xfrQ' target='_blank'>
         <GradientButton
-            href='#home'
-            text='Join Groupme'
-            className='mt-[1vh] text-white bg-[#348888]'
-            theme='colorfull'
-            backgroundColor='#348888'
-          />
+          href='#home'
+          text='Join Groupme'
+          className='mt-[1vh] text-white bg-[#348888]'
+          theme='colorfull'
+          backgroundColor='#348888'
+        />
       </Link>
       <CollapseComponent items={items} />
     </div>
