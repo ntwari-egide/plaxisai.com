@@ -73,12 +73,12 @@ const AboutLayout = () => {
             <GradientButton
               className='border-[#348888] text-[#348888]'
               text='Get Started'
-              href='/#home'
+              href='/signup'
             />
             <GradientButton
               className='border-[white] text-[#09090D]'
               text='See How It Works'
-              href='/#home'
+              href='/signup'
             />
           </div>
           <p className='inter-tight text-[1.7vh]'>

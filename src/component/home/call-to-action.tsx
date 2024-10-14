@@ -30,7 +30,7 @@ const CallToActionComponent = () => {
       </h1>
 
       <GradientButton
-        href='#home'
+        href='/signup'
         size='large'
         text='Get Started'
         className='mt-[1vh] text-white bg-[#09090D]'

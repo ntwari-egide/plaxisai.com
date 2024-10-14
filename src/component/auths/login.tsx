@@ -6,13 +6,13 @@ import {
   RiLinkedinFill,
 } from 'react-icons/ri';
 
-const SignupComponent = () => {
+const LoginComponent = () => {
   return (
     <div className='flex flex-col justify-center items-center object-center mt-[10vh]'>
       <div className='border-[1px] border-[#E6E6E7] rounded-xl w-[35vw] flex flex-col py-[4vh] gap-[3vh]'>
         <div className='flex flex-col object-center items-center justify-center'>
           <h1 className='text-[#000000] md:text-[2.5vh] font-bold whyteInktrap_font   md:text-start leading-[5vh] text-center'>
-            Welcome to Plaxis AI
+            Login to Plaxis AI
           </h1>
           <p className='w-[20vw] inter-tight  font-normal text-[1.7vh] text-center'>
             Unlock your career: Just upload your resume
@@ -57,7 +57,7 @@ const SignupComponent = () => {
             />
 
             <Button className='inter-tight bg-[#F28729] rounded-full border-[#F28729] py-[3vh] hover:text-[#09090D] font-semibold text-[#09090D] cursor-pointer hover:scale-[1.02]'>
-              Create Account
+              Login
               <RiArrowRightLine className='text-[3vh]' />
             </Button>
           </div>
@@ -75,4 +75,4 @@ const SignupComponent = () => {
   );
 };
 
-export default SignupComponent;
+export default LoginComponent;

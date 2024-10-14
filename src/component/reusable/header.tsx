@@ -61,10 +61,10 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
             backgroundColor='#F28729'
             text='Login'
             theme='colorfull'
-            href='/#home'
+            href='/login'
             className='bg-[#F28729] border-[#F28729]'
           />
-          <GradientButton text='Get Started' href='/#home' />
+          <GradientButton text='Get Started' href='/signup' />
         </div>
       </div>
       <div
