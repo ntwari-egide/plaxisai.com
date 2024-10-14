@@ -26,7 +26,7 @@ const Testimonial = ({
         <Image
           src={userProfileImg}
           preview={false}
-          className='rounded-full object-cover h-[50px] w-[50px]'
+          className='rounded-full object-cover h-[40px] w-[40px]'
         />
 
         <div className=' text-[#09090D]'>

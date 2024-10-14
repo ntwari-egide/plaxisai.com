@@ -62,6 +62,7 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
             text='Login'
             theme='colorfull'
             href='/#home'
+            className='bg-[#F28729] border-[#F28729]'
           />
           <GradientButton text='Get Started' href='/#home' />
         </div>

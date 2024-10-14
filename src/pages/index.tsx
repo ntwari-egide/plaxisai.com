@@ -19,6 +19,7 @@ import HomeWelcomeComponent from '@/component/home/welcome';
 import FooterComponent from '@/component/layouts/footer';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
+import QuickStats from '@/component/home/quick-stats';
 
 export default function HomePage() {
   // register gsap
@@ -70,6 +71,7 @@ export default function HomePage() {
           <div className=' md:h-[230vh] ipad-portrait:hidden'></div>
         </div>
         <TestimonialsPage />
+        <QuickStats />
         <FAQComponent />
         <CallToActionComponent />
         <FooterComponent />

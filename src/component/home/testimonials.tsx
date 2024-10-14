@@ -98,7 +98,7 @@ const TestimonialsPage = () => {
   ];
 
   return (
-    <div className='mt-[10vh] flex flex-col gap-[4vh] md:px-[3vw] px-[2vw]'>
+    <div className='mt-[20vh] flex flex-col gap-[4vh] md:px-[3vw] px-[2vw]'>
       <div className='flex flex-row justify-between justify-items-center object-center items-center'>
         <div>
           <p className='text-[#F28729] inter-tight md:text-[2vh] font-medium'>
