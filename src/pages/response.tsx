@@ -6,9 +6,9 @@
 
 import * as React from 'react';
 
+import ResponseLayout from '@/component/response';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
-import ResponseLayout from '@/component/response';
 
 export default function HomePage() {
   return (
