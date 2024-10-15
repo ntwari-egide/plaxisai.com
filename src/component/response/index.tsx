@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import CompaniesMatch from '../reusable/matches/companies';
+import FiltersComponent from './filter';
+import CompaniesMatch from '../matches/companies';
 import TagComponent from '../reusable/tags';
 
 type ResponseLayoutProps = {
@@ -49,6 +50,27 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
           matchingNumber='94.5%'
           logoImg='https://www.cdnlogo.com/logos/m/59/meta.svg'
         />
+      </div>
+
+      <div className='mt-[5vh]'>
+        <div className='flex flex-row justify-between'>
+          <h1 className='whyteInktrap_font text-[4.5vh] font-semibold'>
+            All matched jobs
+          </h1>
+          <div>
+            <TagComponent
+              title='Matching Results'
+              description='40 jobs found'
+              classname='bg-[#348888]'
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className='flex flex-row'>
+        <div className='w-[15%]'>
+          <FiltersComponent />
+        </div>
       </div>
     </div>
   );

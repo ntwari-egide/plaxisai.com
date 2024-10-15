@@ -6,6 +6,7 @@
 
 import * as React from 'react';
 
+import FooterComponent from '@/component/layouts/footer';
 import ResponseLayout from '@/component/response';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
@@ -17,6 +18,7 @@ export default function HomePage() {
       <div className='welcome-bg flex justify-between flex-col'>
         <HeaderLayout />
         <ResponseLayout />
+        <FooterComponent />
       </div>
     </div>
   );
