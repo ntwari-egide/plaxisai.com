@@ -167,11 +167,13 @@ span.ant-collapse-header-text {
 }
 
 .ant-select-selector {
-  background: #09090d !important;
-  color: #9d9d9e !important;
+  color: #4d4d4d !important;
   font-size: 1.7vh !important;
-  border: 1px solid #1c1c1f !important;
-  font-family: 'WhyteInktrap', sans-serif !important;
+  border: 1px solid #e5e5e5 !important;
+  width: 10em !important;
+  font-weight: medium;
+  font-family: 'InterTight', sans-serif;
+  border-radius: 40px !important;
 }
 
 /* components/ScrollImage.module.css */
