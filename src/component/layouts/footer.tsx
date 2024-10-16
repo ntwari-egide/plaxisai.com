@@ -20,13 +20,13 @@ const FooterComponent = () => {
             Overview
           </h2>
           <ul className='flex flex-col gap-[1.5vh] mt-[2vh]'>
-            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Resume Templates
             </li>
-            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Resume Reviews
             </li>
-            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Resume Writing
             </li>
           </ul>
@@ -36,13 +36,13 @@ const FooterComponent = () => {
             Documentation
           </h2>
           <ul className='flex flex-col gap-[1.5vh] mt-[2vh]'>
-            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Help Center
             </li>
-            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Documentation
             </li>
-            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Versioning Info
             </li>
           </ul>
@@ -52,19 +52,19 @@ const FooterComponent = () => {
             Resources
           </h2>
           <ul className='flex flex-col gap-[1.5vh] mt-[2vh]'>
-            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               FAQ
             </li>
-            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Updates
             </li>
-            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Help Center
             </li>
-            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Contact
             </li>
-            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Privacy Policy
             </li>
           </ul>
@@ -74,19 +74,19 @@ const FooterComponent = () => {
             Company
           </h2>
           <ul className='flex flex-col gap-[1.5vh] mt-[2vh]'>
-            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Community
             </li>
-            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               About
             </li>
-            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Blog
             </li>
-            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Privacy Policy
             </li>
-            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Terms of Service
             </li>
           </ul>

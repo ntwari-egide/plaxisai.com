@@ -1,4 +1,5 @@
 import JobDetailsLayout from '@/component/job-details';
+import FooterComponent from '@/component/layouts/footer';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
 
@@ -9,6 +10,7 @@ const JobDetailsPage = () => {
       <div className='welcome-bg flex justify-between flex-col'>
         <HeaderLayout sticky />
         <JobDetailsLayout />
+        <FooterComponent />
       </div>
     </div>
   );

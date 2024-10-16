@@ -3,17 +3,18 @@
 import { Button, Image } from 'antd';
 import {
   RiArrowRightLine,
-  RiUserLocationLine,
+  RiMapPinLine,
   RiVerifiedBadgeFill,
 } from 'react-icons/ri';
 
+import PlaxisAITag from './ai-tag';
 import JobMatch from '../matches/job';
 import { jobMatches } from '../response/job-matches-component';
 
 const JobDetailsLayout = () => {
   return (
     <div className='md:px-[3vw] mt-[4vh]'>
-      <div className='flex flex-row'>
+      <div className='flex flex-row gap-[4vw]'>
         <div className='w-[70%] flex flex-col gap-[3vh]'>
           {/* job details */}
 
@@ -37,7 +38,7 @@ const JobDetailsLayout = () => {
                 preview={false}
               />
               <div className='flex flex-col justify-between'>
-                <div className='flex flex-row gap-[2vw]'>
+                <div className='flex flex-row gap-[1vw]'>
                   <div className='flex flex-row items-center gap-[0.4vw]'>
                     <h1 className='text-[#09090D] font-semibold text-[1.6vh]'>
                       Meta
@@ -45,7 +46,7 @@ const JobDetailsLayout = () => {
                     <RiVerifiedBadgeFill className='text-[#F28729]' />
                   </div>
                   <div className='flex flex-row gap-[0.4vw] cursor-pointer hover:underline'>
-                    <RiUserLocationLine className='text-[#848486] text-[1.7vh]' />
+                    <RiMapPinLine className='text-[#848486] text-[1.7vh]' />
                     <h1 className='text-[#848486] font-semibold text-[1.6vh]'>
                       Menlo Park, CA
                     </h1>
@@ -147,7 +148,16 @@ const JobDetailsLayout = () => {
           </div>
         </div>
 
-        <div>{/* plaxis ai details  */}</div>
+        <div className='bg-[#F2F2F2] rounded-lg w-[30%] h-[80vh] sticky top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'>
+          {/* plaxis ai details  */}
+
+          <PlaxisAITag />
+          <div>{/* matching results  */}</div>
+
+          <div>{/* people  */}</div>
+
+          <div>{/* actions  */}</div>
+        </div>
       </div>
 
       <div className='mt-[10vh]'>
@@ -158,14 +168,20 @@ const JobDetailsLayout = () => {
 
         <div className='grid grid-cols-4 w-full gap-[3vh] '>
           {jobMatches.map((job, key) => (
-            <JobMatch
-              key={key}
-              companyName={job.companyName}
-              matchingPercentage={job.matchingPercentage}
-              date={job.date}
-              salary={job.salary}
-              title={job.title}
-            />
+            <>
+              {key < 4 ? (
+                <JobMatch
+                  key={key}
+                  companyName={job.companyName}
+                  matchingPercentage={job.matchingPercentage}
+                  date={job.date}
+                  salary={job.salary}
+                  title={job.title}
+                />
+              ) : (
+                ''
+              )}
+            </>
           ))}
         </div>
       </div>
