@@ -10,7 +10,7 @@ type ResponseLayoutProps = {
 
 const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
   return (
-    <div className='px-[3vw] mt-[3vh] ' onClick={onClick}>
+    <div className='px-[3vw] mt-[3vh] relative flex flex-col  gap-[2vh]' onClick={onClick}>
       <div className='flex flex-row gap-[3vw] items-center'>
         <TagComponent
           title='Matching Results'
@@ -67,7 +67,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
         </div>
       </div>
 
-      <div className='flex flex-row'>
+      <div className='flex flex-row sticky top-0'>
         <div className='w-[15%]'>
           <FiltersComponent />
         </div>

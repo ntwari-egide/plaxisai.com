@@ -13,9 +13,9 @@ import Seo from '@/component/seo';
 
 export default function HomePage() {
   return (
-    <div className='flex flex-col gap-[15vh]'>
+    <div className='flex flex-col relative gap-[15vh]'>
       <Seo templateTitle='Home' />
-      <div className='welcome-bg flex justify-between flex-col'>
+      <div className='welcome-bg relative flex justify-between flex-col'>
         <HeaderLayout />
         <ResponseLayout />
         <FooterComponent />

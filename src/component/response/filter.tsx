@@ -1,4 +1,4 @@
-import Checkbox from 'antd/es/checkbox/Checkbox';
+import { Checkbox } from 'antd';
 
 const FiltersComponent = () => {
   return (
