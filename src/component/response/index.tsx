@@ -71,12 +71,14 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
         </div>
       </div>
 
-      <div className='flex flex-row sticky top-0'>
-        <div className='w-[15%]'>
-          <FiltersComponent />
-        </div>
-        <div className='w-[85%]'>
-          <JobMatchesComponent />
+      <div className='sticky top-0 z-10'>
+        <div className='flex flex-row'>
+          <div className='w-[15%]'>
+            <FiltersComponent />
+          </div>
+          <div className='w-[85%]'>
+            <JobMatchesComponent />
+          </div>
         </div>
       </div>
     </div>
