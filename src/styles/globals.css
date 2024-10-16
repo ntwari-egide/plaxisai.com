@@ -226,11 +226,10 @@ span.ant-progress-text.ant-progress-text-inner {
   opacity: 0.6 !important;
 }
 
-
 /* Override Ant Design Checkbox color */
 .ant-checkbox-checked .ant-checkbox-inner {
-  background-color: #09090D !important; /* Change the background color when checked */
-  border-color: #09090D !important;     /* Change the border color when checked */
+  background-color: #09090d !important; /* Change the background color when checked */
+  border-color: #09090d !important; /* Change the border color when checked */
 }
 
 /* Optional: Change the color of the checkmark */
@@ -240,5 +239,5 @@ span.ant-progress-text.ant-progress-text-inner {
 
 /* Change the border color of the checkbox when unchecked */
 .ant-checkbox-inner {
-  border-color: #09090D !important;  /* Change the border color when unchecked */
+  border-color: #09090d !important; /* Change the border color when unchecked */
 }

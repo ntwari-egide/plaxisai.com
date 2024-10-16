@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import FiltersComponent from './filter';
+import JobMatchesComponent from './job-matches-component';
 import CompaniesMatch from '../matches/companies';
 import TagComponent from '../reusable/tags';
 
@@ -10,7 +11,10 @@ type ResponseLayoutProps = {
 
 const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
   return (
-    <div className='px-[3vw] mt-[3vh] relative flex flex-col  gap-[2vh]' onClick={onClick}>
+    <div
+      className='px-[3vw] mt-[3vh] relative flex flex-col  gap-[2vh]'
+      onClick={onClick}
+    >
       <div className='flex flex-row gap-[3vw] items-center'>
         <TagComponent
           title='Matching Results'
@@ -70,6 +74,9 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
       <div className='flex flex-row sticky top-0'>
         <div className='w-[15%]'>
           <FiltersComponent />
+        </div>
+        <div className='w-[85%]'>
+          <JobMatchesComponent />
         </div>
       </div>
     </div>
