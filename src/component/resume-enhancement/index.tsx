@@ -1,14 +1,32 @@
 /* eslint-disable react/jsx-curly-brace-presence */
 /* eslint-disable jsx-a11y/alt-text */
-import { CheckCircleFilled, CheckCircleOutlined } from '@ant-design/icons';
-import { Button, Image, Select } from 'antd';
+import { CheckCircleFilled, CheckCircleOutlined, SendOutlined } from '@ant-design/icons';
+import { Button, Image, Input, Select } from 'antd';
 import { RiDownload2Line, RiDownloadLine, RiGroupLine } from 'react-icons/ri';
 
 import PlaxisAITag from '../job-details/ai-tag';
 import AIDarkImg from '../../../public/images/ai-icon.png';
 import AILightImg from '../../../public/images/ai-icon-white.png';
+import PlaxisAIMessage from './ai-message';
+import UserMessage from './user-message';
+import { useEffect, useRef } from 'react';
 
 const ResumeEnhancementLayout = () => {
+
+    const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    // Function to scroll to the bottom of the chat container
+    const scrollToBottom = () => {
+      if (messagesEndRef.current) {
+        messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+  
+    // Scroll to the bottom when the component mounts or updates (e.g., new messages)
+    useEffect(() => {
+      scrollToBottom();
+    }, []);
+
   return (
     <div className='px-[3vw] mt-[5vh]'>
       <div className='flex flex-row gap-[4vw]'>
@@ -57,20 +75,23 @@ const ResumeEnhancementLayout = () => {
             </div>
           </div>
 
-          <div className=' bg-white px-[4vh] py-[3vh] rounded-md flex flex-col gap-[3vh]'>
+          <div className=' bg-white px-[4vh] py-[3vh] rounded-md flex flex-col gap-[3vh] h-[30vh] overflow-auto overflow-y-auto' ref={messagesEndRef}>
 
-            
+            <PlaxisAIMessage message='Sure! On it! Improved your experience section!' />
 
-            <div className='flex flex-row gap-[1vw] ml-[2vw]'>
-                <Image 
-                className='h-[40px] w-[35px] rounded-full object-cover border'
-                src='https://images.pexels.com/photos/28570314/pexels-photo-28570314/free-photo-of-confident-young-woman-in-glasses-portrait.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-                preview={false}
-                />
+            <UserMessage message='Can you improve the description to pass the requirements' />
 
-                <p className='inter-tight text-[1.6vh] w-[60%] text-[#848486] font-medium'>Can you improve the description to pass the requirements </p>
+            <PlaxisAIMessage message='Sure! On it!' />
+          </div>
+
+          <div className="flex flex-row gap-[1vw] items-center">
+            <Image src={AIDarkImg.src} className='h-[20px] w-[20px]' preview={false} />
+
+            <Input.TextArea className='border-none inter-tight placeholder:text-[#7E7E80] font-semibold text-[1.7vh] bg-[#F2F2F2]' placeholder='Ask me any thing ...' />
+
+            <div className='border border-[#DBDBDB] w-[35px] h-[35px] rounded-md flex items-center object-center justify-center flex-row cursor-pointer hover:scale-[1.02] transition-all'>
+            <SendOutlined className=' -rotate-45 text-[1.6vh]' />
             </div>
-           
           </div>
         </div>
       </div>
