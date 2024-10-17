@@ -1,5 +1,3 @@
-import JobDetailsLayout from '@/component/job-details';
-import FooterComponent from '@/component/layouts/footer';
 import ResumeEnhancementLayout from '@/component/resume-enhancement';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
