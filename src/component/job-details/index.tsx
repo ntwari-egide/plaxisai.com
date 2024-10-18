@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { CheckCircleFilled, CheckCircleOutlined } from '@ant-design/icons';
 import { Button, Image, Select } from 'antd';
+import Link from 'next/link';
 import {
   RiArrowRightLine,
   RiGroupLine,
@@ -249,23 +250,35 @@ const JobDetailsLayout = () => {
             {/* actions  */}
 
             <div className='flex flex-row justify-between mt-[2vh] w-full'>
-              <Button className='inter-tight bg-[#348888] rounded-full border-[2px] border-[#348888] py-[3vh] hover:text-[#FFFFFF] font-semibold text-[#FFFFFF] cursor-pointer text-[1.6vh] hover:scale-[1.02] w-[40%]'>
-                <Image
-                  src={AILightImg.src}
-                  className='h-[15px] w-[15px]'
-                  preview={false}
-                />
-                Enhance resume
-              </Button>
+              <Link
+                href={'/resume-enhancements'}
+                target='_blank'
+                className='w-[40%]'
+              >
+                <Button className='inter-tight bg-[#348888] rounded-full border-[2px] border-[#348888] py-[3vh] hover:text-[#FFFFFF] font-semibold text-[#FFFFFF] cursor-pointer text-[1.6vh] hover:scale-[1.02]'>
+                  <Image
+                    src={AILightImg.src}
+                    className='h-[15px] w-[15px]'
+                    preview={false}
+                  />
+                  Enhance resume
+                </Button>
+              </Link>
 
-              <Button className='inter-tight bg-[white] rounded-full border-[#09090D] py-[3vh] border-[2px] font-semibold text-[#09090D] cursor-pointer text-[1.6vh] hover:scale-[1.02] w-[55%]'>
-                <Image
-                  src={AIDarkImg.src}
-                  className='h-[15px] w-[15px]'
-                  preview={false}
-                />
-                Generate Cover Letter
-              </Button>
+              <Link
+                href={'/cover-letter-enhancements'}
+                target='_blank'
+                className='w-[55%]'
+              >
+                <Button className='inter-tight bg-[white] rounded-full border-[#09090D] py-[3vh] border-[2px] font-semibold text-[#09090D] cursor-pointer text-[1.6vh] hover:scale-[1.02] w-full'>
+                  <Image
+                    src={AIDarkImg.src}
+                    className='h-[15px] w-[15px]'
+                    preview={false}
+                  />
+                  Generate Cover Letter
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
