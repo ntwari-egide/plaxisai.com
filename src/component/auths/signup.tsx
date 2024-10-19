@@ -9,40 +9,40 @@ import {
 const SignupComponent = () => {
   return (
     <div className='flex flex-col justify-center items-center object-center mt-[10vh]'>
-      <div className='border-[1px] border-[#E6E6E7] rounded-xl w-[35vw] flex flex-col py-[4vh] gap-[3vh]'>
+      <div className='border-[1px] border-[#E6E6E7] rounded-xl ipad-portrait:w-[80vw] w-[80vw] md:w-[35vw] flex flex-col py-[4vh] gap-[3vh]'>
         <div className='flex flex-col object-center items-center justify-center'>
           <h1 className='text-[#000000] md:text-[2.5vh] font-bold whyteInktrap_font   md:text-start leading-[5vh] text-center'>
             Welcome to Plaxis AI
           </h1>
-          <p className='w-[20vw] inter-tight  font-normal text-[1.7vh] text-center'>
+          <p className='md:w-[20vw] ipad-portrait:w-full inter-tight  font-normal text-[1.7vh] text-center'>
             Unlock your career: Just upload your resume
           </p>
         </div>
 
         <div className='mt-[2vh] gap-[2vh] flex flex-col items-center'>
-          <div className='flex flex-row gap-[2vw] w-[20vw] border border-[#E6E6E7] py-[1vh] cursor-pointer hover:scale-[1.02] transition-all px-[2vw] rounded-md justify-center items-center'>
+          <div className='flex flex-row gap-[2vw] w-[70vw] md:w-[20vw] ipad-portrait:w-[60vw] border border-[#E6E6E7] py-[1vh] cursor-pointer hover:scale-[1.02] transition-all px-[2vw] rounded-md justify-center items-center'>
             <RiGoogleFill className='text-[2vh]' />
-            <p className=' inter-tight  font-medium text-[1.7vh] w-[15vw]'>
+            <p className='inter-tight  font-medium text-[1.7vh] ipad-portrait:w-[30vw] md:w-[15vw]'>
               Continue with Google
             </p>
           </div>
 
-          <div className='flex flex-row gap-[2vw] w-[20vw] border border-[#E6E6E7] py-[1vh] cursor-pointer hover:scale-[1.02] transition-all px-[2vw] rounded-md justify-center items-center'>
+          <div className='flex flex-row gap-[2vw] w-[70vw] md:w-[20vw] ipad-portrait:w-[60vw] border border-[#E6E6E7] py-[1vh] cursor-pointer hover:scale-[1.02] transition-all px-[2vw] rounded-md justify-center items-center'>
             <RiLinkedinFill className='text-[2vh]' />
-            <p className=' inter-tight  font-medium text-[1.7vh] w-[15vw]'>
+            <p className='inter-tight  font-medium text-[1.7vh] ipad-portrait:w-[30vw] md:w-[15vw]'>
               Continue with LinkedIn
             </p>
           </div>
 
-          <div className='flex flex-row gap-[2vw] w-[20vw] border border-[#E6E6E7] py-[1vh] cursor-pointer hover:scale-[1.02] transition-all px-[2vw] rounded-md justify-center items-center'>
+          <div className='flex flex-row gap-[2vw] w-[70vw] md:w-[20vw] ipad-portrait:w-[60vw] border border-[#E6E6E7] py-[1vh] cursor-pointer hover:scale-[1.02] transition-all px-[2vw] rounded-md justify-center items-center'>
             <RiAppleFill className='text-[2vh]' />
-            <p className=' inter-tight  font-medium text-[1.7vh] w-[15vw]'>
+            <p className='inter-tight  font-medium text-[1.7vh] ipad-portrait:w-[30vw] md:w-[15vw]'>
               Continue with Apple
             </p>
           </div>
         </div>
         <div className='mt-[2vh] flex flex-col items-center '>
-          <div className='w-[20vw] flex-col flex gap-[2vh]'>
+          <div className='md:w-[20vw] w-[70vw] flex-col flex gap-[2vh] ipad-portrait:w-[60vw]'>
             <p className='inter-tight  font-semibold text-[1.7vh] text-start'>
               Email
             </p>
@@ -63,7 +63,7 @@ const SignupComponent = () => {
           </div>
         </div>
       </div>
-      <p className='mt-[3vh] inter-tight text-[#848486] w-[20vw] text-[1.7vh] text-center font-medium'>
+      <p className='mt-[3vh] inter-tight text-[#848486] md:w-[20vw] ipad-portrait:w-[80vw] text-[1.7vh] text-center font-medium w-[80vw]'>
         By clicking “Create Account” above, you acknowledge that you have read
         and understood, and agree to Plaxis AI’s <br />
         <span className='text-[#09090D] cursor-pointer hover:underline'>
