@@ -26,6 +26,10 @@ const CoverLetterEnhancementLayout = () => {
             <UserMessage message='Can you improve the description to pass the requirements' />
 
             <PlaxisAIMessage message='Sure! On it!' />
+
+            <UserMessage message='Can you improve the description to pass the requirements' />
+
+            <PlaxisAIMessage message='Sure! On it!' />
           </div>
 
           <div className='flex flex-row gap-[1vw] items-center'>
