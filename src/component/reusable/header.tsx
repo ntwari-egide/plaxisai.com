@@ -16,10 +16,12 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
   return (
     <header
       className={`${
-        sticky ? 'md:sticky top-0 z-[90] header_grassmorpshism' : ''
+        sticky
+          ? 'md:sticky top-0 z-[90] py-4 md:py-0 header_grassmorpshism'
+          : ''
       }`}
     >
-      <div className='flex px-[6vw]  mt-[3vh] z-50 md:px-[3vw] flex-row justify-between justify-items-center place-items-center'>
+      <div className='flex px-[6vw] items-center mt-[3vh] z-50 md:px-[3vw] flex-row justify-between justify-items-center place-items-center'>
         <Link href='/'>
           <LogoComponent size='medium' />
         </Link>

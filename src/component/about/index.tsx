@@ -44,7 +44,7 @@ const AboutLayout = () => {
   ];
 
   return (
-    <div className='md:px-[15vw] px-[6vw] w-full mt-[5vh] md:mt-[20vh] flex flex-col'>
+    <div className='md:px-[15vw] px-[6vw] w-full mt-[5vh] md:mt-[20vh] flex flex-col ipad-landscape:px-[5vw]'>
       <div>
         <p className='text-[#F28729] inter-tight md:text-[2vh] font-medium'>
           About Us
