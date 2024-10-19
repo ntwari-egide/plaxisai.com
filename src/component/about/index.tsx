@@ -44,7 +44,7 @@ const AboutLayout = () => {
   ];
 
   return (
-    <div className='md:px-[15vw] px-[6vw] w-full mt-[5vh] md:mt-[20vh] flex flex-col ipad-landscape:px-[5vw]'>
+    <div className='md:px-[15vw] px-[6vw] w-full mt-[5vh] md:mt-[20vh] flex flex-col ipad-portrait:px-[5vw] ipad-landscape:px-[5vw]'>
       <div>
         <p className='text-[#F28729] inter-tight md:text-[2vh] font-medium'>
           About Us
@@ -65,10 +65,10 @@ const AboutLayout = () => {
       </div>
 
       <div className='mt-[10vh] flex flex-col gap-[4vh] border-t-[1px] border-t-[#E6E6E7] pt-[4vh]'>
-        <h1 className='text-[#000000] text-[4.5vh] md:text-[4.5vh] font-bold whyteInktrap_font  text-center md:text-start md:w-[35vw] mt-4 leading-[5vh]'>
+        <h1 className='text-[#000000] text-[4.5vh] md:text-[4.5vh] font-bold whyteInktrap_font  text-center md:text-start md:w-[35vw] mt-4 leading-[5vh] ipad-portrait:w-full'>
           Ready to find your perfect match?
         </h1>
-        <div className='md:grid grid-cols-2 gap-[10vw] object-center items-center flex flex-col-reverse justify-center'>
+        <div className='md:grid grid-cols-2 gap-[10vw] object-center items-center ipad-portrait:flex ipad-portrait:flex-col-reverse flex flex-col-reverse justify-center'>
           <div className=' flex flex-row gap-[3vw]'>
             <GradientButton
               className='border-[#348888] text-[#348888]'
@@ -100,7 +100,7 @@ type StoryBoardProps = {
 
 const StoryBoard = ({ storyImg, content }: StoryBoardProps) => {
   return (
-    <div className=' md:grid flex flex-col grid-cols-2 gap-[10vw]'>
+    <div className=' md:grid flex flex-col grid-cols-2 gap-[10vw] ipad-portrait:flex ipad-portrait:flex-col'>
       <div className=''>
         <Image
           src={storyImg}
