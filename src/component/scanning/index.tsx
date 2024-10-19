@@ -2,8 +2,8 @@ import { Steps } from 'antd';
 
 const ScanningComponent = () => {
   return (
-    <div className='px-[3vw] h-[80vh] flex flex-row w-full'>
-      <div className='flex flex-col items-center w-[65%]'>
+    <div className='px-[3vw] h-[80vh] flex flex-col md:flex-row w-full'>
+      <div className='flex flex-col items-center md:w-[65%]'>
         <div className=' flex flex-col gap-[4vh] mt-[10vh]'>
           <h1 className='text-[7vh] whyteInktrap_font font-semibold'>
             Still scanning...
@@ -17,7 +17,7 @@ const ScanningComponent = () => {
           </p>
         </div>
       </div>
-      <div className='border-l border-l-[#DADADC] pt-[10vh] pl-[5vh]'>
+      <div className='border-l border-l-[#DADADC] pt-[10vh] pl-[5vh] md:block hidden'>
         <Steps
           direction='vertical'
           current={1}

@@ -1,4 +1,3 @@
-import FooterComponent from '@/component/layouts/footer';
 import HeaderLayout from '@/component/reusable/header';
 import ScanningComponent from '@/component/scanning';
 import Seo from '@/component/seo';
@@ -10,7 +9,7 @@ const LoginPage = () => {
       <div>
         <HeaderLayout sticky />
         <ScanningComponent />
-        <FooterComponent />
+        {/* <FooterComponent /> */}
       </div>
     </>
   );
