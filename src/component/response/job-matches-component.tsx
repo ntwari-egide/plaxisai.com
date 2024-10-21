@@ -68,7 +68,7 @@ export const jobMatches = [
 ];
 const JobMatchesComponent = () => {
   return (
-    <div className='grid grid-cols-3 w-full gap-[3vh] '>
+    <div className='md:grid flex flex-col grid-cols-3 w-full gap-[3vh] '>
       {jobMatches.map((job, key) => (
         <JobMatch
           key={key}

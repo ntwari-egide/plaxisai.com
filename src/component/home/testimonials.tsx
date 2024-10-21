@@ -99,16 +99,16 @@ const TestimonialsPage = () => {
 
   return (
     <div className='mt-[20vh] flex flex-col gap-[4vh] md:px-[3vw] px-[2vw]'>
-      <div className='flex flex-row justify-between justify-items-center object-center items-center'>
+      <div className='flex md:flex-row flex-col justify-between justify-items-center object-center items-center'>
         <div>
-          <p className='text-[#F28729] inter-tight md:text-[2vh] font-medium'>
+          <p className='text-[#F28729] text-center md:text-start inter-tight md:text-[2vh] font-medium'>
             Our users
           </p>
-          <h1 className='text-[#000000] text-[2.5vh] md:text-[4.5vh] font-bold whyteInktrap_font  text-center md:text-start w-[25vw] mt-4 leading-[5vh]'>
+          <h1 className='text-[#000000] text-[2.5vh] md:text-[4.5vh] font-bold whyteInktrap_font  text-center md:text-start md:w-[25vw] mt-4 leading-[5vh]'>
             What are they saying about us?
           </h1>
         </div>
-        <p className='w-[20vw] inter-tight  font-medium text-[1.7vh]'>
+        <p className='md:w-[20vw] text-center md:text-start inter-tight  font-medium text-[1.7vh]'>
           Instantly access a curated list of top-matching companies and
           positions.
         </p>

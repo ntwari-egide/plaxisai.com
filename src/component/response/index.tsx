@@ -12,10 +12,10 @@ type ResponseLayoutProps = {
 const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
   return (
     <div
-      className='px-[3vw] mt-[3vh] relative flex flex-col  gap-[2vh]'
+      className='md:px-[3vw] px-[6vw] mt-[3vh] relative flex flex-col  gap-[2vh]'
       onClick={onClick}
     >
-      <div className='flex flex-row gap-[3vw] items-center'>
+      <div className='md:flex hidden flex-row gap-[3vw] items-center'>
         <TagComponent
           title='Matching Results'
           description='3 companies found'
@@ -32,7 +32,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
           classname='bg-[#173440]'
         />
       </div>
-      <div className='grid grid-cols-3 gap-[3vw]'>
+      <div className='md:grid grid-cols-3 gap-[3vw]'>
         <CompaniesMatch
           title='Software Engineering Intern'
           companyName='Apple'
@@ -58,10 +58,10 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
 
       <div className='mt-[5vh]'>
         <div className='flex flex-row justify-between'>
-          <h1 className='whyteInktrap_font text-[4.5vh] font-semibold'>
+          <h1 className='whyteInktrap_font text-[2.6vh] md:text-[4.5vh] font-semibold'>
             All matched jobs
           </h1>
-          <div>
+          <div className='md:block hidden'>
             <TagComponent
               title='Matching Results'
               description='40 jobs found'
@@ -72,11 +72,11 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
       </div>
 
       <div className='sticky top-0 z-10'>
-        <div className='flex flex-row'>
-          <div className='w-[15%]'>
+        <div className='flex flex-col md:flex-row'>
+          <div className='w-[15%] hidden md:block'>
             <FiltersComponent />
           </div>
-          <div className='w-[85%]'>
+          <div className='md:w-[85%]'>
             <JobMatchesComponent />
           </div>
         </div>
