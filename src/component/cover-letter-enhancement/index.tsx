@@ -15,7 +15,7 @@ const CoverLetterEnhancementLayout = () => {
       <div className='flex flex-row gap-[4vw]'>
         <div className='w-[65%] flex flex-col border border-[#E6E6E7] rounded-lg'></div>
 
-        <div className='bg-[#F2F2F2] rounded-lg w-[35%] h-[70vh] sticky top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'>
+        <div className='bg-[#F2F2F2] rounded-lg ipad-landscape:w-[40%] w-[35%] ipad-landscape:h-[60vh] md:h-[70vh] sticky top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'>
           {/* plaxis ai details  */}
 
           <PlaxisAITag />
@@ -52,7 +52,7 @@ const CoverLetterEnhancementLayout = () => {
       </div>
 
       <div className='flex flex-col items-center object-center'>
-        <div className='w-[28vw]'>
+        <div className='md:w-[28vw] ipad-landscape:w-[40vw]'>
           {/* actions  */}
 
           <div className='flex flex-row justify-between mt-[2vh] w-full'>

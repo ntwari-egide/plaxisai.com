@@ -15,7 +15,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
       className='md:px-[3vw] px-[6vw] mt-[3vh] relative flex flex-col  gap-[2vh]'
       onClick={onClick}
     >
-      <div className='md:flex hidden flex-row gap-[3vw] items-center'>
+      <div className='md:flex hidden ipad-portrait:flex-col flex-row gap-[3vw] items-center'>
         <TagComponent
           title='Matching Results'
           description='3 companies found'
@@ -32,7 +32,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
           classname='bg-[#173440]'
         />
       </div>
-      <div className='md:grid grid-cols-3 gap-[3vw]'>
+      <div className='md:grid ipad-portrait:grid-cols-2 grid-cols-3 gap-[3vw]'>
         <CompaniesMatch
           title='Software Engineering Intern'
           companyName='Apple'
@@ -73,7 +73,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
 
       <div className='sticky top-0 z-10'>
         <div className='flex flex-col md:flex-row'>
-          <div className='w-[15%] hidden md:block'>
+          <div className='w-[15%] ipad-portrait:w-[35vw] hidden md:block'>
             <FiltersComponent />
           </div>
           <div className='md:w-[85%]'>
