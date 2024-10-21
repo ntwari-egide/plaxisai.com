@@ -18,16 +18,16 @@ import AILightImg from '../../../public/images/ai-icon-white.png';
 
 const JobDetailsLayout = () => {
   return (
-    <div className='md:px-[3vw] mt-[4vh]'>
-      <div className='flex flex-row gap-[4vw]'>
-        <div className='w-[65%] flex flex-col gap-[3vh]'>
+    <div className='md:px-[3vw] px-[6vw] mt-[4vh]'>
+      <div className='flex ipad-portrait:flex-col-reverse flex-col-reverse md:flex-row md:gap-[4vw] gap-[14vw]'>
+        <div className='md:w-[65%] ipad-portrait:w-full flex flex-col gap-[3vh]'>
           {/* job details */}
 
           <div className='flex flex-row justify-between'>
-            <h1 className='text-[4.5vh] font-semibold whyteInktrap_font'>
+            <h1 className='md:text-[4.5vh] text-[2.5vh] font-semibold whyteInktrap_font'>
               Software Engineering Intern
             </h1>
-            <Button className='inter-tight bg-[#F28729] rounded-full border-[#F28729] py-[2.3vh] hover:text-[#09090D] font-semibold text-[#09090D] cursor-pointer text-[1.4vh] hover:scale-[1.02] w-[15%]'>
+            <Button className='inter-tight bg-[#F28729] rounded-full border-[#F28729] py-[2.3vh] hover:text-[#09090D] font-semibold text-[#09090D] cursor-pointer text-[1.4vh] hover:scale-[1.02] md:w-[15%] ipad-landscape:w-[16vw]'>
               Easy Apply
               <RiArrowRightLine className='text-[3vh] -rotate-45' />
             </Button>
@@ -153,7 +153,7 @@ const JobDetailsLayout = () => {
           </div>
         </div>
 
-        <div className='bg-[#F2F2F2] rounded-lg w-[35%] h-[78vh] sticky top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'>
+        <div className='bg-[#F2F2F2] rounded-lg ipad-portrait:w-full md:w-[35%] md:h-[78vh] ipad-portrait:relative md:sticky ipad-portrait:top-0 top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'>
           {/* plaxis ai details  */}
 
           <PlaxisAITag />
@@ -197,7 +197,7 @@ const JobDetailsLayout = () => {
             {/* people  */}
             <div className='flex flex-row justify-between items-center'>
               <div className='flex flex-row gap-[0.4vw] items-center'>
-                <div className=' bg-[#E5E5E5] w-[45px] flex flex-row h-[45px] items-center justify-center rounded-full'>
+                <div className=' bg-[#E5E5E5] w-[45px] hidden md:flex flex-row h-[45px] items-center justify-center rounded-full'>
                   <RiGroupLine className='text-[1.5vh]' />
                 </div>
                 <div className='flex flex-col'>
@@ -219,7 +219,7 @@ const JobDetailsLayout = () => {
               />
             </div>
 
-            <div className='flex felx-row justify-between'>
+            <div className='flex flex-row justify-between ipad-portrait:justify-start ipad-portrait:gap-[3vw]'>
               <Image
                 src='https://images.pexels.com/photos/28570314/pexels-photo-28570314/free-photo-of-confident-young-woman-in-glasses-portrait.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
                 className='h-[70px] w-[70px] object-cover cursor-pointer hover:scale-[1.02] transition-all rounded-full border-[2px] border-[#173440]'
@@ -249,13 +249,13 @@ const JobDetailsLayout = () => {
           <div>
             {/* actions  */}
 
-            <div className='flex flex-row justify-between mt-[2vh] w-full'>
+            <div className='flex flex-col md:gap-0 gap-[2vh] md:flex-row justify-between mt-[2vh] w-full'>
               <Link
                 href={'/resume-enhancements'}
                 target='_blank'
-                className='w-[40%]'
+                className='md:w-[40%] w-full ipad-landscape:w-[43%]'
               >
-                <Button className='inter-tight bg-[#348888] rounded-full border-[2px] border-[#348888] py-[3vh] hover:text-[#FFFFFF] font-semibold text-[#FFFFFF] cursor-pointer text-[1.6vh] hover:scale-[1.02]'>
+                <Button className='inter-tight bg-[#348888] rounded-full border-[2px] border-[#348888] py-[3vh] hover:text-[#FFFFFF] font-semibold text-[#FFFFFF] cursor-pointer ipad-landscape:text-[1.4vh] text-[1.6vh] hover:scale-[1.02] w-full'>
                   <Image
                     src={AILightImg.src}
                     className='h-[15px] w-[15px]'
@@ -268,9 +268,9 @@ const JobDetailsLayout = () => {
               <Link
                 href={'/cover-letter-enhancements'}
                 target='_blank'
-                className='w-[55%]'
+                className='md:w-[55%] w-full'
               >
-                <Button className='inter-tight bg-[white] rounded-full border-[#09090D] py-[3vh] border-[2px] font-semibold text-[#09090D] cursor-pointer text-[1.6vh] hover:scale-[1.02] w-full'>
+                <Button className='inter-tight bg-[white] rounded-full border-[#09090D] py-[3vh] border-[2px] font-semibold text-[#09090D] cursor-pointer text-[1.6vh] hover:scale-[1.02]  ipad-landscape:text-[1.4vh] w-full'>
                   <Image
                     src={AIDarkImg.src}
                     className='h-[15px] w-[15px]'
@@ -290,7 +290,7 @@ const JobDetailsLayout = () => {
           Similar Jobs
         </h1>
 
-        <div className='grid grid-cols-4 w-full gap-[3vh] '>
+        <div className='md:grid flex flex-col ipad-portrait:grid-cols-2 ipad-landscape:grid-cols-3 md:grid-cols-4 w-full gap-[3vh] '>
           {jobMatches.map((job, key) => (
             <>
               {key < 4 ? (
