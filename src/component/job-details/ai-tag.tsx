@@ -12,8 +12,8 @@ const PlaxisAITag = ({ size }: PlaxisAITagProps) => {
     <div
       className={`flex flex-row ipad-portrait:w-[18vw] items-center gap-[0.5vh] bg-white ${
         size == 'small'
-          ? 'px-[1vh] py-[0.5vh] w-[5em]'
-          : 'px-[2vh] py-[1vh] w-[7em]'
+          ? 'px-[1vh] py-[0.5vh] w-[6em]'
+          : 'px-[2vh] py-[1vh] w-[8em]'
       }  rounded-full`}
     >
       <Image
