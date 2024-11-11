@@ -1,6 +1,6 @@
 // pages/auth/google/callback.tsx (if using Next.js)
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default function GoogleCallback() {
   const router = useRouter();

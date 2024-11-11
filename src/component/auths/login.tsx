@@ -1,42 +1,44 @@
-import { Button, Input } from 'antd';
 import {
-  RiAppleFill,
-  RiArrowRightLine,
-  RiGoogleFill,
-  RiLinkedinFill,
-} from 'react-icons/ri';
-import { GoogleOAuthProvider, GoogleLogin, CredentialResponse } from '@react-oauth/google';
+  CredentialResponse,
+  GoogleLogin,
+  GoogleOAuthProvider,
+} from '@react-oauth/google';
+import { Button, Input } from 'antd';
 import axios from 'axios';
+import { RiAppleFill, RiArrowRightLine, RiLinkedinFill } from 'react-icons/ri';
 
 const LoginComponent = () => {
-
   // Replace with your Google Client ID
-  const GOOGLE_CLIENT_ID = "510410189536-qsibj18mg602mo7q5f5lqd56gngc7f7o.apps.googleusercontent.com";
+  const GOOGLE_CLIENT_ID =
+    '510410189536-qsibj18mg602mo7q5f5lqd56gngc7f7o.apps.googleusercontent.com';
 
   // Function to handle the Google login response
   const handleLogin = async (credentialResponse: CredentialResponse) => {
     const idToken = credentialResponse.credential; // Get the ID token from Google
 
     if (!idToken) {
-      console.error("No ID token provided");
+      console.error('No ID token provided');
       return;
     }
 
     try {
       // Send ID token to backend
       const response = await axios.post(
-        'http://localhost:8080/api/v1/auth/google/login',  // Update with your backend URL
+        'http://localhost:8080/api/v1/auth/google/login', // Update with your backend URL
         { idToken },
         { headers: { 'Content-Type': 'application/json' } }
       );
 
       // Handle response from your backend
-      console.log("Login response:", response.data);
+      console.log('Login response:', response.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.error("Login error:", error.response ? error.response.data : error.message);
+        console.error(
+          'Login error:',
+          error.response ? error.response.data : error.message
+        );
       } else {
-        console.error("Unexpected error:", error);
+        console.error('Unexpected error:', error);
       }
     }
   };
