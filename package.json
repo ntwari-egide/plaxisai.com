@@ -20,6 +20,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
     "@gsap/react": "^2.1.1",
+    "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^2.2.5",
     "@types/formidable": "^3.4.5",
     "@types/pdf-parse": "^1.1.4",
