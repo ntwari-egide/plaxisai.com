@@ -44,7 +44,7 @@ const AIPipelineComponent = ({
                 'Our intelligent system scans over 5 million employers, pinpointing the perfect match for you in mere seconds.',
             },
             {
-              title: 'Revealing Best Matches',
+              title: 'Revealing Best Matches, Referrals & Enhancements',
               description:
                 'Instantly access a curated list of top-matching companies and positions.',
             },
@@ -68,7 +68,7 @@ const AIPipelineComponent = ({
               : Screen3
           }
           alt='screen-2'
-          className='w-[84vw] h-[85vh] absolute -[20vw] object-cover'
+          className='w-[70vw] h-[70vh] absolute -[20vw] object-cover'
         />
       </div>
     </div>

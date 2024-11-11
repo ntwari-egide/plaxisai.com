@@ -34,7 +34,7 @@ const ScanningComponent = () => {
                 'Our intelligent system scans over 5 million employers, pinpointing the perfect match for you in mere seconds.',
             },
             {
-              title: 'Revealing Best Matches',
+              title: 'Revealing Best Matches, Referrals & Enhancements',
               description:
                 'Instantly access a curated list of top-matching companies and positions.',
             },

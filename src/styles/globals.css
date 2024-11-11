@@ -223,9 +223,11 @@ span.ant-progress-text.ant-progress-text-inner {
   color: white !important;
 }
 
-.ant-steps-item.ant-steps-item-finish,
+.ant-steps-item.ant-steps-item-finish {
+  opacity: 0.9 !important;
+}
 .ant-steps-item {
-  opacity: 0.6 !important;
+  opacity: 0.2 !important;
 }
 
 /* Override Ant Design Checkbox color */
