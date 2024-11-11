@@ -25,7 +25,7 @@ const GradientButton = ({
   return (
     <>
       {href ? (
-        <Link href={href}>
+        <Link href={href} target={`${href != '' ? '_blank' : ''}`}>
           <button
             onClick={onClick}
             className={` cursor-pointer hover:scale-[1.04] transition-all relative text-[#000000] flex flex-row justify-between items-center inter-tight place-items-center  border-[2px] ${

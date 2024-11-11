@@ -1,5 +1,4 @@
 import type { CollapseProps } from 'antd';
-import Link from 'next/link';
 
 import CollapseComponent from '../controls/collapse';
 import GradientButton from '../controls/gradient-button';
@@ -44,15 +43,13 @@ const FAQComponent = () => {
         Our Discord community and staff are here to help! Your feedback will
         help us improve in future versions.
       </p>
-      <Link href='https://discord.gg/hFgPf7xfrQ' target='_blank'>
-        <GradientButton
-          href='#home'
-          text='Join Groupme'
-          className='mt-[1vh] text-white bg-[#348888]'
-          theme='colorfull'
-          backgroundColor='#348888'
-        />
-      </Link>
+      <GradientButton
+        href='https://discord.gg/hFgPf7xfrQ'
+        text='Join Groupme'
+        className='mt-[1vh] text-white bg-[#348888]'
+        theme='colorfull'
+        backgroundColor='#348888'
+      />
       <CollapseComponent items={items} />
     </div>
   );
