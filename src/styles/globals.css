@@ -245,3 +245,24 @@ span.ant-progress-text.ant-progress-text-inner {
 .ant-checkbox-inner {
   border-color: #09090d !important; /* Change the border color when unchecked */
 }
+
+.nsm7Bb-HzV7m-LgbsSe.hJDwNd-SxQuSe.i5vt6e-Ia7Qfc.uaxL4e-RbRzK {
+  max-width: 70vw !important;
+  width: 20vw !important;
+}
+
+/* Medium devices (tablets) */
+@media (max-width: 768px) {
+  .nsm7Bb-HzV7m-LgbsSe.hJDwNd-SxQuSe.i5vt6e-Ia7Qfc.uaxL4e-RbRzK {
+  max-width: 70vw !important;
+  width: 60vw !important;
+  }
+}
+
+/* Small devices (mobile) */
+@media (max-width: 480px) {
+  .nsm7Bb-HzV7m-LgbsSe.hJDwNd-SxQuSe.i5vt6e-Ia7Qfc.uaxL4e-RbRzK {
+  max-width: 70vw !important;
+  width: 70vw !important;
+  }
+}

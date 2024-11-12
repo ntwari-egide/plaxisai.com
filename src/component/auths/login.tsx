@@ -3,9 +3,26 @@ import {
   GoogleLogin,
   GoogleOAuthProvider,
 } from '@react-oauth/google';
-import { Button, Input } from 'antd';
+import { Button, Image, Input } from 'antd';
 import axios from 'axios';
 import { RiAppleFill, RiArrowRightLine, RiLinkedinFill } from 'react-icons/ri';
+import { LinkedIn } from 'react-linkedin-login-oauth2';
+import linkedin from 'react-linkedin-login-oauth2/assets/linkedin.png';
+
+interface LinkedInResponse {
+  code: string;
+}
+
+interface LoginResponseType {
+  // Define this interface based on the response structure from your backend
+  token: string;
+  user: {
+    id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+  };
+}
 
 const LoginComponent = () => {
   // Replace with your Google Client ID
@@ -30,18 +47,35 @@ const LoginComponent = () => {
       );
 
       // Handle response from your backend
-      console.log('Login response:', response.data);
+      // console.log('Login response:', response.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.error(
-          'Login error:',
-          error.response ? error.response.data : error.message
-        );
+        // console.error(
+        //   'Login error:',
+        //   error.response ? error.response.data : error.message
+        // );
       } else {
-        console.error('Unexpected error:', error);
+        // console.error('Unexpected error:', error);
       }
     }
   };
+
+  const handleSuccess = async (code: string) => {
+    try {
+      // Send the authorization code to your backend
+      const response = await axios.post<LoginResponseType>(
+        'http://localhost:8080/auth/linkedin/login',
+        { token: code },
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+
+      console.log('Login successful:', response.data);
+      // Optionally, handle the successful login, e.g., store token, navigate
+    } catch (error) {
+      console.error('Error logging in with LinkedIn:', error);
+    }
+  };
+  
 
   return (
     <div className='flex flex-col justify-center items-center object-center mt-[10vh]'>
@@ -65,12 +99,24 @@ const LoginComponent = () => {
             />
           </GoogleOAuthProvider>
 
-          <div className='flex flex-row gap-[2vw] w-[70vw] md:w-[20vw] ipad-portrait:w-[60vw] border border-[#E6E6E7] py-[1vh] cursor-pointer hover:scale-[1.02] transition-all px-[2vw] rounded-md justify-center items-center'>
-            <RiLinkedinFill className='text-[2vh]' />
-            <p className=' inter-tight  font-medium text-[1.7vh] ipad-portrait:w-[30vw] md:w-[15vw]'>
-              Continue with LinkedIn
-            </p>
-          </div>
+          <LinkedIn
+            clientId="78eruy1o6h1won"
+            redirectUri="http://localhost:3000/auth/google"
+            onSuccess={handleSuccess}
+            scope="r_liteprofile r_emailaddress"
+          >
+            {({ linkedInLogin }) => (
+              <div
+                onClick={linkedInLogin}  // Call the linkedInLogin function when the div is clicked
+                className="flex flex-row gap-[2vw] w-[70vw] md:w-[20vw] ipad-portrait:w-[60vw] border border-[#E6E6E7] py-[1vh] cursor-pointer hover:scale-[1.02] transition-all px-[2vw] rounded-md justify-center items-center"
+              >
+                <RiLinkedinFill className="text-[2vh]" />
+                <p className="inter-tight font-medium text-[1.7vh] ipad-portrait:w-[30vw] md:w-[15vw]">
+                  Continue with LinkedIn
+                </p>
+              </div>
+            )}
+          </LinkedIn>
 
           <div className='flex flex-row gap-[2vw] w-[70vw] md:w-[20vw] ipad-portrait:w-[60vw] border border-[#E6E6E7] py-[1vh] cursor-pointer hover:scale-[1.02] transition-all px-[2vw] rounded-md justify-center items-center'>
             <RiAppleFill className='text-[2vh]' />
