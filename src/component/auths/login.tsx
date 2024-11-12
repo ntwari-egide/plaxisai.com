@@ -3,11 +3,10 @@ import {
   GoogleLogin,
   GoogleOAuthProvider,
 } from '@react-oauth/google';
-import { Button, Image, Input } from 'antd';
+import { Button, Input } from 'antd';
 import axios from 'axios';
-import { RiAppleFill, RiArrowRightLine, RiLinkedinFill } from 'react-icons/ri';
+import { RiArrowRightLine, RiLinkedinFill } from 'react-icons/ri';
 import { LinkedIn } from 'react-linkedin-login-oauth2';
-import linkedin from 'react-linkedin-login-oauth2/assets/linkedin.png';
 
 interface LinkedInResponse {
   code: string;
@@ -75,7 +74,6 @@ const LoginComponent = () => {
       console.error('Error logging in with LinkedIn:', error);
     }
   };
-  
 
   return (
     <div className='flex flex-col justify-center items-center object-center mt-[10vh]'>
@@ -100,30 +98,23 @@ const LoginComponent = () => {
           </GoogleOAuthProvider>
 
           <LinkedIn
-            clientId="78eruy1o6h1won"
-            redirectUri="http://localhost:3000/auth/google"
+            clientId='78eruy1o6h1won'
+            redirectUri='http://localhost:3000/auth/google'
             onSuccess={handleSuccess}
-            scope="r_liteprofile r_emailaddress"
+            scope='r_liteprofile r_emailaddress'
           >
             {({ linkedInLogin }) => (
               <div
-                onClick={linkedInLogin}  // Call the linkedInLogin function when the div is clicked
-                className="flex flex-row gap-[2vw] w-[70vw] md:w-[20vw] ipad-portrait:w-[60vw] border border-[#E6E6E7] py-[1vh] cursor-pointer hover:scale-[1.02] transition-all px-[2vw] rounded-md justify-center items-center"
+                onClick={linkedInLogin} // Call the linkedInLogin function when the div is clicked
+                className='flex flex-row gap-[2vw] w-[70vw] md:w-[20vw] ipad-portrait:w-[60vw] border border-[#E6E6E7] py-[1vh] cursor-pointer hover:scale-[1.02] transition-all px-[2vw] rounded-md justify-center items-center'
               >
-                <RiLinkedinFill className="text-[2vh]" />
-                <p className="inter-tight font-medium text-[1.7vh] ipad-portrait:w-[30vw] md:w-[15vw]">
+                <RiLinkedinFill className='text-[2vh]' />
+                <p className='inter-tight font-medium text-[1.7vh] ipad-portrait:w-[30vw] md:w-[15vw]'>
                   Continue with LinkedIn
                 </p>
               </div>
             )}
           </LinkedIn>
-
-          <div className='flex flex-row gap-[2vw] w-[70vw] md:w-[20vw] ipad-portrait:w-[60vw] border border-[#E6E6E7] py-[1vh] cursor-pointer hover:scale-[1.02] transition-all px-[2vw] rounded-md justify-center items-center'>
-            <RiAppleFill className='text-[2vh]' />
-            <p className=' inter-tight  font-medium text-[1.7vh] ipad-portrait:w-[30vw] md:w-[15vw]'>
-              Continue with Apple
-            </p>
-          </div>
         </div>
         <div className='mt-[2vh] flex flex-col items-center '>
           <div className='md:w-[20vw] w-[70vw] flex-col flex gap-[2vh] ipad-portrait:w-[60vw]'>
@@ -137,6 +128,16 @@ const LoginComponent = () => {
             <Input
               type='email'
               placeholder='Enter your email address'
+              className='outline-none border-[#E6E6E7] border rounded-md inter-tight placeholder:text-[#848486] placeholder:font-semibold text-[2vh]'
+            />
+
+            <p className='inter-tight  font-semibold text-[1.7vh] text-start'>
+              Password
+            </p>
+
+            <Input
+              type='password'
+              placeholder='Password*'
               className='outline-none border-[#E6E6E7] border rounded-md inter-tight placeholder:text-[#848486] placeholder:font-semibold text-[2vh]'
             />
 

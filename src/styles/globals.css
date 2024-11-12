@@ -254,15 +254,15 @@ span.ant-progress-text.ant-progress-text-inner {
 /* Medium devices (tablets) */
 @media (max-width: 768px) {
   .nsm7Bb-HzV7m-LgbsSe.hJDwNd-SxQuSe.i5vt6e-Ia7Qfc.uaxL4e-RbRzK {
-  max-width: 70vw !important;
-  width: 60vw !important;
+    max-width: 70vw !important;
+    width: 60vw !important;
   }
 }
 
 /* Small devices (mobile) */
 @media (max-width: 480px) {
   .nsm7Bb-HzV7m-LgbsSe.hJDwNd-SxQuSe.i5vt6e-Ia7Qfc.uaxL4e-RbRzK {
-  max-width: 70vw !important;
-  width: 70vw !important;
+    max-width: 70vw !important;
+    width: 70vw !important;
   }
 }

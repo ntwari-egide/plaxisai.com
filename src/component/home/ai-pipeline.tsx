@@ -39,7 +39,7 @@ const AIPipelineComponent = ({
                 'Your resume is meticulously analyzed by our cutting-edge algorithm, ensuring no detail is missed.',
             },
             {
-              title: 'Matching Profiles',
+              title: 'Matching Opportunities',
               description:
                 'Our intelligent system scans over 5 million employers, pinpointing the perfect match for you in mere seconds.',
             },
