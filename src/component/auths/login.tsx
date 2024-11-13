@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { RiArrowRightLine, RiLinkedinFill } from 'react-icons/ri';
 import { LinkedIn } from 'react-linkedin-login-oauth2';
 
+import api from '@/global/axios-config';
 import { encryptData } from '@/utils/encryptions';
 
 interface LoginResponseType {
@@ -26,11 +27,10 @@ interface LoginResponseType {
 }
 
 const LoginComponent = () => {
-
   // states
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const router = useRouter(); // Initialize navigate for redirection
 
@@ -49,15 +49,18 @@ const LoginComponent = () => {
 
     try {
       // Send ID token to backend
-      const response = await axios.post(
-        'http://localhost:8080/api/v1/auth/google/login', // Update with your backend URL
+      const response = await api.post(
+        '/auth/google/login', // Update with your backend URL
         { idToken },
         { headers: { 'Content-Type': 'application/json' } }
       );
 
       // save the user response in cookies.
-      Cookies.set('user-credentials',  await encryptData(JSON.stringify(response.data)), { expires: 7 });
-
+      Cookies.set(
+        'user-credentials',
+        await encryptData(JSON.stringify(response.data)),
+        { expires: 7 }
+      );
     } catch (error) {
       if (axios.isAxiosError(error)) {
         // console.error(
@@ -71,37 +74,39 @@ const LoginComponent = () => {
   };
 
   const handleSuccess = async (code: string) => {
-    setIsLoading
+    setIsLoading;
 
     try {
       // Send the authorization code to your backend
-      const response = await axios.post<LoginResponseType>(
+      const response = await api.post<LoginResponseType>(
         'http://localhost:8080/auth/linkedin/login',
         { token: code },
         { headers: { 'Content-Type': 'application/json' } }
       );
       // Optionally, handle the successful login, e.g., store token, navigate
       // save the user response in cookies.
-      Cookies.set('user-credentials',  await encryptData(JSON.stringify(response.data)), { expires: 7 });
-
+      Cookies.set(
+        'user-credentials',
+        await encryptData(JSON.stringify(response.data)),
+        { expires: 7 }
+      );
     } catch (error) {
       console.error('Error logging in with LinkedIn:', error);
     }
   };
 
   const handleEmailLogin = async () => {
-
-    if ( !email || !password) {
-      message.error(" Please fill in credentials")
+    if (!email || !password) {
+      message.error(' Please fill in credentials');
       return;
     }
-  
+
     setIsLoading(true);
 
     try {
       // Send the authorization code to your backend
-      const response = await axios.post(
-        'http://localhost:8080/api/v1/auth/email/login',
+      const response = await api.post(
+        '/auth/email/login',
         {
           email,
           password,
@@ -110,16 +115,20 @@ const LoginComponent = () => {
       );
 
       // save the user response in cookies.
-      Cookies.set('user-credentials',  await encryptData(JSON.stringify(response.data)), { expires: 7 });
+      Cookies.set(
+        'user-credentials',
+        await encryptData(JSON.stringify(response.data)),
+        { expires: 7 }
+      );
 
       // setting the user credentials to empty
-      setEmail("");
-      setPassword("");
-  
+      setEmail('');
+      setPassword('');
+
       // Optionally, handle successful login
     } catch (error) {
       const axiosError = error as AxiosError;
-  
+
       if (axiosError.response) {
         if (axiosError.response.status === 422) {
           // Redirect to signup if user not registered
@@ -127,14 +136,19 @@ const LoginComponent = () => {
           router.push('/signup'); // Redirects to the signup page
 
           //setting login credentials to empty
-          setEmail("");
-          setPassword("");
+          setEmail('');
+          setPassword('');
         } else {
-          message.error(`Error ${axiosError.response.status}: ${axiosError.response.data || 'Error logging in with your email. Try again!'}`);
+          message.error(
+            `Error ${axiosError.response.status}: ${
+              axiosError.response.data ||
+              'Error logging in with your email. Try again!'
+            }`
+          );
         }
       } else {
         message.error('Network error. Please check your connection.');
-        setPassword("");
+        setPassword('');
       }
     } finally {
       setIsLoading(false);
@@ -209,7 +223,11 @@ const LoginComponent = () => {
               className='outline-none border-[#E6E6E7] border rounded-md inter-tight placeholder:text-[#848486] placeholder:font-semibold text-[2vh]'
             />
 
-            <Button loading={isLoading} onClick={handleEmailLogin} className='inter-tight bg-[#F28729] rounded-full border-[#F28729] py-[3vh] hover:text-[#09090D] font-semibold text-[#09090D] ipad-portrait:text-[2vh] cursor-pointer hover:scale-[1.02]'>
+            <Button
+              loading={isLoading}
+              onClick={handleEmailLogin}
+              className='inter-tight bg-[#F28729] rounded-full border-[#F28729] py-[3vh] hover:text-[#09090D] font-semibold text-[#09090D] ipad-portrait:text-[2vh] cursor-pointer hover:scale-[1.02]'
+            >
               Login
               <RiArrowRightLine className='text-[3vh]' />
             </Button>

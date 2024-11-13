@@ -44,7 +44,9 @@ export const decryptData = (encryptedData: string): string => {
     const decrypted = bytes.toString(CryptoJS.enc.Utf8);
 
     if (!decrypted) {
-      console.error('Decryption failed. Data may be corrupted or the wrong key may have been used.');
+      console.error(
+        'Decryption failed. Data may be corrupted or the wrong key may have been used.'
+      );
       return ''; // Return an empty string if decryption fails
     }
 

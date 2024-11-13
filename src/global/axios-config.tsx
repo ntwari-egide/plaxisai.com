@@ -12,7 +12,7 @@ import axios from 'axios';
 
 // Create a new Axios instance
 
-export const API_URL = 'http://localhost:6500/';
+export const API_URL = 'http://localhost:8080/api/v1';
 // export const API_URL = 'https://api.afriset.org/api/v1';
 
 const api = axios.create({
