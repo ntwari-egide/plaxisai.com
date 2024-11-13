@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   CredentialResponse,
   GoogleLogin,
@@ -10,6 +11,8 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { RiArrowRightLine, RiLinkedinFill } from 'react-icons/ri';
 import { LinkedIn } from 'react-linkedin-login-oauth2';
+
+import { encryptData } from '@/utils/encryptions';
 
 interface LoginResponseType {
   // Define this interface based on the response structure from your backend
@@ -52,8 +55,9 @@ const LoginComponent = () => {
         { headers: { 'Content-Type': 'application/json' } }
       );
 
-      // Handle response from your backend
-      // console.log('Login response:', response.data);
+      // save the user response in cookies.
+      Cookies.set('user-credentials',  await encryptData(JSON.stringify(response.data)), { expires: 7 });
+
     } catch (error) {
       if (axios.isAxiosError(error)) {
         // console.error(
@@ -76,17 +80,24 @@ const LoginComponent = () => {
         { token: code },
         { headers: { 'Content-Type': 'application/json' } }
       );
-
-      console.log('Login successful:', response.data);
       // Optionally, handle the successful login, e.g., store token, navigate
+      // save the user response in cookies.
+      Cookies.set('user-credentials',  await encryptData(JSON.stringify(response.data)), { expires: 7 });
+
     } catch (error) {
       console.error('Error logging in with LinkedIn:', error);
     }
   };
 
   const handleEmailLogin = async () => {
-    setIsLoading(true);
+
+    if ( !email || !password) {
+      message.error(" Please fill in credentials")
+      return;
+    }
   
+    setIsLoading(true);
+
     try {
       // Send the authorization code to your backend
       const response = await axios.post(
@@ -97,11 +108,13 @@ const LoginComponent = () => {
         },
         { headers: { 'Content-Type': 'application/json' } }
       );
-  
-      console.log('Login successful:', response.data);
 
       // save the user response in cookies.
-      Cookies.set('token', response.data, { expires: 7 });
+      Cookies.set('user-credentials',  await encryptData(JSON.stringify(response.data)), { expires: 7 });
+
+      // setting the user credentials to empty
+      setEmail("");
+      setPassword("");
   
       // Optionally, handle successful login
     } catch (error) {
@@ -112,11 +125,16 @@ const LoginComponent = () => {
           // Redirect to signup if user not registered
           message.info('User not found. Redirecting to signup.');
           router.push('/signup'); // Redirects to the signup page
+
+          //setting login credentials to empty
+          setEmail("");
+          setPassword("");
         } else {
           message.error(`Error ${axiosError.response.status}: ${axiosError.response.data || 'Error logging in with your email. Try again!'}`);
         }
       } else {
         message.error('Network error. Please check your connection.');
+        setPassword("");
       }
     } finally {
       setIsLoading(false);
