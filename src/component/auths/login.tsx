@@ -3,14 +3,12 @@ import {
   GoogleLogin,
   GoogleOAuthProvider,
 } from '@react-oauth/google';
-import { Button, Input } from 'antd';
-import axios from 'axios';
+import { Button, Input, message } from 'antd';
+import axios, { AxiosError } from 'axios';
+import { useState } from 'react';
 import { RiArrowRightLine, RiLinkedinFill } from 'react-icons/ri';
 import { LinkedIn } from 'react-linkedin-login-oauth2';
-
-interface LinkedInResponse {
-  code: string;
-}
+import { useRouter } from 'next/router';
 
 interface LoginResponseType {
   // Define this interface based on the response structure from your backend
@@ -24,6 +22,14 @@ interface LoginResponseType {
 }
 
 const LoginComponent = () => {
+
+  // states
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const router = useRouter(); // Initialize navigate for redirection
+
   // Replace with your Google Client ID
   const GOOGLE_CLIENT_ID =
     '510410189536-qsibj18mg602mo7q5f5lqd56gngc7f7o.apps.googleusercontent.com';
@@ -60,6 +66,8 @@ const LoginComponent = () => {
   };
 
   const handleSuccess = async (code: string) => {
+    setIsLoading
+
     try {
       // Send the authorization code to your backend
       const response = await axios.post<LoginResponseType>(
@@ -72,6 +80,42 @@ const LoginComponent = () => {
       // Optionally, handle the successful login, e.g., store token, navigate
     } catch (error) {
       console.error('Error logging in with LinkedIn:', error);
+    }
+  };
+
+  const handleEmailLogin = async () => {
+    setIsLoading(true);
+  
+    try {
+      // Send the authorization code to your backend
+      const response = await axios.post(
+        'http://localhost:8080/api/v1/auth/email/login',
+        {
+          email,
+          password,
+        },
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+  
+      console.log('Login successful:', response.data);
+  
+      // Optionally, handle successful login
+    } catch (error) {
+      const axiosError = error as AxiosError;
+  
+      if (axiosError.response) {
+        if (axiosError.response.status === 422) {
+          // Redirect to signup if user not registered
+          message.info('User not found. Redirecting to signup.');
+          router.push('/signup'); // Redirects to the signup page
+        } else {
+          message.error(`Error ${axiosError.response.status}: ${axiosError.response.data || 'Error logging in with your email. Try again!'}`);
+        }
+      } else {
+        message.error('Network error. Please check your connection.');
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -127,6 +171,7 @@ const LoginComponent = () => {
 
             <Input
               type='email'
+              onChange={(e) => setEmail(e.target.value)}
               placeholder='Enter your email address'
               className='outline-none border-[#E6E6E7] border rounded-md inter-tight placeholder:text-[#848486] placeholder:font-semibold text-[2vh]'
             />
@@ -137,11 +182,12 @@ const LoginComponent = () => {
 
             <Input
               type='password'
+              onChange={(e) => setPassword(e.target.value)}
               placeholder='Password*'
               className='outline-none border-[#E6E6E7] border rounded-md inter-tight placeholder:text-[#848486] placeholder:font-semibold text-[2vh]'
             />
 
-            <Button className='inter-tight bg-[#F28729] rounded-full border-[#F28729] py-[3vh] hover:text-[#09090D] font-semibold text-[#09090D] ipad-portrait:text-[2vh] cursor-pointer hover:scale-[1.02]'>
+            <Button loading={isLoading} onClick={handleEmailLogin} className='inter-tight bg-[#F28729] rounded-full border-[#F28729] py-[3vh] hover:text-[#09090D] font-semibold text-[#09090D] ipad-portrait:text-[2vh] cursor-pointer hover:scale-[1.02]'>
               Login
               <RiArrowRightLine className='text-[3vh]' />
             </Button>
