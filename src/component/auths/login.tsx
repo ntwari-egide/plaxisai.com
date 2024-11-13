@@ -5,10 +5,11 @@ import {
 } from '@react-oauth/google';
 import { Button, Input, message } from 'antd';
 import axios, { AxiosError } from 'axios';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { RiArrowRightLine, RiLinkedinFill } from 'react-icons/ri';
 import { LinkedIn } from 'react-linkedin-login-oauth2';
-import { useRouter } from 'next/router';
 
 interface LoginResponseType {
   // Define this interface based on the response structure from your backend
@@ -98,6 +99,9 @@ const LoginComponent = () => {
       );
   
       console.log('Login successful:', response.data);
+
+      // save the user response in cookies.
+      Cookies.set('token', response.data, { expires: 7 });
   
       // Optionally, handle successful login
     } catch (error) {
