@@ -42,6 +42,8 @@ const LoginComponent = () => {
   const handleLogin = async (credentialResponse: CredentialResponse) => {
     const idToken = credentialResponse.credential; // Get the ID token from Google
 
+    setIsLoading(true);
+
     if (!idToken) {
       console.error('No ID token provided');
       return;
@@ -61,6 +63,9 @@ const LoginComponent = () => {
         await encryptData(JSON.stringify(response.data)),
         { expires: 7 }
       );
+
+      // route back to home
+      router.push('/');
     } catch (error) {
       if (axios.isAxiosError(error)) {
         // console.error(
@@ -79,7 +84,7 @@ const LoginComponent = () => {
     try {
       // Send the authorization code to your backend
       const response = await api.post<LoginResponseType>(
-        'http://localhost:8080/auth/linkedin/login',
+        '/linkedin/login',
         { token: code },
         { headers: { 'Content-Type': 'application/json' } }
       );
@@ -90,6 +95,9 @@ const LoginComponent = () => {
         await encryptData(JSON.stringify(response.data)),
         { expires: 7 }
       );
+
+      // route back to home
+      router.push('/');
     } catch (error) {
       console.error('Error logging in with LinkedIn:', error);
     }
@@ -124,6 +132,9 @@ const LoginComponent = () => {
       // setting the user credentials to empty
       setEmail('');
       setPassword('');
+
+      // route back to home
+      router.push('/');
 
       // Optionally, handle successful login
     } catch (error) {
@@ -201,9 +212,6 @@ const LoginComponent = () => {
             <p className='inter-tight  font-semibold text-[1.7vh] text-start'>
               Email
             </p>
-            <p className='inter-tight  font-normal text-[1.7vh] text-start'>
-              If you have school email, please use it.
-            </p>
 
             <Input
               type='email'
@@ -235,8 +243,8 @@ const LoginComponent = () => {
         </div>
       </div>
       <p className='mt-[3vh] inter-tight text-[#848486] md:w-[20vw] ipad-portrait:w-[80vw] text-[1.7vh] text-center font-medium w-[80vw]'>
-        By clicking “Create Account” above, you acknowledge that you have read
-        and understood, and agree to Plaxis AI’s <br />
+        By clicking “Login” above, you acknowledge that you have read and
+        understood, and agree to Plaxis AI’s <br />
         <span className='text-[#09090D] cursor-pointer hover:underline'>
           {' '}
           Terms and Privacy.
