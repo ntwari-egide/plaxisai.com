@@ -1,7 +1,9 @@
-import { Avatar } from 'antd';
+/* eslint-disable jsx-a11y/alt-text */
+import { BellOutlined, DownOutlined } from '@ant-design/icons';
+import { Avatar, Image } from 'antd';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { RiArrowDownLine, RiCloseLine } from 'react-icons/ri';
+import { RiCloseLine } from 'react-icons/ri';
 
 import logger from '@/lib/logger';
 
@@ -9,7 +11,6 @@ import { getRealUserInfo, validateJwtToken } from '@/utils/auth';
 
 import LogoComponent from './logo';
 import GradientButton from '../controls/gradient-button';
-import { BellOutlined, DownOutlined } from '@ant-design/icons';
 
 type HeaderLayoutProps = {
   sticky?: boolean;
@@ -36,6 +37,8 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
 
     checkTokenValidity();
   }, []);
+
+  logger(userDetails, 'user details');
   return (
     <header
       className={`${
@@ -81,33 +84,41 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
             </ul>
           </nav>
         </div>
-        {
-          userDetails ? (
-            <div className="flex flex-row items-center gap-[1vw]">
-              <BellOutlined className='text-[2vh] cursor-pointer hover:rotate-6 transition-all' />
-              
-              <Avatar size="large" gap={4} className=' bg-[#348888]'>
+        {userDetails ? (
+          <div className='flex flex-row items-center gap-[1vw]'>
+            <BellOutlined className='text-[2vh] cursor-pointer hover:rotate-6 transition-all' />
+
+            {userDetails.profilePic ? (
+              <Image
+                src={userDetails.profilePic}
+                className='h-[35px] w-[35px] rounded-full object-contain'
+                preview={false}
+              />
+            ) : (
+              <Avatar size='large' gap={4} className=' bg-[#348888]'>
                 {userDetails.firstName.charAt(0)}
               </Avatar>
+            )}
 
-              <p className='whyteInktrap_font mt-1 text-[1.7vh] font-semibold'> {userDetails.firstName + " " +  userDetails.lastName}</p>
+            <p className='whyteInktrap_font mt-1 text-[1.7vh] font-semibold'>
+              {' '}
+              {userDetails.firstName + ' ' + userDetails.lastName}
+            </p>
 
-              <DownOutlined  className=' cursor-pointer'/>
-            </div>
-          ):
-          (
-            <div className='flex flex-row gap-[2vw]'>
-          <GradientButton
-            backgroundColor='#F28729'
-            text='Login'
-            theme='colorfull'
-            href='/login'
-            className='bg-[#F28729] border-[#F28729]'
-          />
-          <GradientButton text='Get Started' href='/signup' />
-        </div>
-          )
-        }
+            <DownOutlined className=' cursor-pointer' />
+          </div>
+        ) : (
+          <div className='flex flex-row gap-[2vw]'>
+            <GradientButton
+              backgroundColor='#F28729'
+              text='Login'
+              theme='colorfull'
+              href='/login'
+              className='bg-[#F28729] border-[#F28729]'
+            />
+            <GradientButton text='Get Started' href='/signup' />
+          </div>
+        )}
       </div>
       <div
         className={`${
