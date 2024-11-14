@@ -144,9 +144,6 @@ const LoginComponent = () => {
         if (axiosError.response.status === 422) {
           const errorMessage = (axiosError.response.data as { errors?: any }).errors;
           
-          console.log('error: ', errorMessage);
-          
-          
           if (errorMessage?.email === "Incorrect Credentials") {
             // Redirect to signup if user not registered
             message.error('User with that email not found. Redirecting to signup.');
