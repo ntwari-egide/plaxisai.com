@@ -1,6 +1,7 @@
+import { Avatar } from 'antd';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { RiCloseLine } from 'react-icons/ri';
+import { RiArrowDownLine, RiCloseLine } from 'react-icons/ri';
 
 import logger from '@/lib/logger';
 
@@ -8,6 +9,7 @@ import { getRealUserInfo, validateJwtToken } from '@/utils/auth';
 
 import LogoComponent from './logo';
 import GradientButton from '../controls/gradient-button';
+import { BellOutlined, DownOutlined } from '@ant-design/icons';
 
 type HeaderLayoutProps = {
   sticky?: boolean;
@@ -34,8 +36,6 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
 
     checkTokenValidity();
   }, []);
-
-  logger('user details: ', userDetails);
   return (
     <header
       className={`${
@@ -81,7 +81,22 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
             </ul>
           </nav>
         </div>
-        <div className='flex flex-row gap-[2vw]'>
+        {
+          userDetails ? (
+            <div className="flex flex-row items-center gap-[1vw]">
+              <BellOutlined className='text-[2vh] cursor-pointer hover:rotate-6 transition-all' />
+              
+              <Avatar size="large" gap={4} className=' bg-[#348888]'>
+                {userDetails.firstName.charAt(0)}
+              </Avatar>
+
+              <p className='whyteInktrap_font mt-1 text-[1.7vh] font-semibold'> {userDetails.firstName + " " +  userDetails.lastName}</p>
+
+              <DownOutlined  className=' cursor-pointer'/>
+            </div>
+          ):
+          (
+            <div className='flex flex-row gap-[2vw]'>
           <GradientButton
             backgroundColor='#F28729'
             text='Login'
@@ -91,6 +106,8 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
           />
           <GradientButton text='Get Started' href='/signup' />
         </div>
+          )
+        }
       </div>
       <div
         className={`${
