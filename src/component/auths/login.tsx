@@ -142,17 +142,19 @@ const LoginComponent = () => {
 
       if (axiosError.response) {
         if (axiosError.response.status === 422) {
-          const errorMessage = (axiosError.response.data as { errors?: any }).errors;
-          
-          if (errorMessage?.email === "Incorrect Credentials") {
-            // Redirect to signup if user not registered
-            message.error('User with that email not found. Redirecting to signup.');
-            router.push('/signup'); // Redirects to the signup page
+          const errorMessage = (axiosError.response.data as { errors?: any })
+            .errors;
 
+          if (errorMessage?.email === 'Incorrect Credentials') {
+            // Redirect to signup if user not registered
+            message.error(
+              'User with that email not found. Redirecting to signup.'
+            );
+            router.push('/signup'); // Redirects to the signup page
           } else {
-            message.error("Invalid credentails.")
+            message.error('Invalid credentails.');
           }
-      
+
           // Setting login credentials to empty
           setEmail('');
           setPassword('');
@@ -160,7 +162,8 @@ const LoginComponent = () => {
           // Handling other error statuses
           message.error(
             `Error ${axiosError.response.status}: ${
-              (axiosError.response.data as { errors?: string }).errors || 'Error logging in with your email. Try again!'
+              (axiosError.response.data as { errors?: string }).errors ||
+              'Error logging in with your email. Try again!'
             }`
           );
         }

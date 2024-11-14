@@ -1,6 +1,10 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RiCloseLine } from 'react-icons/ri';
+
+import logger from '@/lib/logger';
+
+import { getRealUserInfo, validateJwtToken } from '@/utils/auth';
 
 import LogoComponent from './logo';
 import GradientButton from '../controls/gradient-button';
@@ -12,7 +16,26 @@ type HeaderLayoutProps = {
 const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
   const [isNotificationCanceled, setNotificationCanceling] =
     useState<boolean>(false);
+  const [userDetails, setUserDetails] = useState<any>();
 
+  useEffect(() => {
+    const checkTokenValidity = async () => {
+      try {
+        if (await validateJwtToken()) {
+          const _userInfo = await getRealUserInfo(); // Await the async call
+          setUserDetails(_userInfo.data);
+        } else {
+          logger('JWT token is invalid or expired');
+        }
+      } catch (error) {
+        logger(error, 'Error validating token or fetching user info:');
+      }
+    };
+
+    checkTokenValidity();
+  }, []);
+
+  logger('user details: ', userDetails);
   return (
     <header
       className={`${

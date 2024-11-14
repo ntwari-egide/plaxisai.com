@@ -132,7 +132,7 @@ const SignupComponent = () => {
         { headers: { 'Content-Type': 'application/json' } }
       );
 
-      console.log("res: ", response.data)
+      console.log('res: ', response.data);
 
       // save the user response in cookies.
       Cookies.set(
