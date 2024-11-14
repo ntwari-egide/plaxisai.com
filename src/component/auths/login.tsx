@@ -142,22 +142,33 @@ const LoginComponent = () => {
 
       if (axiosError.response) {
         if (axiosError.response.status === 422) {
-          // Redirect to signup if user not registered
-          message.info('User not found. Redirecting to signup.');
-          router.push('/signup'); // Redirects to the signup page
+          const errorMessage = (axiosError.response.data as { errors?: any }).errors;
+          
+          console.log('error: ', errorMessage);
+          
+          
+          if (errorMessage?.email === "Incorrect Credentials") {
+            // Redirect to signup if user not registered
+            message.error('User with that email not found. Redirecting to signup.');
+            router.push('/signup'); // Redirects to the signup page
 
-          //setting login credentials to empty
+          } else {
+            message.error("Invalid credentails.")
+          }
+      
+          // Setting login credentials to empty
           setEmail('');
           setPassword('');
         } else {
+          // Handling other error statuses
           message.error(
             `Error ${axiosError.response.status}: ${
-              axiosError.response.data ||
-              'Error logging in with your email. Try again!'
+              (axiosError.response.data as { errors?: string }).errors || 'Error logging in with your email. Try again!'
             }`
           );
         }
       } else {
+        // Handling network error
         message.error('Network error. Please check your connection.');
         setPassword('');
       }
@@ -215,6 +226,7 @@ const LoginComponent = () => {
 
             <Input
               type='email'
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder='Enter your email address'
               className='outline-none border-[#E6E6E7] border rounded-md inter-tight placeholder:text-[#848486] placeholder:font-semibold text-[2vh]'
@@ -226,6 +238,7 @@ const LoginComponent = () => {
 
             <Input
               type='password'
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder='Password*'
               className='outline-none border-[#E6E6E7] border rounded-md inter-tight placeholder:text-[#848486] placeholder:font-semibold text-[2vh]'

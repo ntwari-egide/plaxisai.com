@@ -32,7 +32,7 @@ const SignupComponent = () => {
   const [password, setPassword] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [passwordConfirmation, setConfirmPassword] = useState<string>();
-  const [usingEmail, setIsUsingEmail] = useState<boolean>(true);
+  const [usingEmail, setIsUsingEmail] = useState<boolean>(false);
   const [firstName, setFirstName] = useState<string>();
   const [lastName, setLastName] = useState<string>();
 
@@ -107,9 +107,13 @@ const SignupComponent = () => {
     }
   };
 
-  const handleEmailLogin = async () => {
-    if (!email || !password) {
-      message.error(' Please fill in credentials');
+  const handleEmailSignup = async () => {
+    setIsLoading(true);
+
+    if (!firstName || !lastName) {
+      message.error(' Please fill in form!');
+      setIsLoading(false);
+
       return;
     }
 
@@ -118,13 +122,17 @@ const SignupComponent = () => {
     try {
       // Send the authorization code to your backend
       const response = await api.post(
-        '/auth/email/login',
+        '/auth/email/register',
         {
           email,
           password,
+          firstName,
+          lastName,
         },
         { headers: { 'Content-Type': 'application/json' } }
       );
+
+      console.log("res: ", response.data)
 
       // save the user response in cookies.
       Cookies.set(
@@ -136,6 +144,8 @@ const SignupComponent = () => {
       // setting the user credentials to empty
       setEmail('');
       setPassword('');
+      setLastName('');
+      setFirstName('');
 
       // route back to home
       router.push('/');
@@ -147,8 +157,8 @@ const SignupComponent = () => {
       if (axiosError.response) {
         if (axiosError.response.status === 422) {
           // Redirect to signup if user not registered
-          message.info('User not found. Redirecting to signup.');
-          router.push('/signup'); // Redirects to the signup page
+          message.info('User already found. Redirecting to login...', 5);
+          router.push('/login'); // Redirects to the signup page
 
           //setting login credentials to empty
           setEmail('');
@@ -171,6 +181,9 @@ const SignupComponent = () => {
   };
 
   const handlePasswordConfirmationCheck = async () => {
+    if (!password && !passwordConfirmation) {
+      message.error('Please fill out all fields!');
+    }
     if (password !== passwordConfirmation) {
       message.error('Passwords not matching!');
       setConfirmPassword('');
@@ -284,7 +297,7 @@ const SignupComponent = () => {
                 <Input
                   type='string'
                   value={firstName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  onChange={(e) => setFirstName(e.target.value)}
                   placeholder='Enter your first name'
                   className='outline-none border-[#E6E6E7] border rounded-md inter-tight placeholder:text-[#848486] placeholder:font-semibold text-[2vh]'
                 />
@@ -303,7 +316,7 @@ const SignupComponent = () => {
 
                 <Button
                   loading={isLoading}
-                  onClick={handlePasswordConfirmationCheck}
+                  onClick={handleEmailSignup}
                   className='inter-tight bg-[#F28729] rounded-full border-[#F28729] py-[3vh] hover:text-[#09090D] font-semibold text-[#09090D] ipad-portrait:text-[2vh] cursor-pointer hover:scale-[1.02]'
                 >
                   Create Account
@@ -311,17 +324,19 @@ const SignupComponent = () => {
                 </Button>
               </div>
             </div>
+            <div className='flex flex-col items-center'>
+              <p className='mt-[3vh] inter-tight text-[#848486] md:w-[20vw] ipad-portrait:w-[80vw] text-[1.7vh] text-center font-medium w-[80vw]'>
+                By clicking “Create Account” above, you acknowledge that you
+                have read and understood, and agree to Plaxis AI’s <br />
+                <span className='text-[#09090D] cursor-pointer hover:underline'>
+                  {' '}
+                  Terms and Privacy.
+                </span>
+              </p>
+            </div>
           </>
         )}
       </div>
-      {/* <p className='mt-[3vh] inter-tight text-[#848486] md:w-[20vw] ipad-portrait:w-[80vw] text-[1.7vh] text-center font-medium w-[80vw]'>
-        By clicking “Create Account” above, you acknowledge that you have read
-        and understood, and agree to Plaxis AI’s <br />
-        <span className='text-[#09090D] cursor-pointer hover:underline'>
-          {' '}
-          Terms and Privacy.
-        </span>
-      </p> */}
     </div>
   );
 };
