@@ -1,6 +1,65 @@
+import { analyzeResume, careerMatchingAI, CareerMatchResponse, ResumeValidationResponse } from '@/features/gen-ai';
+import logger from '@/lib/logger';
+import { RootState } from '@/store';
+import { decryptData } from '@/utils/encryptions';
+import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { Steps } from 'antd';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 const ScanningComponent = () => {
+
+  const [resumeValidations, setResumeValidations] = useState<ResumeValidationResponse>()
+
+  const [careerMatches, setCareerMatches] = useState<CareerMatchResponse>()
+
+  const router = useRouter()
+
+  const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
+
+  useEffect( () => {
+
+    const perfromAIActions = async () => {
+      const content =  decryptData(Cookies.get('resume-content') || '')
+
+    // if userResumeContent does not exists, send back to the main page
+    if(!content) {
+      router.push("/");
+      return;
+    }
+
+    const userResumeContent = JSON.parse(
+     content
+    );
+
+    // send resume content to the validate resume api
+
+     // getting the company matches using open ai api
+    //  await dispatch(seta('STARTED'));
+     const analysisResponse : ResumeValidationResponse = await dispatch(
+       analyzeResume(userResumeContent)
+     ).unwrap();
+    //  await dispatch(setOpenAi('COMPLETED'));
+     setResumeValidations(analysisResponse);
+    
+    // send the resume content to the career matches suggestion
+    const careerMatches: CareerMatchResponse = await dispatch(
+      careerMatchingAI(userResumeContent)
+    ).unwrap();
+
+    setCareerMatches(careerMatches);
+    
+    // send the response of career suggests to the job maches 
+    const companies: string[] = careerMatches.companyMatches.map(({ name }) => name);
+
+
+    }
+
+    perfromAIActions();
+  },[])
+
   return (
     <div className='px-[3vw] h-[80vh] flex flex-col md:flex-row w-full'>
       <div className='flex flex-col items-center md:w-[65%]'>

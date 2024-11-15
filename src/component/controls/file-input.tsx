@@ -40,10 +40,6 @@ const ReusableFileInput = ({
   const { error, response } = useSelector(
     (state: RootState) => state.resumeScanner
   );
-  const progress = useSelector((state: RootState) => state.trackingProgress);
-  const validity = useSelector(
-    (state: RootState) => state.openAI.response?.validity
-  );
 
   const getBase64 = (img: File, callback: (imageUrl: string) => void) => {
     const reader = new FileReader();
@@ -64,13 +60,13 @@ const ReusableFileInput = ({
       // set this encrypted format resume content to the cookies
       Cookies.set(
         'resume-content',
-        await encryptData(JSON.stringify(resumeText)),
+        await encryptData(JSON.stringify(resumeText.content)),
         { expires: 7 }
       );
 
       // router to the scanning page
       Router.push("/scanning")
-      
+
     } catch (error) {
       message.error('Error processing the file');
     }

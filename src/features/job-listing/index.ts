@@ -26,17 +26,33 @@ const initialState: JobListingState = {
   error: null,
 };
 
+interface _Company {
+  companyName: string;
+}
+
 export interface RequestJobListing {
   title: string;
-  company: string;
-  companyLocation: string;
+  companies: _Company[]
+}
+
+interface _RequestJobListing {
+  title: string;
+  companies: string[]
 }
 
 export const jobListingRequest = createAsyncThunk(
   'jobListing/fetchJobs',
-  async (request: any) => {
+  async (request: _RequestJobListing) => {
     try {
-      const response = await axios.post('api/job-listing', request, {
+
+      const jobRequest: RequestJobListing = {
+        title: request.title,
+        companies: []
+      }
+
+      request.companies.map ( company => jobRequest.companies.push( { companyName: company}) )
+
+      const response = await axios.post('api/job-listing', jobRequest, {
         headers: {
           'Content-Type': 'application/json',
         },

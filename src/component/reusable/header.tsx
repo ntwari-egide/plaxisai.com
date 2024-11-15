@@ -28,17 +28,16 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
           const _userInfo = await getRealUserInfo(); // Await the async call
           setUserDetails(_userInfo.data);
         } else {
-          logger('JWT token is invalid or expired');
+          // logger('JWT token is invalid or expired');
         }
       } catch (error) {
-        logger(error, 'Error validating token or fetching user info:');
+        // logger(error, 'Error validating token or fetching user info:');
       }
     };
 
     checkTokenValidity();
   }, []);
 
-  logger(userDetails, 'user details');
   return (
     <header
       className={`${
