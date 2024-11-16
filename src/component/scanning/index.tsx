@@ -1,5 +1,6 @@
 import { analyzeResume, careerMatchingAI, CareerMatchResponse, ResumeValidationResponse } from '@/features/gen-ai';
 import { _RequestJobListing, jobListingRequest } from '@/features/job-listing';
+import { ScanningProgress, setMatchesListing, setMatchingProfile, setResumeScanner } from '@/features/tracking-progress';
 import logger from '@/lib/logger';
 import { RootState } from '@/store';
 import { decryptData } from '@/utils/encryptions';
@@ -8,87 +9,130 @@ import { Steps } from 'antd';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ScanningComponent = () => {
+  const [resumeValidations, setResumeValidations] = useState<ResumeValidationResponse>();
+  const [processStartTime, setProcessStartTime] = useState<number>(Date.now());
+  const [estimatedEndTime, setEstimatedEndTime] = useState<number | null>(null);
+  const [remainingSeconds, setRemainingSeconds] = useState<number | null>(null);
 
-  const [resumeValidations, setResumeValidations] = useState<ResumeValidationResponse>()
-
-  const [careerMatches, setCareerMatches] = useState<CareerMatchResponse>()
-
-  const router = useRouter()
+  const router = useRouter();
 
   const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
 
-  useEffect( () => {
+  const scanningProgress = useSelector(
+    (state: RootState) => state.trackingProgress
+  );
 
+  // Track process completion
+  const isProcessComplete = 
+    scanningProgress.extractingData === ScanningProgress.COMPLETED &&
+    scanningProgress.matchingProfile === ScanningProgress.COMPLETED &&
+    scanningProgress.matchesListing === ScanningProgress.COMPLETED;
+
+  // Update remaining time based on process progress
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (isProcessComplete) {
+        setRemainingSeconds(0);
+        clearInterval(timer);
+      } else if (estimatedEndTime) {
+        const remaining = Math.max(0, Math.ceil((estimatedEndTime - Date.now()) / 1000));
+        setRemainingSeconds(remaining);
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [estimatedEndTime, isProcessComplete]);
+
+  useEffect(() => {
     const perfromAIActions = async () => {
-      const content =  decryptData(Cookies.get('resume-content') || '')
+      const content = decryptData(Cookies.get('resume-content') || '');
 
-    // if userResumeContent does not exists, send back to the main page
-    if(!content) {
-      router.push("/");
-      return;
-    }
+      if (!content) {
+        router.push("/");
+        return;
+      }
 
-    const userResumeContent = JSON.parse(
-     content
-    );
+      const userResumeContent = JSON.parse(content);
+      
+      // Start process timing
+      const startTime = Date.now();
+      setProcessStartTime(startTime);
+      // Set initial estimated completion time (30 seconds from start)
+      setEstimatedEndTime(startTime + 30000);
 
-    // send resume content to the validate resume api
+      await dispatch(setResumeScanner(ScanningProgress.STARTED));
 
-     // getting the company matches using open ai api
-    //  await dispatch(seta('STARTED'));
-     const analysisResponse : ResumeValidationResponse = await dispatch(
-       analyzeResume(userResumeContent)
-     ).unwrap();
-    //  await dispatch(setOpenAi('COMPLETED'));
-     setResumeValidations(analysisResponse);
-    
-    // send the resume content to the career matches suggestion
-    const careerMatches: CareerMatchResponse = await dispatch(
-      careerMatchingAI(userResumeContent)
-    ).unwrap();
+      const analysisResponse: ResumeValidationResponse = await dispatch(
+        analyzeResume(userResumeContent)
+      ).unwrap();
 
-    setCareerMatches(careerMatches);
-    
-    // send the response of career suggests to the job maches 
-    const companies: string[] = careerMatches.companyMatches.map(({ name }) => name);
-    
-    const request: _RequestJobListing = {
-      title: careerMatches.title,
-      companies,
-    }
+      setResumeValidations(analysisResponse);
+      
+      await dispatch(setResumeScanner(ScanningProgress.COMPLETED));
 
-    const jobsFound: CareerMatchResponse = await dispatch(
-      jobListingRequest(request)
-    ).unwrap();
+      await dispatch(setMatchingProfile(ScanningProgress.STARTED));
 
-  }
+      const careerMatches: CareerMatchResponse = await dispatch(
+        careerMatchingAI(userResumeContent)
+      ).unwrap();
+
+      await dispatch(setMatchingProfile(ScanningProgress.COMPLETED));
+      
+      await dispatch(setMatchesListing(ScanningProgress.STARTED));
+      const companies: string[] = careerMatches.companyMatches.map(({ name }) => name);
+
+      const request: _RequestJobListing = {
+        title: careerMatches.title,
+        companies,
+      };
+
+      await dispatch(jobListingRequest(request)).unwrap();
+      await dispatch(setMatchesListing(ScanningProgress.COMPLETED));
+    };
 
     perfromAIActions();
-  },[])
+  }, []);
+
+  // Function to get status message
+  const getStatusMessage = () => {
+    if (isProcessComplete) {
+      return "All processes completed!";
+    }
+    if (remainingSeconds === null) {
+      return "Initializing...";
+    }
+    if (remainingSeconds === 0) {
+      return "Almost done...";
+    }
+    return `Hold tight, ${remainingSeconds} ${remainingSeconds === 1 ? 'sec' : 'secs'} remaining`;
+  };
 
   return (
     <div className='px-[3vw] h-[80vh] flex flex-col md:flex-row w-full'>
       <div className='flex flex-col items-center md:w-[65%]'>
-        <div className=' flex flex-col gap-[4vh] mt-[10vh]'>
+        <div className='flex flex-col gap-[4vh] mt-[10vh]'>
           <h1 className='text-[7vh] whyteInktrap_font font-semibold'>
-            Still scanning...
+            {isProcessComplete ? 'Scan complete!' : 'Still scanning...'}
           </h1>
-          <p className='inter-tight  font-medium text-[1.7vh]'>
-            We’re doing the hard work for you—your job search just got a whole
+          <p className='inter-tight font-medium text-[1.7vh]'>
+            We're doing the hard work for you—your job search just got a whole
             lot easier!
           </p>
-          <p className='inter-tight  font-semibold text-[1.7vh] italic'>
-            Hold tight, 30 secs
+          <p className='inter-tight font-semibold text-[1.7vh] italic'>
+            {getStatusMessage()}
           </p>
         </div>
       </div>
       <div className='border-l border-l-[#DADADC] pt-[10vh] pl-[5vh] md:block hidden'>
         <Steps
           direction='vertical'
-          current={1}
+          current={
+            scanningProgress.matchesListing === ScanningProgress.COMPLETED ? 3 :
+            scanningProgress.matchingProfile === ScanningProgress.COMPLETED ? 2 : 1
+          }
           className='alliance-2'
           items={[
             {
