@@ -46,7 +46,7 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
           : ''
       }`}
     >
-      <div className='flex px-[6vw] items-center mt-[3vh] z-50 md:px-[3vw] flex-row justify-between justify-items-center place-items-center'>
+      <div className='flex px-[6vw] items-center my-[1vh] z-50 md:px-[3vw] flex-row justify-between justify-items-center place-items-center'>
         <Link href='/'>
           <LogoComponent size='medium' />
         </Link>

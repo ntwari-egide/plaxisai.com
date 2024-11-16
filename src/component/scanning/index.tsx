@@ -1,4 +1,5 @@
 import { analyzeResume, careerMatchingAI, CareerMatchResponse, ResumeValidationResponse } from '@/features/gen-ai';
+import { _RequestJobListing, jobListingRequest } from '@/features/job-listing';
 import logger from '@/lib/logger';
 import { RootState } from '@/store';
 import { decryptData } from '@/utils/encryptions';
@@ -53,9 +54,17 @@ const ScanningComponent = () => {
     
     // send the response of career suggests to the job maches 
     const companies: string[] = careerMatches.companyMatches.map(({ name }) => name);
-
-
+    
+    const request: _RequestJobListing = {
+      title: careerMatches.title,
+      companies,
     }
+
+    const jobsFound: CareerMatchResponse = await dispatch(
+      jobListingRequest(request)
+    ).unwrap();
+
+  }
 
     perfromAIActions();
   },[])
