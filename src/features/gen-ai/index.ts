@@ -1,5 +1,6 @@
-import api from '@/global/axios-config';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import api from '@/global/axios-config';
 
 export interface CompanyMatch {
   id: number;
@@ -43,9 +44,13 @@ export const analyzeResume = createAsyncThunk<ResumeValidationResponse, string>(
   'GenAI/analyzeResume',
   async (resumeText, { rejectWithValue }) => {
     try {
-      const response = await api.post('/gen-ai/validate-resume', { resumeText }, {
-        headers: { 'Content-Type': 'application/json' },
-      });
+      const response = await api.post(
+        '/gen-ai/validate-resume',
+        { resumeText },
+        {
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
       return response.data;
     } catch (error: any) {
       return rejectWithValue('Failed to analyze resume');
@@ -57,9 +62,13 @@ export const careerMatchingAI = createAsyncThunk<CareerMatchResponse, string>(
   'GenAI/careerMatchingAI', // Unique action type here
   async (resumeText, { rejectWithValue }) => {
     try {
-      const response = await api.post('/gen-ai/suggest-career-matches', { resumeText }, {
-        headers: { 'Content-Type': 'application/json' },
-      });
+      const response = await api.post(
+        '/gen-ai/suggest-career-matches',
+        { resumeText },
+        {
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
       return response.data;
     } catch (error: any) {
       return rejectWithValue('Failed to fetch career matches');
@@ -84,7 +93,10 @@ const GenAISlice = createSlice({
       state.error = null;
     };
 
-    const handleRejected = (state: ResumeScanAIState, action: PayloadAction<string | undefined>) => {
+    const handleRejected = (
+      state: ResumeScanAIState,
+      action: PayloadAction<string | undefined>
+    ) => {
       state.loading = false;
       state.error = action.payload || 'An error occurred';
     };
@@ -92,17 +104,23 @@ const GenAISlice = createSlice({
     builder
       // analyzeResume cases
       .addCase(analyzeResume.pending, handlePending)
-      .addCase(analyzeResume.fulfilled, (state, action: PayloadAction<ResumeValidationResponse>) => {
-        state.loading = false;
-        state.validations = action.payload;
-      })
+      .addCase(
+        analyzeResume.fulfilled,
+        (state, action: PayloadAction<ResumeValidationResponse>) => {
+          state.loading = false;
+          state.validations = action.payload;
+        }
+      )
 
       // careerMatchingAI cases
       .addCase(careerMatchingAI.pending, handlePending)
-      .addCase(careerMatchingAI.fulfilled, (state, action: PayloadAction<CareerMatchResponse>) => {
-        state.loading = false;
-        state.companyMatches = action.payload;
-      })
+      .addCase(
+        careerMatchingAI.fulfilled,
+        (state, action: PayloadAction<CareerMatchResponse>) => {
+          state.loading = false;
+          state.companyMatches = action.payload;
+        }
+      );
   },
 });
 

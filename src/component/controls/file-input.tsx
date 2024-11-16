@@ -1,20 +1,20 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { Flex, message } from 'antd';
+import Cookies from 'js-cookie';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '@/store';
 
 import { uploadFile } from '@/features/resume-scanner';
+import { encryptData } from '@/utils/encryptions';
 
 import TextButton from './text-button';
 import TypingAnimation from '../reusable/typing-animations';
 import AIIcon from '../../../public/images/ai-icon.png';
-import { encryptData } from '@/utils/encryptions';
-import Cookies from 'js-cookie';
 
 type ReusableFileInputProps = {
   onChange?: (file: File) => void;
@@ -34,7 +34,6 @@ const ReusableFileInput = ({
 }: ReusableFileInputProps) => {
   const Router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
-
 
   const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
   const { error, response } = useSelector(
@@ -65,8 +64,7 @@ const ReusableFileInput = ({
       );
 
       // router to the scanning page
-      Router.push("/scanning")
-
+      Router.push('/scanning');
     } catch (error) {
       message.error('Error processing the file');
     }

@@ -5,8 +5,6 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { RiCloseLine } from 'react-icons/ri';
 
-import logger from '@/lib/logger';
-
 import { getRealUserInfo, validateJwtToken } from '@/utils/auth';
 
 import LogoComponent from './logo';

@@ -7,18 +7,17 @@ export enum ScanningProgress {
   FAILED = 'FAILED',
 }
 
-
 export interface ScanningState {
-  extractingData: ScanningProgress,
-  matchesListing: ScanningProgress,
-  matchingProfile: ScanningProgress,
+  extractingData: ScanningProgress;
+  matchesListing: ScanningProgress;
+  matchingProfile: ScanningProgress;
 }
 
-const initialState : ScanningState = {
+const initialState: ScanningState = {
   extractingData: ScanningProgress.NOT_STARTED,
   matchesListing: ScanningProgress.NOT_STARTED,
   matchingProfile: ScanningProgress.NOT_STARTED,
-}
+};
 
 const trackingProgress = createSlice({
   name: 'trackingProgress',
