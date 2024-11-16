@@ -115,6 +115,8 @@ const ScanningComponent = () => {
     perfromAIActions();
   }, []);
 
+
+
   // Function to get status message
   const getStatusMessage = () => {
     if (isProcessComplete) {
@@ -131,6 +133,10 @@ const ScanningComponent = () => {
     } remaining`;
   };
 
+  if( !warningsDisplayed && remainingSeconds == 0) {
+    router.push('/matches')
+  }
+
   return (
     <div className='px-[3vw] h-[80vh] flex flex-col md:flex-row w-full'>
       <div className='flex flex-col items-center md:w-[65%]'>
@@ -145,11 +151,12 @@ const ScanningComponent = () => {
 
           { warningsDisplayed && !resumeValidations?.isValid ? (
             <div
-              className={`border rounded-md p-[2vw] md:w-[90%] inter-tight flex flex-col gap-[2vh] ${
-                resumeValidations?.isValid ? 'text-[#348888]' : 'text-[#F28729]'
-              }`}
+              className={` items-center md:w-[65%] `}
             >
-              <p className='text-[2vh] inter-tight font-semibold'>
+             <div className={`border rounded-md p-[2vw] inter-tight flex flex-col gap-[2vh] ${
+                resumeValidations?.isValid ? 'text-[#348888]' : 'text-[#F28729]'
+              }`}>
+             <p className='text-[2vh] inter-tight font-semibold'>
                 Resume Scanning Warnings
               </p>
 
@@ -173,10 +180,11 @@ const ScanningComponent = () => {
                 ))}
               </div>
 
-              <Button onClick={() => setWarningsDisplayed(false)} className='inter-tight bg-[white] rounded-full border-[#F28729] py-[2vh] border-[2px] font-semibold text-[#F28729] cursor-pointer text-[1.6vh] hover:scale-[1.02] md:w-[25%]'>
+              <Button onClick={() => setWarningsDisplayed(false)} className='inter-tight bg-[white] rounded-full border-[#F28729] py-[2vh] border-[2px] font-semibold text-[#F28729] cursor-pointer text-[1.6vh] hover:scale-[1.02] md:w-[40%]'>
               <RiArrowRightCircleLine className='text-[2vh]' />
               Ignore warnings
             </Button>
+             </div>
             </div>
           ) : (
             <p className='inter-tight font-semibold text-[1.7vh] italic'>
@@ -189,9 +197,9 @@ const ScanningComponent = () => {
         <Steps
           direction='vertical'
           current={
-            scanningProgress.matchesListing === ScanningProgress.COMPLETED
+            scanningProgress.matchesListing === ScanningProgress.COMPLETED && !warningsDisplayed
               ? 3
-              : scanningProgress.matchingProfile === ScanningProgress.COMPLETED
+              : scanningProgress.matchingProfile === ScanningProgress.COMPLETED && !warningsDisplayed
               ? 2
               : 1
           }
