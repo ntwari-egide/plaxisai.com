@@ -1,16 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
+import { RootState } from '@/store';
+
+import { CareerMatchResponse } from '@/features/gen-ai';
+
 import FiltersComponent from './filter';
 import JobMatchesComponent from './job-matches-component';
 import CompaniesMatch from '../matches/companies';
 import TagComponent from '../reusable/tags';
-import { RootState } from '@/store';
-import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
-import { useDispatch, useSelector } from 'react-redux';
-import logger from '@/lib/logger';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { CareerMatchResponse } from '@/features/gen-ai';
 
 type ResponseLayoutProps = {
   onClick?: () => void;

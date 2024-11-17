@@ -2,10 +2,10 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import filters from './features/filters';
 import genAI from './features/gen-ai';
+import jobGrader from './features/job-grader'
 import jobListing from './features/job-listing';
 import resumeScanner from './features/resume-scanner';
 import trackingProgress from './features/tracking-progress';
-import jobGrader from './features/job-grader'
 export const store = configureStore({
   reducer: {
     // Add the generated reducer here

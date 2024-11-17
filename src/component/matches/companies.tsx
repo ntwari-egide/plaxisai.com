@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/alt-text */
-import logger from '@/lib/logger';
 import { CheckCircleFilled } from '@ant-design/icons';
 import { Image } from 'antd';
 import {

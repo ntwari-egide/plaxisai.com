@@ -1,7 +1,8 @@
-import logger from '@/lib/logger';
-import JobMatch from '../matches/job';
 import { useSelector } from 'react-redux';
+
 import { RootState } from '@/store';
+
+import JobMatch from '../matches/job';
 
 export const jobMatches = [
   {

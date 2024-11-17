@@ -3,6 +3,7 @@ import { Button, Steps } from 'antd';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { RiArrowRightCircleLine } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '@/store';
@@ -21,7 +22,6 @@ import {
   setResumeScanner,
 } from '@/features/tracking-progress';
 import { decryptData } from '@/utils/encryptions';
-import { RiArrowRightCircleLine } from 'react-icons/ri';
 
 const ScanningComponent = () => {
   const [resumeValidations, setResumeValidations] =

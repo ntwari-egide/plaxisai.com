@@ -1,7 +1,3 @@
-import { GraderRequest, GraderResponse, jobGraderRequest } from '@/features/job-grader';
-import logger from '@/lib/logger';
-import { RootState } from '@/store';
-import { decryptData } from '@/utils/encryptions';
 import { CheckCircleFilled } from '@ant-design/icons';
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { Button } from 'antd';
@@ -11,6 +7,11 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { RiArrowRightLine } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
+
+import { RootState } from '@/store';
+
+import { GraderRequest, jobGraderRequest } from '@/features/job-grader';
+import { decryptData } from '@/utils/encryptions';
 
 type JobMatchProps = {
   date?: string;
