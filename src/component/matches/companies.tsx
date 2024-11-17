@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
+import logger from '@/lib/logger';
 import { CheckCircleFilled } from '@ant-design/icons';
 import { Image } from 'antd';
 import {
@@ -13,6 +14,7 @@ type CompaniesMatchProps = {
   matchingNumber: string;
   title: string;
   subtitle: string;
+  matchingDetails: any[];
 };
 
 const CompaniesMatch = ({
@@ -20,8 +22,10 @@ const CompaniesMatch = ({
   companyName,
   matchingNumber,
   title,
+  matchingDetails,
   subtitle,
 }: CompaniesMatchProps) => {
+
   return (
     <div className='border border-[#E6E6E7] hover:border-[#348888] cursor-pointer transition-all rounded-xl mt-[3vh] py-[3vh] px-[2vw] flex flex-col gap-[3vh]'>
       <div className='flex flex-row gap-[1vw]  justify-between'>
@@ -39,7 +43,7 @@ const CompaniesMatch = ({
               <RiVerifiedBadgeFill className='text-[#F28729]' />
             </div>
             <h1 className='text-[#173440] font-medium text-[5vh] whyteInktrap_font'>
-              {matchingNumber}
+              {matchingNumber}%
             </h1>
           </div>
         </div>
@@ -48,35 +52,27 @@ const CompaniesMatch = ({
 
       <h1 className='whyteInktrap_font text-[2vh] font-medium'>{title}</h1>
 
-      <div className='flex flex-col gap-[2vh]'>
-        <div className='flex flex-row items-center object-center gap-[1vw]'>
-          <CheckCircleFilled className='text-[#348888] rounded-full text-[3vh]' />
-          <p className='text-[2vh] inter-tight text-[#09090D]'>
-            Work Experience
-          </p>
-        </div>
-
-        <div className='flex flex-row items-center object-center gap-[1vw]'>
-          <CheckCircleFilled className='text-[#348888] rounded-full text-[3vh]' />
-          <p className='text-[2vh] inter-tight text-[#09090D]'>
-            Education & Certifications
-          </p>
-        </div>
-
-        <div className='flex flex-row items-center object-center gap-[1vw]'>
-          <CheckCircleFilled className='text-[#AAE2E2] rounded-full text-[3vh]' />
-          <p className='text-[2vh] inter-tight text-[#09090D]'>
-            Company Values
-          </p>
-        </div>
-
-        <div className='flex flex-row items-center object-center gap-[1vw]'>
-          <CheckCircleFilled className='text-[#173440] rounded-full text-[3vh]' />
-          <p className='text-[2vh] inter-tight text-[#09090D]'>
-            F1 Visa Sponsorship
-          </p>
-        </div>
+      {
+  Object.keys(matchingDetails).map((matchingKey) => (
+    <div key={matchingKey} className='flex flex-col gap-[2vh]'>
+      <div className='flex flex-row items-center object-center gap-[1vw]'>
+        <CheckCircleFilled
+          className={`${
+            matchingDetails[matchingKey] > 95
+              ? 'text-[#173440]'
+              : matchingDetails[matchingKey] > 90
+              ? 'text-[#348888]'
+              : 'text-[#AAE2E2]'
+          } rounded-full text-[3vh]`}
+        />
+        <p className='text-[2vh] inter-tight text-[#09090D]'>
+          {matchingKey} ({matchingDetails[matchingKey]}%)
+        </p>
       </div>
+    </div>
+  ))
+}
+      
 
       <div className='border-t border-t-[#09090D] border-dashed flex flex-row py-[2vh] gap-[1vw]'>
         <p className='text-[1.4vh] inter-tight text-[#848486] font-medium'>

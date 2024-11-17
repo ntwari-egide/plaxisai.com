@@ -1,4 +1,7 @@
+import logger from '@/lib/logger';
 import JobMatch from '../matches/job';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 export const jobMatches = [
   {
@@ -66,17 +69,29 @@ export const jobMatches = [
   },
   // Add more job objects here to reach a total of 40
 ];
-const JobMatchesComponent = () => {
+
+
+const JobMatchesComponent = ( ) => {
+
+  const jobMatches = useSelector(
+    (state: RootState) => state.jobListing.jobs 
+  )
+
+  logger(jobMatches, "jobs")
+
   return (
     <div className='md:grid flex flex-col grid-cols-3 ipad-portrait:grid-cols-1 w-full gap-[3vh] '>
-      {jobMatches.map((job, key) => (
+      {jobMatches?.map((job, key) => (
         <JobMatch
           key={key}
           companyName={job.companyName}
           matchingPercentage={job.matchingPercentage}
-          date={job.date}
-          salary={job.salary}
-          title={job.title}
+          date={job?.jobDetails?.datePosted}
+          salary={job?.jobDetails?.salaryRange
+          }
+          title={job?.jobDetails?.title}
+          location={job?.jobDetails?.location}
+          jobDescription={job?.jobDetails?.jobDescription}
         />
       ))}
     </div>

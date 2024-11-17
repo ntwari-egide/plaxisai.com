@@ -4,12 +4,26 @@ import FiltersComponent from './filter';
 import JobMatchesComponent from './job-matches-component';
 import CompaniesMatch from '../matches/companies';
 import TagComponent from '../reusable/tags';
+import { RootState } from '@/store';
+import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
+import { useDispatch, useSelector } from 'react-redux';
+import logger from '@/lib/logger';
+import { useRouter } from 'next/router';
 
 type ResponseLayoutProps = {
   onClick?: () => void;
 };
 
 const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
+
+  const router = useRouter()
+
+  const careerMatches = useSelector(
+    (state: RootState) => state.genAI.companyMatches
+  );
+
+  if (! careerMatches) router.push('/')
+
   return (
     <div
       className='md:px-[3vw] px-[6vw] mt-[3vh] relative flex flex-col  gap-[2vh]'
@@ -33,27 +47,19 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
         />
       </div>
       <div className='md:grid ipad-portrait:grid-cols-2 grid-cols-3 gap-[3vw]'>
-        <CompaniesMatch
-          title='Software Engineering Intern'
-          companyName='Apple'
-          subtitle='20 jobs available from this company'
-          matchingNumber='96.7%'
-          logoImg='https://logodownload.org/wp-content/uploads/2013/12/apple-logo-16.png'
-        />
-        <CompaniesMatch
-          title='Software Engineering Intern'
-          companyName='Google'
-          subtitle='20 jobs available from this company'
-          matchingNumber='95.7%'
-          logoImg='https://loodibee.com/wp-content/uploads/Google-Symbol.png'
-        />
-        <CompaniesMatch
-          title='Software Engineering Intern'
-          companyName='Meta'
-          subtitle='20 jobs available from this company'
-          matchingNumber='94.5%'
-          logoImg='https://www.cdnlogo.com/logos/m/59/meta.svg'
-        />
+        {
+          careerMatches?.companyMatches.map((company, key) => (
+            <CompaniesMatch
+            key={key}
+            title={careerMatches.title}
+            companyName={company.name}
+            matchingDetails={company.matchingDetails}
+            subtitle='20 jobs available from this company'
+            matchingNumber={company.matchingCredit.toString()}
+            logoImg='https://logodownload.org/wp-content/uploads/2013/12/apple-logo-16.png'
+          />
+          ))
+        }
       </div>
 
       <div className='mt-[5vh]'>

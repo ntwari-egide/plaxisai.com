@@ -9,6 +9,8 @@ type JobMatchProps = {
   companyName?: string;
   title?: string;
   salary?: string;
+  location?: string;
+  jobDescription: string;
 };
 
 const JobMatch = ({
@@ -17,24 +19,32 @@ const JobMatch = ({
   companyName,
   title,
   salary,
+  location,
+  jobDescription
 }: JobMatchProps) => {
   return (
     <Link href='/job-details' target='_blank'>
       <div className='border py-[2vh] rounded-xl px-[1vw] border-[#E6E6E7] w-full flex flex-col'>
         <div className='bg-[#EBF3F3] rounded-md flex flex-col py-[2vh] px-[1vw] gap-[2vh]'>
           <div className='flex flex-row justify-between'>
-            <p className='bg-white px-[1.5vw] flex items-center inter-tight text-[1.7vh] font-medium rounded-full'>
+            {date ? <p className='bg-white px-[1.5vw] py-[1vh] flex items-center inter-tight text-[1.7vh] font-medium rounded-full'>
               {date}
-            </p>
+            </p>: ''}
             <p className='whyteInktrap_font text-[3.5vh] font-semibold'>
-              {matchingPercentage}
+              {98}%
             </p>
           </div>
 
           <div className='flex flex-col gap-[1vh]'>
+            <div className="flex justify-between flex-row">
             <h1 className='inter-tight text-[1.7vh] font-semibold'>
               {companyName}
             </h1>
+
+            <h1 className='inter-tight text-[1.7vh]'>
+              {location}
+            </h1>
+            </div>
             <h1 className='whyteInktrap_font text-[2vh] font-medium'>
               {title}
             </h1>
@@ -69,9 +79,11 @@ const JobMatch = ({
             Easy Apply
             <RiArrowRightLine className='text-[3vh]' />
           </Button>
-          <div className='border-[#E6E6E7] border rounded-full px-[2vw] flex items-center text-[2vh] inter-tight font-medium'>
+          {
+            salary? <div className='border-[#E6E6E7] border rounded-full px-[2vw] flex items-center text-[2vh] inter-tight font-medium'>
             {salary}
-          </div>
+          </div>: ''
+          }
         </div>
       </div>
     </Link>

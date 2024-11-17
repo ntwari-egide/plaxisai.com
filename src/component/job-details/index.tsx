@@ -301,6 +301,7 @@ const JobDetailsLayout = () => {
                   date={job.date}
                   salary={job.salary}
                   title={job.title}
+                  jobDescription=''
                 />
               ) : (
                 ''
