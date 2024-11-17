@@ -42,7 +42,7 @@ const CompaniesMatch = ({
               <RiVerifiedBadgeFill className='text-[#F28729]' />
             </div>
             <h1 className='text-[#173440] font-medium text-[5vh] whyteInktrap_font'>
-              {matchingNumber}%
+              {matchingNumber}
             </h1>
           </div>
         </div>
@@ -60,12 +60,12 @@ const CompaniesMatch = ({
                   matchingDetails[matchingKey] > 95
                     ? 'text-[#173440]'
                     : matchingDetails[matchingKey] > 90
-                    ? 'text-[#348888]'
+                    ? 'text-[#9b9e9e]'
                     : 'text-[#AAE2E2]'
                 } rounded-full text-[3vh]`}
               />
               <p className='text-[2vh] inter-tight text-[#09090D]'>
-                {matchingKey} ({matchingDetails[matchingKey]}%)
+                {matchingKey} ({matchingDetails[matchingKey]})
               </p>
             </div>
           </div>

@@ -133,7 +133,7 @@ const ScanningComponent = () => {
     } remaining`;
   };
 
-  if( !warningsDisplayed && remainingSeconds == 0) {
+  if( !warningsDisplayed && remainingSeconds == 0 && resumeValidations) {
     router.push('/matches')
   }
 
@@ -149,13 +149,11 @@ const ScanningComponent = () => {
             lot easier!
           </p>
 
-          { warningsDisplayed && !resumeValidations?.isValid ? (
+          { warningsDisplayed ? (
             <div
               className={` items-center md:w-[65%] `}
             >
-             <div className={`border rounded-md p-[2vw] inter-tight flex flex-col gap-[2vh] ${
-                resumeValidations?.isValid ? 'text-[#348888]' : 'text-[#F28729]'
-              }`}>
+             <div className="border rounded-md p-[2vw] inter-tight flex flex-col gap-[2vh] text-[#F28729]">
              <p className='text-[2vh] inter-tight font-semibold'>
                 Resume Scanning Warnings
               </p>
@@ -180,7 +178,7 @@ const ScanningComponent = () => {
                 ))}
               </div>
 
-              <Button onClick={() => setWarningsDisplayed(false)} className='inter-tight bg-[white] rounded-full border-[#F28729] py-[2vh] border-[2px] font-semibold text-[#F28729] cursor-pointer text-[1.6vh] hover:scale-[1.02] md:w-[40%]'>
+              <Button onClick={() => setWarningsDisplayed(false)} className='inter-tight bg-[white] rounded-full border-[#F28729] py-[2vh] border-[2px] font-semibold text-[#F28729] cursor-pointer text-[1.6vh] hover:scale-[1.02] md:w-[50%]'>
               <RiArrowRightCircleLine className='text-[2vh]' />
               Ignore warnings
             </Button>

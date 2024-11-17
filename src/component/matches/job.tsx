@@ -1,6 +1,6 @@
 import { CheckCircleFilled } from '@ant-design/icons';
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
-import { Button } from 'antd';
+import { Button, Skeleton } from 'antd';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -75,7 +75,7 @@ const JobMatch = ({
               {date}
             </p>: ''}
             <p className='whyteInktrap_font text-[3.5vh] font-semibold'>
-              {graderResponse?.matchingPercentage}%
+              {graderResponse?.matchingPercentage}
             </p>
           </div>
 
@@ -96,24 +96,30 @@ const JobMatch = ({
 
           <div className='flex flex-col gap-[1vh]'>
 
-          {graderResponse && graderResponse.matchingResults.map((result) => (
-  <div key={result.criteria} className='flex flex-col gap-[2vh]'>
-    <div className='flex flex-row items-center object-center gap-[1vw]'>
-      <CheckCircleFilled
-        className={`${
-          result.number > 95
-            ? 'text-[#173440]'
-            : result.number > 90
-            ? 'text-[#348888]'
-            : 'text-[#AAE2E2]'
-        } rounded-full text-[3vh]`}
-      />
-      <p className='text-[2vh] inter-tight text-[#09090D]'>
-        {result.criteria} ({result.number}%)
-      </p>
-    </div>
-  </div>
-))}
+            {
+              !graderResponse ? <>
+              <Skeleton active className='w-full' />
+              </> : <>
+              {graderResponse && graderResponse.matchingResults.map((result) => (
+              <div key={result.criteria} className='flex flex-col gap-[2vh]'>
+                <div className='flex flex-row items-center object-center gap-[1vw]'>
+                  <CheckCircleFilled
+                    className={`${
+                      result.number > 95
+                        ? 'text-[#173440]'
+                        : result.number > 90
+                        ? 'text-[#348888]'
+                        : 'text-[#AAE2E2]'
+                    } rounded-full text-[3vh]`}
+                  />
+                  <p className='text-[2vh] inter-tight text-[#09090D]'>
+                    {result.criteria} ({result.number})
+                  </p>
+                </div>
+              </div>
+            ))}
+              </>
+            }
           </div>
         </div>
 
