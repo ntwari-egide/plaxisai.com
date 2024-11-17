@@ -297,7 +297,6 @@ const JobDetailsLayout = () => {
                 <JobMatch
                   key={key}
                   companyName={job.companyName}
-                  matchingPercentage={job.matchingPercentage}
                   date={job.date}
                   salary={job.salary}
                   title={job.title}

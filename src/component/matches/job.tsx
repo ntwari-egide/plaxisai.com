@@ -1,11 +1,14 @@
+import { RootState } from '@/store';
 import { CheckCircleFilled } from '@ant-design/icons';
+import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { Button } from 'antd';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { RiArrowRightLine } from 'react-icons/ri';
+import { useDispatch } from 'react-redux';
 
 type JobMatchProps = {
   date?: string;
-  matchingPercentage?: string;
   companyName?: string;
   title?: string;
   salary?: string;
@@ -15,13 +18,25 @@ type JobMatchProps = {
 
 const JobMatch = ({
   date,
-  matchingPercentage,
   companyName,
   title,
   salary,
   location,
   jobDescription
 }: JobMatchProps) => {
+
+  const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
+
+  useEffect(() => {
+    // send the request to scan through the resume description
+
+     const getJobAIGradings = async () => {
+      // await dispatch(analyzeResume(ScanningProgress.STARTED));
+     }
+
+     getJobAIGradings();
+  },[])
+
   return (
     <Link href='/job-details' target='_blank'>
       <div className='border py-[2vh] rounded-xl px-[1vw] border-[#E6E6E7] w-full flex flex-col'>

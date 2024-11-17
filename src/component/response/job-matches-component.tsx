@@ -77,15 +77,12 @@ const JobMatchesComponent = ( ) => {
     (state: RootState) => state.jobListing.jobs 
   )
 
-  logger(jobMatches, "jobs")
-
   return (
     <div className='md:grid flex flex-col grid-cols-3 ipad-portrait:grid-cols-1 w-full gap-[3vh] '>
       {jobMatches?.map((job, key) => (
         <JobMatch
           key={key}
           companyName={job.companyName}
-          matchingPercentage={job.matchingPercentage}
           date={job?.jobDetails?.datePosted}
           salary={job?.jobDetails?.salaryRange
           }
