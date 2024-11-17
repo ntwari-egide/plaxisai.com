@@ -1,9 +1,14 @@
+import { GraderRequest, GraderResponse, jobGraderRequest } from '@/features/job-grader';
+import logger from '@/lib/logger';
 import { RootState } from '@/store';
+import { decryptData } from '@/utils/encryptions';
 import { CheckCircleFilled } from '@ant-design/icons';
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { Button } from 'antd';
+import Cookies from 'js-cookie';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { RiArrowRightLine } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
 
@@ -27,11 +32,34 @@ const JobMatch = ({
 
   const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
 
+  const [graderResponse, setGraderResponse] = useState<any>()
+
+  const router = useRouter();
+
+  const content = decryptData(Cookies.get('resume-content') || '');
+
+      if (!content) {
+        router.push('/');
+        return;
+      }
+
+    const userResumeContent = JSON.parse(content);
+
   useEffect(() => {
     // send the request to scan through the resume description
 
+
+
      const getJobAIGradings = async () => {
-      // await dispatch(analyzeResume(ScanningProgress.STARTED));
+
+      const request: GraderRequest = {
+        resumeText: userResumeContent,
+        jobDescription
+      }
+
+      const graderResponse =  await dispatch(jobGraderRequest(request));
+      
+      setGraderResponse(graderResponse.payload);
      }
 
      getJobAIGradings();
@@ -46,7 +74,7 @@ const JobMatch = ({
               {date}
             </p>: ''}
             <p className='whyteInktrap_font text-[3.5vh] font-semibold'>
-              {98}%
+              {graderResponse?.matchingPercentage}%
             </p>
           </div>
 
@@ -66,26 +94,25 @@ const JobMatch = ({
           </div>
 
           <div className='flex flex-col gap-[1vh]'>
-            <div className='flex flex-row items-center object-center gap-[1vw]'>
-              <CheckCircleFilled className='text-[#348888] rounded-full text-[3vh]' />
-              <p className='text-[2vh] inter-tight text-[#09090D]'>
-                Work Experience
-              </p>
-            </div>
 
-            <div className='flex flex-row items-center object-center gap-[1vw]'>
-              <CheckCircleFilled className='text-[#6A6C72] rounded-full text-[3vh]' />
-              <p className='text-[2vh] inter-tight text-[#09090D]'>
-                Education & Certifications
-              </p>
-            </div>
-
-            <div className='flex flex-row items-center object-center gap-[1vw]'>
-              <CheckCircleFilled className='text-[#173440] rounded-full text-[3vh]' />
-              <p className='text-[2vh] inter-tight text-[#09090D]'>
-                Education & Certification
-              </p>
-            </div>
+          {graderResponse && graderResponse.matchingResults.map((result) => (
+  <div key={result.criteria} className='flex flex-col gap-[2vh]'>
+    <div className='flex flex-row items-center object-center gap-[1vw]'>
+      <CheckCircleFilled
+        className={`${
+          result.number > 95
+            ? 'text-[#173440]'
+            : result.number > 90
+            ? 'text-[#348888]'
+            : 'text-[#AAE2E2]'
+        } rounded-full text-[3vh]`}
+      />
+      <p className='text-[2vh] inter-tight text-[#09090D]'>
+        {result.criteria} ({result.number}%)
+      </p>
+    </div>
+  </div>
+))}
           </div>
         </div>
 

@@ -88,7 +88,7 @@ const JobMatchesComponent = ( ) => {
           }
           title={job?.jobDetails?.title}
           location={job?.jobDetails?.location}
-          jobDescription={job?.jobDetails?.jobDescription}
+          jobDescription={job?.jobDetails?.description}
         />
       ))}
     </div>

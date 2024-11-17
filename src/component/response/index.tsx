@@ -9,6 +9,8 @@ import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import logger from '@/lib/logger';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { CareerMatchResponse } from '@/features/gen-ai';
 
 type ResponseLayoutProps = {
   onClick?: () => void;
@@ -18,11 +20,27 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
 
   const router = useRouter()
 
-  const careerMatches = useSelector(
+  const [careerMatches, setCareerMatches] = useState<CareerMatchResponse>()
+
+  const matches = useSelector(
     (state: RootState) => state.genAI.companyMatches
   );
+  
+ useEffect(() => {
+  const getAllData =  async () => {
+   
+  
+    if (! matches) {
+      router.push('/')
+    } else {
+      setCareerMatches(matches)
+    }
 
-  if (! careerMatches) router.push('/')
+    
+  }
+
+  getAllData();
+ },[])
 
   return (
     <div
