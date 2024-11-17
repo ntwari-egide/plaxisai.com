@@ -5,7 +5,7 @@ import genAI from './features/gen-ai';
 import jobListing from './features/job-listing';
 import resumeScanner from './features/resume-scanner';
 import trackingProgress from './features/tracking-progress';
-
+import jobGrader from './features/job-grader'
 export const store = configureStore({
   reducer: {
     // Add the generated reducer here
@@ -14,6 +14,7 @@ export const store = configureStore({
     genAI: genAI,
     trackingProgress: trackingProgress,
     jobsFiltered: filters,
+    jobGrader: jobGrader,
   },
 });
 
