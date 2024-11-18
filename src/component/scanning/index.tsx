@@ -21,7 +21,8 @@ import {
   setMatchingProfile,
   setResumeScanner,
 } from '@/features/tracking-progress';
-import { decryptData } from '@/utils/encryptions';
+import { decryptData, encryptData } from '@/utils/encryptions';
+import logger from '@/lib/logger';
 
 const ScanningComponent = () => {
   const [resumeValidations, setResumeValidations] =
@@ -108,7 +109,14 @@ const ScanningComponent = () => {
         companies,
       };
 
-      await dispatch(jobListingRequest(request)).unwrap();
+     const response =  await dispatch(jobListingRequest(request)).unwrap();
+
+      //store job matches in the cookies
+      localStorage.setItem(
+        'job-matches',
+         await encryptData(JSON.stringify(response))
+      );
+
       await dispatch(setMatchesListing(ScanningProgress.COMPLETED));
     };
 

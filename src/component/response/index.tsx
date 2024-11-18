@@ -30,6 +30,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
   const jobMatches = useSelector(
     (state: RootState) => state.jobListing.jobs 
   )
+  
 
  useEffect(() => {
   const getAllData =  async () => {

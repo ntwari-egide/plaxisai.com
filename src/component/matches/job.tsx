@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { CheckCircleFilled } from '@ant-design/icons';
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { Button, Skeleton } from 'antd';
@@ -20,6 +21,7 @@ type JobMatchProps = {
   salary?: string;
   location?: string;
   jobDescription: string;
+  jobId: string;
 };
 
 const JobMatch = ({
@@ -28,7 +30,8 @@ const JobMatch = ({
   title,
   salary,
   location,
-  jobDescription
+  jobDescription,
+  jobId
 }: JobMatchProps) => {
 
   const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
@@ -67,7 +70,7 @@ const JobMatch = ({
   },[])
 
   return (
-    <Link href='/job-details' target='_blank'>
+    <Link href={`/job-details/${jobId}`} target='_blank'>
       <div className='border py-[2vh] rounded-xl px-[1vw] border-[#E6E6E7] w-full flex flex-col'>
         <div className='bg-[#EBF3F3] rounded-md flex flex-col py-[2vh] px-[1vw] gap-[2vh]'>
           <div className='flex flex-row justify-between'>
@@ -100,7 +103,7 @@ const JobMatch = ({
               !graderResponse ? <>
               <Skeleton active className='w-full' />
               </> : <>
-              {graderResponse && graderResponse.matchingResults.map((result) => (
+              {graderResponse && graderResponse.matchingResults.map((result: any) => (
               <div key={result.criteria} className='flex flex-col gap-[2vh]'>
                 <div className='flex flex-row items-center object-center gap-[1vw]'>
                   <CheckCircleFilled

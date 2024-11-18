@@ -28,8 +28,6 @@ const CompaniesMatch = ({
   companyDomain
 }: CompaniesMatchProps) => {
 
-  logger( companyDomain,"logo")
-
   return (
     <div className='border border-[#E6E6E7] hover:border-[#348888] cursor-pointer transition-all rounded-xl mt-[3vh] py-[3vh] px-[2vw] flex flex-col gap-[3vh]'>
       <div className='flex flex-row gap-[1vw]  justify-between'>

@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import api from '@/global/axios-config';
+import Cookies from 'js-cookie';
+import { encryptData } from '@/utils/encryptions';
 
 export interface Job {
   id: string;

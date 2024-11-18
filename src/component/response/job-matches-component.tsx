@@ -16,6 +16,7 @@ const JobMatchesComponent = ( ) => {
       {jobMatches?.map((job, key) => (
         <JobMatch
           key={key}
+          jobId={job?.jobDetails?.id}
           companyName={job.companyName}
           date={job?.jobDetails?.datePosted}
           salary={job?.jobDetails?.salaryRange
