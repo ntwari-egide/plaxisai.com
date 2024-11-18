@@ -1,7 +1,9 @@
 /* eslint-disable react/jsx-curly-brace-presence */
 /* eslint-disable jsx-a11y/alt-text */
-import { CheckCircleFilled, CheckCircleOutlined } from '@ant-design/icons';
+import { CheckCircleFilled } from '@ant-design/icons';
+import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { Button, Image, Select, Skeleton } from 'antd';
+import Cookies from 'js-cookie';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -11,19 +13,17 @@ import {
   RiMapPinLine,
   RiVerifiedBadgeFill,
 } from 'react-icons/ri';
+import { useDispatch } from 'react-redux';
 
+import { RootState } from '@/store';
+
+import { CareerMatchResponse } from '@/features/gen-ai';
+import { GraderRequest, jobGraderRequest } from '@/features/job-grader';
 import { decryptData } from '@/utils/encryptions';
 
 import PlaxisAITag from './ai-tag';
 import AIDarkImg from '../../../public/images/ai-icon.png';
 import AILightImg from '../../../public/images/ai-icon-white.png';
-import { GraderRequest, jobGraderRequest } from '@/features/job-grader';
-import Cookies from 'js-cookie';
-import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
-import { RootState } from '@/store';
-import { useDispatch } from 'react-redux';
-import logger from '@/lib/logger';
-import { CareerMatchResponse } from '@/features/gen-ai';
 
 type JobDetailsLayoutProps = {
   jobId: string | string[] | undefined;
@@ -31,101 +31,100 @@ type JobDetailsLayoutProps = {
 
 const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
   const [jobDetails, setJobDetails] = useState<any>(null);
-const [graderResponse, setGraderResponse] = useState<any>(null);
-const [companyDomain,setCompanyDomain] = useState<string>();
-const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
-const router = useRouter();
+  const [graderResponse, setGraderResponse] = useState<any>(null);
+  const [companyDomain, setCompanyDomain] = useState<string>();
+  const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
+  const router = useRouter();
 
-useEffect(() => {
-  const getData = async () => {
-    // Retrieve job matches from localStorage
-    const rawData = await localStorage.getItem('job-matches');
-    if (!rawData) {
-      router.push('/');
-      return;
-    }
-
-    try {
-      // Decrypt and parse job matches
-      const jobs = JSON.parse(decryptData(rawData));
-      const matchingJob = jobs.find((job: any) => job?.jobDetails?.id === jobId);
-
-      // if (!matchingJob) {
-      //   router.push('/'); // Redirect if no matching job is found
-      //   return;
-      // }
-
-      setJobDetails(matchingJob); // Set the matching job details
-    } catch (error) {
-      console.error('Error parsing job data:', error);
-      router.push('/'); // Redirect in case of an error
-    }
-
-    // fetching company domain
-    const storedMatches = Cookies.get("career-matches");
-
-if (!storedMatches) {
-  console.error("No career matches found in cookies.");
-  return; // Exit early if no data is present
-}
-
-
-try {
-  const decryptedData = decryptData(storedMatches);
-
-
-  if (!decryptedData) {
-    console.error("Decryption returned null or invalid data.");
-    return; // Exit early if decryption fails
-  }
-
-  const careerMatches: CareerMatchResponse = JSON.parse(decryptedData);
-
-
-  careerMatches.companyMatches.forEach(company => {
-    if (company.name === jobDetails?.companyName) {
-      setCompanyDomain(company.companyDomain);
-    }
-  });
-} catch (error) {
-  // console.error("Failed to parse career matches or decrypt data:", error);
-}
-  };
-
-  getData();
-}, [router, jobId]); // Only runs when router or jobId changes
-
-useEffect(() => {
-  // Fetch grader response only when jobDetails is available
-  const fetchGraderResponse = async () => {
-    if (!jobDetails) return;
-
-    try {
-      // Retrieve and decrypt resume content
-      const content = decryptData(Cookies.get('resume-content') || '');
-      if (!content) {
+  useEffect(() => {
+    const getData = async () => {
+      // Retrieve job matches from localStorage
+      const rawData = await localStorage.getItem('job-matches');
+      if (!rawData) {
         router.push('/');
         return;
       }
 
-      const userResumeContent = JSON.parse(content);
+      try {
+        // Decrypt and parse job matches
+        const jobs = JSON.parse(decryptData(rawData));
+        const matchingJob = jobs.find(
+          (job: any) => job?.jobDetails?.id === jobId
+        );
 
-      // Create the grading request
-      const request: GraderRequest = {
-        resumeText: userResumeContent,
-        jobDescription: jobDetails.jobDetails.description,
-      };
+        // if (!matchingJob) {
+        //   router.push('/'); // Redirect if no matching job is found
+        //   return;
+        // }
 
-      // Dispatch the grading request and set the response
-      const graderResponse = await dispatch(jobGraderRequest(request));
-      setGraderResponse(graderResponse.payload);
-    } catch (error) {
-      console.error('Error fetching grader response:', error);
-    }
-  };
+        setJobDetails(matchingJob); // Set the matching job details
+      } catch (error) {
+        console.error('Error parsing job data:', error);
+        router.push('/'); // Redirect in case of an error
+      }
 
-  fetchGraderResponse();
-}, [jobDetails, dispatch, router]); // Runs when jobDetails changes
+      // fetching company domain
+      const storedMatches = Cookies.get('career-matches');
+
+      if (!storedMatches) {
+        console.error('No career matches found in cookies.');
+        return; // Exit early if no data is present
+      }
+
+      try {
+        const decryptedData = decryptData(storedMatches);
+
+        if (!decryptedData) {
+          console.error('Decryption returned null or invalid data.');
+          return; // Exit early if decryption fails
+        }
+
+        const careerMatches: CareerMatchResponse = JSON.parse(decryptedData);
+
+        careerMatches.companyMatches.forEach((company) => {
+          if (company.name === jobDetails?.companyName) {
+            setCompanyDomain(company.companyDomain);
+          }
+        });
+      } catch (error) {
+        // console.error("Failed to parse career matches or decrypt data:", error);
+      }
+    };
+
+    getData();
+  }, [router, jobId]); // Only runs when router or jobId changes
+
+  useEffect(() => {
+    // Fetch grader response only when jobDetails is available
+    const fetchGraderResponse = async () => {
+      if (!jobDetails) return;
+
+      try {
+        // Retrieve and decrypt resume content
+        const content = decryptData(Cookies.get('resume-content') || '');
+        if (!content) {
+          router.push('/');
+          return;
+        }
+
+        const userResumeContent = JSON.parse(content);
+
+        // Create the grading request
+        const request: GraderRequest = {
+          resumeText: userResumeContent,
+          jobDescription: jobDetails.jobDetails.description,
+        };
+
+        // Dispatch the grading request and set the response
+        const graderResponse = await dispatch(jobGraderRequest(request));
+        setGraderResponse(graderResponse.payload);
+      } catch (error) {
+        console.error('Error fetching grader response:', error);
+      }
+    };
+
+    fetchGraderResponse();
+  }, [jobDetails, dispatch, router]); // Runs when jobDetails changes
 
   return (
     <div className='md:px-[3vw] px-[6vw] mt-[4vh]'>
@@ -146,9 +145,7 @@ useEffect(() => {
           <div className='flex flex-row'>
             <div className='flex flex-row gap-[1.5vw]'>
               <Image
-                src={
-                  `https://logo.clearbit.com/${companyDomain}`
-                }
+                src={`https://logo.clearbit.com/${companyDomain}`}
                 className='w-[60px] h-[60px] object-contain '
                 preview={false}
               />
@@ -160,14 +157,14 @@ useEffect(() => {
                     </h1>
                     <RiVerifiedBadgeFill className='text-[#F28729]' />
                   </div>
-                  {
-                    jobDetails?.jobDetails?.location && <div className='flex flex-row gap-[0.4vw] cursor-pointer hover:underline'>
-                    <RiMapPinLine className='text-[#848486] text-[1.7vh]' />
-                    <h1 className='text-[#848486] font-semibold text-[1.6vh]'>
-                      {jobDetails?.jobDetails?.location}
-                    </h1>
-                  </div>
-                  }
+                  {jobDetails?.jobDetails?.location && (
+                    <div className='flex flex-row gap-[0.4vw] cursor-pointer hover:underline'>
+                      <RiMapPinLine className='text-[#848486] text-[1.7vh]' />
+                      <h1 className='text-[#848486] font-semibold text-[1.6vh]'>
+                        {jobDetails?.jobDetails?.location}
+                      </h1>
+                    </div>
+                  )}
                 </div>
 
                 <div className='flex flex-row gap-[1vw]'>
@@ -209,7 +206,7 @@ useEffect(() => {
           </h1>
           <div className=' bg-white px-[2vh] py-[2vh] rounded-md flex flex-col gap-[2vh]'>
             {/* matching results  */}
-            
+
             {!graderResponse ? (
               <>
                 <Skeleton active className='w-full' />
@@ -240,8 +237,6 @@ useEffect(() => {
                   ))}
               </>
             )}
-
-            
           </div>
 
           <div className=' bg-white px-[2vh] py-[2vh] rounded-md flex flex-col gap-[3vh]'>

@@ -9,7 +9,6 @@ const secretKey = 'Aadfasdflmkmadfifasdf023dsf';
  * @returns {string} - The encrypted data, or an empty string if encryption fails.
  */
 export const encryptData = (data: string): string => {
-
   try {
     const encrypted = CryptoJS.AES.encrypt(data, secretKey).toString();
     return encrypted;
