@@ -13,6 +13,7 @@ import { RootState } from '@/store';
 
 import { GraderRequest, jobGraderRequest } from '@/features/job-grader';
 import { decryptData } from '@/utils/encryptions';
+import logger from '@/lib/logger';
 
 type JobMatchProps = {
   date?: string;

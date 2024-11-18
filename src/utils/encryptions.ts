@@ -9,10 +9,6 @@ const secretKey = 'Aadfasdflmkmadfifasdf023dsf';
  * @returns {string} - The encrypted data, or an empty string if encryption fails.
  */
 export const encryptData = (data: string): string => {
-  if (!secretKey) {
-    console.error('Encryption key is not set in the environment variables.');
-    return ''; // Return an empty string if the secret key is not set
-  }
 
   try {
     const encrypted = CryptoJS.AES.encrypt(data, secretKey).toString();
@@ -29,11 +25,6 @@ export const encryptData = (data: string): string => {
  * @returns {string} - The decrypted data as a stringified object, or an empty string if decryption fails.
  */
 export const decryptData = (encryptedData: string): string => {
-  if (!secretKey) {
-    console.error('Encryption key is not set in the environment variables.');
-    return ''; // Return an empty string if the secret key is not set
-  }
-
   if (!encryptedData) {
     console.error('No data to decrypt.');
     return ''; // Return an empty string if no encrypted data is provided

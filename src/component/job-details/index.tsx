@@ -23,6 +23,7 @@ import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { RootState } from '@/store';
 import { useDispatch } from 'react-redux';
 import logger from '@/lib/logger';
+import { CareerMatchResponse } from '@/features/gen-ai';
 
 type JobDetailsLayoutProps = {
   jobId: string | string[] | undefined;
@@ -30,70 +31,101 @@ type JobDetailsLayoutProps = {
 
 const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
   const [jobDetails, setJobDetails] = useState<any>(null);
-  const [graderResponse, setGraderResponse] = useState<any>();
+const [graderResponse, setGraderResponse] = useState<any>(null);
+const [companyDomain,setCompanyDomain] = useState<string>();
+const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
+const router = useRouter();
 
-  const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
+useEffect(() => {
+  const getData = async () => {
+    // Retrieve job matches from localStorage
+    const rawData = await localStorage.getItem('job-matches');
+    if (!rawData) {
+      router.push('/');
+      return;
+    }
+
+    try {
+      // Decrypt and parse job matches
+      const jobs = JSON.parse(decryptData(rawData));
+      const matchingJob = jobs.find((job: any) => job?.jobDetails?.id === jobId);
+
+      // if (!matchingJob) {
+      //   router.push('/'); // Redirect if no matching job is found
+      //   return;
+      // }
+
+      setJobDetails(matchingJob); // Set the matching job details
+    } catch (error) {
+      console.error('Error parsing job data:', error);
+      router.push('/'); // Redirect in case of an error
+    }
+
+    // fetching company domain
+    const storedMatches = Cookies.get("career-matches");
+
+if (!storedMatches) {
+  console.error("No career matches found in cookies.");
+  return; // Exit early if no data is present
+}
 
 
-  const router = useRouter();
+try {
+  const decryptedData = decryptData(storedMatches);
 
-  useEffect(() => {
-    // Run this block only in the browser
-    const getData = async () => {
-      const rawData = await localStorage.getItem('job-matches');
 
-      // If no data exists, redirect to the home page
-      if (!rawData) {
+  if (!decryptedData) {
+    console.error("Decryption returned null or invalid data.");
+    return; // Exit early if decryption fails
+  }
+
+  const careerMatches: CareerMatchResponse = JSON.parse(decryptedData);
+
+
+  careerMatches.companyMatches.forEach(company => {
+    if (company.name === jobDetails?.companyName) {
+      setCompanyDomain(company.companyDomain);
+    }
+  });
+} catch (error) {
+  // console.error("Failed to parse career matches or decrypt data:", error);
+}
+  };
+
+  getData();
+}, [router, jobId]); // Only runs when router or jobId changes
+
+useEffect(() => {
+  // Fetch grader response only when jobDetails is available
+  const fetchGraderResponse = async () => {
+    if (!jobDetails) return;
+
+    try {
+      // Retrieve and decrypt resume content
+      const content = decryptData(Cookies.get('resume-content') || '');
+      if (!content) {
         router.push('/');
         return;
       }
 
-      try {
-        const jobs = JSON.parse(decryptData(rawData));
-        const matchingJob = jobs.find(
-          (job: any) => job?.jobDetails?.id === jobId
-        );
+      const userResumeContent = JSON.parse(content);
 
-        if (matchingJob) {
-          setJobDetails(matchingJob);
+      // Create the grading request
+      const request: GraderRequest = {
+        resumeText: userResumeContent,
+        jobDescription: jobDetails.jobDetails.description,
+      };
 
-          // send the request to scan through the resume description
+      // Dispatch the grading request and set the response
+      const graderResponse = await dispatch(jobGraderRequest(request));
+      setGraderResponse(graderResponse.payload);
+    } catch (error) {
+      console.error('Error fetching grader response:', error);
+    }
+  };
 
-        const content = decryptData(Cookies.get('resume-content') || '');
-
-        if (!content) {
-          router.push('/');
-          return;
-        }
-        const userResumeContent = JSON.parse(content);
-
-
-        const getJobAIGradings = async () => {
-          const request: GraderRequest = {
-            resumeText: userResumeContent,
-            jobDescription: jobDetails?.jobDetails?.description,
-          };
-
-          const graderResponse = await dispatch(jobGraderRequest(request));
-
-          setGraderResponse(graderResponse.payload);
-        };
-
-        getJobAIGradings();
-
-        } else {
-          // Redirect if no matching job is found
-          // router.push('/');
-        }
-
-        
-      } catch (error) {
-        // router.push('/'); // Redirect in case of an error
-      }
-    };
-
-    getData();
-  }, [router, jobId]); // Add router and jobId to dependencies
+  fetchGraderResponse();
+}, [jobDetails, dispatch, router]); // Runs when jobDetails changes
 
   return (
     <div className='md:px-[3vw] px-[6vw] mt-[4vh]'>
@@ -115,7 +147,7 @@ const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
             <div className='flex flex-row gap-[1.5vw]'>
               <Image
                 src={
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR86kDWkquaiBSCj1nHaJTsCTNlVPH0GR4H2w&s'
+                  `https://logo.clearbit.com/${companyDomain}`
                 }
                 className='w-[60px] h-[60px] object-contain '
                 preview={false}
@@ -128,12 +160,14 @@ const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
                     </h1>
                     <RiVerifiedBadgeFill className='text-[#F28729]' />
                   </div>
-                  <div className='flex flex-row gap-[0.4vw] cursor-pointer hover:underline'>
+                  {
+                    jobDetails?.jobDetails?.location && <div className='flex flex-row gap-[0.4vw] cursor-pointer hover:underline'>
                     <RiMapPinLine className='text-[#848486] text-[1.7vh]' />
                     <h1 className='text-[#848486] font-semibold text-[1.6vh]'>
-                      {jobDetails?.location}
+                      {jobDetails?.jobDetails?.location}
                     </h1>
                   </div>
+                  }
                 </div>
 
                 <div className='flex flex-row gap-[1vw]'>

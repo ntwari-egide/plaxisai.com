@@ -96,6 +96,12 @@ const ScanningComponent = () => {
         careerMatchingAI(userResumeContent)
       ).unwrap();
 
+      //store career matches in the cookies
+      Cookies.set(
+        'career-matches',
+        await encryptData(JSON.stringify(careerMatches))
+      );
+
       await dispatch(setMatchingProfile(ScanningProgress.COMPLETED));
 
       await dispatch(setMatchesListing(ScanningProgress.STARTED));
@@ -110,7 +116,7 @@ const ScanningComponent = () => {
 
       const response = await dispatch(jobListingRequest(request)).unwrap();
 
-      //store job matches in the cookies
+      //store job matches in the localStorage
       localStorage.setItem(
         'job-matches',
         await encryptData(JSON.stringify(response))
