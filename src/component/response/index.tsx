@@ -26,7 +26,11 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
   const matches = useSelector(
     (state: RootState) => state.genAI.companyMatches
   );
-  
+
+  const jobMatches = useSelector(
+    (state: RootState) => state.jobListing.jobs 
+  )
+
  useEffect(() => {
   const getAllData =  async () => {
    
@@ -36,8 +40,6 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
     } else {
       setCareerMatches(matches)
     }
-
-    
   }
 
   getAllData();
@@ -72,6 +74,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
             key={key}
             title={careerMatches.title}
             companyName={company.name}
+            companyDomain={company.companyDomain}
             matchingDetails={company.matchingDetails}
             subtitle='20 jobs available from this company'
             matchingNumber={company.matchingCredit.toString()}
@@ -89,7 +92,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
           <div className='md:block hidden'>
             <TagComponent
               title='Matching Results'
-              description='40 jobs found'
+              description={`${jobMatches.length} jobs found`}
               classname='bg-[#348888]'
             />
           </div>

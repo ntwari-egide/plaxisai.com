@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
+import logger from '@/lib/logger';
 import { CheckCircleFilled } from '@ant-design/icons';
 import { Image } from 'antd';
 import {
@@ -14,6 +15,7 @@ type CompaniesMatchProps = {
   title: string;
   subtitle: string;
   matchingDetails: any[];
+  companyDomain: string;
 };
 
 const CompaniesMatch = ({
@@ -23,17 +25,20 @@ const CompaniesMatch = ({
   title,
   matchingDetails,
   subtitle,
+  companyDomain
 }: CompaniesMatchProps) => {
+
+  logger( companyDomain,"logo")
 
   return (
     <div className='border border-[#E6E6E7] hover:border-[#348888] cursor-pointer transition-all rounded-xl mt-[3vh] py-[3vh] px-[2vw] flex flex-col gap-[3vh]'>
       <div className='flex flex-row gap-[1vw]  justify-between'>
         <div className='flex flex-row gap-[1.5vw]'>
-          <Image
-            src={logoImg}
+          { companyDomain && <Image
+            src={`https://logo.clearbit.com/${companyDomain}`}
             className='w-[60px] h-[60px] object-contain '
             preview={false}
-          />
+          />}
           <div className='flex flex-col'>
             <div className='flex flex-row items-center gap-[0.4vw]'>
               <h1 className='text-[#09090D] font-semibold text-[1.6vh]'>

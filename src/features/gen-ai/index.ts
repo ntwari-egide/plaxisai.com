@@ -6,6 +6,7 @@ export interface CompanyMatch {
   id: number;
   name: string;
   matchingCredit: number;
+  companyDomain: string;
   matchingDetails: any[];
 }
 
