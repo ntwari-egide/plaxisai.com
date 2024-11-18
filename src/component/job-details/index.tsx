@@ -24,6 +24,7 @@ import { decryptData } from '@/utils/encryptions';
 import PlaxisAITag from './ai-tag';
 import AIDarkImg from '../../../public/images/ai-icon.png';
 import AILightImg from '../../../public/images/ai-icon-white.png';
+import logger from '@/lib/logger';
 
 type JobDetailsLayoutProps = {
   jobId: string | string[] | undefined;
@@ -92,7 +93,7 @@ const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
     };
 
     getData();
-  }, [router, jobId]); // Only runs when router or jobId changes
+  }, [router, jobId, companyDomain, jobDetails?.companyName]); // Only runs when router or jobId changes
 
   useEffect(() => {
     // Fetch grader response only when jobDetails is available
@@ -125,6 +126,8 @@ const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
 
     fetchGraderResponse();
   }, [jobDetails, dispatch, router]); // Runs when jobDetails changes
+
+  logger( companyDomain,"domain")
 
   return (
     <div className='md:px-[3vw] px-[6vw] mt-[4vh]'>
@@ -189,7 +192,7 @@ const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
               Job Description
             </h1>
             <div
-              className='inter-tight whitespace-pre-line text-[#848486] text-[1.8vh] leading-[3vh]'
+              className='inter-tight whitespace-break-spaces text-[#848486] text-[1.8vh] leading-[3vh]'
               dangerouslySetInnerHTML={{
                 __html: jobDetails?.jobDetails?.description,
               }}
