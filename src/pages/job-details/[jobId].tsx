@@ -1,13 +1,12 @@
+import { useRouter } from 'next/router';
+
 import JobDetailsLayout from '@/component/job-details';
 import FooterComponent from '@/component/layouts/footer';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
-import logger from '@/lib/logger';
-import { useRouter } from 'next/router';
 
 const JobDetailsPage = () => {
-
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <div>

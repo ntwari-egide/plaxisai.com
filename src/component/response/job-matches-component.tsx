@@ -4,12 +4,8 @@ import { RootState } from '@/store';
 
 import JobMatch from '../matches/job';
 
-
-const JobMatchesComponent = ( ) => {
-
-  const jobMatches = useSelector(
-    (state: RootState) => state.jobListing.jobs 
-  )
+const JobMatchesComponent = () => {
+  const jobMatches = useSelector((state: RootState) => state.jobListing.jobs);
 
   return (
     <div className='md:grid flex flex-col grid-cols-3 ipad-portrait:grid-cols-1 w-full gap-[3vh] '>
@@ -19,8 +15,7 @@ const JobMatchesComponent = ( ) => {
           jobId={job?.jobDetails?.id}
           companyName={job.companyName}
           date={job?.jobDetails?.datePosted}
-          salary={job?.jobDetails?.salaryRange
-          }
+          salary={job?.jobDetails?.salaryRange}
           title={job?.jobDetails?.title}
           location={job?.jobDetails?.location}
           jobDescription={job?.jobDetails?.description}

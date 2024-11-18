@@ -37,11 +37,15 @@ export const jobGraderRequest = createAsyncThunk(
   'jobGrader/gradeJob',
   async (request: GraderRequest) => {
     try {
-      const response = await api.post('/jobs-matches/jobs-descriptions-grader', request, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await api.post(
+        '/jobs-matches/jobs-descriptions-grader',
+        request,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       return response.data as GraderResponse;
     } catch (error) {

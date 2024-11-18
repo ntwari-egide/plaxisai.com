@@ -1,12 +1,10 @@
 /* eslint-disable react/jsx-curly-brace-presence */
 /* eslint-disable jsx-a11y/alt-text */
 import { CheckCircleFilled, CheckCircleOutlined } from '@ant-design/icons';
-import { Button, Image, Select } from 'antd';
+import { Button, Image, Select, Skeleton } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import ReactHtmlParser from 'react-html-parser';
-
 import {
   RiArrowRightLine,
   RiGroupLine,
@@ -17,17 +15,26 @@ import {
 import { decryptData } from '@/utils/encryptions';
 
 import PlaxisAITag from './ai-tag';
-import JobMatch from '../matches/job';
 import AIDarkImg from '../../../public/images/ai-icon.png';
 import AILightImg from '../../../public/images/ai-icon-white.png';
+import { GraderRequest, jobGraderRequest } from '@/features/job-grader';
+import Cookies from 'js-cookie';
+import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
+import { RootState } from '@/store';
+import { useDispatch } from 'react-redux';
+import logger from '@/lib/logger';
 
 type JobDetailsLayoutProps = {
-  jobId: string | string[] | undefined
-}
+  jobId: string | string[] | undefined;
+};
 
-const JobDetailsLayout = ( { jobId} : JobDetailsLayoutProps) => {
-
+const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
   const [jobDetails, setJobDetails] = useState<any>(null);
+  const [graderResponse, setGraderResponse] = useState<any>();
+
+  const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
+
+
   const router = useRouter();
 
   useEffect(() => {
@@ -35,29 +42,57 @@ const JobDetailsLayout = ( { jobId} : JobDetailsLayoutProps) => {
     const getData = async () => {
       const rawData = await localStorage.getItem('job-matches');
 
-    // If no data exists, redirect to the home page
-    if (!rawData) {
-      router.push('/');
-      return;
-    }
-
-    try {
-      const jobs = JSON.parse(decryptData(rawData));
-      const matchingJob = jobs.find((job: any) => job?.jobDetails?.id === jobId);
-      
-      if (matchingJob) {
-        setJobDetails(matchingJob);
-      } else {
-        // Redirect if no matching job is found
-        // router.push('/');
+      // If no data exists, redirect to the home page
+      if (!rawData) {
+        router.push('/');
+        return;
       }
-    } catch (error) {
-      // router.push('/'); // Redirect in case of an error
-    }
-    }
+
+      try {
+        const jobs = JSON.parse(decryptData(rawData));
+        const matchingJob = jobs.find(
+          (job: any) => job?.jobDetails?.id === jobId
+        );
+
+        if (matchingJob) {
+          setJobDetails(matchingJob);
+
+          // send the request to scan through the resume description
+
+        const content = decryptData(Cookies.get('resume-content') || '');
+
+        if (!content) {
+          router.push('/');
+          return;
+        }
+        const userResumeContent = JSON.parse(content);
+
+
+        const getJobAIGradings = async () => {
+          const request: GraderRequest = {
+            resumeText: userResumeContent,
+            jobDescription: jobDetails?.jobDetails?.description,
+          };
+
+          const graderResponse = await dispatch(jobGraderRequest(request));
+
+          setGraderResponse(graderResponse.payload);
+        };
+
+        getJobAIGradings();
+
+        } else {
+          // Redirect if no matching job is found
+          // router.push('/');
+        }
+
+        
+      } catch (error) {
+        // router.push('/'); // Redirect in case of an error
+      }
+    };
 
     getData();
-
   }, [router, jobId]); // Add router and jobId to dependencies
 
   return (
@@ -68,7 +103,7 @@ const JobDetailsLayout = ( { jobId} : JobDetailsLayoutProps) => {
 
           <div className='flex flex-row justify-between'>
             <h1 className='md:text-[4.5vh] text-[2.5vh] font-semibold whyteInktrap_font'>
-             {jobDetails?.jobDetails?.title}
+              {jobDetails?.jobDetails?.title}
             </h1>
             <Button className='inter-tight bg-[#F28729] rounded-full border-[#F28729] py-[2.3vh] hover:text-[#09090D] font-semibold text-[#09090D] cursor-pointer text-[1.4vh] hover:scale-[1.02] md:w-[15%] ipad-landscape:w-[16vw]'>
               Easy Apply
@@ -97,7 +132,6 @@ const JobDetailsLayout = ( { jobId} : JobDetailsLayoutProps) => {
                     <RiMapPinLine className='text-[#848486] text-[1.7vh]' />
                     <h1 className='text-[#848486] font-semibold text-[1.6vh]'>
                       {jobDetails?.location}
-
                     </h1>
                   </div>
                 </div>
@@ -106,11 +140,11 @@ const JobDetailsLayout = ( { jobId} : JobDetailsLayoutProps) => {
                   <h1 className='text-[#313131] bg-[#F3F3F3] px-[1vw] py-[0.5vh] rounded-sm font-semibold text-[1.6vh] cursor-pointer hover:underline'>
                     Full-time
                   </h1>
-                  {
-                    jobDetails?.jobDetails?.employmentType && <h1 className='text-[#313131] bg-[#F3F3F3] px-[1vw] py-[0.5vh] rounded-sm font-semibold text-[1.6vh] cursor-pointer hover:underline'>
-                    {jobDetails?.jobDetails?.employmentType}
-                  </h1>
-                  }
+                  {jobDetails?.jobDetails?.employmentType && (
+                    <h1 className='text-[#313131] bg-[#F3F3F3] px-[1vw] py-[0.5vh] rounded-sm font-semibold text-[1.6vh] cursor-pointer hover:underline'>
+                      {jobDetails?.jobDetails?.employmentType}
+                    </h1>
+                  )}
                   <h1 className='text-[#313131] bg-[#F3F3F3] px-[1vw] py-[0.5vh] rounded-sm font-semibold text-[1.6vh] cursor-pointer hover:underline'>
                     Onsite
                   </h1>
@@ -120,13 +154,16 @@ const JobDetailsLayout = ( { jobId} : JobDetailsLayoutProps) => {
           </div>
 
           <div className='w-full flex flex-col gap-[2vh]'>
-          < h1 className='text-[1.8vh] text-[#173440] font-semibold inter-tight'>
+            <h1 className='text-[1.8vh] text-[#173440] font-semibold inter-tight'>
               Job Description
             </h1>
-            <div className='inter-tight whitespace-pre-line text-[#848486] text-[1.8vh] leading-[3vh]' dangerouslySetInnerHTML={{ __html:jobDetails?.jobDetails?.description}}> 
-             
-            </div>
-            </div>
+            <div
+              className='inter-tight whitespace-pre-line text-[#848486] text-[1.8vh] leading-[3vh]'
+              dangerouslySetInnerHTML={{
+                __html: jobDetails?.jobDetails?.description,
+              }}
+            ></div>
+          </div>
         </div>
 
         <div className='bg-[#F2F2F2] rounded-lg ipad-portrait:w-full md:w-[35%] md:h-[78vh] ipad-portrait:relative md:sticky ipad-portrait:top-0 top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'>
@@ -134,39 +171,43 @@ const JobDetailsLayout = ( { jobId} : JobDetailsLayoutProps) => {
 
           <PlaxisAITag />
           <h1 className='text-[5vh] whyteInktrap_font text-center font-semibold text-[#0D0D0D]'>
-            94.9%
+            {graderResponse?.matchingPercentage}
           </h1>
           <div className=' bg-white px-[2vh] py-[2vh] rounded-md flex flex-col gap-[2vh]'>
             {/* matching results  */}
-            <div className='flex flex-row gap-[0.4vw] items-center'>
-              <div className=' bg-[#E5E5E5] w-[25px] flex flex-row h-[25px] items-center justify-center rounded-full'>
-                <CheckCircleOutlined className='text-[1.5vh]' />
-              </div>
-              <h1 className='text-[1.7vh] font-medium'>Matching results</h1>
-            </div>
+            
+            {!graderResponse ? (
+              <>
+                <Skeleton active className='w-full' />
+              </>
+            ) : (
+              <>
+                {graderResponse &&
+                  graderResponse.matchingResults.map((result: any) => (
+                    <div
+                      key={result.criteria}
+                      className='flex flex-col gap-[1vh]'
+                    >
+                      <div className='flex flex-row items-center object-center gap-[1vw]'>
+                        <CheckCircleFilled
+                          className={`${
+                            result.number > 95
+                              ? 'text-[#173440]'
+                              : result.number > 90
+                              ? 'text-[#348888]'
+                              : 'text-[#AAE2E2]'
+                          } rounded-full text-[2.5vh]`}
+                        />
+                        <p className='text-[1.7vh] inter-tight text-[#09090D]'>
+                          {result.criteria} ({result.number})
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+              </>
+            )}
 
-            <div className='flex flex-col gap-[1vh]'>
-              <div className='flex flex-row items-center object-center gap-[1vw]'>
-                <CheckCircleFilled className='text-[#348888] rounded-full text-[2.5vh]' />
-                <p className='text-[1.7vh] inter-tight text-[#09090D]'>
-                  Work Experience
-                </p>
-              </div>
-
-              <div className='flex flex-row items-center object-center gap-[1vw]'>
-                <CheckCircleFilled className='text-[#6A6C72] rounded-full text-[2.5vh]' />
-                <p className='text-[1.7vh] inter-tight text-[#09090D]'>
-                  Education & Certifications
-                </p>
-              </div>
-
-              <div className='flex flex-row items-center object-center gap-[1vw]'>
-                <CheckCircleFilled className='text-[#173440] rounded-full text-[2.5vh]' />
-                <p className='text-[1.7vh] inter-tight text-[#09090D]'>
-                  Education & Certification
-                </p>
-              </div>
-            </div>
+            
           </div>
 
           <div className=' bg-white px-[2vh] py-[2vh] rounded-md flex flex-col gap-[3vh]'>

@@ -18,33 +18,25 @@ type ResponseLayoutProps = {
 };
 
 const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
+  const router = useRouter();
 
-  const router = useRouter()
+  const [careerMatches, setCareerMatches] = useState<CareerMatchResponse>();
 
-  const [careerMatches, setCareerMatches] = useState<CareerMatchResponse>()
+  const matches = useSelector((state: RootState) => state.genAI.companyMatches);
 
-  const matches = useSelector(
-    (state: RootState) => state.genAI.companyMatches
-  );
+  const jobMatches = useSelector((state: RootState) => state.jobListing.jobs);
 
-  const jobMatches = useSelector(
-    (state: RootState) => state.jobListing.jobs 
-  )
-  
+  useEffect(() => {
+    const getAllData = async () => {
+      if (!matches) {
+        router.push('/');
+      } else {
+        setCareerMatches(matches);
+      }
+    };
 
- useEffect(() => {
-  const getAllData =  async () => {
-   
-  
-    if (! matches) {
-      router.push('/')
-    } else {
-      setCareerMatches(matches)
-    }
-  }
-
-  getAllData();
- },[])
+    getAllData();
+  }, []);
 
   return (
     <div
@@ -69,9 +61,8 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
         />
       </div>
       <div className='md:grid ipad-portrait:grid-cols-2 grid-cols-3 gap-[3vw]'>
-        {
-          careerMatches?.companyMatches.map((company, key) => (
-            <CompaniesMatch
+        {careerMatches?.companyMatches.map((company, key) => (
+          <CompaniesMatch
             key={key}
             title={careerMatches.title}
             companyName={company.name}
@@ -81,8 +72,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
             matchingNumber={company.matchingCredit.toString()}
             logoImg='https://logodownload.org/wp-content/uploads/2013/12/apple-logo-16.png'
           />
-          ))
-        }
+        ))}
       </div>
 
       <div className='mt-[5vh]'>

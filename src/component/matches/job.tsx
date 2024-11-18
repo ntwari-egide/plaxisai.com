@@ -31,66 +31,64 @@ const JobMatch = ({
   salary,
   location,
   jobDescription,
-  jobId
+  jobId,
 }: JobMatchProps) => {
-
   const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
 
-  const [graderResponse, setGraderResponse] = useState<any>()
+  const [graderResponse, setGraderResponse] = useState<any>();
 
   const router = useRouter();
 
   const content = decryptData(Cookies.get('resume-content') || '');
 
-      if (!content) {
-        router.push('/');
-        return;
-      }
+  if (!content) {
+    router.push('/');
+    return;
+  }
 
-    const userResumeContent = JSON.parse(content);
+  const userResumeContent = JSON.parse(content);
 
   useEffect(() => {
     // send the request to scan through the resume description
 
-
-
-     const getJobAIGradings = async () => {
-
+    const getJobAIGradings = async () => {
       const request: GraderRequest = {
         resumeText: userResumeContent,
-        jobDescription
-      }
+        jobDescription,
+      };
 
-      const graderResponse =  await dispatch(jobGraderRequest(request));
-      
+      const graderResponse = await dispatch(jobGraderRequest(request));
+
       setGraderResponse(graderResponse.payload);
-     }
+    };
 
-     getJobAIGradings();
-  },[])
+    getJobAIGradings();
+  }, []);
 
   return (
     <Link href={`/job-details/${jobId}`} target='_blank'>
       <div className='border py-[2vh] rounded-xl px-[1vw] border-[#E6E6E7] w-full flex flex-col'>
         <div className='bg-[#EBF3F3] rounded-md flex flex-col py-[2vh] px-[1vw] gap-[2vh]'>
           <div className='flex flex-row justify-between'>
-            {date ? <p className='bg-white px-[1.5vw] py-[1vh] flex items-center inter-tight text-[1.7vh] font-medium rounded-full'>
-              {date}
-            </p>: ''}
+            {date ? (
+              <p className='bg-white px-[1.5vw] py-[1vh] flex items-center inter-tight text-[1.7vh] font-medium rounded-full'>
+                {date}
+              </p>
+            ) : (
+              ''
+            )}
             <p className='whyteInktrap_font text-[3.5vh] font-semibold'>
               {graderResponse?.matchingPercentage}
             </p>
           </div>
 
           <div className='flex flex-col gap-[1vh]'>
-            <div className="flex justify-between flex-row">
-            <h1 className='inter-tight text-[1.7vh] font-semibold'>
-              {companyName}
-            </h1>
+            <div className='flex justify-between flex-row'>
+              <h1 className='inter-tight text-[1.7vh] font-semibold'>
+                {companyName}
+              </h1>
 
-            <h1 className='inter-tight text-[1.7vh]'>
-              {location}
-            </h1>
+              <h1 className='inter-tight text-[1.7vh]'>{location}</h1>
             </div>
             <h1 className='whyteInktrap_font text-[2vh] font-medium'>
               {title}
@@ -98,31 +96,36 @@ const JobMatch = ({
           </div>
 
           <div className='flex flex-col gap-[1vh]'>
-
-            {
-              !graderResponse ? <>
-              <Skeleton active className='w-full' />
-              </> : <>
-              {graderResponse && graderResponse.matchingResults.map((result: any) => (
-              <div key={result.criteria} className='flex flex-col gap-[2vh]'>
-                <div className='flex flex-row items-center object-center gap-[1vw]'>
-                  <CheckCircleFilled
-                    className={`${
-                      result.number > 95
-                        ? 'text-[#173440]'
-                        : result.number > 90
-                        ? 'text-[#348888]'
-                        : 'text-[#AAE2E2]'
-                    } rounded-full text-[3vh]`}
-                  />
-                  <p className='text-[2vh] inter-tight text-[#09090D]'>
-                    {result.criteria} ({result.number})
-                  </p>
-                </div>
-              </div>
-            ))}
+            {!graderResponse ? (
+              <>
+                <Skeleton active className='w-full' />
               </>
-            }
+            ) : (
+              <>
+                {graderResponse &&
+                  graderResponse.matchingResults.map((result: any) => (
+                    <div
+                      key={result.criteria}
+                      className='flex flex-col gap-[2vh]'
+                    >
+                      <div className='flex flex-row items-center object-center gap-[1vw]'>
+                        <CheckCircleFilled
+                          className={`${
+                            result.number > 95
+                              ? 'text-[#173440]'
+                              : result.number > 90
+                              ? 'text-[#348888]'
+                              : 'text-[#AAE2E2]'
+                          } rounded-full text-[3vh]`}
+                        />
+                        <p className='text-[2vh] inter-tight text-[#09090D]'>
+                          {result.criteria} ({result.number})
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+              </>
+            )}
           </div>
         </div>
 
@@ -131,11 +134,13 @@ const JobMatch = ({
             Easy Apply
             <RiArrowRightLine className='text-[3vh]' />
           </Button>
-          {
-            salary? <div className='border-[#E6E6E7] border rounded-full px-[2vw] flex items-center text-[2vh] inter-tight font-medium'>
-            {salary}
-          </div>: ''
-          }
+          {salary ? (
+            <div className='border-[#E6E6E7] border rounded-full px-[2vw] flex items-center text-[2vh] inter-tight font-medium'>
+              {salary}
+            </div>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     </Link>

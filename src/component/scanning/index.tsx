@@ -22,7 +22,6 @@ import {
   setResumeScanner,
 } from '@/features/tracking-progress';
 import { decryptData, encryptData } from '@/utils/encryptions';
-import logger from '@/lib/logger';
 
 const ScanningComponent = () => {
   const [resumeValidations, setResumeValidations] =
@@ -109,12 +108,12 @@ const ScanningComponent = () => {
         companies,
       };
 
-     const response =  await dispatch(jobListingRequest(request)).unwrap();
+      const response = await dispatch(jobListingRequest(request)).unwrap();
 
       //store job matches in the cookies
       localStorage.setItem(
         'job-matches',
-         await encryptData(JSON.stringify(response))
+        await encryptData(JSON.stringify(response))
       );
 
       await dispatch(setMatchesListing(ScanningProgress.COMPLETED));
@@ -122,8 +121,6 @@ const ScanningComponent = () => {
 
     perfromAIActions();
   }, []);
-
-
 
   // Function to get status message
   const getStatusMessage = () => {
@@ -141,8 +138,8 @@ const ScanningComponent = () => {
     } remaining`;
   };
 
-  if( !warningsDisplayed && remainingSeconds == 0 && resumeValidations) {
-    router.push('/matches')
+  if (!warningsDisplayed && remainingSeconds == 0 && resumeValidations) {
+    router.push('/matches');
   }
 
   return (
@@ -157,40 +154,41 @@ const ScanningComponent = () => {
             lot easier!
           </p>
 
-          { warningsDisplayed ? (
-            <div
-              className={` items-center md:w-[65%] `}
-            >
-             <div className="border rounded-md p-[2vw] inter-tight flex flex-col gap-[2vh] text-[#F28729]">
-             <p className='text-[2vh] inter-tight font-semibold'>
-                Resume Scanning Warnings
-              </p>
+          {warningsDisplayed ? (
+            <div className={` items-center md:w-[65%] `}>
+              <div className='border rounded-md p-[2vw] inter-tight flex flex-col gap-[2vh] text-[#F28729]'>
+                <p className='text-[2vh] inter-tight font-semibold'>
+                  Resume Scanning Warnings
+                </p>
 
-              <div className='flex flex-col gap-[1vh]'>
-                {resumeValidations?.error?.map((error, index) => (
-                  <>
-                    {' '}
-                    {error.isValid ? (
-                      ''
-                    ) : (
-                      <p
-                        key={index}
-                        className='text-[1.6vh] inter-tight font-normal'
-                      >
-                        In your{' '}
-                        <span className=' font-medium'>{error.section}</span>,{' '}
-                        {error.message}
-                      </p>
-                    )}
-                  </>
-                ))}
+                <div className='flex flex-col gap-[1vh]'>
+                  {resumeValidations?.error?.map((error, index) => (
+                    <>
+                      {' '}
+                      {error.isValid ? (
+                        ''
+                      ) : (
+                        <p
+                          key={index}
+                          className='text-[1.6vh] inter-tight font-normal'
+                        >
+                          In your{' '}
+                          <span className=' font-medium'>{error.section}</span>,{' '}
+                          {error.message}
+                        </p>
+                      )}
+                    </>
+                  ))}
+                </div>
+
+                <Button
+                  onClick={() => setWarningsDisplayed(false)}
+                  className='inter-tight bg-[white] rounded-full border-[#F28729] py-[2vh] border-[2px] font-semibold text-[#F28729] cursor-pointer text-[1.6vh] hover:scale-[1.02] md:w-[50%]'
+                >
+                  <RiArrowRightCircleLine className='text-[2vh]' />
+                  Ignore warnings
+                </Button>
               </div>
-
-              <Button onClick={() => setWarningsDisplayed(false)} className='inter-tight bg-[white] rounded-full border-[#F28729] py-[2vh] border-[2px] font-semibold text-[#F28729] cursor-pointer text-[1.6vh] hover:scale-[1.02] md:w-[50%]'>
-              <RiArrowRightCircleLine className='text-[2vh]' />
-              Ignore warnings
-            </Button>
-             </div>
             </div>
           ) : (
             <p className='inter-tight font-semibold text-[1.7vh] italic'>
@@ -203,9 +201,11 @@ const ScanningComponent = () => {
         <Steps
           direction='vertical'
           current={
-            scanningProgress.matchesListing === ScanningProgress.COMPLETED && !warningsDisplayed
+            scanningProgress.matchesListing === ScanningProgress.COMPLETED &&
+            !warningsDisplayed
               ? 3
-              : scanningProgress.matchingProfile === ScanningProgress.COMPLETED && !warningsDisplayed
+              : scanningProgress.matchingProfile ===
+                  ScanningProgress.COMPLETED && !warningsDisplayed
               ? 2
               : 1
           }
