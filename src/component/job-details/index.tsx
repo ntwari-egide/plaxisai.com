@@ -24,7 +24,6 @@ import { decryptData } from '@/utils/encryptions';
 import PlaxisAITag from './ai-tag';
 import AIDarkImg from '../../../public/images/ai-icon.png';
 import AILightImg from '../../../public/images/ai-icon-white.png';
-import logger from '@/lib/logger';
 
 type JobDetailsLayoutProps = {
   jobId: string | string[] | undefined;
@@ -127,8 +126,6 @@ const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
     fetchGraderResponse();
   }, [jobDetails, dispatch, router]); // Runs when jobDetails changes
 
-  logger( companyDomain,"domain")
-
   return (
     <div className='md:px-[3vw] px-[6vw] mt-[4vh]'>
       <div className='flex ipad-portrait:flex-col-reverse flex-col-reverse md:flex-row md:gap-[4vw] gap-[14vw]'>
@@ -139,10 +136,12 @@ const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
             <h1 className='md:text-[4.5vh] text-[2.5vh] font-semibold whyteInktrap_font'>
               {jobDetails?.jobDetails?.title}
             </h1>
-            <Button className='inter-tight bg-[#F28729] rounded-full border-[#F28729] py-[2.3vh] hover:text-[#09090D] font-semibold text-[#09090D] cursor-pointer text-[1.4vh] hover:scale-[1.02] md:w-[15%] ipad-landscape:w-[16vw]'>
-              Easy Apply
-              <RiArrowRightLine className='text-[3vh] -rotate-45' />
-            </Button>
+            { jobDetails && <Link className='md:w-[15%] ipad-landscape:w-[16vw]' target='_blank' href={jobDetails?.jobDetails?.jobProviders[0]?.url} >
+              <Button className='inter-tight bg-[#F28729] rounded-full border-[#F28729] py-[2.3vh] hover:text-[#09090D] font-semibold text-[#09090D] cursor-pointer text-[1.4vh] hover:scale-[1.02] '>
+                Easy Apply
+                <RiArrowRightLine className='text-[3vh] -rotate-45' />
+              </Button>
+            </Link>}
           </div>
 
           <div className='flex flex-row'>
