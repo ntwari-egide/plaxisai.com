@@ -24,6 +24,7 @@ import { decryptData } from '@/utils/encryptions';
 import PlaxisAITag from './ai-tag';
 import AIDarkImg from '../../../public/images/ai-icon.png';
 import AILightImg from '../../../public/images/ai-icon-white.png';
+import ReferralsPage from './referrals';
 
 type JobDetailsLayoutProps = {
   jobId: string | string[] | undefined;
@@ -241,58 +242,8 @@ const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
             )}
           </div>
 
-          <div className=' bg-white px-[2vh] py-[2vh] rounded-md flex flex-col gap-[3vh]'>
-            {/* people  */}
-            <div className='flex flex-row justify-between items-center'>
-              <div className='flex flex-row gap-[0.4vw] items-center'>
-                <div className=' bg-[#E5E5E5] w-[45px] hidden md:flex flex-row h-[45px] items-center justify-center rounded-full'>
-                  <RiGroupLine className='text-[1.5vh]' />
-                </div>
-                <div className='flex flex-col'>
-                  <h1 className='text-[1.7vh] font-medium'>People</h1>
-                  <h1 className='text-[1.7vh] font-normal text-[#808080]'>
-                    Attended Lehigh
-                  </h1>
-                </div>
-              </div>
-
-              <Select
-                className=' bg-white text-black'
-                defaultValue={'Recruiting Team'}
-                options={[
-                  { label: 'Recruiting Team', value: 'Recruiting Team' },
-                  { label: 'Dev Team', value: 'Dev Team' },
-                  { label: 'Marketing Team', value: 'Marketing Team' },
-                ]}
-              />
-            </div>
-
-            <div className='flex flex-row justify-between ipad-portrait:justify-start ipad-portrait:gap-[3vw]'>
-              <Image
-                src='https://images.pexels.com/photos/28570314/pexels-photo-28570314/free-photo-of-confident-young-woman-in-glasses-portrait.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-                className='h-[70px] w-[70px] object-cover cursor-pointer hover:scale-[1.02] transition-all rounded-full border-[2px] border-[#173440]'
-                preview={false}
-              />
-
-              <Image
-                src='https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-                className='h-[70px] w-[70px] object-cover cursor-pointer hover:scale-[1.02] transition-all rounded-full border-[2px] border-[#173440]'
-                preview={false}
-              />
-
-              <Image
-                src='https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-                className='h-[70px] w-[70px] object-cover cursor-pointer hover:scale-[1.02] transition-all rounded-full border-[2px] border-[#173440]'
-                preview={false}
-              />
-
-              <Image
-                src='https://images.pexels.com/photos/28927046/pexels-photo-28927046/free-photo-of-nigerian-woman-posing-with-books-indoors.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-                className='h-[70px] w-[70px] object-cover cursor-pointer hover:scale-[1.02] transition-all rounded-full border-[2px] border-[#173440]'
-                preview={false}
-              />
-            </div>
-          </div>
+          {/* people content  */}
+          <ReferralsPage jobDetails={jobDetails} />
 
           <div>
             {/* actions  */}

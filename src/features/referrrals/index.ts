@@ -1,8 +1,10 @@
+import api from '@/global/axios-config';
+import logger from '@/lib/logger';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Types
-interface ReferralProfile {
+export interface ReferralProfile {
   fullName: string;
   headline: string;
   summary: string;
@@ -17,8 +19,8 @@ interface GetReferralsParams {
   title: string;
 }
 
-interface ReferralsState {
-  profiles: ReferralProfile[];
+export interface ReferralsState {
+  profiles: any;
   loading: boolean;
   error: string | null;
   lastUpdated: number | null;
@@ -43,15 +45,10 @@ export const fetchReferrals = createAsyncThunk<
   { rejectValue: string }
 >('referrals/fetchReferrals', async (params, { rejectWithValue }) => {
   try {
-    const response = await axios.get<ReferralProfile[]>('/api/referrals', {
-      params: {
+    const response = await api.post<any>('/referrals', {
         companyName: params.companyName,
         title: params.title,
-      },
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    });
+      });
 
     return response.data;
   } catch (error) {
