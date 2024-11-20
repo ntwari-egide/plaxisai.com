@@ -42,9 +42,9 @@ const ReferralsPage = ({ jobDetails}: ReferralsPageProps) => {
                   <RiGroupLine className='text-[1.5vh]' />
                 </div>
                 <div className='flex flex-col'>
-                  <h1 className='text-[1.7vh] font-medium'>People</h1>
+                  <h1 className='text-[1.7vh] font-medium'>Referrals</h1>
                   <h1 className='text-[1.7vh] font-normal text-[#808080]'>
-                    Attended Lehigh
+                    HR Team & Fellows
                   </h1>
                 </div>
               </div>
@@ -76,13 +76,6 @@ const ReferralsPage = ({ jobDetails}: ReferralsPageProps) => {
                     <p>No referrals found</p> // Optional fallback message if no referrals
                 )
                 }
-
-              
-              <Image
-                src='https://images.pexels.com/photos/28927046/pexels-photo-28927046/free-photo-of-nigerian-woman-posing-with-books-indoors.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-                className='h-[70px] w-[70px] object-cover cursor-pointer hover:scale-[1.02] transition-all rounded-full border-[2px] border-[#173440]'
-                preview={false}
-              />
             </div>
           </div>
     )
