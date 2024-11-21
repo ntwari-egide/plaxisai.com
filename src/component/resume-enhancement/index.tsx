@@ -37,7 +37,8 @@ type ChatContent = {
 const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [jobDescription, setJobDescriptions] = useState<string>()
-  const [chatContent, setChatContent] = useState<ChatContent[]>()
+  
+  const [chatContent, setChatContent] = useState<ChatContent[]>([])
 
   const [userPrompt, setUserPrompt] = useState<string>()
   
@@ -118,6 +119,36 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
     }
   }, [dispatch, jobId, router]);
 
+  const handleUserPrompting = async () => {
+    // Ignore empty messages
+    if (!userPrompt?.trim()) {
+      setUserPrompt("");
+      return;
+    } 
+    
+    // Append the user's input to the chat history
+    setChatContent((prevChatContent) => {
+      return [
+        ...prevChatContent, // Existing chat history
+        { role: "user", content: userPrompt }, // New chat message
+        { role: 'plaxis-ai', content: 'Sure! On it!' }, // New chat message
+      ];
+    });
+
+    // send the request 
+    const request: ResumeEnhancementsRequest = {
+      resumeText: resumeEnhancement.resumeEnhanced?.newResume || '',
+      jobDescription: jobDescription || '',
+      userPrompt,
+    };
+
+    await dispatch(resumeEnhancementRequest(request));
+
+    // Clear the input field
+    setUserPrompt("");
+  };
+
+
   return (
     <div className='px-[3vw] mt-[5vh]'>
       <div className="flex flex-row gap-[4vw]">
@@ -172,13 +203,15 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
             className=' bg-white px-[4vh] py-[3vh] rounded-md flex flex-col gap-[3vh] h-[30vh] overflow-auto overflow-y-auto'
             ref={messagesEndRef}
           >
-            {
+            { chatContent ? <>
+            
+              {
               chatContent?.map( (chat, key) => (
                 <>
                   { chat.role == 'user' ? <UserMessage message={chat.content} />: <PlaxisAIMessage message={chat.content} /> }
                 </>
               ) )
-            }
+            }</> : <> <p className='inter-tight text-[1.5vh] text-center text-[#848486] font-medium'>Ask Plaxis AI Bot to improve anything...</p></>}
           </div>
 
           <div className='flex flex-row gap-[1vw] items-center'>
@@ -193,6 +226,7 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
               placeholder='Ask me any thing ...'
               value={userPrompt}
               onChange={(e) => setUserPrompt(e.target.value) }
+              onPressEnter={handleUserPrompting}
             />
 
             <div className='border border-[#DBDBDB] w-[35px] h-[35px] rounded-md flex items-center object-center justify-center flex-row cursor-pointer hover:scale-[1.02] transition-all'>
