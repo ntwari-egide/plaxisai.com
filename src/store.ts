@@ -5,6 +5,7 @@ import genAI from './features/gen-ai';
 import jobGrader from './features/job-grader';
 import jobListing from './features/job-listing';
 import referrals from './features/referrrals';
+import resumeEnhancement from './features/resume-enhancements';
 import resumeScanner from './features/resume-scanner';
 import trackingProgress from './features/tracking-progress';
 
@@ -18,6 +19,7 @@ export const store = configureStore({
     jobsFiltered: filters,
     jobGrader: jobGrader,
     referrals: referrals,
+    resumeEnhancement: resumeEnhancement,
   },
 });
 
