@@ -19,7 +19,21 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
     useState<boolean>(false);
   const [userDetails, setUserDetails] = useState<any>();
 
+  const cancelNotifications = () => {
+    setNotificationCanceling(true)
+
+    // store it in the session storage so that it won't change accross the windows
+    sessionStorage.setItem("closeNotification", JSON.stringify(true));
+  }
+
   useEffect(() => {
+
+    const getNotifications = () => {
+      const notifiationLive = sessionStorage.getItem("closeNotification")
+
+      notifiationLive && setNotificationCanceling(JSON.parse(notifiationLive))
+    }
+
     const checkTokenValidity = async () => {
       try {
         if (await validateJwtToken()) {
@@ -33,6 +47,7 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
       }
     };
 
+    getNotifications();
     checkTokenValidity();
   }, []);
 
@@ -131,7 +146,7 @@ const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
 
         <RiCloseLine
           className='cursor-pointer text-[#09090D] text-[2.5vh]'
-          onClick={() => setNotificationCanceling(true)}
+          onClick={cancelNotifications}
         />
       </div>
     </header>
