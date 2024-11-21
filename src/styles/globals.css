@@ -275,3 +275,9 @@ span.ant-progress-text.ant-progress-text-inner {
 .alice-carousel__dots-item:not(.__custom) {
   background-color: #abe2e2 !important;
 }
+
+
+li.alice-carousel__stage-item.__active.__target {
+  width: auto !important;
+  margin-right: 10px !important;
+}

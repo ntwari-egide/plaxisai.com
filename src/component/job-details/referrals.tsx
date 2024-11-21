@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
-import { Image, Select } from 'antd';
+import { Image, Select, Tooltip } from 'antd';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import AliceCarousel from 'react-alice-carousel';
@@ -40,7 +40,7 @@ const ReferralsPage = ({ jobDetails }: ReferralsPageProps) => {
   const responsive = {
     0: { items: 1 },
     568: { items: 5 },
-    1024: { items: 4 },
+    1024: { items: referrals?.length > 4 ? 4:  referrals?.length},
   };
 
   return (
@@ -66,31 +66,34 @@ const ReferralsPage = ({ jobDetails }: ReferralsPageProps) => {
         />
       </div>
 
-      <div className='flex flex-row justify-between ipad-portrait:justify-start ipad-portrait:gap-[3vw]'>
-        <AliceCarousel
+      <div className='flex flex-row ipad-portrait:justify-start ipad-portrait:gap-[3vw]'>
+        {
+          Array.isArray(referrals) && referrals.length > 0 ? <AliceCarousel
           mouseTracking
           disableButtonsControls
           items={
             Array.isArray(referrals) && referrals.length > 0
               ? referrals.map((referral: any, key: number) => (
                   <Link href={referral?.profileURL} target='_blank' key={key}>
-                    <Image
+                    <Tooltip title={referral?.fullName}>
+                      <Image
                       draggable={false}
                       src={
                         referral?.profilePicture ||
-                        '/default-profile-picture.png'
+                        'https://media.licdn.com/dms/image/v2/D4E12AQEud3Ll5MI7cQ/article-inline_image-shrink_1000_1488/article-inline_image-shrink_1000_1488/0/1660833954461?e=1737590400&v=beta&t=o1G5AsAWRCnSy9iv_hX9bRDS1eJD7DBzxIUIr8tAWLc'
                       }
                       alt={referral?.fullName || 'LinkedIn Profile'}
                       className='h-[70px] w-[70px] object-cover cursor-pointer hover:scale-[1.02] transition-all rounded-full border-[2px] border-[#173440]'
                       preview={false}
-                    />
+                    /></Tooltip>
                   </Link>
                 ))
-              : [<p key='no-referrals'>No referrals found</p>] // Ensure this is an array
+              : [] // Ensure this is an array
           }
           responsive={responsive}
           controlsStrategy='alternate'
-        />
+        /> : <p key='no-referrals' className='inter-tight text-[1.5vh] text-center'>No referrals found</p>
+        }
       </div>
     </div>
   );
