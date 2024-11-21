@@ -266,3 +266,12 @@ span.ant-progress-text.ant-progress-text-inner {
     width: 70vw !important;
   }
 }
+
+.alice-carousel__dots-item:not(.__custom):hover,
+.alice-carousel__dots-item:not(.__custom).__active {
+  background-color: #348888 !important;
+}
+
+.alice-carousel__dots-item:not(.__custom) {
+  background-color: #abe2e2 !important;
+}

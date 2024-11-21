@@ -92,6 +92,9 @@ dependencies:
   react:
     specifier: ^18.3.1
     version: 18.3.1
+  react-alice-carousel:
+    specifier: ^2.9.1
+    version: 2.9.1(react@18.3.1)
   react-dom:
     specifier: ^18.3.1
     version: 18.3.1(react@18.3.1)
@@ -16542,6 +16545,18 @@ packages:
       strip-json-comments: 2.0.1
     dev: false
 
+  /react-alice-carousel@2.9.1(react@18.3.1):
+    resolution:
+      {
+        integrity: sha512-/wQE4cqogKL/db+SoiiRmdj5j6C9I31pfzrmz8nuXmWmSl/UxxJz/O92W/ryxicTw1au+3mUW+drU3ZAhF3JPA==,
+      }
+    peerDependencies:
+      react: '>=15.4'
+    dependencies:
+      react: 18.3.1
+      vanilla-swipe: 2.4.1
+    dev: false
+
   /react-dom@18.3.1(react@18.3.1):
     resolution:
       {
@@ -19173,6 +19188,13 @@ packages:
     dependencies:
       builtins: 1.0.3
     dev: true
+
+  /vanilla-swipe@2.4.1:
+    resolution:
+      {
+        integrity: sha512-o6pfI0dipet88ZnPLV4Jx04Ia+U3xANh14vhROW2TOe/mrwk2JGG68+Z0BPoD1YUcQQEnK4SZBXkqFe+K1l7/w==,
+      }
+    dev: false
 
   /video-react@0.16.0(react-dom@18.3.1)(react@18.3.1):
     resolution:

@@ -2,14 +2,13 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { CheckCircleFilled } from '@ant-design/icons';
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
-import { Button, Image, Select, Skeleton } from 'antd';
+import { Button, Image, Skeleton } from 'antd';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import {
   RiArrowRightLine,
-  RiGroupLine,
   RiMapPinLine,
   RiVerifiedBadgeFill,
 } from 'react-icons/ri';
@@ -22,9 +21,9 @@ import { GraderRequest, jobGraderRequest } from '@/features/job-grader';
 import { decryptData } from '@/utils/encryptions';
 
 import PlaxisAITag from './ai-tag';
+import ReferralsPage from './referrals';
 import AIDarkImg from '../../../public/images/ai-icon.png';
 import AILightImg from '../../../public/images/ai-icon-white.png';
-import ReferralsPage from './referrals';
 
 type JobDetailsLayoutProps = {
   jobId: string | string[] | undefined;
@@ -137,12 +136,18 @@ const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
             <h1 className='md:text-[4.5vh] text-[2.5vh] font-semibold whyteInktrap_font'>
               {jobDetails?.jobDetails?.title}
             </h1>
-            { jobDetails && <Link className='md:w-[15%] ipad-landscape:w-[16vw]' target='_blank' href={jobDetails?.jobDetails?.jobProviders[0]?.url} >
-              <Button className='inter-tight bg-[#F28729] rounded-full border-[#F28729] py-[2.3vh] hover:text-[#09090D] font-semibold text-[#09090D] cursor-pointer text-[1.4vh] hover:scale-[1.02] '>
-                Easy Apply
-                <RiArrowRightLine className='text-[3vh] -rotate-45' />
-              </Button>
-            </Link>}
+            {jobDetails && (
+              <Link
+                className='md:w-[15%] ipad-landscape:w-[16vw]'
+                target='_blank'
+                href={jobDetails?.jobDetails?.jobProviders[0]?.url}
+              >
+                <Button className='inter-tight bg-[#F28729] rounded-full border-[#F28729] py-[2.3vh] hover:text-[#09090D] font-semibold text-[#09090D] cursor-pointer text-[1.4vh] hover:scale-[1.02] '>
+                  Easy Apply
+                  <RiArrowRightLine className='text-[3vh] -rotate-45' />
+                </Button>
+              </Link>
+            )}
           </div>
 
           <div className='flex flex-row'>
@@ -200,7 +205,7 @@ const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
           </div>
         </div>
 
-        <div className='bg-[#F2F2F2] rounded-lg ipad-portrait:w-full md:w-[35%] md:h-[78vh] ipad-portrait:relative md:sticky ipad-portrait:top-0 top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'>
+        <div className='bg-[#F2F2F2] rounded-lg ipad-portrait:w-full md:w-[35%] md:h-[86vh] ipad-portrait:relative md:sticky ipad-portrait:top-0 top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'>
           {/* plaxis ai details  */}
 
           <PlaxisAITag />

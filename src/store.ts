@@ -4,9 +4,9 @@ import filters from './features/filters';
 import genAI from './features/gen-ai';
 import jobGrader from './features/job-grader';
 import jobListing from './features/job-listing';
+import referrals from './features/referrrals';
 import resumeScanner from './features/resume-scanner';
 import trackingProgress from './features/tracking-progress';
-import referrals from './features/referrrals';
 
 export const store = configureStore({
   reducer: {
