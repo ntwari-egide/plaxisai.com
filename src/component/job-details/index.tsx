@@ -255,7 +255,7 @@ const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
 
             <div className='flex flex-col md:gap-0 gap-[2vh] md:flex-row justify-between mt-[2vh] w-full'>
               <Link
-                href={'/resume-enhancements'}
+                href={`/resume-enhancements/${jobDetails?.jobDetails?.id}`}
                 target='_blank'
                 className='md:w-[40%] w-full ipad-landscape:w-[43%]'
               >

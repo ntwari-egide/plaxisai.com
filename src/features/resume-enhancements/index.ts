@@ -22,7 +22,7 @@ export interface ResumeEnhancementState {
     error: string | null | undefined;
 }
 
-export interface ResumeEnhancementsRequestDto {
+export interface ResumeEnhancementsRequest {
     resumeText: string;
 
     jobDescription: string;
@@ -40,7 +40,7 @@ const initialState: ResumeEnhancementState = {
 // Async Thunk
 export const resumeEnhancementRequest = createAsyncThunk(
     'jobGrader/gradeJob',
-    async (request: ResumeEnhancementsRequestDto) => {
+    async (request: ResumeEnhancementsRequest) => {
       try {
         const response = await api.post(
           '/enhancements/resume',
