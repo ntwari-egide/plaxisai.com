@@ -16,7 +16,7 @@ export default function AboutPage() {
     <div className='flex relative flex-col gap-[15vh]'>
       <Seo templateTitle='About' />
       <div className='welcome-bg flex justify-between flex-col'>
-        <HeaderLayout sticky />
+        <HeaderLayout sticky showNotification />
         <AboutLayout />
         <FooterComponent />
       </div>

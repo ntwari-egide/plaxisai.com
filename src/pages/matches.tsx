@@ -16,7 +16,7 @@ export default function HomePage() {
     <div className='flex flex-col gap-[15vh]'>
       <Seo templateTitle='Home' />
       <div className='welcome-bg flex justify-between flex-col'>
-        <HeaderLayout sticky />
+        <HeaderLayout showNotification sticky />
         <ResponseLayout />
         <FooterComponent />
       </div>

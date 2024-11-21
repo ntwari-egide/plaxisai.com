@@ -60,7 +60,7 @@ export default function HomePage() {
     <div className='flex relative flex-col gap-[15vh]'>
       <Seo templateTitle='Home' />
       <div className='welcome-bg flex justify-between flex-col'>
-        <HeaderLayout sticky />
+        <HeaderLayout sticky showNotification />
         {/* Each HomeWelcomeComponent with the same animation, if intended */}
         <HomeWelcomeComponent />
         <div

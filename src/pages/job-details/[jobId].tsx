@@ -12,7 +12,7 @@ const JobDetailsPage = () => {
     <div>
       <Seo templateTitle='Home' />
       <div className='welcome-bg flex justify-between flex-col'>
-        <HeaderLayout sticky />
+        <HeaderLayout sticky showNotification={false}/>
         <JobDetailsLayout jobId={router.query.jobId} />
         <FooterComponent />
       </div>

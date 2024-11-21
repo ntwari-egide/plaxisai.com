@@ -12,11 +12,12 @@ import GradientButton from '../controls/gradient-button';
 
 type HeaderLayoutProps = {
   sticky?: boolean;
+  showNotification: boolean
 };
 
-const HeaderLayout = ({ sticky }: HeaderLayoutProps) => {
+const HeaderLayout = ({ sticky, showNotification }: HeaderLayoutProps) => {
   const [isNotificationCanceled, setNotificationCanceling] =
-    useState<boolean>(false);
+    useState<boolean>(!showNotification);
   const [userDetails, setUserDetails] = useState<any>();
 
   const cancelNotifications = () => {

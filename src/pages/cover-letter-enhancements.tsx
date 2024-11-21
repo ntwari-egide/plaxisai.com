@@ -7,7 +7,7 @@ const CoverLetterEnhancement = () => {
     <div>
       <Seo templateTitle='Home' />
       <div className='welcome-bg flex justify-between flex-col'>
-        <HeaderLayout sticky />
+        <HeaderLayout showNotification sticky />
         <CoverLetterEnhancementLayout />
       </div>
     </div>
