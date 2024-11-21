@@ -131,7 +131,7 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
       return [
         ...prevChatContent, // Existing chat history
         { role: "user", content: userPrompt }, // New chat message
-        { role: 'plaxis-ai', content: 'Sure! On it!' }, // New chat message
+        { role: 'plaxis-ai', content: 'Got it—taking care of it!' }, // New chat message
       ];
     });
 
@@ -146,6 +146,24 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
 
     // Clear the input field
     setUserPrompt("");
+
+    // Update the "working on it" message to "done"
+    setChatContent((prevChatContent) => {
+      const updatedChatContent = [...prevChatContent];
+      const lastAIMessageIndex = updatedChatContent.findLastIndex(
+        (chat) => chat.role === "plaxis-ai" && chat.content === "Got it—taking care of it!"
+      );
+
+      if (lastAIMessageIndex !== -1) {
+        // Update the message to reflect completion
+        updatedChatContent[lastAIMessageIndex] = {
+          ...updatedChatContent[lastAIMessageIndex],
+          content: "All done—your request has been completed!",
+        };
+      }
+
+      return updatedChatContent;
+    });
   };
 
 
@@ -163,7 +181,7 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
     <Skeleton className="rounded-lg h-[75vh] ipad-landscape:w-[60%] w-[65%] border border-[#E6E6E7] p-[2vw]" />
   )}
 
-        <div className='bg-[#F2F2F2] rounded-lg ipad-landscape:w-[40%] w-[35%] ipad-landscape:h-[60vh] md:h-[70vh] sticky top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'>
+        <div className='bg-[#F2F2F2] rounded-lg ipad-landscape:w-[40%] w-[35%] ipad-landscape:h-[75vh] md:h-[70vh] sticky top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'>
           {/* plaxis ai details  */}
 
           <PlaxisAITag />
@@ -176,7 +194,7 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
               <h1 className='text-[1.7vh] font-medium'>Matching results (ATS ratings)</h1>
             </div>
 
-            <div className='flex flex-row  justify-between'>
+            { resumeEnhancement.resumeEnhanced && !resumeEnhancement.loading ? <div className='flex flex-row  justify-between overflow-scroll h-[10vh]'>
               <div className='flex flex-col gap-[1vh]'>
                 
                 {
@@ -196,7 +214,7 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
               <h1 className='text-[5vh] whyteInktrap_font text-center font-semibold text-[#0D0D0D]'>
                 {resumeEnhancement.resumeEnhanced?.results.matchingPercentage}
               </h1>
-            </div>
+            </div> : <Skeleton className="rounded-lg h-[5vh] border border-[#E6E6E7] p-[2vw]" />}
           </div>
 
           <div
@@ -208,7 +226,8 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
               {
               chatContent?.map( (chat, key) => (
                 <>
-                  { chat.role == 'user' ? <UserMessage message={chat.content} />: <PlaxisAIMessage message={chat.content} /> }
+                  { chat.role == 'user' ? <UserMessage 
+                  key={key} message={chat.content} />: <PlaxisAIMessage message={chat.content} /> }
                 </>
               ) )
             }</> : <> <p className='inter-tight text-[1.5vh] text-center text-[#848486] font-medium'>Ask Plaxis AI Bot to improve anything...</p></>}
