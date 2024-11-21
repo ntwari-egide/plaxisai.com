@@ -280,3 +280,46 @@ li.alice-carousel__stage-item.__active.__target {
   width: auto !important;
   margin-right: 10px !important;
 }
+
+
+.resume-enhancements {
+  font-family: 'Times New Roman', Times, serif !important;
+}
+
+.resume-enhancements span.newly-added{
+  background-color: #C2DBDB;
+  color:#09090d !important;
+}
+
+.resume-enhancements li {
+  list-style: circle;
+  margin-left: 2vw;
+}
+
+.resume-enhancements header {
+  align-items: center;
+  text-align: center;
+}
+
+.resume-enhancements a {
+  text-decoration: underline;
+}
+
+.resume-enhancements header:first-child {
+  font-weight: 900;
+}
+
+.resume-enhancements h2 {
+  font-weight: 900;
+  font-size: 2vh;
+}
+
+.resume-enhancements h3 {
+  font-weight: 700;
+}
+
+.resume-enhancements section p {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 5px; /* Optional: Add space between items */
+}

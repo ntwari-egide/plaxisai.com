@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import api from "@/global/axios-config";
+import logger from "@/lib/logger";
 
 export interface Results {
     matchingPercentage: string;
@@ -49,12 +50,14 @@ export const resumeEnhancementRequest = createAsyncThunk(
             headers: {
               'Content-Type': 'application/json',
             },
-          }
+          } 
         );
   
-        return response.data as ResumeEnhancement;
-      } catch (error) {
-        throw new Error('Failed to grade job description');
+        // logger(response.data ,"response")
+        return response.data;
+      } catch (error: any) {
+        // logger(error.response?.data || error.message, "Detailed Error");
+        throw new Error(error.response?.data?.message || 'Failed to grade job description');
       }
     }
   );
