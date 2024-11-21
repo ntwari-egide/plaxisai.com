@@ -7,7 +7,7 @@ const LoginPage = () => {
     <>
       <Seo templateTitle='Still scanning...' />
       <div>
-        <HeaderLayout sticky showNotification/>
+        <HeaderLayout sticky showNotification />
         <ScanningComponent />
         {/* <FooterComponent /> */}
       </div>

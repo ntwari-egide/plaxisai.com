@@ -7,7 +7,7 @@ const ResumeEnhancement = () => {
     <div>
       <Seo templateTitle='Home' />
       <div className='welcome-bg flex justify-between flex-col'>
-        <HeaderLayout sticky showNotification/>
+        <HeaderLayout sticky showNotification />
         <ResumeEnhancementLayout />
       </div>
     </div>

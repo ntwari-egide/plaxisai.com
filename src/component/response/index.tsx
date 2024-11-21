@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -62,20 +63,21 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
       </div>
       <div className='md:grid ipad-portrait:grid-cols-2 grid-cols-3 gap-[3vw]'>
         {careerMatches?.companyMatches.map((company, key) => (
-          <CompaniesMatch
-            key={key}
-            title={careerMatches.title}
-            companyName={company.name}
-            companyDomain={company.companyDomain}
-            matchingDetails={company.matchingDetails}
-            subtitle='20 jobs available from this company'
-            matchingNumber={company.matchingCredit.toString()}
-            logoImg='https://logodownload.org/wp-content/uploads/2013/12/apple-logo-16.png'
-          />
+          <Link href='#jobs' key={key}>
+            <CompaniesMatch
+              title={careerMatches.title}
+              companyName={company.name}
+              companyDomain={company.companyDomain}
+              matchingDetails={company.matchingDetails}
+              subtitle='20 jobs available from this company'
+              matchingNumber={company.matchingCredit.toString()}
+              logoImg='https://logodownload.org/wp-content/uploads/2013/12/apple-logo-16.png'
+            />
+          </Link>
         ))}
       </div>
 
-      <div className='mt-[5vh]'>
+      <div className='mt-[5vh]' id='jobs'>
         <div className='flex flex-row justify-between'>
           <h1 className='whyteInktrap_font text-[2.6vh] md:text-[4.5vh] font-semibold'>
             All matched jobs

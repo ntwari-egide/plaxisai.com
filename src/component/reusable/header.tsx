@@ -12,28 +12,28 @@ import GradientButton from '../controls/gradient-button';
 
 type HeaderLayoutProps = {
   sticky?: boolean;
-  showNotification: boolean
+  showNotification: boolean;
 };
 
 const HeaderLayout = ({ sticky, showNotification }: HeaderLayoutProps) => {
-  const [isNotificationCanceled, setNotificationCanceling] =
-    useState<boolean>(!showNotification);
+  const [isNotificationCanceled, setNotificationCanceling] = useState<boolean>(
+    !showNotification
+  );
   const [userDetails, setUserDetails] = useState<any>();
 
   const cancelNotifications = () => {
-    setNotificationCanceling(true)
+    setNotificationCanceling(true);
 
     // store it in the session storage so that it won't change accross the windows
-    sessionStorage.setItem("closeNotification", JSON.stringify(true));
-  }
+    sessionStorage.setItem('closeNotification', JSON.stringify(true));
+  };
 
   useEffect(() => {
-
     const getNotifications = () => {
-      const notifiationLive = sessionStorage.getItem("closeNotification")
+      const notifiationLive = sessionStorage.getItem('closeNotification');
 
-      notifiationLive && setNotificationCanceling(JSON.parse(notifiationLive))
-    }
+      notifiationLive && setNotificationCanceling(JSON.parse(notifiationLive));
+    };
 
     const checkTokenValidity = async () => {
       try {

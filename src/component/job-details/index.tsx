@@ -205,7 +205,7 @@ const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
           </div>
         </div>
 
-        <div className='bg-[#F2F2F2] rounded-lg ipad-portrait:w-full md:w-[35%] md:h-[81vh] ipad-portrait:relative md:sticky ipad-portrait:top-0 top-[8vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'>
+        <div className='bg-[#F2F2F2] rounded-lg ipad-portrait:w-full md:w-[35%] md:h-[86vh] ipad-portrait:relative md:sticky ipad-portrait:top-0 top-[10vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'>
           {/* plaxis ai details  */}
 
           <PlaxisAITag />

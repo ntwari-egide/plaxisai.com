@@ -5,7 +5,7 @@ const SignupPage = () => {
   return (
     <div>
       <Seo templateTitle='Login' />
-      <SignupComponent/>
+      <SignupComponent />
     </div>
   );
 };
