@@ -1,7 +1,8 @@
+import { useRouter } from 'next/router';
+
 import ResumeEnhancementLayout from '@/component/resume-enhancement';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
-import { useRouter } from 'next/router';
 
 const ResumeEnhancement = () => {
   const router = useRouter();

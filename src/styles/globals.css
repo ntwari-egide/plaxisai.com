@@ -281,14 +281,13 @@ li.alice-carousel__stage-item.__active.__target {
   margin-right: 10px !important;
 }
 
-
 .resume-enhancements {
   font-family: 'Times New Roman', Times, serif !important;
 }
 
-.resume-enhancements span.newly-added{
-  background-color: #C2DBDB;
-  color:#09090d !important;
+.resume-enhancements span.newly-added {
+  background-color: #c2dbdb;
+  color: #09090d !important;
 }
 
 .resume-enhancements li {
@@ -322,4 +321,14 @@ li.alice-carousel__stage-item.__active.__target {
   display: flex !important;
   flex-direction: row !important;
   gap: 5px; /* Optional: Add space between items */
+}
+
+
+.no-color-formatting span.newly-added {
+  background-color: none !important;
+  color: #000000 !important;
+}
+
+.no-color-formatting .newly-added {
+  color: #000000 !important;
 }

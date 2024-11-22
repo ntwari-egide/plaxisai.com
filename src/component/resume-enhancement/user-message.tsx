@@ -1,17 +1,31 @@
-import { Image } from 'antd';
+/* eslint-disable jsx-a11y/alt-text */
+import { Avatar, Image } from 'antd';
 
 type UserMessageProps = {
   message?: string;
+  userProfile: string | null;
 };
 
-const UserMessage = ({ message }: UserMessageProps) => {
+const UserMessage = ({ message, userProfile }: UserMessageProps) => {
   return (
-    <div className='flex flex-row gap-[1vw] ml-[2vw]'>
-      <Image
+    <div className='flex flex-row gap-[1vw] ml-[2vw] items-center'>
+      {/* <Image
         className='h-[40px] w-[35px] rounded-full object-cover border'
-        src='https://images.pexels.com/photos/28570314/pexels-photo-28570314/free-photo-of-confident-young-woman-in-glasses-portrait.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+        src={userProfile || ''}
         preview={false}
-      />
+      /> */}
+
+      {userProfile ? (
+        <Image
+          src={userProfile}
+          className='h-[35px] w-[35px] rounded-full object-contain'
+          preview={false}
+        />
+      ) : (
+        <Avatar size='large' gap={4} className=' bg-[#348888]'>
+          U
+        </Avatar>
+      )}
 
       <p className='inter-tight text-[1.6vh] w-[60%] text-[#848486] font-medium'>
         {message}

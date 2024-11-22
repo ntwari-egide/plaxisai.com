@@ -17,7 +17,11 @@ import logger from '@/lib/logger';
 
 import { RootState } from '@/store';
 
-import { resumeEnhancementRequest, ResumeEnhancementsRequest } from '@/features/resume-enhancements';
+import {
+  resumeEnhancementRequest,
+  ResumeEnhancementsRequest,
+} from '@/features/resume-enhancements';
+import { getRealUserInfo, validateJwtToken } from '@/utils/auth';
 import { decryptData } from '@/utils/encryptions';
 
 import PlaxisAIMessage from './ai-message';
@@ -27,41 +31,42 @@ import AIDarkImg from '../../../public/images/ai-icon.png';
 
 type ResumeEnhancementLayoutProps = {
   jobId: string | string[] | undefined;
-}
+};
 
 type ChatContent = {
-  role: 'user' | 'plaxis-ai',
-  content: string
-}
+  role: 'user' | 'plaxis-ai';
+  content: string;
+};
 
-const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
+const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [jobDescription, setJobDescriptions] = useState<string>()
-  
-  const [chatContent, setChatContent] = useState<ChatContent[]>([])
+  const [jobDescription, setJobDescriptions] = useState<string>();
 
-  const [userPrompt, setUserPrompt] = useState<string>()
-  
+  const [chatContent, setChatContent] = useState<ChatContent[]>([]);
+
+  const [userPrompt, setUserPrompt] = useState<string>();
+
+  const [userDetails, setUserDetails] = useState<any>();
+
   const router = useRouter();
 
   const resumeEnhancement = useSelector(
     (state: RootState) => state.resumeEnhancement
-  )
-
+  );
 
   const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
 
   // Function to scroll to the bottom of the chat container
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
     }
   };
 
   // Scroll to the bottom when the component mounts or updates (e.g., new messages)
   useEffect(() => {
     scrollToBottom();
-  }, []);
+  }, [chatContent]);
 
   //getting all required data on the initial loading
   useEffect(() => {
@@ -74,20 +79,20 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
           router.push('/');
           return;
         }
-  
+
         // Decrypt and parse job matches
         const jobs = JSON.parse(decryptData(rawData));
         const matchingJob = jobs.find(
           (job: any) => job?.jobDetails?.id === jobId
         );
-  
+
         if (!matchingJob?.jobDetails?.description) {
           logger('Job description not found for selected job', 'error');
           router.push('/');
           return;
         }
-  
-        setJobDescriptions(matchingJob?.jobDetails?.description)
+
+        setJobDescriptions(matchingJob?.jobDetails?.description);
         // Fetch resume content
         const encryptedContent = Cookies.get('resume-content');
         if (!encryptedContent) {
@@ -95,25 +100,37 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
           router.push('/');
           return;
         }
-  
+
         const content = decryptData(encryptedContent);
         if (!content?.trim()) {
           logger('Resume content is empty after decryption', 'error');
           router.push('/');
           return;
         }
-  
+
         const request: ResumeEnhancementsRequest = {
           resumeText: content,
-          jobDescription: matchingJob.jobDetails.description
+          jobDescription: matchingJob.jobDetails.description,
         };
-  
+
         await dispatch(resumeEnhancementRequest(request));
+
+        // get the user information
+        try {
+          if (await validateJwtToken()) {
+            const _userInfo = await getRealUserInfo(); // Await the async call
+            setUserDetails(_userInfo.data);
+          } else {
+            // logger('JWT token is invalid or expired');
+          }
+        } catch (error) {
+          // logger(error, 'Error validating token or fetching user info:');
+        }
       } catch (error) {
         router.push('/');
       }
     };
-  
+
     if (jobId) {
       getData();
     }
@@ -122,20 +139,20 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
   const handleUserPrompting = async () => {
     // Ignore empty messages
     if (!userPrompt?.trim()) {
-      setUserPrompt("");
+      setUserPrompt('');
       return;
-    } 
-    
+    }
+
     // Append the user's input to the chat history
     setChatContent((prevChatContent) => {
       return [
         ...prevChatContent, // Existing chat history
-        { role: "user", content: userPrompt }, // New chat message
+        { role: 'user', content: userPrompt }, // New chat message
         { role: 'plaxis-ai', content: 'Got it—taking care of it!' }, // New chat message
       ];
     });
 
-    // send the request 
+    // send the request
     const request: ResumeEnhancementsRequest = {
       resumeText: resumeEnhancement.resumeEnhanced?.newResume || '',
       jobDescription: jobDescription || '',
@@ -143,7 +160,7 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
     };
 
     // Clear the input field
-    setUserPrompt("");
+    setUserPrompt('');
 
     //send the request to the backend
     await dispatch(resumeEnhancementRequest(request));
@@ -152,14 +169,16 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
     setChatContent((prevChatContent) => {
       const updatedChatContent = [...prevChatContent];
       const lastAIMessageIndex = updatedChatContent.findLastIndex(
-        (chat) => chat.role === "plaxis-ai" && chat.content === "Got it—taking care of it!"
+        (chat) =>
+          chat.role === 'plaxis-ai' &&
+          chat.content === 'Got it—taking care of it!'
       );
 
       if (lastAIMessageIndex !== -1) {
         // Update the message to reflect completion
         updatedChatContent[lastAIMessageIndex] = {
           ...updatedChatContent[lastAIMessageIndex],
-          content: "All done—your request has been completed!",
+          content: 'All done—your request has been completed!',
         };
       }
 
@@ -168,19 +187,78 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
   };
 
 
+  const downloadPDF = async () => {
+    const resumeContent = resumeEnhancement.resumeEnhanced?.newResume;
+  
+    if (!resumeContent) {
+      console.error("No resume content found");
+      return;
+    }
+  
+    try {
+      // Create a hidden iframe to render the resume content
+      const iframe = document.createElement("iframe");
+      iframe.style.position = "absolute";
+      iframe.style.top = "-9999px"; // Hide the iframe
+      document.body.appendChild(iframe);
+  
+      // Write the content into the iframe's document
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+      if (!iframeDoc) {
+        throw new Error("Unable to access iframe document");
+      }
+      iframeDoc.open();
+      iframeDoc.write(resumeContent);
+      iframeDoc.close();
+  
+      // Wait for the content to load and then print it to a PDF
+      iframe.onload = () => {
+        iframe.contentWindow?.print();
+  
+        // Cleanup: Remove the iframe after printing
+        document.body.removeChild(iframe);
+      };
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+    }
+  };
+  
+  const downloadDOCX = () => {
+    const resumeContent = resumeEnhancement.resumeEnhanced?.newResume;
+    
+    if (!resumeContent) {
+      logger('No resume content found', 'error');
+      return;
+    }
+  
+    // Remove HTML tags to get plain text
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = resumeContent;
+    const plainText = tempDiv.textContent || tempDiv.innerText;
+  
+    // Create a Blob with the content
+    const blob = new Blob([plainText], { type: 'text/plain' });
+    
+    // Create a download link
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'enhanced-resume.docx';
+    link.click();
+  };
+
   return (
     <div className='px-[3vw] mt-[5vh]'>
-      <div className="flex flex-row gap-[4vw]">
-  {resumeEnhancement.resumeEnhanced && !resumeEnhancement.loading ? (
-    <div
-      className="ipad-landscape:w-[60%] w-[65%] flex flex-col border border-[#E6E6E7] rounded-lg h-[75vh] overflow-y-scroll resume-enhancements p-[2vw]"
-      dangerouslySetInnerHTML={{
-        __html: resumeEnhancement.resumeEnhanced?.newResume,
-      }}
-    />
-  ) : (
-    <Skeleton className="rounded-lg h-[75vh] ipad-landscape:w-[60%] w-[65%] border border-[#E6E6E7] p-[2vw]" />
-  )}
+      <div className='flex flex-row gap-[4vw]'>
+        {resumeEnhancement.resumeEnhanced && !resumeEnhancement.loading ? (
+          <div
+            className='ipad-landscape:w-[60%] w-[65%] flex flex-col border border-[#E6E6E7] rounded-lg h-[75vh] overflow-y-scroll resume-enhancements p-[2vw]'
+            dangerouslySetInnerHTML={{
+              __html: resumeEnhancement.resumeEnhanced?.newResume,
+            }}
+          />
+        ) : (
+          <Skeleton className='rounded-lg h-[75vh] ipad-landscape:w-[60%] w-[65%] border border-[#E6E6E7] p-[2vw]' />
+        )}
 
         <div className='bg-[#F2F2F2] rounded-lg ipad-landscape:w-[40%] w-[35%] ipad-landscape:h-[75vh] md:h-[70vh] sticky top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'>
           {/* plaxis ai details  */}
@@ -192,46 +270,67 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
               <div className=' bg-[#E5E5E5] w-[25px] flex flex-row h-[25px] items-center justify-center rounded-full'>
                 <CheckCircleOutlined className='text-[1.5vh]' />
               </div>
-              <h1 className='text-[1.7vh] font-medium'>Matching results (ATS ratings)</h1>
+              <h1 className='text-[1.7vh] font-medium'>
+                Matching results (ATS ratings)
+              </h1>
             </div>
 
-            { resumeEnhancement.resumeEnhanced && !resumeEnhancement.loading ? <div className='flex flex-row  justify-between overflow-y-scroll h-[10vh]'>
-              <div className='flex flex-col gap-[1vh]'>
-                
-                {
-                  resumeEnhancement.resumeEnhanced && resumeEnhancement.resumeEnhanced.results.matchingResults.map( (results, key) => (
-                    <div key={key} className='flex flex-row items-center object-center gap-[1vw]'>
-                  <CheckCircleFilled className='text-[#348888] rounded-full text-[2.5vh]' />
-                  <p className='text-[1.7vh] inter-tight text-[#09090D]'>
-                    {results.criteria} ({results.number})
-                  </p>
+            {resumeEnhancement.resumeEnhanced && !resumeEnhancement.loading ? (
+              <div className='flex flex-row  justify-between overflow-y-scroll h-[10vh]'>
+                <div className='flex flex-col gap-[1vh]'>
+                  {resumeEnhancement.resumeEnhanced &&
+                    resumeEnhancement.resumeEnhanced.results.matchingResults.map(
+                      (results, key) => (
+                        <div
+                          key={key}
+                          className='flex flex-row items-center object-center gap-[1vw]'
+                        >
+                          <CheckCircleFilled className='text-[#348888] rounded-full text-[2.5vh]' />
+                          <p className='text-[1.7vh] inter-tight text-[#09090D]'>
+                            {results.criteria} ({results.number})
+                          </p>
+                        </div>
+                      )
+                    )}
                 </div>
-                  ))
-                }
 
-                
+                <h1 className='text-[5vh] whyteInktrap_font text-center font-semibold text-[#0D0D0D]'>
+                  {resumeEnhancement.resumeEnhanced?.results.matchingPercentage}
+                </h1>
               </div>
-
-              <h1 className='text-[5vh] whyteInktrap_font text-center font-semibold text-[#0D0D0D]'>
-                {resumeEnhancement.resumeEnhanced?.results.matchingPercentage}
-              </h1>
-            </div> : <Skeleton className="rounded-lg h-[5vh] border border-[#E6E6E7] p-[2vw]" />}
+            ) : (
+              <Skeleton className='rounded-lg h-[5vh] border border-[#E6E6E7] p-[2vw]' />
+            )}
           </div>
 
           <div
             className=' bg-white px-[4vh] py-[3vh] rounded-md flex flex-col gap-[3vh] h-[30vh] overflow-auto overflow-y-auto'
             ref={messagesEndRef}
           >
-            { chatContent ? <>
-            
-              {
-              chatContent?.map( (chat, key) => (
-                <>
-                  { chat.role == 'user' ? <UserMessage 
-                  key={key} message={chat.content} />: <PlaxisAIMessage message={chat.content} /> }
-                </>
-              ) )
-            }</> : <> <p className='inter-tight text-[1.5vh] text-center text-[#848486] font-medium'>Ask Plaxis AI Bot to improve anything...</p></>}
+            {chatContent ? (
+              <>
+                {chatContent?.map((chat, key) => (
+                  <>
+                    {chat.role == 'user' ? (
+                      <UserMessage
+                        userProfile={userDetails?.profilePic}
+                        key={key}
+                        message={chat.content}
+                      />
+                    ) : (
+                      <PlaxisAIMessage message={chat.content} />
+                    )}
+                  </>
+                ))}
+              </>
+            ) : (
+              <>
+                {' '}
+                <p className='inter-tight text-[1.5vh] text-center text-[#848486] font-medium'>
+                  Ask Plaxis AI Bot to improve anything...
+                </p>
+              </>
+            )}
           </div>
 
           <div className='flex flex-row gap-[1vw] items-center'>
@@ -245,8 +344,11 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
               className='border-none inter-tight placeholder:text-[#7E7E80] font-semibold text-[1.7vh] bg-[#F2F2F2]'
               placeholder='Ask me any thing ...'
               value={userPrompt}
-              onChange={(e) => setUserPrompt(e.target.value) }
-              onPressEnter={handleUserPrompting}
+              onChange={(e) => setUserPrompt(e.target.value)}
+              onPressEnter={(e) => {
+                e.preventDefault(); // Prevent default Enter key behavior
+                handleUserPrompting();
+              }}
             />
 
             <div className='border border-[#DBDBDB] w-[35px] h-[35px] rounded-md flex items-center object-center justify-center flex-row cursor-pointer hover:scale-[1.02] transition-all'>
@@ -261,12 +363,19 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
           {/* actions  */}
 
           <div className='flex flex-row justify-between mt-[2vh] w-full'>
-            <Button className='inter-tight bg-[#348888] rounded-full border-[2px] border-[#348888] py-[3vh] hover:text-[#FFFFFF] font-semibold text-[#FFFFFF] cursor-pointer text-[1.6vh] hover:scale-[1.02] w-[40%]'>
+            <Button className='inter-tight bg-[#348888] rounded-full border-[2px] border-[#348888] py-[3vh] hover:text-[#FFFFFF] font-semibold text-[#FFFFFF] cursor-pointer text-[1.6vh] hover:scale-[1.02] w-[40%]'
+            onClick={downloadPDF}
+            loading={resumeEnhancement.loading}
+            >
               <RiDownloadLine className='text-[2vh]' />
               Download PDF
             </Button>
 
-            <Button className='inter-tight bg-[white] rounded-full border-[#09090D] py-[3vh] border-[2px] font-semibold text-[#09090D] cursor-pointer text-[1.6vh] hover:scale-[1.02] w-[55%]'>
+            <Button className='inter-tight bg-[white] rounded-full border-[#09090D] py-[3vh] border-[2px] font-semibold text-[#09090D] cursor-pointer text-[1.6vh] hover:scale-[1.02] w-[55%]'
+            onClick={downloadDOCX}
+            loading={resumeEnhancement.loading}
+
+            >
               <RiDownloadLine className='text-[2vh]' />
               Download Word (.Docx)
             </Button>
