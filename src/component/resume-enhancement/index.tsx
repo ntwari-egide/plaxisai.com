@@ -142,10 +142,11 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
       userPrompt,
     };
 
-    await dispatch(resumeEnhancementRequest(request));
-
     // Clear the input field
     setUserPrompt("");
+
+    //send the request to the backend
+    await dispatch(resumeEnhancementRequest(request));
 
     // Update the "working on it" message to "done"
     setChatContent((prevChatContent) => {
@@ -194,7 +195,7 @@ const ResumeEnhancementLayout = ( { jobId }: ResumeEnhancementLayoutProps) => {
               <h1 className='text-[1.7vh] font-medium'>Matching results (ATS ratings)</h1>
             </div>
 
-            { resumeEnhancement.resumeEnhanced && !resumeEnhancement.loading ? <div className='flex flex-row  justify-between overflow-scroll h-[10vh]'>
+            { resumeEnhancement.resumeEnhanced && !resumeEnhancement.loading ? <div className='flex flex-row  justify-between overflow-y-scroll h-[10vh]'>
               <div className='flex flex-col gap-[1vh]'>
                 
                 {
