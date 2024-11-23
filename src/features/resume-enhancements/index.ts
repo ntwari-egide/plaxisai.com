@@ -11,9 +11,9 @@ export interface Results {
 export interface ResumeEnhancement {
   id: number;
 
-  newResume: string;
+  newContent: string;
 
-  results: Results;
+  results?: Results;
 }
 
 export interface ResumeEnhancementState {
@@ -26,6 +26,8 @@ export interface ResumeEnhancementsRequest {
   resumeText: string;
 
   jobDescription: string;
+
+  generatedContent?: string;
 
   userPrompt?: string;
 }

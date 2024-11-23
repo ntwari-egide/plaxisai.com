@@ -324,8 +324,7 @@ li.alice-carousel__stage-item.__active.__target {
 }
 
 
-.no-color-formatting span.newly-added {
-  background-color: none !important;
+.no-color-formatting span {
   color: #000000 !important;
 }
 

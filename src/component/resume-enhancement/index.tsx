@@ -41,6 +41,7 @@ type ChatContent = {
 const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [jobDescription, setJobDescriptions] = useState<string>();
+  const [oldResumeContnet, setOldResumeContent] = useState<string>()
 
   const [chatContent, setChatContent] = useState<ChatContent[]>([]);
 
@@ -108,6 +109,8 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
           return;
         }
 
+        setOldResumeContent(content)
+
         const request: ResumeEnhancementsRequest = {
           resumeText: content,
           jobDescription: matchingJob.jobDetails.description,
@@ -154,8 +157,9 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
 
     // send the request
     const request: ResumeEnhancementsRequest = {
-      resumeText: resumeEnhancement.resumeEnhanced?.newResume || '',
+      resumeText: oldResumeContnet || '',
       jobDescription: jobDescription || '',
+      generatedContent: resumeEnhancement.resumeEnhanced?.newContent,
       userPrompt,
     };
 
@@ -187,44 +191,35 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
   };
 
 
-  const downloadPDF = async () => {
-    const resumeContent = resumeEnhancement.resumeEnhanced?.newResume;
-  
+  const downloadPDF = () => {
+    const resumeContent = resumeEnhancement.resumeEnhanced?.newContent;
+    
     if (!resumeContent) {
-      console.error("No resume content found");
+      logger('No resume content found', 'error');
       return;
     }
   
-    try {
-      // Create a hidden iframe to render the resume content
-      const iframe = document.createElement("iframe");
-      iframe.style.position = "absolute";
-      iframe.style.top = "-9999px"; // Hide the iframe
-      document.body.appendChild(iframe);
-  
-      // Write the content into the iframe's document
-      const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
-      if (!iframeDoc) {
-        throw new Error("Unable to access iframe document");
-      }
-      iframeDoc.open();
-      iframeDoc.write(resumeContent);
-      iframeDoc.close();
-  
-      // Wait for the content to load and then print it to a PDF
-      iframe.onload = () => {
-        iframe.contentWindow?.print();
-  
-        // Cleanup: Remove the iframe after printing
-        document.body.removeChild(iframe);
-      };
-    } catch (error) {
-      console.error("Error generating PDF:", error);
+    // Create a new window with the resume content
+    const printWindow = window.open('', '', 'height=500, width=500');
+    
+    if (!printWindow) {
+      logger('Unable to open print window', 'error');
+      return;
     }
+  
+    printWindow.document.write('<html><head>');
+    printWindow.document.write('</head><body>');
+    printWindow.document.write('<div class="no-color-formatting">');
+    printWindow.document.write(resumeContent);
+    printWindow.document.write('</div>');
+    printWindow.document.write('</body></html>');
+    
+    printWindow.document.close();
+    printWindow.print();
   };
   
   const downloadDOCX = () => {
-    const resumeContent = resumeEnhancement.resumeEnhanced?.newResume;
+    const resumeContent = resumeEnhancement.resumeEnhanced?.newContent;
     
     if (!resumeContent) {
       logger('No resume content found', 'error');
@@ -253,7 +248,7 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
           <div
             className='ipad-landscape:w-[60%] w-[65%] flex flex-col border border-[#E6E6E7] rounded-lg h-[75vh] overflow-y-scroll resume-enhancements p-[2vw]'
             dangerouslySetInnerHTML={{
-              __html: resumeEnhancement.resumeEnhanced?.newResume,
+              __html: resumeEnhancement.resumeEnhanced?.newContent,
             }}
           />
         ) : (
@@ -279,7 +274,7 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
               <div className='flex flex-row  justify-between overflow-y-scroll h-[10vh]'>
                 <div className='flex flex-col gap-[1vh]'>
                   {resumeEnhancement.resumeEnhanced &&
-                    resumeEnhancement.resumeEnhanced.results.matchingResults.map(
+                    resumeEnhancement.resumeEnhanced.results?.matchingResults.map(
                       (results, key) => (
                         <div
                           key={key}
@@ -295,7 +290,7 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
                 </div>
 
                 <h1 className='text-[5vh] whyteInktrap_font text-center font-semibold text-[#0D0D0D]'>
-                  {resumeEnhancement.resumeEnhanced?.results.matchingPercentage}
+                  {resumeEnhancement.resumeEnhanced?.results?.matchingPercentage}
                 </h1>
               </div>
             ) : (
