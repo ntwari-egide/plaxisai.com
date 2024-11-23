@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import coverLetterEnhancement from './features/cover-letter';
 import filters from './features/filters';
 import genAI from './features/gen-ai';
 import jobGrader from './features/job-grader';
@@ -20,6 +21,7 @@ export const store = configureStore({
     jobGrader: jobGrader,
     referrals: referrals,
     resumeEnhancement: resumeEnhancement,
+    coverLetterEnhancement: coverLetterEnhancement,
   },
 });
 
