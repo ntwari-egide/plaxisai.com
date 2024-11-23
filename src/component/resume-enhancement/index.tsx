@@ -6,7 +6,7 @@ import {
   SendOutlined,
 } from '@ant-design/icons';
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
-import { Button, Image, Input, Skeleton } from 'antd';
+import { Button, Image, Input, message, Skeleton } from 'antd';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
@@ -48,6 +48,8 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
   const [userPrompt, setUserPrompt] = useState<string>();
 
   const [userDetails, setUserDetails] = useState<any>();
+
+  const [userMessageCount, setUserMessageCount]=useState<number>(0)
 
   const router = useRouter();
 
@@ -143,6 +145,15 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
     // Ignore empty messages
     if (!userPrompt?.trim()) {
       setUserPrompt('');
+      return;
+    }
+
+    // count the messsages
+    setUserMessageCount(prevCount => prevCount+1)
+
+    // check if the message count is greater than 3
+    if(userMessageCount > 2) {
+      message.error("You have reached your message limit. Please upgrade to continue.")
       return;
     }
 
