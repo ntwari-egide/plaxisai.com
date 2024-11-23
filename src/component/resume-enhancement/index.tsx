@@ -41,7 +41,7 @@ type ChatContent = {
 const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [jobDescription, setJobDescriptions] = useState<string>();
-  const [oldResumeContnet, setOldResumeContent] = useState<string>()
+  const [oldResumeContnet, setOldResumeContent] = useState<string>();
 
   const [chatContent, setChatContent] = useState<ChatContent[]>([]);
 
@@ -109,7 +109,7 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
           return;
         }
 
-        setOldResumeContent(content)
+        setOldResumeContent(content);
 
         const request: ResumeEnhancementsRequest = {
           resumeText: content,
@@ -190,50 +190,49 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
     });
   };
 
-
   const downloadPDF = () => {
     const resumeContent = resumeEnhancement.contentEnhanced?.newContent;
-    
+
     if (!resumeContent) {
       logger('No resume content found', 'error');
       return;
     }
-  
+
     // Create a new window with the resume content
     const printWindow = window.open('', '', 'height=500, width=500');
-    
+
     if (!printWindow) {
       logger('Unable to open print window', 'error');
       return;
     }
-  
+
     printWindow.document.write('<html><head>');
     printWindow.document.write('</head><body>');
     printWindow.document.write('<div class="no-color-formatting">');
     printWindow.document.write(resumeContent);
     printWindow.document.write('</div>');
     printWindow.document.write('</body></html>');
-    
+
     printWindow.document.close();
     printWindow.print();
   };
-  
+
   const downloadDOCX = () => {
     const resumeContent = resumeEnhancement.contentEnhanced?.newContent;
-    
+
     if (!resumeContent) {
       logger('No resume content found', 'error');
       return;
     }
-  
+
     // Remove HTML tags to get plain text
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = resumeContent;
     const plainText = tempDiv.textContent || tempDiv.innerText;
-  
+
     // Create a Blob with the content
     const blob = new Blob([plainText], { type: 'text/plain' });
-    
+
     // Create a download link
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
@@ -290,7 +289,10 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
                 </div>
 
                 <h1 className='text-[5vh] whyteInktrap_font text-center font-semibold text-[#0D0D0D]'>
-                  {resumeEnhancement.contentEnhanced?.results?.matchingPercentage}
+                  {
+                    resumeEnhancement.contentEnhanced?.results
+                      ?.matchingPercentage
+                  }
                 </h1>
               </div>
             ) : (
@@ -358,18 +360,19 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
           {/* actions  */}
 
           <div className='flex flex-row justify-between mt-[2vh] w-full'>
-            <Button className='inter-tight bg-[#348888] rounded-full border-[2px] border-[#348888] py-[3vh] hover:text-[#FFFFFF] font-semibold text-[#FFFFFF] cursor-pointer text-[1.6vh] hover:scale-[1.02] w-[40%]'
-            onClick={downloadPDF}
-            loading={resumeEnhancement.loading}
+            <Button
+              className='inter-tight bg-[#348888] rounded-full border-[2px] border-[#348888] py-[3vh] hover:text-[#FFFFFF] font-semibold text-[#FFFFFF] cursor-pointer text-[1.6vh] hover:scale-[1.02] w-[40%]'
+              onClick={downloadPDF}
+              loading={resumeEnhancement.loading}
             >
               <RiDownloadLine className='text-[2vh]' />
               Download PDF
             </Button>
 
-            <Button className='inter-tight bg-[white] rounded-full border-[#09090D] py-[3vh] border-[2px] font-semibold text-[#09090D] cursor-pointer text-[1.6vh] hover:scale-[1.02] w-[55%]'
-            onClick={downloadDOCX}
-            loading={resumeEnhancement.loading}
-
+            <Button
+              className='inter-tight bg-[white] rounded-full border-[#09090D] py-[3vh] border-[2px] font-semibold text-[#09090D] cursor-pointer text-[1.6vh] hover:scale-[1.02] w-[55%]'
+              onClick={downloadDOCX}
+              loading={resumeEnhancement.loading}
             >
               <RiDownloadLine className='text-[2vh]' />
               Download Word (.Docx)

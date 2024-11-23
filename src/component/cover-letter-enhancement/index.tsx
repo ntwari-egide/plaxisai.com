@@ -1,24 +1,27 @@
 /* eslint-disable react/jsx-curly-brace-presence */
 /* eslint-disable jsx-a11y/alt-text */
 import { SendOutlined } from '@ant-design/icons';
+import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { Button, Image, Input, Skeleton } from 'antd';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
+import { useEffect, useRef, useState } from 'react';
 import { RiDownloadLine } from 'react-icons/ri';
+import { useDispatch, useSelector } from 'react-redux';
+
+import logger from '@/lib/logger';
+
+import { RootState } from '@/store';
+
+import { coverLetterEnhancementsRequest } from '@/features/cover-letter';
+import { ResumeEnhancementsRequest } from '@/features/resume-enhancements';
+import { getRealUserInfo, validateJwtToken } from '@/utils/auth';
+import { decryptData } from '@/utils/encryptions';
 
 import PlaxisAITag from '../job-details/ai-tag';
 import PlaxisAIMessage from '../resume-enhancement/ai-message';
 import UserMessage from '../resume-enhancement/user-message';
 import AIDarkImg from '../../../public/images/ai-icon.png';
-import { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/store';
-import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
-import { decryptData } from '@/utils/encryptions';
-import Cookies from 'js-cookie';
-import { ResumeEnhancementsRequest } from '@/features/resume-enhancements';
-import { coverLetterEnhancementsRequest } from '@/features/cover-letter';
-import { getRealUserInfo, validateJwtToken } from '@/utils/auth';
-import logger from '@/lib/logger';
 
 type CoverLetterLayoutProps = {
   jobId: string | string[] | undefined;
@@ -29,11 +32,10 @@ type ChatContent = {
   content: string;
 };
 
-const CoverLetterEnhancementLayout = ({ jobId}: CoverLetterLayoutProps) => {
-
+const CoverLetterEnhancementLayout = ({ jobId }: CoverLetterLayoutProps) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [jobDescription, setJobDescriptions] = useState<string>();
-  const [oldResumeContnet, setOldResumeContent] = useState<string>()
+  const [oldResumeContnet, setOldResumeContent] = useState<string>();
 
   const [chatContent, setChatContent] = useState<ChatContent[]>([]);
 
@@ -97,7 +99,7 @@ const CoverLetterEnhancementLayout = ({ jobId}: CoverLetterLayoutProps) => {
           return;
         }
 
-        setOldResumeContent(content)
+        setOldResumeContent(content);
 
         const request: ResumeEnhancementsRequest = {
           resumeText: content,
@@ -178,11 +180,12 @@ const CoverLetterEnhancementLayout = ({ jobId}: CoverLetterLayoutProps) => {
     });
   };
 
-  logger( coverLetterEnhancement.contentEnhanced?.newContent, "contnet")
+  logger(coverLetterEnhancement.contentEnhanced?.newContent, 'contnet');
   return (
     <div className='px-[3vw] mt-[5vh]'>
       <div className='flex flex-row gap-[4vw]'>
-      {coverLetterEnhancement.contentEnhanced && !coverLetterEnhancement.loading ? (
+        {coverLetterEnhancement.contentEnhanced &&
+        !coverLetterEnhancement.loading ? (
           <div
             className='ipad-landscape:w-[60%] w-[65%] flex flex-col border border-[#E6E6E7] rounded-lg h-[75vh] overflow-y-scroll whitespace-break-spaces cover-letter p-[2vw]'
             dangerouslySetInnerHTML={{
@@ -193,8 +196,9 @@ const CoverLetterEnhancementLayout = ({ jobId}: CoverLetterLayoutProps) => {
           <Skeleton className='rounded-lg h-[75vh] ipad-landscape:w-[60%] w-[65%] border border-[#E6E6E7] p-[2vw]' />
         )}
 
-        <div className='bg-[#F2F2F2] rounded-lg ipad-landscape:w-[40%] w-[35%] ipad-landscape:h-[60vh] md:h-[75vh] sticky top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'
-            ref={messagesEndRef}
+        <div
+          className='bg-[#F2F2F2] rounded-lg ipad-landscape:w-[40%] w-[35%] ipad-landscape:h-[60vh] md:h-[75vh] sticky top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'
+          ref={messagesEndRef}
         >
           {/* plaxis ai details  */}
 

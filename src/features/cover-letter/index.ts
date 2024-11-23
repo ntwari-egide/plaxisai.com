@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import api from '@/global/axios-config';
-import { ResumeEnhancementsRequest, ResumeEnhancementState } from '../resume-enhancements';
 
-
+import {
+  ResumeEnhancementsRequest,
+  ResumeEnhancementState,
+} from '../resume-enhancements';
 
 const initialState: ResumeEnhancementState = {
   contentEnhanced: null,

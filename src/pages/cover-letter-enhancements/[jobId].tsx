@@ -1,7 +1,8 @@
+import { useRouter } from 'next/router';
+
 import CoverLetterEnhancementLayout from '@/component/cover-letter-enhancement';
 import HeaderLayout from '@/component/reusable/header';
 import Seo from '@/component/seo';
-import { useRouter } from 'next/router';
 
 const CoverLetterEnhancement = () => {
   const router = useRouter();
@@ -11,7 +12,7 @@ const CoverLetterEnhancement = () => {
       <Seo templateTitle='Home' />
       <div className='welcome-bg flex justify-between flex-col'>
         <HeaderLayout showNotification={false} sticky />
-        <CoverLetterEnhancementLayout jobId={router.query.jobId}/>
+        <CoverLetterEnhancementLayout jobId={router.query.jobId} />
       </div>
     </div>
   );
