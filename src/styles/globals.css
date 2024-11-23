@@ -331,3 +331,11 @@ li.alice-carousel__stage-item.__active.__target {
 .no-color-formatting .newly-added {
   color: #000000 !important;
 }
+
+.cover-letter {
+  font-family: 'Times New Roman', Times, serif !important;
+}
+
+.cover-letter header {
+  display: none !important;
+}

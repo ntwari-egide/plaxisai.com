@@ -17,7 +17,7 @@ export interface ResumeEnhancement {
 }
 
 export interface ResumeEnhancementState {
-  resumeEnhanced: ResumeEnhancement | null;
+  contentEnhanced: ResumeEnhancement | null;
   loading: boolean;
   error: string | null | undefined;
 }
@@ -33,7 +33,7 @@ export interface ResumeEnhancementsRequest {
 }
 
 const initialState: ResumeEnhancementState = {
-  resumeEnhanced: null,
+  contentEnhanced: null,
   loading: false,
   error: null,
 };
@@ -68,7 +68,7 @@ const resumeEnhancementSlice = createSlice({
     resetGraderState: (state) => {
       state.loading = false;
       state.error = null;
-      state.resumeEnhanced = null;
+      state.contentEnhanced = null;
     },
   },
   extraReducers: (builder) => {
@@ -79,7 +79,7 @@ const resumeEnhancementSlice = createSlice({
       })
       .addCase(resumeEnhancementRequest.fulfilled, (state, action) => {
         state.loading = false;
-        state.resumeEnhanced = action.payload;
+        state.contentEnhanced = action.payload;
       })
       .addCase(resumeEnhancementRequest.rejected, (state, action) => {
         state.loading = false;

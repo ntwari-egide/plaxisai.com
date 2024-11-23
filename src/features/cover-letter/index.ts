@@ -6,7 +6,7 @@ import { ResumeEnhancementsRequest, ResumeEnhancementState } from '../resume-enh
 
 
 const initialState: ResumeEnhancementState = {
-  resumeEnhanced: null,
+  contentEnhanced: null,
   loading: false,
   error: null,
 };
@@ -41,7 +41,7 @@ const coverLetterEnhancementsSlice = createSlice({
     resetGraderState: (state) => {
       state.loading = false;
       state.error = null;
-      state.resumeEnhanced = null;
+      state.contentEnhanced = null;
     },
   },
   extraReducers: (builder) => {
@@ -52,7 +52,7 @@ const coverLetterEnhancementsSlice = createSlice({
       })
       .addCase(coverLetterEnhancementsRequest.fulfilled, (state, action) => {
         state.loading = false;
-        state.resumeEnhanced = action.payload;
+        state.contentEnhanced = action.payload;
       })
       .addCase(coverLetterEnhancementsRequest.rejected, (state, action) => {
         state.loading = false;

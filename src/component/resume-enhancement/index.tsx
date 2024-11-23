@@ -159,7 +159,7 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
     const request: ResumeEnhancementsRequest = {
       resumeText: oldResumeContnet || '',
       jobDescription: jobDescription || '',
-      generatedContent: resumeEnhancement.resumeEnhanced?.newContent,
+      generatedContent: resumeEnhancement.contentEnhanced?.newContent,
       userPrompt,
     };
 
@@ -192,7 +192,7 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
 
 
   const downloadPDF = () => {
-    const resumeContent = resumeEnhancement.resumeEnhanced?.newContent;
+    const resumeContent = resumeEnhancement.contentEnhanced?.newContent;
     
     if (!resumeContent) {
       logger('No resume content found', 'error');
@@ -219,7 +219,7 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
   };
   
   const downloadDOCX = () => {
-    const resumeContent = resumeEnhancement.resumeEnhanced?.newContent;
+    const resumeContent = resumeEnhancement.contentEnhanced?.newContent;
     
     if (!resumeContent) {
       logger('No resume content found', 'error');
@@ -244,11 +244,11 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
   return (
     <div className='px-[3vw] mt-[5vh]'>
       <div className='flex flex-row gap-[4vw]'>
-        {resumeEnhancement.resumeEnhanced && !resumeEnhancement.loading ? (
+        {resumeEnhancement.contentEnhanced && !resumeEnhancement.loading ? (
           <div
             className='ipad-landscape:w-[60%] w-[65%] flex flex-col border border-[#E6E6E7] rounded-lg h-[75vh] overflow-y-scroll resume-enhancements p-[2vw]'
             dangerouslySetInnerHTML={{
-              __html: resumeEnhancement.resumeEnhanced?.newContent,
+              __html: resumeEnhancement.contentEnhanced?.newContent,
             }}
           />
         ) : (
@@ -270,11 +270,11 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
               </h1>
             </div>
 
-            {resumeEnhancement.resumeEnhanced && !resumeEnhancement.loading ? (
+            {resumeEnhancement.contentEnhanced && !resumeEnhancement.loading ? (
               <div className='flex flex-row  justify-between overflow-y-scroll h-[10vh]'>
                 <div className='flex flex-col gap-[1vh]'>
-                  {resumeEnhancement.resumeEnhanced &&
-                    resumeEnhancement.resumeEnhanced.results?.matchingResults.map(
+                  {resumeEnhancement.contentEnhanced &&
+                    resumeEnhancement.contentEnhanced.results?.matchingResults.map(
                       (results, key) => (
                         <div
                           key={key}
@@ -290,7 +290,7 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
                 </div>
 
                 <h1 className='text-[5vh] whyteInktrap_font text-center font-semibold text-[#0D0D0D]'>
-                  {resumeEnhancement.resumeEnhanced?.results?.matchingPercentage}
+                  {resumeEnhancement.contentEnhanced?.results?.matchingPercentage}
                 </h1>
               </div>
             ) : (
