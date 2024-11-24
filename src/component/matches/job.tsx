@@ -103,27 +103,29 @@ const JobMatch = ({
             ) : (
               <>
                 {graderResponse &&
-                  graderResponse.matchingResults.map((result: any) => (
-                    <div
-                      key={result.criteria}
-                      className='flex flex-col gap-[2vh]'
-                    >
-                      <div className='flex flex-row items-center object-center gap-[1vw]'>
-                        <CheckCircleFilled
-                          className={`${
-                            result.number > 95
-                              ? 'text-[#173440]'
-                              : result.number > 90
-                              ? 'text-[#348888]'
-                              : 'text-[#AAE2E2]'
-                          } rounded-full text-[3vh]`}
-                        />
-                        <p className='text-[2vh] inter-tight text-[#09090D]'>
-                          {result.criteria} ({result.number})
-                        </p>
+                  graderResponse.matchingResults.map((result: any) => {
+                    // Extract and convert the percentage value
+                    const resultNumber = parseFloat(result.number.replace('%', ''));
+
+                    return (
+                      <div key={result.criteria} className='flex flex-col gap-[2vh]'>
+                        <div className='flex flex-row items-center object-center gap-[1vw]'>
+                          <CheckCircleFilled
+                            className={`${
+                              resultNumber > 95
+                                ? 'text-[#173440]'
+                                : resultNumber > 85
+                                ? 'text-[#348888]'
+                                : 'text-[#AAE2E2]'
+                            } rounded-full text-[3vh]`}
+                          />
+                          <p className='text-[2vh] inter-tight text-[#09090D]'>
+                            {result.criteria} ({result.number})
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
               </>
             )}
           </div>
