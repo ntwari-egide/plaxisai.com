@@ -49,7 +49,7 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
 
   const [userDetails, setUserDetails] = useState<any>();
 
-  const [userMessageCount, setUserMessageCount]=useState<number>(0)
+  const [userMessageCount, setUserMessageCount] = useState<number>(0);
 
   const router = useRouter();
 
@@ -149,11 +149,13 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
     }
 
     // count the messsages
-    setUserMessageCount(prevCount => prevCount+1)
+    setUserMessageCount((prevCount) => prevCount + 1);
 
     // check if the message count is greater than 3
-    if(userMessageCount > 2) {
-      message.error("You have reached your message limit. Please upgrade to continue.")
+    if (userMessageCount > 2) {
+      message.error(
+        'You have reached your message limit. Please upgrade to continue.'
+      );
       return;
     }
 
@@ -283,30 +285,35 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
             {resumeEnhancement.contentEnhanced && !resumeEnhancement.loading ? (
               <div className='flex flex-row  justify-between overflow-y-scroll h-[10vh]'>
                 <div className='flex flex-col gap-[1vh]'>
-                {resumeEnhancement.contentEnhanced &&
-                  resumeEnhancement.contentEnhanced.results?.matchingResults.map(
-                    (results, key) => {
-                      // Extract and convert the percentage value
-                      const resultNumber = parseFloat(results.number.replace('%', ''));
+                  {resumeEnhancement.contentEnhanced &&
+                    resumeEnhancement.contentEnhanced.results?.matchingResults.map(
+                      (results, key) => {
+                        // Extract and convert the percentage value
+                        const resultNumber = parseFloat(
+                          results.number.replace('%', '')
+                        );
 
-                      return (
-                        <div key={key} className='flex flex-row items-center object-center gap-[1vw]'>
-                          <CheckCircleFilled
-                            className={`${
-                              resultNumber > 95
-                                ? 'text-[#173440]'
-                                : resultNumber > 85
-                                ? 'text-[#348888]'
-                                : 'text-[#AAE2E2]'
-                            } rounded-full text-[2.5vh]`}
-                          />
-                          <p className='text-[1.7vh] inter-tight text-[#09090D]'>
-                            {results.criteria} ({results.number})
-                          </p>
-                        </div>
-                      );
-                    }
-                  )}
+                        return (
+                          <div
+                            key={key}
+                            className='flex flex-row items-center object-center gap-[1vw]'
+                          >
+                            <CheckCircleFilled
+                              className={`${
+                                resultNumber > 95
+                                  ? 'text-[#173440]'
+                                  : resultNumber > 85
+                                  ? 'text-[#348888]'
+                                  : 'text-[#AAE2E2]'
+                              } rounded-full text-[2.5vh]`}
+                            />
+                            <p className='text-[1.7vh] inter-tight text-[#09090D]'>
+                              {results.criteria} ({results.number})
+                            </p>
+                          </div>
+                        );
+                      }
+                    )}
                 </div>
 
                 <h1 className='text-[5vh] whyteInktrap_font text-center font-semibold text-[#0D0D0D]'>

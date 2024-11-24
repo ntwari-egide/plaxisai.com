@@ -56,7 +56,9 @@ const CompaniesMatch = ({
 
       {Object.keys(matchingDetails).map((matchingKey) => {
         // Extract number from the string and convert to a float
-        const matchingValue = parseFloat(matchingDetails[matchingKey].replace('%', ''));
+        const matchingValue = parseFloat(
+          matchingDetails[matchingKey].replace('%', '')
+        );
 
         return (
           <div key={matchingKey} className='flex flex-col gap-[2vh]'>

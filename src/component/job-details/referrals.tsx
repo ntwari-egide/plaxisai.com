@@ -12,7 +12,6 @@ import 'react-alice-carousel/lib/alice-carousel.css';
 import { RootState } from '@/store';
 
 import { fetchReferrals } from '@/features/referrrals';
-import logger from '@/lib/logger';
 
 type ReferralsPageProps = {
   jobDetails: any;

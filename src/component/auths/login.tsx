@@ -9,8 +9,7 @@ import axios, { AxiosError } from 'axios';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { RiArrowRightLine, RiLinkedinFill } from 'react-icons/ri';
-import { LinkedIn } from 'react-linkedin-login-oauth2';
+import { RiArrowRightLine } from 'react-icons/ri';
 
 import api from '@/global/axios-config';
 import { encryptData } from '@/utils/encryptions';

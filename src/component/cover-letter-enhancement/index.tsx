@@ -45,7 +45,6 @@ const CoverLetterEnhancementLayout = ({ jobId }: CoverLetterLayoutProps) => {
 
   const [userMessageCount, setUserMessageCount] = useState(0); // Track the number of user messages
 
-
   const router = useRouter();
 
   const coverLetterEnhancement = useSelector(
@@ -140,11 +139,13 @@ const CoverLetterEnhancementLayout = ({ jobId }: CoverLetterLayoutProps) => {
     }
 
     // count the messsages
-    setUserMessageCount(prevCount => prevCount+1)
+    setUserMessageCount((prevCount) => prevCount + 1);
 
     // check if the message count is greater than 3
-    if(userMessageCount > 2) {
-      message.error("You have reached your message limit. Please upgrade to continue.")
+    if (userMessageCount > 2) {
+      message.error(
+        'You have reached your message limit. Please upgrade to continue.'
+      );
       return;
     }
 

@@ -224,10 +224,15 @@ const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
                 {graderResponse &&
                   graderResponse.matchingResults.map((result: any) => {
                     // Extract and convert the percentage value
-                    const resultNumber = parseFloat(result.number.replace('%', ''));
+                    const resultNumber = parseFloat(
+                      result.number.replace('%', '')
+                    );
 
                     return (
-                      <div key={result.criteria} className='flex flex-col gap-[1vh]'>
+                      <div
+                        key={result.criteria}
+                        className='flex flex-col gap-[1vh]'
+                      >
                         <div className='flex flex-row items-center object-center gap-[1vw]'>
                           <CheckCircleFilled
                             className={`${
