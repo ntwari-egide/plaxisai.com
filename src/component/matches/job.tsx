@@ -135,7 +135,7 @@ const JobMatch = ({
             <RiArrowRightLine className='text-[3vh]' />
           </Button>
           {salary ? (
-            <div className='border-[#E6E6E7] border rounded-full px-[2vw] flex items-center text-[2vh] inter-tight font-medium'>
+            <div className='border-[#E6E6E7] border rounded-full px-[2vw] flex items-center text-[1.3vh]  text-center inter-tight font-medium'>
               {salary}
             </div>
           ) : (

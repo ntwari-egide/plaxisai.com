@@ -199,7 +199,7 @@ const LoginComponent = () => {
             />
           </GoogleOAuthProvider>
 
-          <LinkedIn
+          {/* <LinkedIn
             clientId='78eruy1o6h1won'
             redirectUri='http://localhost:3000/auth/google'
             onSuccess={handleSuccess}
@@ -216,7 +216,7 @@ const LoginComponent = () => {
                 </p>
               </div>
             )}
-          </LinkedIn>
+          </LinkedIn> */}
         </div>
         <div className='mt-[2vh] flex flex-col items-center '>
           <div className='md:w-[20vw] w-[70vw] flex-col flex gap-[2vh] ipad-portrait:w-[60vw]'>

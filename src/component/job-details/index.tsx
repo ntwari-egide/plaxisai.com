@@ -270,7 +270,7 @@ const JobDetailsLayout = ({ jobId }: JobDetailsLayoutProps) => {
               </Link>
 
               <Link
-                href={'/cover-letter-enhancements'}
+                href={`/cover-letter-enhancements/${jobDetails?.jobDetails?.id}`}
                 target='_blank'
                 className='md:w-[55%] w-full'
               >
