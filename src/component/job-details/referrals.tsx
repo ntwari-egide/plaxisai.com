@@ -12,6 +12,7 @@ import 'react-alice-carousel/lib/alice-carousel.css';
 import { RootState } from '@/store';
 
 import { fetchReferrals } from '@/features/referrrals';
+import logger from '@/lib/logger';
 
 type ReferralsPageProps = {
   jobDetails: any;
@@ -75,7 +76,7 @@ const ReferralsPage = ({ jobDetails }: ReferralsPageProps) => {
               Array.isArray(referrals) && referrals.length > 0
                 ? referrals.map((referral: any, key: number) => (
                     <Link href={referral?.profileURL} target='_blank' key={key}>
-                      <Tooltip title={referral?.fullName}>
+                      <Tooltip title={referral?.headline}>
                         <Image
                           draggable={false}
                           src={
