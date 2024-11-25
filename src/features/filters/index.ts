@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface JobDetails {
   id: string;
@@ -39,7 +39,7 @@ const initialState: JobState = {
 };
 
 const jobFiltersSlice = createSlice({
-  name: "jobFilters",
+  name: 'jobFilters',
   initialState,
   reducers: {
     setJobs(state, action: PayloadAction<Job[]>) {
@@ -51,7 +51,9 @@ const jobFiltersSlice = createSlice({
       action: PayloadAction<{ filterType: string; value: string }>
     ) {
       const { filterType, value } = action.payload;
-      if (state.filters[filterType as keyof typeof state.filters].includes(value)) {
+      if (
+        state.filters[filterType as keyof typeof state.filters].includes(value)
+      ) {
         state.filters[filterType as keyof typeof state.filters] = state.filters[
           filterType as keyof typeof state.filters
         ].filter((item) => item !== value);

@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Button, Checkbox } from "antd";
-import { AppDispatch, RootState } from "@/store";
-import { resetFilters, setJobs, updateFilters } from "@/features/filters";
-import logger from "@/lib/logger";
-import GradientButton from "../controls/gradient-button";
-import { RiArrowRightLine } from "react-icons/ri";
+import { Checkbox } from 'antd';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import logger from '@/lib/logger';
+
+import { AppDispatch, RootState } from '@/store';
+
+import { resetFilters, setJobs, updateFilters } from '@/features/filters';
 
 type FiltersComponentProps = {
-  allJobs: any
-}
+  allJobs: any;
+};
 
-const FiltersComponent = ( { allJobs }: FiltersComponentProps) => {
+const FiltersComponent = ({ allJobs }: FiltersComponentProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const jobs = useSelector((state: RootState) => state.jobsFiltered.allJobs);
   const filters = useSelector((state: RootState) => state.jobsFiltered.filters);
@@ -32,27 +32,27 @@ const FiltersComponent = ( { allJobs }: FiltersComponentProps) => {
   };
 
   useEffect(() => {
-    dispatch(setJobs(allJobs))
-  },[allJobs])
+    dispatch(setJobs(allJobs));
+  }, [allJobs]);
 
-  logger(companyNames,"companies")
+  logger(companyNames, 'companies');
 
   return (
-    <div className="flex flex-col gap-[3vh]">
-      <h1 className="inter-tight text-[2.4vh] font-semibold text-[#09090d]">
+    <div className='flex flex-col gap-[3vh]'>
+      <h1 className='inter-tight text-[2.4vh] font-semibold text-[#09090d]'>
         Filters
       </h1>
 
       {/* Company Filters */}
-      <div className="flex flex-col gap-[1vh]">
-        <h1 className="inter-tight text-[2vh] font-semibold text-[#8F8F8F]">
+      <div className='flex flex-col gap-[1vh]'>
+        <h1 className='inter-tight text-[2vh] font-semibold text-[#8F8F8F]'>
           Company
         </h1>
         {companyNames.map((company) => (
           <Checkbox
             key={company}
             checked={filters.companyName.includes(company)}
-            onChange={() => handleCheckboxChange("companyName", company)}
+            onChange={() => handleCheckboxChange('companyName', company)}
           >
             {company}
           </Checkbox>
@@ -60,26 +60,26 @@ const FiltersComponent = ( { allJobs }: FiltersComponentProps) => {
       </div>
 
       {/* Employment Type Filters */}
-      <div className="flex flex-col gap-[1vh]">
-        <h1 className="inter-tight text-[2vh] font-semibold text-[#8F8F8F]">
+      <div className='flex flex-col gap-[1vh]'>
+        <h1 className='inter-tight text-[2vh] font-semibold text-[#8F8F8F]'>
           Work Schedule
         </h1>
         {employmentTypes.map((type) => (
           <Checkbox
             key={type}
             checked={filters.employmentType.includes(type)}
-            onChange={() => handleCheckboxChange("employmentType", type)}
+            onChange={() => handleCheckboxChange('employmentType', type)}
           >
             {type}
           </Checkbox>
         ))}
       </div>
       <button
-            onClick={handleResetFilters}
-            className={` cursor-pointer hover:scale-[1.04] transition-all relative text-[#000000] inter-tight place-items-center text-center border-[#000000] py-[1vh] w-[10vw]  border-[2px] rounded-full font-medium`}
-          >
-            Reset Filters
-          </button>
+        onClick={handleResetFilters}
+        className={` cursor-pointer hover:scale-[1.04] transition-all relative text-[#000000] inter-tight place-items-center text-center border-[#000000] py-[1vh] w-[10vw]  border-[2px] rounded-full font-medium`}
+      >
+        Reset Filters
+      </button>
     </div>
   );
 };
