@@ -140,8 +140,12 @@ const HeaderLayout = ({ sticky, showNotification }: HeaderLayoutProps) => {
       >
         <div className='w-full'>
           <p className='text-[#09090D] text-center inter-tight text-[1.6vh]'>
-              Introducing the <span className='italic'>“First-of-its-kind AI for User-Prompted Resume and Cover Letter Enhancements”</span>! 
-              Upload below and explore it now!
+            Introducing the{' '}
+            <span className='italic'>
+              “First-of-its-kind AI for User-Prompted Resume and Cover Letter
+              Enhancements”
+            </span>
+            ! Upload below and explore it now!
           </p>
         </div>
 
