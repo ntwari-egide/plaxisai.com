@@ -74,11 +74,11 @@ const HeaderLayout = ({ sticky, showNotification }: HeaderLayoutProps) => {
                   Overview
                 </li>
               </Link>
-              <Link href='/#features'>
+              {/* <Link href='/#features'>
                 <li className='text-[#000000] font-semibold inter-tight transition-all text-[1.7vh] hover:text-[gray] cursor-pointer'>
                   Documentation
                 </li>
-              </Link>
+              </Link> */}
               <Link href='/#features'>
                 <li className='text-[#000000] font-semibold inter-tight transition-all text-[1.7vh] hover:text-[gray] cursor-pointer'>
                   Features
