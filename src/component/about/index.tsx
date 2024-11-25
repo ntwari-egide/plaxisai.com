@@ -13,33 +13,32 @@ const AboutLayout = () => {
     {
       storyImg: StoryImg0,
       content:
-        'Hey there, fellow dreamers! 🌟 If you’re reading this, you’re likely navigating the wild world of job hunting—like a brave explorer searching for hidden treasures in a sea of applications.',
+        'Hey there, fellow students! 🌟 The semester’s in full swing, and we all know what that means: the inevitable internship panic. Applications are open, competition is fierce, and landing just <strong>one</strong> interview feels harder than ever. 😩',
     },
     {
       storyImg: StoryImg1,
       content:
-        'As a college student, I know firsthand how challenging it can be to land just one interview these days. You’ve probably experienced the struggle of enhancing your resume for a specific job, only to find yourself making those edits over and over—sometimes up to 100 times! 😵‍💫',
+        'As college students, we’ve all been there—endlessly tweaking our resumes for each job posting, trying to stand out. You spend hours with AI tools, but they just keep adding content without giving you any control over what goes in. The result? A bloated, unrealistic resume that doesn’t feel like <strong>you</strong>. 😵‍💫',
     },
     {
       storyImg: StoryImg2,
       content:
-        'But what if I told you that there’s a magical platform where you can upload your resume once and instantly connect with companies eager to find you? No more tedious tweaking!',
+        'We knew there had to be a better way. That’s why we built <strong>Plaxis AI</strong>—to put <strong>YOU</strong> back in control. Our <strong>user-prompted AI enhancement tool</strong> lets you decide how your resume and cover letter are improved, ensuring every edit stays true to your voice and experience. No more generic, one-size-fits-all changes—just tailored enhancements that work for <strong>you</strong>. 💡',
     },
     {
       storyImg: StoryImg3,
       content:
-        'That’s where Plaxis AI comes in! Imagine a world where artificial intelligence works tirelessly behind the scenes, scanning over 5 million companies to find the perfect matches for your resume. 🌐✨',
+        'But we didn’t stop there. Imagine uploading your resume <strong>once</strong> and letting our AI take over. It matches your skills to the perfect companies by scanning through <strong>millions of profiles</strong> and opportunities. Plus, we take it a step further by suggesting <strong>referrals from alumni or professionals</strong> who work at the same company you’re applying to—whether they attended your school or currently hold the position you’re aiming for. 🌐✨',
     },
     {
       storyImg: StoryImg4,
       content:
-        'Our powerful query system pulls job listings in real-time, so you’ll be the first to discover new opportunities as soon as they arise. Think of us as your personal treasure map, guiding you to the gems that fit your skills and aspirations. 🗺️💎 We match jobs based on your unique abilities and the interests of the companies. For students without experience, we recommend internships that align with your profile—like finding the perfect stepping stone to launch your career. For seasoned adventurers, we connect you with companies actively seeking talent like yours, and jobs waiting to be explored in your area. 🌍🚀',
+        'Our advanced query system also pulls real-time job listings, ensuring you’re always up-to-date on the latest opportunities. Whether you’re a student looking for internships or a seasoned professional searching for the next big role, Plaxis AI has you covered. 🗺️💎 We match you with roles that align with your skills and career goals. No experience? No problem! We recommend internships tailored to your profile—building your future, one step at a time. 🚀',
     },
-
     {
       storyImg: StoryImg5,
       content:
-        'So, if you’re ready to leave behind the exhausting cycle of repetitive edits and embrace a smarter way to navigate your job search, Plaxis AI is your trusty sidekick! Together, let’s uncover the treasures of your career path.',
+        'Gone are the days of repetitive resume edits, unrealistic content, and endless frustration. With <strong>Plaxis AI</strong>, your job search becomes smarter, faster, and far less stressful. Think of us as your career treasure map, guiding you to opportunities that truly fit—plus connecting you with the people who can help you get there. Let’s uncover the treasures of your future—together. 🌟',
     },
   ];
 
@@ -109,7 +108,10 @@ const StoryBoard = ({ storyImg, content }: StoryBoardProps) => {
         />
       </div>
 
-      <p className='inter-tight text-[1.7vh]'>{content}</p>
+      <p
+        className='inter-tight text-[1.7vh]'
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
     </div>
   );
 };
