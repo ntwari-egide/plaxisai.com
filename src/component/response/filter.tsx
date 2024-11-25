@@ -1,77 +1,85 @@
-import { Checkbox } from 'antd';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Button, Checkbox } from "antd";
+import { AppDispatch, RootState } from "@/store";
+import { resetFilters, setJobs, updateFilters } from "@/features/filters";
+import logger from "@/lib/logger";
+import GradientButton from "../controls/gradient-button";
+import { RiArrowRightLine } from "react-icons/ri";
 
-const FiltersComponent = () => {
+
+type FiltersComponentProps = {
+  allJobs: any
+}
+
+const FiltersComponent = ( { allJobs }: FiltersComponentProps) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const jobs = useSelector((state: RootState) => state.jobsFiltered.allJobs);
+  const filters = useSelector((state: RootState) => state.jobsFiltered.filters);
+
+  // Extract unique filter options dynamically
+  const companyNames = Array.from(new Set(jobs.map((job) => job.companyName)));
+  const employmentTypes = Array.from(
+    new Set(jobs.map((job) => job.jobDetails.employmentType))
+  );
+
+  const handleCheckboxChange = (filterType: string, value: string) => {
+    dispatch(updateFilters({ filterType, value }));
+  };
+
+  const handleResetFilters = () => {
+    dispatch(resetFilters());
+  };
+
+  useEffect(() => {
+    dispatch(setJobs(allJobs))
+  },[allJobs])
+
+  logger(companyNames,"companies")
+
   return (
-    <div className='flex flex-col gap-[3vh]'>
-      <h1 className='inter-tight text-[2.4vh] font-semibold text-[#09090d]'>
+    <div className="flex flex-col gap-[3vh]">
+      <h1 className="inter-tight text-[2.4vh] font-semibold text-[#09090d]">
         Filters
       </h1>
 
-      <div className='flex flex-col gap-[1vh]'>
-        <h1 className='inter-tight text-[2vh] font-semibold text-[#8F8F8F]'>
+      {/* Company Filters */}
+      <div className="flex flex-col gap-[1vh]">
+        <h1 className="inter-tight text-[2vh] font-semibold text-[#8F8F8F]">
           Company
         </h1>
-        <Checkbox className='inter-tight text-[2vh] font-medium text-[#09090d]'>
-          Apple (20)
-        </Checkbox>
-        <Checkbox className='inter-tight text-[2vh] font-medium text-[#09090d]'>
-          Microsoft (10)
-        </Checkbox>
-        <Checkbox className='inter-tight text-[2vh] font-medium text-[#09090d]'>
-          Meta (12)
-        </Checkbox>
+        {companyNames.map((company) => (
+          <Checkbox
+            key={company}
+            checked={filters.companyName.includes(company)}
+            onChange={() => handleCheckboxChange("companyName", company)}
+          >
+            {company}
+          </Checkbox>
+        ))}
       </div>
 
-      <div className='flex flex-col gap-[1vh]'>
-        <h1 className='inter-tight text-[2vh] font-semibold text-[#8F8F8F]'>
+      {/* Employment Type Filters */}
+      <div className="flex flex-col gap-[1vh]">
+        <h1 className="inter-tight text-[2vh] font-semibold text-[#8F8F8F]">
           Work Schedule
         </h1>
-        <Checkbox className='inter-tight text-[2vh] font-medium text-[#09090d]'>
-          Full time (35)
-        </Checkbox>
-        <Checkbox className='inter-tight text-[2vh] font-medium text-[#09090d]'>
-          Part time (19)
-        </Checkbox>
-        <Checkbox className='inter-tight text-[2vh] font-medium text-[#09090d]'>
-          Internship (4)
-        </Checkbox>
-        <Checkbox className='inter-tight text-[2vh] font-medium text-[#09090d]'>
-          Research (5)
-        </Checkbox>
+        {employmentTypes.map((type) => (
+          <Checkbox
+            key={type}
+            checked={filters.employmentType.includes(type)}
+            onChange={() => handleCheckboxChange("employmentType", type)}
+          >
+            {type}
+          </Checkbox>
+        ))}
       </div>
-
-      <div className='flex flex-col gap-[1vh]'>
-        <h1 className='inter-tight text-[2vh] font-semibold text-[#8F8F8F]'>
-          Work Settings
-        </h1>
-        <Checkbox className='inter-tight text-[2vh] font-medium text-[#09090d]'>
-          Remote (2)
-        </Checkbox>
-        <Checkbox className='inter-tight text-[2vh] font-medium text-[#09090d]'>
-          Onsite (40)
-        </Checkbox>
-        <Checkbox className='inter-tight text-[2vh] font-medium text-[#09090d]'>
-          Hybrid (10)
-        </Checkbox>
-      </div>
-
-      <div className='flex flex-col gap-[1vh]'>
-        <h1 className='inter-tight text-[2vh] font-semibold text-[#8F8F8F]'>
-          Season
-        </h1>
-        <Checkbox className='inter-tight text-[2vh] font-medium text-[#09090d]'>
-          Summer (40)
-        </Checkbox>
-        <Checkbox className='inter-tight text-[2vh] font-medium text-[#09090d]'>
-          Winter (40)
-        </Checkbox>
-        <Checkbox className='inter-tight text-[2vh] font-medium text-[#09090d]'>
-          Spring (10)
-        </Checkbox>
-        <Checkbox className='inter-tight text-[2vh] font-medium text-[#09090d]'>
-          Whole year (4)
-        </Checkbox>
-      </div>
+      <button
+            onClick={handleResetFilters}
+            className={` cursor-pointer hover:scale-[1.04] transition-all relative text-[#000000] inter-tight place-items-center text-center border-[#000000] py-[1vh] w-[10vw]  border-[2px] rounded-full font-medium`}
+          >
+            Reset Filters
+          </button>
     </div>
   );
 };

@@ -17,7 +17,7 @@ const QuickStats = () => {
       <div className='grid grid-cols-3 gap-[4vw]'>
         <StatsComponent stat='2000+' description='Students Matched!' />
         <StatsComponent stat='5M+' description='Companies scanned for you!' />
-        <StatsComponent stat='90%' description='Accuracy in matching!' />
+        <StatsComponent stat='95%' description='Accuracy in matching!' />
       </div>
     </div>
   );

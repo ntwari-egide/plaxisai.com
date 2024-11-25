@@ -10,6 +10,7 @@ type GradientButtonProps = {
   href?: string;
   theme?: 'colorfull' | 'transparent';
   backgroundColor?: string;
+  removeIcon?: boolean;
 };
 
 const GradientButton = ({
@@ -21,6 +22,7 @@ const GradientButton = ({
   href,
   theme,
   backgroundColor,
+  removeIcon
 }: GradientButtonProps) => {
   return (
     <>
@@ -58,11 +60,11 @@ const GradientButton = ({
           style={style}
         >
           {text}
-          <RiArrowRightLine
+          { removeIcon ? '': <RiArrowRightLine
             className={`${
               size == 'large' ? ' text-[5vh] md:text-[7vh]' : 'text-[3vh]'
             } rotate-45`}
-          />
+          />}
         </button>
       )}
     </>

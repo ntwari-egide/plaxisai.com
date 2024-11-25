@@ -39,6 +39,10 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
     getAllData();
   }, []);
 
+  const filteredJobs = useSelector(
+    (state: RootState) => state.jobsFiltered.filteredJobs
+  );
+
   return (
     <div
       className='md:px-[3vw] px-[6vw] mt-[3vh] relative flex flex-col  gap-[2vh]'
@@ -85,7 +89,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
           <div className='md:block hidden'>
             <TagComponent
               title='Matching Results'
-              description={`${jobMatches.length} jobs found`}
+              description={`${filteredJobs.length} jobs found`}
               classname='bg-[#348888]'
             />
           </div>
@@ -95,7 +99,7 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
       <div className='sticky top-0 z-10'>
         <div className='flex flex-col md:flex-row'>
           <div className='w-[15%] ipad-portrait:w-[35vw] hidden md:block'>
-            <FiltersComponent />
+            <FiltersComponent allJobs={jobMatches} />
           </div>
           <div className='md:w-[85%]'>
             <JobMatchesComponent />
