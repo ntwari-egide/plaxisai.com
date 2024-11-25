@@ -140,8 +140,8 @@ const HeaderLayout = ({ sticky, showNotification }: HeaderLayoutProps) => {
       >
         <div className='w-full'>
           <p className='text-[#09090D] text-center inter-tight text-[1.6vh]'>
-            Trial of Our AI <span className='italic'>“Speak To Me”</span> Cloud
-            model service is now live. Explore it now!
+              Introducing the <span className='italic'>“First-of-its-kind AI for User-Prompted Resume and Cover Letter Enhancements”</span>! 
+              Upload below and explore it now!
           </p>
         </div>
 
