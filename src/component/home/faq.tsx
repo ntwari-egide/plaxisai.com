@@ -7,22 +7,39 @@ const FAQComponent = () => {
   const items: CollapseProps['items'] = [
     {
       key: '1',
-      label: 'How do I use Plaxis AI to find job opportunities?',
+      label: 'How does Plaxis AI help with job applications?',
       children:
-        'You can use Plaxis AI to find job opportunities by uploading your resume and letting our AI match you with job opportunities that fit your skills and experience.',
+        'Plaxis AI simplifies your job search by analyzing your resume and instantly matching you with companies and job openings that align with your skills, experience, and career goals. Whether you’re a student looking for internships or a professional seeking new opportunities, our AI ensures that your matches are tailored to your unique profile. Additionally, we provide personalized referrals, connecting you with alumni or professionals in your target companies who can boost your chances of success.',
     },
     {
       key: '2',
-      label: 'What happens to my resume after I upload it?',
+      label: 'What makes Plaxis AI’s resume and cover letter enhancements unique?',
       children:
-        'Your resume is securely uploaded into our system and is only used to match you with job opportunities. We do not share your resume with any third parties.',
+        'Unlike other tools that over-edit and make resumes look unrealistic, Plaxis AI offers a user-prompted enhancement tool. You have full control over how your resume and cover letter are updated, ensuring they reflect your voice and true experience. This first-of-its-kind feature empowers you to craft application materials that stand out while staying authentic.',
     },
     {
       key: '3',
-      label:
-        'Can I get feedback on why I was matched with specific job opportunities?',
+      label: 'What happens to my resume after I upload it?',
       children:
-        'While our system does not provide specific feedback for individual matches, it uses a sophisticated algorithm to analyze the skills, experiences, and educational background provided in your resume. It then compares these aspects to the requirements of available job positions to find the best matches. For more detailed insights, you may want to review the job descriptions and required qualifications of your matched opportunities.',
+        'Your resume is securely uploaded and used exclusively to match you with job opportunities. We never share your information with third parties. Additionally, Plaxis AI provides insights into why you were matched with specific roles, helping you understand how your skills align with job requirements.',
+    },
+    {
+      key: '4',
+      label: 'Can Plaxis AI help students with no work experience?',
+      children:
+        'Absolutely! Plaxis AI is designed to support students at all stages of their career journey. For those without experience, we recommend internships tailored to your skills and academic background. Our platform ensures that you’re matched with opportunities that act as stepping stones to a successful career.',
+    },
+    {
+      key: '5',
+      label: 'How does Plaxis AI keep job listings updated?',
+      children:
+        'Our platform pulls job listings in real-time, ensuring you have access to the latest openings as soon as they become available. With over 5 million companies in our database, Plaxis AI helps you stay ahead of the competition by surfacing opportunities that match your profile instantly.',
+    },
+    {
+      key: '6',
+      label: 'Is my data secure with Plaxis AI?',
+      children:
+        'Yes, your data security is our top priority. We use encrypted systems to store and process your information, ensuring that your resume and personal details are fully protected. Your data is never shared or sold to third parties, so you can trust Plaxis AI with your career journey.',
     },
   ];
 
@@ -44,7 +61,7 @@ const FAQComponent = () => {
         help us improve in future versions.
       </p>
       <GradientButton
-        href='https://discord.gg/hFgPf7xfrQ'
+        href='https://groupme.com/join_group/104708974/aQ5ELuOz'
         text='Join Groupme'
         className='mt-[1vh] text-white bg-[#348888]'
         theme='colorfull'
