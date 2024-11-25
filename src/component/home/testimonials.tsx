@@ -98,7 +98,10 @@ const TestimonialsPage = () => {
   ];
 
   return (
-    <div id="testimonials" className='mt-[20vh] flex flex-col gap-[4vh] md:px-[3vw] px-[2vw]'>
+    <div
+      id='testimonials'
+      className='mt-[20vh] flex flex-col gap-[4vh] md:px-[3vw] px-[2vw]'
+    >
       <div className='flex md:flex-row flex-col justify-between justify-items-center object-center items-center'>
         <div>
           <p className='text-[#F28729] text-center md:text-start inter-tight md:text-[2vh] font-medium'>

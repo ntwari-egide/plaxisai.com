@@ -13,7 +13,8 @@ const FAQComponent = () => {
     },
     {
       key: '2',
-      label: 'What makes Plaxis AI’s resume and cover letter enhancements unique?',
+      label:
+        'What makes Plaxis AI’s resume and cover letter enhancements unique?',
       children:
         'Unlike other tools that over-edit and make resumes look unrealistic, Plaxis AI offers a user-prompted enhancement tool. You have full control over how your resume and cover letter are updated, ensuring they reflect your voice and true experience. This first-of-its-kind feature empowers you to craft application materials that stand out while staying authentic.',
     },
