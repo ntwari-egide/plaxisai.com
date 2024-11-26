@@ -12,6 +12,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { RiDownloadLine } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
+import html2canvas from 'html2canvas';
+import { PDFDocument, rgb } from 'pdf-lib';
 
 import logger from '@/lib/logger';
 
@@ -28,6 +30,8 @@ import PlaxisAIMessage from './ai-message';
 import UserMessage from './user-message';
 import PlaxisAITag from '../job-details/ai-tag';
 import AIDarkImg from '../../../public/images/ai-icon.png';
+import jsPDF from 'jspdf';
+
 
 type ResumeEnhancementLayoutProps = {
   jobId: string | string[] | undefined;
@@ -50,6 +54,8 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
   const [userDetails, setUserDetails] = useState<any>();
 
   const [userMessageCount, setUserMessageCount] = useState<number>(0);
+
+  const [nonColoredActive,setNonColoredActive] = useState<boolean>(false)
 
   const router = useRouter();
 
@@ -203,34 +209,39 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
     });
   };
 
-  const downloadPDF = () => {
-    const resumeContent = resumeEnhancement.contentEnhanced?.newContent;
+  const contentRef = useRef<HTMLDivElement>(null);
 
-    if (!resumeContent) {
-      logger('No resume content found', 'error');
-      return;
+  const downloadPDF = async () => {
+
+    // set the resume to non colored version
+    setNonColoredActive(true)
+
+    // Wait for the DOM to update with the non-colored version
+    await new Promise((resolve) => setTimeout(resolve, 100)); // Short delay for state to apply
+
+
+    if (contentRef.current) {
+      const canvas = await html2canvas(contentRef.current);
+      const imgData = canvas.toDataURL('image/png');
+
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdfWidth = 210; // A4 width in mm
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save('enhanced-resume.pdf');
     }
 
-    // Create a new window with the resume content
-    const printWindow = window.open('', '', 'height=500, width=500');
-
-    if (!printWindow) {
-      logger('Unable to open print window', 'error');
-      return;
-    }
-
-    printWindow.document.write('<html><head>');
-    printWindow.document.write('</head><body>');
-    printWindow.document.write('<div class="no-color-formatting">');
-    printWindow.document.write(resumeContent);
-    printWindow.document.write('</div>');
-    printWindow.document.write('</body></html>');
-
-    printWindow.document.close();
-    printWindow.print();
+    // set the resume back to colored version
+    setNonColoredActive(false)
   };
 
   const downloadDOCX = () => {
+
+    // set the resume to non colored version
+    setNonColoredActive(true)
+
+    // render the content
     const resumeContent = resumeEnhancement.contentEnhanced?.newContent;
 
     if (!resumeContent) {
@@ -258,11 +269,16 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
       <div className='flex flex-row gap-[4vw]'>
         {resumeEnhancement.contentEnhanced && !resumeEnhancement.loading ? (
           <div
-            className='ipad-landscape:w-[60%] w-[65%] flex flex-col border border-[#E6E6E7] rounded-lg h-[75vh] overflow-y-scroll resume-enhancements p-[2vw]'
-            dangerouslySetInnerHTML={{
-              __html: resumeEnhancement.contentEnhanced?.newContent,
-            }}
-          />
+            className={`ipad-landscape:w-[60%] w-[65%] flex flex-col border border-[#E6E6E7] rounded-lg h-[75vh] overflow-y-scroll ${nonColoredActive ? 'resume-enhancements-no-formats' : 'resume-enhancements'}`}
+          >
+            <div
+              ref={contentRef}
+              className=' p-[2vw]'
+              dangerouslySetInnerHTML={{
+                __html: resumeEnhancement.contentEnhanced?.newContent,
+              }}
+            />
+          </div>
         ) : (
           <Skeleton className='rounded-lg h-[75vh] ipad-landscape:w-[60%] w-[65%] border border-[#E6E6E7] p-[2vw]' />
         )}
