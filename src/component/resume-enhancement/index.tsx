@@ -7,13 +7,13 @@ import {
 } from '@ant-design/icons';
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { Button, Image, Input, message, Skeleton } from 'antd';
+import html2canvas from 'html2canvas';
 import Cookies from 'js-cookie';
+import jsPDF from 'jspdf';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { RiDownloadLine } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
-import html2canvas from 'html2canvas';
-import { PDFDocument, rgb } from 'pdf-lib';
 
 import logger from '@/lib/logger';
 
@@ -30,8 +30,6 @@ import PlaxisAIMessage from './ai-message';
 import UserMessage from './user-message';
 import PlaxisAITag from '../job-details/ai-tag';
 import AIDarkImg from '../../../public/images/ai-icon.png';
-import jsPDF from 'jspdf';
-
 
 type ResumeEnhancementLayoutProps = {
   jobId: string | string[] | undefined;
@@ -55,7 +53,7 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
 
   const [userMessageCount, setUserMessageCount] = useState<number>(0);
 
-  const [nonColoredActive,setNonColoredActive] = useState<boolean>(false)
+  const [nonColoredActive, setNonColoredActive] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -212,13 +210,11 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   const downloadPDF = async () => {
-
     // set the resume to non colored version
-    setNonColoredActive(true)
+    setNonColoredActive(true);
 
     // Wait for the DOM to update with the non-colored version
     await new Promise((resolve) => setTimeout(resolve, 100)); // Short delay for state to apply
-
 
     if (contentRef.current) {
       const canvas = await html2canvas(contentRef.current);
@@ -233,14 +229,10 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
     }
 
     // set the resume back to colored version
-    setNonColoredActive(false)
+    setNonColoredActive(false);
   };
 
   const downloadDOCX = () => {
-
-    // set the resume to non colored version
-    setNonColoredActive(true)
-
     // render the content
     const resumeContent = resumeEnhancement.contentEnhanced?.newContent;
 
@@ -249,15 +241,63 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
       return;
     }
 
-    // Remove HTML tags to get plain text
+    // Create a temporary div to hold the resume content and apply styles
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = resumeContent;
-    const plainText = tempDiv.textContent || tempDiv.innerText;
 
-    // Create a Blob with the content
-    const blob = new Blob([plainText], { type: 'text/plain' });
+    // Apply CSS styles dynamically for spans with 'newly-added' class
+    const newlyAddedSpans = tempDiv.querySelectorAll('span.newly-added');
+    newlyAddedSpans.forEach((span: HTMLElement) => {
+      span.style.color = '#09090d';
+    });
 
-    // Create a download link
+    // Apply styles to list items (li)
+    const listItems = tempDiv.querySelectorAll('li');
+    listItems.forEach((item: HTMLElement) => {
+      item.style.listStyleType = 'circle'; // This sets the bullet style
+      item.style.marginLeft = '9px'; // Set left margin for indentation
+    });
+
+    // Apply styles to header tags (header)
+    const headers = tempDiv.querySelectorAll('header');
+    headers.forEach((header: HTMLElement, index: number) => {
+      header.style.textAlign = 'center'; // Center-align the header
+      header.style.alignItems = 'center'; // Align content inside the header
+      header.style.alignContent = 'center'; // Align content vertically
+      if (index === 0) {
+        header.style.fontWeight = '900'; // Bold font for the first header
+      }
+    });
+
+    // Apply styles to h2 tags
+    const h2s = tempDiv.querySelectorAll('h2');
+    h2s.forEach((h2: HTMLElement) => {
+      h2.style.fontWeight = '900'; // Bold font
+    });
+
+    // Apply styles to h3 tags
+    const h3s = tempDiv.querySelectorAll('h3');
+    h3s.forEach((h3: HTMLElement) => {
+      h3.style.fontWeight = '700'; // Set medium bold font for h3
+    });
+
+    // Apply styles to p tags inside section
+    const sections = tempDiv.querySelectorAll('section p');
+    sections.forEach((p: HTMLElement) => {
+      p.style.display = 'flex'; // Flexbox for section paragraphs
+      p.style.flexDirection = 'row'; // Align items in a row
+      p.style.gap = '5px'; // Add gap between flex items (optional)
+    });
+
+    // Extract the content with the applied styles
+    const styledContent = tempDiv.innerHTML;
+
+    // Create a Blob with the styled content for DOCX
+    const blob = new Blob([styledContent], {
+      type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    });
+
+    // Create a download link for the DOCX file
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.download = 'enhanced-resume.docx';
@@ -269,11 +309,15 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
       <div className='flex flex-row gap-[4vw]'>
         {resumeEnhancement.contentEnhanced && !resumeEnhancement.loading ? (
           <div
-            className={`ipad-landscape:w-[60%] w-[65%] flex flex-col border border-[#E6E6E7] rounded-lg h-[75vh] overflow-y-scroll ${nonColoredActive ? 'resume-enhancements-no-formats' : 'resume-enhancements'}`}
+            className={`ipad-landscape:w-[60%] w-[65%] flex flex-col border border-[#E6E6E7] rounded-lg h-[75vh] overflow-y-scroll ${
+              nonColoredActive
+                ? 'resume-enhancements-no-formats'
+                : 'resume-enhancements'
+            }`}
           >
             <div
               ref={contentRef}
-              className=' p-[2vw]'
+              className='p-[2vw]'
               dangerouslySetInnerHTML={{
                 __html: resumeEnhancement.contentEnhanced?.newContent,
               }}

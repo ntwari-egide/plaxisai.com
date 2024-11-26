@@ -281,7 +281,8 @@ li.alice-carousel__stage-item.__active.__target {
   margin-right: 10px !important;
 }
 
-.resume-enhancements, .resume-enhancements-no-formats {
+.resume-enhancements,
+.resume-enhancements-no-formats {
   font-family: 'Times New Roman', Times, serif !important;
 }
 
@@ -301,42 +302,42 @@ li.alice-carousel__stage-item.__active.__target {
   margin-left: 2vw;
 }
 
-.resume-enhancements header, 
-.resume-enhancements-no-formats header{
+.resume-enhancements header,
+.resume-enhancements-no-formats header {
   align-items: center;
   text-align: center;
 }
 
-.resume-enhancements a, 
-.resume-enhancements-no-formats a{
+.resume-enhancements a,
+.resume-enhancements-no-formats a {
   text-decoration: underline;
 }
 
-.resume-enhancements header:first-child, 
-.resume-enhancements-no-formats  header:first-child{
+.resume-enhancements header:first-child,
+.resume-enhancements-no-formats header:first-child {
   font-weight: 900;
 }
 
-.resume-enhancements h2 ,
-.resume-enhancements-no-formats h2{
+.resume-enhancements h2,
+.resume-enhancements-no-formats h2 {
   font-weight: 900;
   font-size: 2vh;
 }
 
-.resume-enhancements h3 ,
-.resume-enhancements-no-formats h3{
+.resume-enhancements h3,
+.resume-enhancements-no-formats h3 {
   font-weight: 700;
 }
 
-.resume-enhancements section p ,
-.resume-enhancements-no-formats section p{
+.resume-enhancements section p,
+.resume-enhancements-no-formats section p {
   display: flex !important;
   flex-direction: row !important;
   gap: 5px; /* Optional: Add space between items */
 }
 
-.no-color-formatting span ,
-.resume-enhancements-no-formats span{
+.no-color-formatting span,
+.resume-enhancements-no-formats span {
   color: #000000 !important;
 }
 
