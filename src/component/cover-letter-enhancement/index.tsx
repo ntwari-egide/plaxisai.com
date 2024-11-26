@@ -3,7 +3,9 @@
 import { SendOutlined } from '@ant-design/icons';
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { Button, Image, Input, message, Skeleton } from 'antd';
+import html2canvas from 'html2canvas';
 import Cookies from 'js-cookie';
+import jsPDF from 'jspdf';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { RiDownloadLine } from 'react-icons/ri';
@@ -44,6 +46,8 @@ const CoverLetterEnhancementLayout = ({ jobId }: CoverLetterLayoutProps) => {
   const [userDetails, setUserDetails] = useState<any>();
 
   const [userMessageCount, setUserMessageCount] = useState(0); // Track the number of user messages
+
+  const [nonColoredActive, setNonColoredActive] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -193,18 +197,119 @@ const CoverLetterEnhancementLayout = ({ jobId }: CoverLetterLayoutProps) => {
     });
   };
 
-  logger(coverLetterEnhancement.contentEnhanced?.newContent, 'contnet');
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const downloadPDF = async () => {
+    // set the resume to non colored version
+    setNonColoredActive(true);
+
+    // Wait for the DOM to update with the non-colored version
+    await new Promise((resolve) => setTimeout(resolve, 100)); // Short delay for state to apply
+
+    if (contentRef.current) {
+      const canvas = await html2canvas(contentRef.current);
+      const imgData = canvas.toDataURL('image/png');
+
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdfWidth = 210; // A4 width in mm
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save('enhanced-cover-letter.pdf');
+    }
+
+    // set the resume back to colored version
+    setNonColoredActive(false);
+  };
+
+  const downloadDOCX = () => {
+    // render the content
+    const resumeContent = coverLetterEnhancement.contentEnhanced?.newContent;
+
+    if (!resumeContent) {
+      logger('No resume content found', 'error');
+      return;
+    }
+
+    // Create a temporary div to hold the resume content and apply styles
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = resumeContent;
+
+    // Apply CSS styles dynamically for spans with 'newly-added' class
+    const newlyAddedSpans = tempDiv.querySelectorAll('span.newly-added');
+    newlyAddedSpans.forEach((span: HTMLElement) => {
+      span.style.color = '#09090d';
+    });
+
+    // Apply styles to list items (li)
+    const listItems = tempDiv.querySelectorAll('li');
+    listItems.forEach((item: HTMLElement) => {
+      item.style.listStyleType = 'circle'; // This sets the bullet style
+      item.style.marginLeft = '9px'; // Set left margin for indentation
+    });
+
+    // Apply styles to header tags (header)
+    const headers = tempDiv.querySelectorAll('header');
+    headers.forEach((header: HTMLElement, index: number) => {
+      header.style.textAlign = 'center'; // Center-align the header
+      header.style.alignItems = 'center'; // Align content inside the header
+      header.style.alignContent = 'center'; // Align content vertically
+      if (index === 0) {
+        header.style.fontWeight = '900'; // Bold font for the first header
+      }
+    });
+
+    // Apply styles to h2 tags
+    const h2s = tempDiv.querySelectorAll('h2');
+    h2s.forEach((h2: HTMLElement) => {
+      h2.style.fontWeight = '900'; // Bold font
+    });
+
+    // Apply styles to h3 tags
+    const h3s = tempDiv.querySelectorAll('h3');
+    h3s.forEach((h3: HTMLElement) => {
+      h3.style.fontWeight = '700'; // Set medium bold font for h3
+    });
+
+    // Apply styles to p tags inside section
+    const sections = tempDiv.querySelectorAll('section p');
+    sections.forEach((p: HTMLElement) => {
+      p.style.display = 'flex'; // Flexbox for section paragraphs
+      p.style.flexDirection = 'row'; // Align items in a row
+      p.style.gap = '5px'; // Add gap between flex items (optional)
+    });
+
+    // Extract the content with the applied styles
+    const styledContent = tempDiv.innerHTML;
+
+    // Create a Blob with the styled content for DOCX
+    const blob = new Blob([styledContent], {
+      type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    });
+
+    // Create a download link for the DOCX file
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'enhanced-cover-letter.docx';
+    link.click();
+  };
+
   return (
     <div className='px-[3vw] mt-[5vh]'>
       <div className='flex flex-row gap-[4vw]'>
         {coverLetterEnhancement.contentEnhanced &&
         !coverLetterEnhancement.loading ? (
           <div
-            className='ipad-landscape:w-[60%] w-[65%] flex flex-col border border-[#E6E6E7] rounded-lg h-[75vh] overflow-y-scroll whitespace-break-spaces cover-letter p-[2vw]'
-            dangerouslySetInnerHTML={{
-              __html: coverLetterEnhancement.contentEnhanced?.newContent,
-            }}
-          />
+            className={`ipad-landscape:w-[60%] w-[65%] flex flex-col border border-[#E6E6E7] rounded-lg h-[75vh] overflow-y-scroll cover-letter`}
+          >
+            <div
+              ref={contentRef}
+              className='p-[2vw]'
+              dangerouslySetInnerHTML={{
+                __html: coverLetterEnhancement.contentEnhanced?.newContent,
+              }}
+            />
+          </div>
         ) : (
           <Skeleton className='rounded-lg h-[75vh] ipad-landscape:w-[60%] w-[65%] border border-[#E6E6E7] p-[2vw]' />
         )}
@@ -277,12 +382,20 @@ const CoverLetterEnhancementLayout = ({ jobId }: CoverLetterLayoutProps) => {
           {/* actions  */}
 
           <div className='flex flex-row justify-between mt-[2vh] w-full'>
-            <Button className='inter-tight bg-[#348888] rounded-full border-[2px] border-[#348888] py-[3vh] hover:text-[#FFFFFF] font-semibold text-[#FFFFFF] cursor-pointer text-[1.6vh] hover:scale-[1.02] w-[40%]'>
+            <Button
+              className='inter-tight bg-[#348888] rounded-full border-[2px] border-[#348888] py-[3vh] hover:text-[#FFFFFF] font-semibold text-[#FFFFFF] cursor-pointer text-[1.6vh] hover:scale-[1.02] w-[40%]'
+              onClick={downloadPDF}
+              loading={coverLetterEnhancement.loading}
+            >
               <RiDownloadLine className='text-[2vh]' />
               Download PDF
             </Button>
 
-            <Button className='inter-tight bg-[white] rounded-full border-[#09090D] py-[3vh] border-[2px] font-semibold text-[#09090D] cursor-pointer text-[1.6vh] hover:scale-[1.02] w-[55%]'>
+            <Button
+              className='inter-tight bg-[white] rounded-full border-[#09090D] py-[3vh] border-[2px] font-semibold text-[#09090D] cursor-pointer text-[1.6vh] hover:scale-[1.02] w-[55%]'
+              onClick={downloadDOCX}
+              loading={coverLetterEnhancement.loading}
+            >
               <RiDownloadLine className='text-[2vh]' />
               Download Word (.Docx)
             </Button>
