@@ -24,15 +24,18 @@ const CallToActionComponent = () => {
     <div className='call-to-action relative mt-[10vh] md:mt-[35vh] flex flex-col md:gap-[6vh] ipad-portrait:mt-[15vh] place-items-center'>
       <h1
         ref={textRef}
-        className='text-white text-[4vh] md:text-[8vh] font-bold text-center w-[80vw] md:w-[50vw] m-auto alliance-2 ipad-portrait:text-[5vh] ipad-portrait:[90vw]'
+        className='text-[#000000] text-[4vh] md:text-[8vh] font-bold text-center w-[80vw] md:w-[54vw] m-auto whyteInktrap_font leading-[12vh] ipad-portrait:text-[5vh] ipad-portrait:[90vw]'
       >
         Your next great job is just one upload away.
       </h1>
+
       <GradientButton
-        href='/#home'
+        href='/signup'
         size='large'
-        text='Get Matched for Free'
-        className='mt-[5vh]'
+        text='Get Started'
+        className='mt-[1vh] text-white bg-[#09090D]'
+        theme='colorfull'
+        backgroundColor='#09090D'
       />
     </div>
   );

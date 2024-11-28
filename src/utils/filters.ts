@@ -1,4 +1,4 @@
-import { FilterOptions } from '@/component/response';
+// import { filterOptions } from '@/component/response';
 
 /**
  * @param filterOptionName
@@ -43,7 +43,7 @@ export const getFilterOptions = (
  * @param filterOptions
  * @approach loop through the jobs and check if the job matches the filterOptions, if it does, add it to the filteredJobs array
  */
-export const filterJobsHelper = (jobs: any[], filterOptions: FilterOptions) => {
+export const filterJobsHelper = (jobs: any[], filterOptions: any) => {
   // Helper function to traverse nested objects and find the value of a given key
   const traverse = (obj: any, key: string): any => {
     if (typeof obj !== 'object' || obj === null) {
@@ -65,7 +65,7 @@ export const filterJobsHelper = (jobs: any[], filterOptions: FilterOptions) => {
 
   const matchesFilter = (
     job: any,
-    filterKey: keyof FilterOptions,
+    filterKey: keyof any,
     filterValues: string[]
   ) => {
     if (filterValues.length === 0) return true;
@@ -79,7 +79,7 @@ export const filterJobsHelper = (jobs: any[], filterOptions: FilterOptions) => {
     const cloneJob = { ...job };
 
     const matchesAllFilters = (
-      Object.keys(filterOptions) as (keyof FilterOptions)[]
+      Object.keys(filterOptions) as (keyof any)[]
     ).every((key) => matchesFilter(cloneJob, key, filterOptions[key]));
 
     // Job must match all specified filters to be included

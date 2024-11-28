@@ -27,7 +27,7 @@ const ReusableSelect = ({
         onChange={onChange}
         style={{ width: width }}
         className={'alliance-2' + className}
-        suffixIcon={<RiArrowDownLine className='text-white' />}
+        suffixIcon={<RiArrowDownLine className='text-[#000000]' />}
         options={options}
         popupMatchSelectWidth={false}
         defaultValue={defaultValue}

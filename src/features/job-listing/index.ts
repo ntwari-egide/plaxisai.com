@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+
+import api from '@/global/axios-config';
 
 export interface Job {
   id: string;
@@ -26,17 +27,34 @@ const initialState: JobListingState = {
   error: null,
 };
 
+interface _Company {
+  companyName: string;
+}
+
 export interface RequestJobListing {
   title: string;
-  company: string;
-  companyLocation: string;
+  companies: _Company[];
+}
+
+export interface _RequestJobListing {
+  title: string;
+  companies: string[];
 }
 
 export const jobListingRequest = createAsyncThunk(
   'jobListing/fetchJobs',
-  async (request: any) => {
+  async (request: _RequestJobListing) => {
     try {
-      const response = await axios.post('api/job-listing', request, {
+      const jobRequest: RequestJobListing = {
+        title: request.title,
+        companies: [],
+      };
+
+      request.companies.map((company) =>
+        jobRequest.companies.push({ companyName: company })
+      );
+
+      const response = await api.post('/jobs-matches', jobRequest, {
         headers: {
           'Content-Type': 'application/json',
         },

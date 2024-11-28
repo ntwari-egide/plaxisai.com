@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import coverLetterEnhancement from './features/cover-letter';
 import filters from './features/filters';
+import genAI from './features/gen-ai';
+import jobGrader from './features/job-grader';
 import jobListing from './features/job-listing';
-import openAi from './features/open-ai';
+import referrals from './features/referrrals';
+import resumeEnhancement from './features/resume-enhancements';
 import resumeScanner from './features/resume-scanner';
 import trackingProgress from './features/tracking-progress';
 
@@ -11,9 +15,13 @@ export const store = configureStore({
     // Add the generated reducer here
     resumeScanner: resumeScanner,
     jobListing: jobListing,
-    openAI: openAi,
+    genAI: genAI,
     trackingProgress: trackingProgress,
     jobsFiltered: filters,
+    jobGrader: jobGrader,
+    referrals: referrals,
+    resumeEnhancement: resumeEnhancement,
+    coverLetterEnhancement: coverLetterEnhancement,
   },
 });
 

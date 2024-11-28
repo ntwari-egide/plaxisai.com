@@ -1,26 +1,41 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export enum ScanningProgress {
+  NOT_STARTED = 'NOT-STARTED',
+  STARTED = 'STARTED',
+  COMPLETED = 'COMPLETED',
+  FAILED = 'FAILED',
+}
+
+export interface ScanningState {
+  extractingData: ScanningProgress;
+  matchesListing: ScanningProgress;
+  matchingProfile: ScanningProgress;
+}
+
+const initialState: ScanningState = {
+  extractingData: ScanningProgress.NOT_STARTED,
+  matchesListing: ScanningProgress.NOT_STARTED,
+  matchingProfile: ScanningProgress.NOT_STARTED,
+};
+
 const trackingProgress = createSlice({
   name: 'trackingProgress',
-  initialState: {
-    resumeScaner: 'NOT-STARTED',
-    jobListing: 'NOT-STARTED',
-    openAi: 'NOT-STARTED',
-  },
+  initialState,
   reducers: {
     setResumeScanner: (state, action) => {
-      state.resumeScaner = action.payload;
+      state.extractingData = action.payload;
     },
-    setJobListing: (state, action) => {
-      state.jobListing = action.payload;
+    setMatchesListing: (state, action) => {
+      state.matchesListing = action.payload;
     },
-    setOpenAi: (state, action) => {
-      state.openAi = action.payload;
+    setMatchingProfile: (state, action) => {
+      state.matchingProfile = action.payload;
     },
   },
 });
 
-export const { setResumeScanner, setJobListing, setOpenAi } =
+export const { setResumeScanner, setMatchesListing, setMatchingProfile } =
   trackingProgress.actions;
 
 export default trackingProgress.reducer;

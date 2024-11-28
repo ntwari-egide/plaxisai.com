@@ -1,54 +1,73 @@
 import type { CollapseProps } from 'antd';
-import Link from 'next/link';
 
 import CollapseComponent from '../controls/collapse';
-import TextButton from '../controls/text-button';
+import GradientButton from '../controls/gradient-button';
 
 const FAQComponent = () => {
   const items: CollapseProps['items'] = [
     {
       key: '1',
-      label: 'How do I use Plaxis AI to find job opportunities?',
+      label: 'How does Plaxis AI help with job applications?',
       children:
-        'You can use Plaxis AI to find job opportunities by uploading your resume and letting our AI match you with job opportunities that fit your skills and experience.',
+        'Plaxis AI simplifies your job search by analyzing your resume and instantly matching you with companies and job openings that align with your skills, experience, and career goals. Whether you’re a student looking for internships or a professional seeking new opportunities, our AI ensures that your matches are tailored to your unique profile. Additionally, we provide personalized referrals, connecting you with alumni or professionals in your target companies who can boost your chances of success.',
     },
     {
       key: '2',
-      label: 'What happens to my resume after I upload it?',
+      label:
+        'What makes Plaxis AI’s resume and cover letter enhancements unique?',
       children:
-        'Your resume is securely uploaded into our system and is only used to match you with job opportunities. We do not share your resume with any third parties.',
+        'Unlike other tools that over-edit and make resumes look unrealistic, Plaxis AI offers a user-prompted enhancement tool. You have full control over how your resume and cover letter are updated, ensuring they reflect your voice and true experience. This first-of-its-kind feature empowers you to craft application materials that stand out while staying authentic.',
     },
     {
       key: '3',
-      label:
-        'Can I get feedback on why I was matched with specific job opportunities?',
+      label: 'What happens to my resume after I upload it?',
       children:
-        'While our system does not provide specific feedback for individual matches, it uses a sophisticated algorithm to analyze the skills, experiences, and educational background provided in your resume. It then compares these aspects to the requirements of available job positions to find the best matches. For more detailed insights, you may want to review the job descriptions and required qualifications of your matched opportunities.',
+        'Your resume is securely uploaded and used exclusively to match you with job opportunities. We never share your information with third parties. Additionally, Plaxis AI provides insights into why you were matched with specific roles, helping you understand how your skills align with job requirements.',
+    },
+    {
+      key: '4',
+      label: 'Can Plaxis AI help students with no work experience?',
+      children:
+        'Absolutely! Plaxis AI is designed to support students at all stages of their career journey. For those without experience, we recommend internships tailored to your skills and academic background. Our platform ensures that you’re matched with opportunities that act as stepping stones to a successful career.',
+    },
+    {
+      key: '5',
+      label: 'How does Plaxis AI keep job listings updated?',
+      children:
+        'Our platform pulls job listings in real-time, ensuring you have access to the latest openings as soon as they become available. With over 5 million companies in our database, Plaxis AI helps you stay ahead of the competition by surfacing opportunities that match your profile instantly.',
+    },
+    {
+      key: '6',
+      label: 'Is my data secure with Plaxis AI?',
+      children:
+        'Yes, your data security is our top priority. We use encrypted systems to store and process your information, ensuring that your resume and personal details are fully protected. Your data is never shared or sold to third parties, so you can trust Plaxis AI with your career journey.',
     },
   ];
 
   return (
     <div
       id='faq'
-      className=' relative mt-[10vh] md:mt-[25vh] flex flex-col gap-[1vh] md:gap-[3vh] place-items-center'
+      className=' relative mt-[10vh] md:mt-[25vh] flex flex-col gap-[1vh] md:gap-[4vh] place-items-center'
     >
-      <h1 className='text-[#F28729] inter-tight md:text-[3vh] font-medium text-center'>
-        FAQ
-      </h1>
-      <h1 className='text-white text-[2.5vh] md:text-[5vh] font-bold alliance-2 text-center'>
-        Got questions? <br /> Join the community.
-      </h1>
-      <p className='text-center text-[#BDBDBE] text-[2vh] w-[80vw] md:w-[27vw] ipad-portrait:w-[70vw] m-auto'>
+      <div className='flex flex-col place-items-center'>
+        <h1 className='text-[#F28729] inter-tight md:text-[2vh] font-medium'>
+          FAQ
+        </h1>
+        <h1 className='text-[#000000] text-[2.5vh] md:text-[4.5vh] font-bold whyteInktrap_font  text-center w-[30vw] mt-4 leading-[5vh]'>
+          Got questions? <br /> Join the community.
+        </h1>
+      </div>
+      <p className='text-center text-[#09090D] md:w-[27vw] ipad-portrait:w-[70vw] m-auto w-[20vw] inter-tight  font-medium text-[1.7vh]'>
         Our Discord community and staff are here to help! Your feedback will
         help us improve in future versions.
       </p>
-      <Link href='https://discord.gg/hFgPf7xfrQ' target='_blank'>
-        <TextButton
-          text='Join Discord'
-          isContentImportant
-          className='mt-[2vh]'
-        />
-      </Link>
+      <GradientButton
+        href='https://groupme.com/join_group/104708974/aQ5ELuOz'
+        text='Join Groupme'
+        className='mt-[1vh] text-white bg-[#348888]'
+        theme='colorfull'
+        backgroundColor='#348888'
+      />
       <CollapseComponent items={items} />
     </div>
   );

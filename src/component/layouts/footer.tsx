@@ -10,67 +10,83 @@ import LogoComponent from '../reusable/logo';
 
 const FooterComponent = () => {
   return (
-    <div className='mt-[15vh] md:mt-[23vh] z-30 px-[6vw] md:px-[3vw] pb-[4vh] '>
+    <div className='mt-[15vh] md:mt-[23vh] z-30 px-[6vw] md:px-[3vw] pb-[4vh] border-t border-t-[#E6E6E7] pt-[4vh] '>
       <div className='min-h-[40vh] justify-between md:flex grid grid-cols-2 flex-col md:flex-row ipad-portrait:gap-[2vw] gap-[10vw]'>
         <div className='flex flex-col justify-between md:h-[40vh]'>
           <LogoComponent size='medium' />
         </div>
         <div>
-          <h2 className='text-white text-[2.5vh] md:text-[3.5vh] ipad-portrait:text-[2.4vh] font-bold'>
-            Explore
+          <h2 className='text-[#000000] text-[1.5vh] md:text-[2vh] ipad-portrait:text-[2vh] font-medium'>
+            Overview
           </h2>
           <ul className='flex flex-col gap-[1.5vh] mt-[2vh]'>
-            <li className='text-[1.7vh] text-[#78787A] hover:text-white transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Resume Templates
             </li>
-            <li className='text-[1.7vh] text-[#78787A] hover:text-white transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Resume Reviews
             </li>
-            <li className='text-[1.7vh] text-[#78787A] hover:text-white transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Resume Writing
             </li>
           </ul>
         </div>
         <div>
-          <h2 className='text-white text-[2.5vh] md:text-[3.5vh] ipad-portrait:text-[2.4vh] font-bold'>
+          <h2 className='text-[#000000] text-[1.5vh] md:text-[2vh] ipad-portrait:text-[2vh] font-medium'>
+            Documentation
+          </h2>
+          <ul className='flex flex-col gap-[1.5vh] mt-[2vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
+              Help Center
+            </li>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
+              Documentation
+            </li>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
+              Versioning Info
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2 className='text-[#000000] text-[1.5vh] md:text-[2vh] ipad-portrait:text-[2vh] font-medium'>
             Resources
           </h2>
           <ul className='flex flex-col gap-[1.5vh] mt-[2vh]'>
-            <li className='text-[1.7vh] text-[#78787A] hover:text-white transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               FAQ
             </li>
-            <li className='text-[1.7vh] text-[#78787A] hover:text-white transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Updates
             </li>
-            <li className='text-[1.7vh] text-[#78787A] hover:text-white transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Help Center
             </li>
-            <li className='text-[1.7vh] text-[#78787A] hover:text-white transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Contact
             </li>
-            <li className='text-[1.7vh] text-[#78787A] hover:text-white transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Privacy Policy
             </li>
           </ul>
         </div>
         <div>
-          <h2 className='text-white text-[2.5vh] md:text-[3.5vh] ipad-portrait:text-[2.4vh] font-bold'>
+          <h2 className='text-[#000000] text-[1.5vh] md:text-[2vh] ipad-portrait:text-[2vh] font-medium'>
             Company
           </h2>
           <ul className='flex flex-col gap-[1.5vh] mt-[2vh]'>
-            <li className='text-[1.7vh] text-[#78787A] hover:text-white transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Community
             </li>
-            <li className='text-[1.7vh] text-[#78787A] hover:text-white transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               About
             </li>
-            <li className='text-[1.7vh] text-[#78787A] hover:text-white transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Blog
             </li>
-            <li className='text-[1.7vh] text-[#78787A] hover:text-white transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Privacy Policy
             </li>
-            <li className='text-[1.7vh] text-[#78787A] hover:text-white transition-all cursor-pointer ipad-portrait:text-[1.5vh]'>
+            <li className='text-[1.7vh] text-[#09090D] hover:text-[#000000] transition-all cursor-pointer ipad-portrait:text-[1.5vh] inter-tight hover:underline'>
               Terms of Service
             </li>
           </ul>

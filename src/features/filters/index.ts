@@ -1,91 +1,85 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { FilterOptions } from '@/component/response';
-import { filterJobsHelper } from '@/utils/filters';
-
-import { JobListingState } from '../job-listing';
-
-const initialState: JobListingState = {
-  jobs: [],
-  loading: false,
-  error: null,
-};
-
-// reset the state
-export const resetJobListing = createAsyncThunk(
-  'jobListing/reset',
-  async (allJobs: any) => {
-    return allJobs;
-  }
-);
-
-// given the filter options, filter the jobs and return the filtered jobs, know that the filter options are an array of objects of type { label: string, value: string }, and the jobs are an array of objects of type Job. Know that the filter options are the keys of the Job object and can have nested hierarchy, so you need to traverse the job object to get the value of the key
-interface FilterJobsProps {
-  jobs: any[];
-  filterOptions: FilterOptions;
+export interface JobDetails {
+  id: string;
+  title: string;
+  company: string;
+  description: string;
+  image: string;
+  location: string;
+  employmentType: string;
+  datePosted: string;
+  salaryRange: string;
+  jobProviders: any[];
 }
 
-export const filterJobs = createAsyncThunk(
-  'jobListing/filter',
-  async ({ jobs, filterOptions }: FilterJobsProps) => {
-    // Remove 'company' in filterOptions.companies array
-    filterOptions.companies = filterOptions.companies.filter(
-      (company) => company !== 'Company'
-    );
+interface Job {
+  id: number;
+  companyName: string;
+  title: string;
+  jobDetails: JobDetails;
+}
 
-    // Remove 'jobProvider' in filterOptions.jobProvider array
-    filterOptions.jobProvider = filterOptions.jobProvider.filter(
-      (jobProvider) => jobProvider !== 'Job Provider'
-    );
+interface JobState {
+  allJobs: Job[];
+  filteredJobs: Job[];
+  filters: {
+    companyName: string[];
+    employmentType: string[];
+  };
+}
 
-    // Remove 'employmentType' in filterOptions.employmentType array
-    filterOptions.employmentType = filterOptions.employmentType.filter(
-      (employmentType) => employmentType !== 'Employment Type'
-    );
+const initialState: JobState = {
+  allJobs: [],
+  filteredJobs: [],
+  filters: {
+    companyName: [],
+    employmentType: [],
+  },
+};
 
-    // Remove 'location' in filterOptions.location array
-    filterOptions.location = filterOptions.location.filter(
-      (location) => location !== 'Location'
-    );
-
-    // Process filtered jobs
-    const filteredJobs = filterJobsHelper(jobs, filterOptions);
-
-    return filteredJobs;
-  }
-);
-
-const filteredJobsListing = createSlice({
-  name: 'filteredJobsListing',
+const jobFiltersSlice = createSlice({
+  name: 'jobFilters',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(resetJobListing.fulfilled, (state, action) => {
-        state.jobs = action.payload;
-      })
-      .addCase(resetJobListing.rejected, (state, action) => {
-        state.error = action.error.message;
-      })
-      .addCase(resetJobListing.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(filterJobs.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(filterJobs.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = null;
-        state.jobs = action.payload;
-      })
-      .addCase(filterJobs.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
+  reducers: {
+    setJobs(state, action: PayloadAction<Job[]>) {
+      state.allJobs = action.payload;
+      state.filteredJobs = action.payload; // Initially, show all jobs
+    },
+    updateFilters(
+      state,
+      action: PayloadAction<{ filterType: string; value: string }>
+    ) {
+      const { filterType, value } = action.payload;
+      if (
+        state.filters[filterType as keyof typeof state.filters].includes(value)
+      ) {
+        state.filters[filterType as keyof typeof state.filters] = state.filters[
+          filterType as keyof typeof state.filters
+        ].filter((item) => item !== value);
+      } else {
+        state.filters[filterType as keyof typeof state.filters].push(value);
+      }
+
+      // Filter jobs
+      state.filteredJobs = state.allJobs.filter((job) => {
+        const matchesCompany =
+          state.filters.companyName.length === 0 ||
+          state.filters.companyName.includes(job.companyName);
+
+        const matchesEmployment =
+          state.filters.employmentType.length === 0 ||
+          state.filters.employmentType.includes(job.jobDetails.employmentType);
+
+        return matchesCompany && matchesEmployment;
       });
+    },
+    resetFilters(state) {
+      state.filters = { companyName: [], employmentType: [] };
+      state.filteredJobs = state.allJobs; // Reset to show all jobs
+    },
   },
 });
 
-export const filteredJobsActions = filteredJobsListing.actions;
-export default filteredJobsListing.reducer;
+export const { setJobs, updateFilters, resetFilters } = jobFiltersSlice.actions;
+export default jobFiltersSlice.reducer;

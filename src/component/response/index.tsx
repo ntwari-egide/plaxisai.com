@@ -1,17 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
-import { Slider } from 'antd';
+
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { RootState } from '@/store';
 
-import { filterJobs, resetJobListing } from '@/features/filters';
-import { getFilterOptions } from '@/utils/filters';
+import { CareerMatchResponse } from '@/features/gen-ai';
 
-import ReusableSelect from '../controls/select';
-import JobCard from '../layouts/job-card';
+import FiltersComponent from './filter';
+import JobMatchesComponent from './job-matches-component';
+import CompaniesMatch from '../matches/companies';
+import TagComponent from '../reusable/tags';
 
 type ResponseLayoutProps = {
   onClick?: () => void;
@@ -20,220 +21,90 @@ type ResponseLayoutProps = {
 const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
   const router = useRouter();
 
-  const allJobs = useSelector((state: RootState) => state.jobListing.jobs);
+  const [careerMatches, setCareerMatches] = useState<CareerMatchResponse>();
 
-  const jobsFiltered = useSelector(
-    (state: RootState) => state.jobsFiltered.jobs
-  );
+  const matches = useSelector((state: RootState) => state.genAI.companyMatches);
 
-  const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
-
-  const matchedCompanies = useSelector(
-    (state: RootState) => state.openAI.response?.analysis.companyMatches
-  );
-
-  // if the all jobs we need to send back to index.tsx
+  const jobMatches = useSelector((state: RootState) => state.jobListing.jobs);
 
   useEffect(() => {
-    if (allJobs.length === 0) {
-      router.push('/');
-    }
+    const getAllData = async () => {
+      if (!matches) {
+        router.push('/');
+      } else {
+        setCareerMatches(matches);
+      }
+    };
 
-    // reset the state
-    dispatch(resetJobListing(allJobs));
-  }, [allJobs, router]);
+    getAllData();
+  }, []);
 
-  return (
-    <div className='relative min-h-screen p-[2vw]' onClick={onClick}>
-      <div className=' relative flex flex-row'>
-        <h1 className='text-white text-[3vh]'>Matched</h1>
-      </div>
-      <div className='flex flex-col-reverse md:flex-row gap-[3vw] mt-[3vh] ipad-portrait:flex-col-reverse'>
-        <div className='bg-[#09090D] sticky top-[5vh] md:w-[20%] ipad-portrait:w-full border-[1px] border-[#1C1C1F] h-[80vh] rounded-md'>
-          <LeftComponent
-            allJobs={jobsFiltered}
-            matchedCompanies={matchedCompanies}
-          />
-        </div>
-        <div className='md:w-[80%] min-h-[60vh] flex flex-col gap-[4vh] ipad-portrait:w-full'>
-          <div className='grassmorphism_bg sticky top-[0] border-[1px] border-[#1C1C1F] z-50 min-h-[8vh] rounded-md'>
-            <ResponseFilterComponent allJobs={allJobs} />
-          </div>
-          <div className='gap-[2vh] grid grid-cols-1  md:grid-cols-2'>
-            {/* {data.map((job) => ( */}
-            {jobsFiltered.map((job) =>
-              job.jobs.jobs.map((foundJob: any, index: number) => (
-                <JobCard
-                  key={index}
-                  company={foundJob.company}
-                  position={foundJob.title}
-                  duration={foundJob.employmentType}
-                  location={foundJob.location}
-                  description={foundJob.description}
-                  link={foundJob.jobProviders[0].url}
-                  salary={foundJob.salaryRange}
-                  postedDate={foundJob.datePosted}
-                />
-              ))
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
+  const filteredJobs = useSelector(
+    (state: RootState) => state.jobsFiltered.filteredJobs
   );
-};
-
-interface ResponseFilterComponentProps {
-  allJobs: any[];
-}
-
-export interface FilterOptions {
-  companies: string[];
-  jobProvider: string[];
-  employmentType: string[];
-  location: string[];
-}
-
-const ResponseFilterComponent = ({ allJobs }: ResponseFilterComponentProps) => {
-  const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
-
-  // one state for all the filters
-  const [filters, setFilters] = useState<FilterOptions>({
-    companies: [],
-    jobProvider: [],
-    employmentType: [],
-    location: [],
-  });
-  const onChangeCompany = (value: string[]) => {
-    const newFilters = { ...filters, companies: value };
-    setFilters(newFilters);
-    dispatch(filterJobs({ jobs: allJobs, filterOptions: newFilters }));
-  };
-
-  const onChangeJobProvider = (value: string[]) => {
-    const newFilters = { ...filters, jobProvider: value };
-    setFilters(newFilters);
-    dispatch(filterJobs({ jobs: allJobs, filterOptions: newFilters }));
-  };
-
-  const onChangeEmploymentType = (value: string[]) => {
-    const newFilters = { ...filters, employmentType: value };
-    setFilters(newFilters);
-    dispatch(filterJobs({ jobs: allJobs, filterOptions: newFilters }));
-  };
-
-  const onChangeLocation = (value: string[]) => {
-    const newFilters = { ...filters, location: value };
-    setFilters(newFilters);
-    dispatch(filterJobs({ jobs: allJobs, filterOptions: newFilters }));
-  };
 
   return (
-    <div className='flex flex-col p-[1vh]'>
-      <div className='flex  flex-col md:flex-row  p-[1vh] gap-[4vw] justify-between ipad-portrait:flex-col'>
-        <h1 className='text-[2vh] text-white alliance-2'>Filters:</h1>
-        <div className='md:flex gap-[2vw] md:gap-0 grid-cols-2 grid flex-row justify-between w-full'>
-          <ReusableSelect
-            defaultValue={['Company']}
-            options={allJobs && getFilterOptions(allJobs, 'company')}
-            placeholder='Company'
-            width={150}
-            onChange={onChangeCompany}
-            allowMultiple
-          />
-
-          <ReusableSelect
-            defaultValue={['Job Provider']}
-            options={allJobs && getFilterOptions(allJobs, 'jobProvider')}
-            placeholder='Job Provider'
-            width={150}
-            onChange={onChangeJobProvider}
-            allowMultiple
-          />
-
-          <ReusableSelect
-            defaultValue={['Employment Type']}
-            options={allJobs && getFilterOptions(allJobs, 'employmentType')}
-            placeholder='Employment Type'
-            width={150}
-            onChange={onChangeEmploymentType}
-            allowMultiple
-          />
-
-          <ReusableSelect
-            defaultValue={['Location']}
-            options={allJobs && getFilterOptions(allJobs, 'location')}
-            placeholder='Location'
-            width={150}
-            onChange={onChangeLocation}
-            allowMultiple
-          />
-        </div>
+    <div
+      className='md:px-[3vw] px-[6vw] mt-[3vh] relative flex flex-col  gap-[2vh]'
+      onClick={onClick}
+    >
+      <div className='md:flex hidden ipad-portrait:flex-col flex-row gap-[3vw] items-center'>
+        <TagComponent
+          title='Matching Results'
+          description='3 companies found'
+          classname='bg-[#348888]'
+        />
+        <TagComponent
+          title='Visa Sponsorship'
+          description='3 matches sponsor visa'
+          classname='bg-[#09090D]'
+        />
+        <TagComponent
+          title='Hires from Lehigh'
+          description='10+ employees from Lehigh University'
+          classname='bg-[#173440]'
+        />
       </div>
-    </div>
-  );
-};
+      <div className='md:grid ipad-portrait:grid-cols-2 grid-cols-3 gap-[3vw]'>
+        {careerMatches?.companyMatches.map((company, key) => (
+          <Link href='#jobs' key={key}>
+            <CompaniesMatch
+              title={careerMatches.title}
+              companyName={company.name}
+              companyDomain={company.companyDomain}
+              matchingDetails={company.matchingDetails}
+              subtitle='20 jobs available from this company'
+              matchingNumber={company.matchingCredit.toString()}
+              logoImg='https://logodownload.org/wp-content/uploads/2013/12/apple-logo-16.png'
+            />
+          </Link>
+        ))}
+      </div>
 
-interface LeftComponentProps {
-  allJobs?: any[];
-  matchedCompanies?: any[];
-}
-
-const LeftComponent = ({ allJobs, matchedCompanies }: LeftComponentProps) => {
-  const totalJobs =
-    allJobs && Array.isArray(allJobs)
-      ? allJobs
-          .map((job: any) => job.jobs.jobs.length)
-          .reduce((a: number, b: number) => a + b, 0)
-      : 0;
-
-  return (
-    <div className='flex flex-col gap-[2vh]'>
-      <div className='w-full px-[2vh] py-[2vh] flex flex-col gap-[2vh] border-b-[1px] border-[#1C1C1F]'>
-        <h1 className='text-[#9D9D9E] alliance-2 text-[1.7vh]'>
-          Matching Companies
-        </h1>
-        <div className='h-16 w-20 rounded-full border-[2px] border-[#22BABC] flex place-items-center'>
-          <h1 className='text-white text-center w-full text-[3vh]'>
-            {allJobs?.length}
+      <div className='mt-[5vh]' id='jobs'>
+        <div className='flex flex-row justify-between'>
+          <h1 className='whyteInktrap_font text-[2.6vh] md:text-[4.5vh] font-semibold'>
+            All matched jobs
           </h1>
+          <div className='md:block hidden'>
+            <TagComponent
+              title='Matching Results'
+              description={`${filteredJobs.length} jobs found`}
+              classname='bg-[#348888]'
+            />
+          </div>
         </div>
       </div>
-      <div className='w-full px-[2vh] py-[2vh] flex flex-col gap-[2vh] border-b-[1px] border-[#1C1C1F]'>
-        <h1 className='text-[#9D9D9E] alliance-2 text-[1.7vh]'>
-          Resume Matched Jobs
-        </h1>
-        <div className='h-16 w-16 rounded-full border-[2px] border-[#FA7F09] flex place-items-center'>
-          <h1 className='text-white text-center w-full text-[3vh]'>
-            {totalJobs}
-          </h1>
+
+      <div className='sticky top-0 z-10'>
+        <div className='flex flex-col md:flex-row'>
+          <div className='w-[15%] ipad-portrait:w-[35vw] hidden md:block'>
+            <FiltersComponent allJobs={jobMatches} />
+          </div>
+          <div className='md:w-[85%]'>
+            <JobMatchesComponent />
+          </div>
         </div>
-      </div>
-      <div className='w-full px-[2vh] py-[2vh] flex flex-col gap-[2vh] border-b-[1px] border-[#1C1C1F]'>
-        <h1 className='text-[#9D9D9E] alliance-2 text-[1.7vh]'>
-          Matched Companies Score (10)
-          <table className='mt-[2vh]'>
-            {matchedCompanies?.map((company: any, index: number) => (
-              <tbody key={index}>
-                <tr>
-                  <td className='text-[white] text-[1.7vh]'>
-                    {company.name} :
-                  </td>
-                  <td className='text-[#9D9D9E] text-[1.7vh]'>
-                    {company.matchingCredit}
-                  </td>
-                </tr>
-              </tbody>
-            ))}
-          </table>
-        </h1>
-      </div>
-      <div className='w-full px-[2vh] py-[2vh] flex flex-col gap-[2vh]'>
-        <h1 className='text-[#9D9D9E] alliance-2 text-[1.7vh]'>
-          Experience Score
-        </h1>
-        <span className='text-[#22BABC] text-[2.3vh]'>80</span>
-        <Slider defaultValue={80} disabled />
       </div>
     </div>
   );
