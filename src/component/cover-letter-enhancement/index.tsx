@@ -387,7 +387,7 @@ const CoverLetterEnhancementLayout = ({ jobId }: CoverLetterLayoutProps) => {
             />
 
             <div className='border border-[#DBDBDB] w-[35px] h-[35px] rounded-md flex items-center object-center justify-center flex-row cursor-pointer hover:scale-[1.02] transition-all'>
-              <SendOutlined className=' -rotate-45 text-[1.6vh]' />
+              <SendOutlined onClick={handleUserPrompting} className=' -rotate-45 text-[1.6vh]' />
             </div>
           </div>
         </div>
