@@ -15,7 +15,6 @@ import AIPipelineComponent from '@/component/home/ai-pipeline';
 import CallToActionComponent from '@/component/home/call-to-action';
 import FAQComponent from '@/component/home/faq';
 import QuickStats from '@/component/home/quick-stats';
-import TestimonialsPage from '@/component/home/testimonials';
 import HomeWelcomeComponent from '@/component/home/welcome';
 import FooterComponent from '@/component/layouts/footer';
 import HeaderLayout from '@/component/reusable/header';
@@ -70,7 +69,7 @@ export default function HomePage() {
           <AIPipelineComponent animationProgress={AITimelineProgress} />
           <div className=' md:h-[230vh] ipad-portrait:hidden'></div>
         </div>
-        <TestimonialsPage />
+        {/* <TestimonialsPage /> */}
         <QuickStats />
         <FAQComponent />
         <CallToActionComponent />
