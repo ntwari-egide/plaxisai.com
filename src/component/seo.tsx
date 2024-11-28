@@ -24,7 +24,7 @@ const defaultMeta = {
    * If you wish to use a normal image, just specify the path below
    */
   image:
-    'https://res.cloudinary.com/dpqasrwfu/image/upload/v1719519501/f7bms0z0wwedxu4kf7oy.png',
+    'https://res.cloudinary.com/dpqasrwfu/image/upload/v1732817531/bdbc9gzv4homuk8xkk1v.png',
 };
 
 type SeoProps = {

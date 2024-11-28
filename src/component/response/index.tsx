@@ -59,11 +59,11 @@ const ResponseLayout = ({ onClick }: ResponseLayoutProps) => {
           description='3 matches sponsor visa'
           classname='bg-[#09090D]'
         />
-        <TagComponent
+        {/* <TagComponent
           title='Hires from Lehigh'
           description='10+ employees from Lehigh University'
           classname='bg-[#173440]'
-        />
+        /> */}
       </div>
       <div className='md:grid ipad-portrait:grid-cols-2 grid-cols-3 gap-[3vw]'>
         {careerMatches?.companyMatches.map((company, key) => (
