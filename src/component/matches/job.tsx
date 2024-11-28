@@ -35,7 +35,7 @@ const JobMatch = ({
 }: JobMatchProps) => {
   const dispatch: ThunkDispatch<RootState, null, AnyAction> = useDispatch();
 
-  const [graderResponse, setGraderResponse] = useState<any>();
+  const [graderResponse, setGraderResponse] = useState<any>(null);
 
   const router = useRouter();
 
@@ -43,7 +43,7 @@ const JobMatch = ({
 
   if (!content) {
     router.push('/');
-    return;
+    return null; // Returning null to avoid rendering anything
   }
 
   const userResumeContent = JSON.parse(content);
@@ -63,19 +63,27 @@ const JobMatch = ({
     };
 
     getJobAIGradings();
-  }, []);
+  }, [jobDescription, userResumeContent, dispatch]);
+
+  if (!graderResponse) {
+    return (
+      <Link href={`/job-details/${jobId}`} target='_blank'>
+        <div className='border py-[2vh] rounded-xl px-[1vw] border-[#E6E6E7] w-full flex flex-col'>
+          <Skeleton active />
+        </div>
+      </Link>
+    );
+  }
 
   return (
     <Link href={`/job-details/${jobId}`} target='_blank'>
       <div className='border py-[2vh] rounded-xl px-[1vw] border-[#E6E6E7] w-full flex flex-col'>
         <div className='bg-[#EBF3F3] rounded-md flex flex-col py-[2vh] px-[1vw] gap-[2vh]'>
           <div className='flex flex-row justify-between'>
-            {date ? (
+            {date && (
               <p className='bg-white px-[1.5vw] py-[1vh] flex items-center inter-tight text-[1.7vh] font-medium rounded-full'>
                 {date}
               </p>
-            ) : (
-              ''
             )}
             <p className='whyteInktrap_font text-[3.5vh] font-semibold'>
               {graderResponse?.matchingPercentage}
@@ -96,43 +104,30 @@ const JobMatch = ({
           </div>
 
           <div className='flex flex-col gap-[1vh]'>
-            {!graderResponse ? (
-              <>
-                <Skeleton active className='w-full' />
-              </>
-            ) : (
-              <>
-                {graderResponse &&
-                  graderResponse.matchingResults.map((result: any) => {
-                    // Extract and convert the percentage value
-                    const resultNumber = parseFloat(
-                      result.number.replace('%', '')
-                    );
+            {graderResponse &&
+              graderResponse.matchingResults.map((result: any) => {
+                // Extract and convert the percentage value
+                const resultNumber = parseFloat(result.number.replace('%', ''));
 
-                    return (
-                      <div
-                        key={result.criteria}
-                        className='flex flex-col gap-[2vh]'
-                      >
-                        <div className='flex flex-row items-center object-center gap-[1vw]'>
-                          <CheckCircleFilled
-                            className={`${
-                              resultNumber > 95
-                                ? 'text-[#173440]'
-                                : resultNumber > 85
-                                ? 'text-[#348888]'
-                                : 'text-[#AAE2E2]'
-                            } rounded-full text-[3vh]`}
-                          />
-                          <p className='text-[2vh] inter-tight text-[#09090D]'>
-                            {result.criteria} ({result.number})
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })}
-              </>
-            )}
+                return (
+                  <div key={result.criteria} className='flex flex-col gap-[2vh]'>
+                    <div className='flex flex-row items-center object-center gap-[1vw]'>
+                      <CheckCircleFilled
+                        className={`${
+                          resultNumber > 95
+                            ? 'text-[#173440]'
+                            : resultNumber > 85
+                            ? 'text-[#348888]'
+                            : 'text-[#AAE2E2]'
+                        } rounded-full text-[3vh]`}
+                      />
+                      <p className='text-[2vh] inter-tight text-[#09090D]'>
+                        {result.criteria} ({result.number})
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
           </div>
         </div>
 
@@ -141,12 +136,10 @@ const JobMatch = ({
             Easy Apply
             <RiArrowRightLine className='text-[3vh]' />
           </Button>
-          {salary ? (
-            <div className='border-[#E6E6E7] border rounded-full px-[2vw] flex items-center text-[1.3vh]  text-center inter-tight font-medium'>
+          {salary && (
+            <div className='border-[#E6E6E7] border rounded-full px-[2vw] flex items-center text-[1.3vh] text-center inter-tight font-medium'>
               {salary}
             </div>
-          ) : (
-            ''
           )}
         </div>
       </div>

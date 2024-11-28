@@ -189,20 +189,27 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
     // Update the "working on it" message to "done"
     setChatContent((prevChatContent) => {
       const updatedChatContent = [...prevChatContent];
-      const lastAIMessageIndex = updatedChatContent.findLastIndex(
-        (chat) =>
-          chat.role === 'plaxis-ai' &&
-          chat.content === 'Got it—taking care of it!'
-      );
-
+      
+      // Find the index of the last AI message using a reversed approach
+      const lastAIMessageIndex = updatedChatContent
+        .slice()
+        .reverse()
+        .findIndex(
+          (chat) =>
+            chat.role === 'plaxis-ai' &&
+            chat.content === 'Got it—taking care of it!'
+        );
+    
+      // If a matching message is found, update it
       if (lastAIMessageIndex !== -1) {
-        // Update the message to reflect completion
-        updatedChatContent[lastAIMessageIndex] = {
-          ...updatedChatContent[lastAIMessageIndex],
+        const originalIndex = updatedChatContent.length - 1 - lastAIMessageIndex;
+    
+        updatedChatContent[originalIndex] = {
+          ...updatedChatContent[originalIndex],
           content: 'All done—your request has been completed!',
         };
       }
-
+    
       return updatedChatContent;
     });
   };
@@ -247,8 +254,12 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
 
     // Apply CSS styles dynamically for spans with 'newly-added' class
     const newlyAddedSpans = tempDiv.querySelectorAll('span.newly-added');
-    newlyAddedSpans.forEach((span: HTMLElement) => {
-      span.style.color = '#09090d';
+
+    newlyAddedSpans.forEach((span) => {
+      // Ensure the element is of type HTMLElement
+      if (span instanceof HTMLElement) {
+        span.style.color = '#09090d';
+      }
     });
 
     // Apply styles to list items (li)
@@ -283,10 +294,13 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
 
     // Apply styles to p tags inside section
     const sections = tempDiv.querySelectorAll('section p');
-    sections.forEach((p: HTMLElement) => {
-      p.style.display = 'flex'; // Flexbox for section paragraphs
-      p.style.flexDirection = 'row'; // Align items in a row
-      p.style.gap = '5px'; // Add gap between flex items (optional)
+    sections.forEach((p) => {
+      // Ensure the element is of type HTMLElement
+      if (p instanceof HTMLElement) {
+        p.style.display = 'flex'; // Flexbox for section paragraphs
+        p.style.flexDirection = 'row'; // Align items in a row
+        p.style.gap = '5px'; // Add gap between flex items (optional)
+      }
     });
 
     // Extract the content with the applied styles

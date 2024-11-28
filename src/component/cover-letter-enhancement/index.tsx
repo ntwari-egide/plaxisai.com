@@ -179,20 +179,26 @@ const CoverLetterEnhancementLayout = ({ jobId }: CoverLetterLayoutProps) => {
     // Update the "working on it" message to "done"
     setChatContent((prevChatContent) => {
       const updatedChatContent = [...prevChatContent];
-      const lastAIMessageIndex = updatedChatContent.findLastIndex(
-        (chat) =>
-          chat.role === 'plaxis-ai' &&
-          chat.content === 'Got it—taking care of it!'
-      );
-
+    
+      // Find the index of the last AI message with the specific content
+      const lastAIMessageIndex = updatedChatContent
+        ?.slice()  // Create a shallow copy to avoid modifying the original array
+        .reverse()
+        .findIndex(
+          (chat) =>
+            chat.role === 'plaxis-ai' &&
+            chat.content === 'Got it—taking care of it!'
+        );
+    
+      // If we found a matching AI message, update it
       if (lastAIMessageIndex !== -1) {
-        // Update the message to reflect completion
-        updatedChatContent[lastAIMessageIndex] = {
-          ...updatedChatContent[lastAIMessageIndex],
+        const originalIndex = updatedChatContent.length - 1 - lastAIMessageIndex;
+        updatedChatContent[originalIndex] = {
+          ...updatedChatContent[originalIndex],
           content: 'All done—your request has been completed!',
         };
       }
-
+    
       return updatedChatContent;
     });
   };
@@ -236,10 +242,14 @@ const CoverLetterEnhancementLayout = ({ jobId }: CoverLetterLayoutProps) => {
     tempDiv.innerHTML = resumeContent;
 
     // Apply CSS styles dynamically for spans with 'newly-added' class
-    const newlyAddedSpans = tempDiv.querySelectorAll('span.newly-added');
-    newlyAddedSpans.forEach((span: HTMLElement) => {
-      span.style.color = '#09090d';
-    });
+    // Ensure tempDiv exists before querying
+    if (tempDiv) {
+      const newlyAddedSpans = Array.from(tempDiv.querySelectorAll('span.newly-added')) as HTMLElement[];
+
+      newlyAddedSpans.forEach((span) => {
+        span.style.color = '#09090d';  // Apply color to each span
+      });
+    }
 
     // Apply styles to list items (li)
     const listItems = tempDiv.querySelectorAll('li');
@@ -271,13 +281,17 @@ const CoverLetterEnhancementLayout = ({ jobId }: CoverLetterLayoutProps) => {
       h3.style.fontWeight = '700'; // Set medium bold font for h3
     });
 
-    // Apply styles to p tags inside section
-    const sections = tempDiv.querySelectorAll('section p');
-    sections.forEach((p: HTMLElement) => {
-      p.style.display = 'flex'; // Flexbox for section paragraphs
-      p.style.flexDirection = 'row'; // Align items in a row
-      p.style.gap = '5px'; // Add gap between flex items (optional)
-    });
+    // Ensure tempDiv exists before querying
+    if (tempDiv) {
+      // Convert NodeList to array and assert the type
+      const paragraphs = Array.from(tempDiv.querySelectorAll('section p')) as HTMLElement[];
+
+      paragraphs.forEach((p) => {
+        p.style.display = 'flex';         // Flexbox for section paragraphs
+        p.style.flexDirection = 'row';    // Align items in a row
+        p.style.gap = '5px';              // Add gap between flex items (optional)
+      });
+    }
 
     // Extract the content with the applied styles
     const styledContent = tempDiv.innerHTML;
