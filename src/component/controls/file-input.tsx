@@ -77,11 +77,11 @@ const ReusableFileInput = ({
   return (
     <>
       <Flex
-        className={`flex relative flex-col md:gap-[1vh] inter-tight ${className}`}
+        className={`flex relative flex-col  md:gap-[1vh] inter-tight ${className}`}
         style={style}
         onClick={handleContainerClick}
       >
-        <div className='flex cursor-pointer hover:scale-[1.03] transition-all flex-row justify-between items-center place-items-center bg-[#DADADC] text-[#CDCDD0]  px-[1vw] py-[1vh] gap-[2vw] rounded-full text-[2vh] hover:border-[1px] hover:border-[#348888]'>
+        <div className='flex cursor-pointer hover:scale-[1.03] transition-all flex-row justify-between items-center place-items-center bg-[#DADADC] text-[#CDCDD0]  md:px-[1vw] px-[2vw] py-[1vh] gap-[2vw] rounded-full text-[2vh] hover:border-[1px] hover:border-[#348888]'>
           <Image
             src={AIIcon}
             className='ml-[0.5vw]'

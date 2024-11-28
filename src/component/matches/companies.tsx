@@ -58,9 +58,10 @@ const CompaniesMatch = ({
         // Extract number from the string and convert to a float
         // Type assertion to assume matchingDetails is an object with string values
         const matchingValue = parseFloat(
-          (matchingDetails as unknown as { [key: string]: string })[matchingKey].replace('%', '')
+          (matchingDetails as unknown as { [key: string]: string })[
+            matchingKey
+          ].replace('%', '')
         );
-
 
         return (
           <div key={matchingKey} className='flex flex-col gap-[2vh]'>
@@ -75,8 +76,14 @@ const CompaniesMatch = ({
                 } rounded-full text-[3vh]`}
               />
               <p className='text-[2vh] inter-tight text-[#09090D]'>
-  {matchingKey} ({(matchingDetails as unknown as { [key: string]: string })[matchingKey]})
-</p>
+                {matchingKey} (
+                {
+                  (matchingDetails as unknown as { [key: string]: string })[
+                    matchingKey
+                  ]
+                }
+                )
+              </p>
             </div>
           </div>
         );

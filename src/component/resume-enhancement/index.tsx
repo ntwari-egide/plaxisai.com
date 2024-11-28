@@ -189,7 +189,7 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
     // Update the "working on it" message to "done"
     setChatContent((prevChatContent) => {
       const updatedChatContent = [...prevChatContent];
-      
+
       // Find the index of the last AI message using a reversed approach
       const lastAIMessageIndex = updatedChatContent
         .slice()
@@ -199,17 +199,18 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
             chat.role === 'plaxis-ai' &&
             chat.content === 'Got it—taking care of it!'
         );
-    
+
       // If a matching message is found, update it
       if (lastAIMessageIndex !== -1) {
-        const originalIndex = updatedChatContent.length - 1 - lastAIMessageIndex;
-    
+        const originalIndex =
+          updatedChatContent.length - 1 - lastAIMessageIndex;
+
         updatedChatContent[originalIndex] = {
           ...updatedChatContent[originalIndex],
           content: 'All done—your request has been completed!',
         };
       }
-    
+
       return updatedChatContent;
     });
   };

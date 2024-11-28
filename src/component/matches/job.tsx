@@ -110,7 +110,10 @@ const JobMatch = ({
                 const resultNumber = parseFloat(result.number.replace('%', ''));
 
                 return (
-                  <div key={result.criteria} className='flex flex-col gap-[2vh]'>
+                  <div
+                    key={result.criteria}
+                    className='flex flex-col gap-[2vh]'
+                  >
                     <div className='flex flex-row items-center object-center gap-[1vw]'>
                       <CheckCircleFilled
                         className={`${

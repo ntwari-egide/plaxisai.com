@@ -179,26 +179,27 @@ const CoverLetterEnhancementLayout = ({ jobId }: CoverLetterLayoutProps) => {
     // Update the "working on it" message to "done"
     setChatContent((prevChatContent) => {
       const updatedChatContent = [...prevChatContent];
-    
+
       // Find the index of the last AI message with the specific content
       const lastAIMessageIndex = updatedChatContent
-        ?.slice()  // Create a shallow copy to avoid modifying the original array
+        ?.slice() // Create a shallow copy to avoid modifying the original array
         .reverse()
         .findIndex(
           (chat) =>
             chat.role === 'plaxis-ai' &&
             chat.content === 'Got it—taking care of it!'
         );
-    
+
       // If we found a matching AI message, update it
       if (lastAIMessageIndex !== -1) {
-        const originalIndex = updatedChatContent.length - 1 - lastAIMessageIndex;
+        const originalIndex =
+          updatedChatContent.length - 1 - lastAIMessageIndex;
         updatedChatContent[originalIndex] = {
           ...updatedChatContent[originalIndex],
           content: 'All done—your request has been completed!',
         };
       }
-    
+
       return updatedChatContent;
     });
   };
@@ -244,10 +245,12 @@ const CoverLetterEnhancementLayout = ({ jobId }: CoverLetterLayoutProps) => {
     // Apply CSS styles dynamically for spans with 'newly-added' class
     // Ensure tempDiv exists before querying
     if (tempDiv) {
-      const newlyAddedSpans = Array.from(tempDiv.querySelectorAll('span.newly-added')) as HTMLElement[];
+      const newlyAddedSpans = Array.from(
+        tempDiv.querySelectorAll('span.newly-added')
+      ) as HTMLElement[];
 
       newlyAddedSpans.forEach((span) => {
-        span.style.color = '#09090d';  // Apply color to each span
+        span.style.color = '#09090d'; // Apply color to each span
       });
     }
 
@@ -284,12 +287,14 @@ const CoverLetterEnhancementLayout = ({ jobId }: CoverLetterLayoutProps) => {
     // Ensure tempDiv exists before querying
     if (tempDiv) {
       // Convert NodeList to array and assert the type
-      const paragraphs = Array.from(tempDiv.querySelectorAll('section p')) as HTMLElement[];
+      const paragraphs = Array.from(
+        tempDiv.querySelectorAll('section p')
+      ) as HTMLElement[];
 
       paragraphs.forEach((p) => {
-        p.style.display = 'flex';         // Flexbox for section paragraphs
-        p.style.flexDirection = 'row';    // Align items in a row
-        p.style.gap = '5px';              // Add gap between flex items (optional)
+        p.style.display = 'flex'; // Flexbox for section paragraphs
+        p.style.flexDirection = 'row'; // Align items in a row
+        p.style.gap = '5px'; // Add gap between flex items (optional)
       });
     }
 
