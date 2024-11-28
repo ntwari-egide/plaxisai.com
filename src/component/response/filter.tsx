@@ -35,8 +35,6 @@ const FiltersComponent = ({ allJobs }: FiltersComponentProps) => {
     dispatch(setJobs(allJobs));
   }, [allJobs]);
 
-  logger(companyNames, 'companies');
-
   return (
     <div className='flex flex-col gap-[3vh]'>
       <h1 className='inter-tight text-[2.4vh] font-semibold text-[#09090d]'>

@@ -24,7 +24,6 @@ export const coverLetterEnhancementsRequest = createAsyncThunk(
         },
       });
 
-      // logger(response.data ,"response")
       return response.data;
     } catch (error: any) {
       // logger(error.response?.data || error.message, "Detailed Error");

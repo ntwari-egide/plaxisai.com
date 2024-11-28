@@ -82,7 +82,7 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
         // Retrieve job matches from localStorage
         const rawData = localStorage.getItem('job-matches');
         if (!rawData) {
-          logger('No job matches found', 'error');
+          // logger('No job matches found', 'error');
           router.push('/');
           return;
         }
@@ -94,7 +94,7 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
         );
 
         if (!matchingJob?.jobDetails?.description) {
-          logger('Job description not found for selected job', 'error');
+          // logger('Job description not found for selected job', 'error');
           router.push('/');
           return;
         }
@@ -103,14 +103,14 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
         // Fetch resume content
         const encryptedContent = Cookies.get('resume-content');
         if (!encryptedContent) {
-          logger('No resume content found', 'error');
+          // logger('No resume content found', 'error');
           router.push('/');
           return;
         }
 
         const content = decryptData(encryptedContent);
         if (!content?.trim()) {
-          logger('Resume content is empty after decryption', 'error');
+          // logger('Resume content is empty after decryption', 'error');
           router.push('/');
           return;
         }

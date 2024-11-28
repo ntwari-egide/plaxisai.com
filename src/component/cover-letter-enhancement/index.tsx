@@ -11,8 +11,6 @@ import { useEffect, useRef, useState } from 'react';
 import { RiDownloadLine } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 
-import logger from '@/lib/logger';
-
 import { RootState } from '@/store';
 
 import { coverLetterEnhancementsRequest } from '@/features/cover-letter';
@@ -234,7 +232,6 @@ const CoverLetterEnhancementLayout = ({ jobId }: CoverLetterLayoutProps) => {
     const resumeContent = coverLetterEnhancement.contentEnhanced?.newContent;
 
     if (!resumeContent) {
-      logger('No resume content found', 'error');
       return;
     }
 

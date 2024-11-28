@@ -48,8 +48,7 @@ export const resumeEnhancementRequest = createAsyncThunk(
           'Content-Type': 'application/json',
         },
       });
-
-      // logger(response.data ,"response")
+      
       return response.data;
     } catch (error: any) {
       // logger(error.response?.data || error.message, "Detailed Error");
