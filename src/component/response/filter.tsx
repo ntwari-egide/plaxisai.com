@@ -2,8 +2,6 @@ import { Checkbox } from 'antd';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import logger from '@/lib/logger';
-
 import { AppDispatch, RootState } from '@/store';
 
 import { resetFilters, setJobs, updateFilters } from '@/features/filters';

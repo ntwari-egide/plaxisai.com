@@ -321,10 +321,10 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
 
   return (
     <div className='px-[3vw] mt-[5vh]'>
-      <div className='flex flex-row gap-[4vw]'>
+      <div className='flex flex-col md:flex-row gap-[4vw]'>
         {resumeEnhancement.contentEnhanced && !resumeEnhancement.loading ? (
           <div
-            className={`ipad-landscape:w-[60%] w-[65%] flex flex-col border border-[#E6E6E7] rounded-lg h-[75vh] overflow-y-scroll ${
+            className={`ipad-landscape:w-[60%] md:w-[65%] flex flex-col border border-[#E6E6E7] rounded-lg h-[40vh] md:h-[75vh] overflow-y-scroll ${
               nonColoredActive
                 ? 'resume-enhancements-no-formats'
                 : 'resume-enhancements'
@@ -342,11 +342,11 @@ const ResumeEnhancementLayout = ({ jobId }: ResumeEnhancementLayoutProps) => {
           <Skeleton className='rounded-lg h-[75vh] ipad-landscape:w-[60%] w-[65%] border border-[#E6E6E7] p-[2vw]' />
         )}
 
-        <div className='bg-[#F2F2F2] rounded-lg ipad-landscape:w-[40%] w-[35%] ipad-landscape:h-[75vh] md:h-[70vh] sticky top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'>
+        <div className='bg-[#F2F2F2] rounded-lg ipad-landscape:w-[40%] md:w-[35%] ipad-landscape:h-[75vh] md:h-[70vh] sticky top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'>
           {/* plaxis ai details  */}
 
           <PlaxisAITag />
-          <div className=' bg-white px-[2vh] py-[2vh] rounded-md flex flex-col gap-[2vh]'>
+          <div className=' bg-white px-[2vh] hidden md:flex py-[2vh] rounded-md flex-col gap-[2vh]'>
             {/* matching results  */}
             <div className='flex flex-row gap-[0.4vw] items-center'>
               <div className=' bg-[#E5E5E5] w-[25px] flex flex-row h-[25px] items-center justify-center rounded-full'>

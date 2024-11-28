@@ -312,11 +312,11 @@ const CoverLetterEnhancementLayout = ({ jobId }: CoverLetterLayoutProps) => {
 
   return (
     <div className='px-[3vw] mt-[5vh]'>
-      <div className='flex flex-row gap-[4vw]'>
+      <div className='flex flex-col md:flex-row gap-[4vw]'>
         {coverLetterEnhancement.contentEnhanced &&
         !coverLetterEnhancement.loading ? (
           <div
-            className={`ipad-landscape:w-[60%] w-[65%] flex flex-col border border-[#E6E6E7] rounded-lg h-[75vh] overflow-y-scroll cover-letter`}
+            className={`ipad-landscape:w-[60%] md:w-[65%] flex flex-col border border-[#E6E6E7] rounded-lg h-[40vh] md:h-[75vh] overflow-y-scroll cover-letter`}
           >
             <div
               ref={contentRef}
@@ -331,7 +331,7 @@ const CoverLetterEnhancementLayout = ({ jobId }: CoverLetterLayoutProps) => {
         )}
 
         <div
-          className='bg-[#F2F2F2] rounded-lg ipad-landscape:w-[40%] w-[35%] ipad-landscape:h-[60vh] md:h-[75vh] sticky top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'
+          className='bg-[#F2F2F2] rounded-lg ipad-landscape:w-[40%] md:w-[35%] ipad-landscape:h-[60vh] md:h-[75vh] sticky top-[18vh] flex flex-col gap-[3vh] px-[3vh] py-[2vh]'
           ref={messagesEndRef}
         >
           {/* plaxis ai details  */}
